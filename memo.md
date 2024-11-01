@@ -1,0 +1,1 @@
+1. 如何获取`shard$i.config`一系列文件？运行`exps/load.sh $1 $2`. $1是shard个数，`exps/run_exp.sh`中设置为16. $2可以不加或者为`-r`, 表示是否启动replication。每个shard对应`exps/replicas`中一个ip。如果启用replication，则一个shard对应3个ip。
