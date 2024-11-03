@@ -5,7 +5,6 @@ using namespace std;
 namespace mockstrongstore {
 
 Client::Client()
-    : transport(0.0, 0.0, 0), mode(mode), timeServer(timeServer)
 {
     // Initialize all state here;
     client_id = 0;
@@ -16,52 +15,15 @@ Client::Client()
         client_id = dis(gen);
     }
     t_id = (client_id/10000)*10000;
-
-    nshards = nShards;
-    bclient.reserve(nshards);
-
-
-    /* Start a client for time stamp server. */
-    if (mode == MODE_OCC) {
-        string tssConfigPath = configPath + ".tss.config";
-        ifstream tssConfigStream(tssConfigPath);
-        if (tssConfigStream.fail()) {
-            fprintf(stderr, "unable to read configuration file: %s\n",
-                    tssConfigPath.c_str());
-        }
-        transport::Configuration tssConfig(tssConfigStream);
-        tss = new replication::vr::VRClient(tssConfig, &transport);
-    }
-
-    /* Start a client for each shard. */
-    for (int i = 0; i < nShards; i++) {
-        string shardConfigPath = configPath + to_string(i) + ".config";
-        ShardClient *shardclient = new ShardClient(mode, shardConfigPath,
-            &transport, client_id, i, closestReplica);
-        bclient[i] = new BufferClient(shardclient);
-    }
-
-    /* Run the transport in a new thread. */
-    clientTransport = new thread(&Client::run_client, this);
-
-    }
+}
 
 Client::~Client()
-{
-    transport.Stop();
-    delete tss;
-    for (auto& b : bclient) {
-        delete b;
-    }
-    clientTransport->join();
-}
+{}
 
 /* Runs the transport event loop. */
 void
 Client::run_client()
-{
-    transport.Run();
-}
+{}
 
 /* Begins a transaction. All subsequent operations before a commit() or
  * abort() are part of this transaction.
@@ -74,101 +36,47 @@ Client::Begin()
     t_id++;
     participants.clear();
     commit_sleep = -1;
-    for (int i = 0; i < nshards; i++) {
-        bclient[i]->Begin(t_id);
-    }
+
+    // Initialize a transaction.
+    txn = Transaction();
 }
 
 int Client::GetNVersions(const string& key, size_t n) {
-    // Contact the appropriate shard to get the value.
-    int i = key_to_shard(key, nshards);
-
-    // If needed, add this shard to set of participants and send BEGIN.
-    if (participants.find(i) == participants.end()) {
-        participants.insert(i);
-    }
-
     Promise promise(GET_TIMEOUT);
-    bclient[i]->GetNVersions(key, n, &promise);
 
+    history.emplace_back(std::make_pair(key, n));
+
+    promise->Reply(REPLY_OK);
     return promise.GetReply();
 }
 
 int Client::Get(const string &key)
 {
-    // Contact the appropriate shard to get the value.
-    int i = key_to_shard(key, nshards);
+    Promise promise(GET_TIMEOUT);
 
-    // If needed, add this shard to set of participants and send BEGIN.
-    if (participants.find(i) == participants.end()) {
-        participants.insert(i);
+    // Read your own writes, check the write set first.
+    if (txn.getWriteSet().find(key) != txn.getWriteSet().end()) {
+        promise->Reply(REPLY_OK);
+        return;
     }
 
-    Promise promise(GET_TIMEOUT);
-    bclient[i]->Get(key, &promise);
-
+    if (txn.getReadSet().find(key) == txn.getReadSet().end()) {
+        txn.addReadSet(key, Timestamp());
+    }
+    promise->Reply(REPLY_OK);
     return promise.GetReply();
 }
 
 int Client::BatchGet(std::map<std::string, std::string>& values, std::map<int,
     std::map<uint64_t, std::vector<std::string>>>& keys) {
   int status = REPLY_OK;
-
-  map<int, Promise *> promises;
-
-  for (auto p : participants) {
-    promises.emplace(p, new Promise(PREPARE_TIMEOUT));
-    bclient[p]->BatchGet(promises[p]);
-  }
-
-  for (auto& entry : promises) {
-    Promise *p = entry.second;
-    if (p->GetReply() == REPLY_OK) {
-      values.insert(p->getValues().begin(), p->getValues().end());
-      for (size_t i = 0; i < p->EstimateBlockSize(); ++i) {
-        auto block = p->GetEstimateBlock(i);
-        auto key = p->GetUnverifiedKey(i);
-        if (keys.find(entry.first) != keys.end()) {
-          if (keys[entry.first].find(block) != keys[entry.first].end()) {
-            keys[entry.first][block].emplace_back(key);
-          } else {
-            keys[entry.first].emplace(block, std::vector<std::string>{key});
-          }
-        } else {
-          std::map<uint64_t, std::vector<std::string>> innermap;
-          innermap.emplace(block, std::vector<std::string>{key});
-          keys.emplace(entry.first, innermap);
-        }
-      }
-    } else {
-      status = p->GetReply();
-    }
-    delete p;
-  }
-
+  // TODO
   return status;
 }
 
 int Client::BatchGet(std::map<std::string, std::string>& values) {
   int status = REPLY_OK;
-
-  map<int, Promise *> promises;
-
-  for (auto p : participants) {
-    promises.emplace(p, new Promise(PREPARE_TIMEOUT));
-    bclient[p]->BatchGet(promises[p]);
-  }
-
-  for (auto& entry : promises) {
-    auto p = entry.second;
-    if (p->GetReply() == REPLY_OK) {
-      values.insert(p->getValues().begin(), p->getValues().end());
-    } else {
-      status = p->GetReply();
-    }
-    delete p;
-  }
-
+  // TODO
   return status;
 }
 
@@ -176,66 +84,24 @@ int Client::GetRange(const string& from, const string& to,
     std::map<std::string, std::string>& values, std::map<int,
     std::map<uint64_t, std::vector<std::string>>>& keys) {
   int status = REPLY_OK;
-  map<int, Promise *> promises;
-
-  for (int i = 0; i < nshards; ++i) {
-    promises.emplace(i, new Promise(GET_TIMEOUT));
-    bclient[i]->GetRange(from, to, promises[i]);
-  }
-
-  for (auto entry : promises) {
-    auto p = entry.second;
-    if (p->GetReply() == REPLY_OK) {
-      values.insert(p->getValues().begin(), p->getValues().end());
-      for (size_t i = 0; i < p->EstimateBlockSize(); ++i) {
-        auto block = p->GetEstimateBlock(i);
-        auto key = p->GetUnverifiedKey(i);
-        if (keys.find(entry.first) != keys.end()) {
-          if (keys[entry.first].find(block) != keys[entry.first].end()) {
-            keys[entry.first][block].emplace_back(key);
-          } else {
-            keys[entry.first].emplace(block, std::vector<std::string>{key});
-          }
-        } else {
-          std::map<uint64_t, std::vector<std::string>> innermap;
-          innermap.emplace(block, std::vector<std::string>{key});
-          keys.emplace(entry.first, innermap);
-        }
-      }
-    } else {
-      status = p->GetReply();
-    }
-    delete p;
-  }
-
+  // TODO
   return status;
 }
 
 void Client::BufferKey(const std::string& key) {
-  int i = key_to_shard(key, nshards);
-  // If needed, add this shard to set of participants and send BEGIN.
-  if (participants.find(i) == participants.end()) {
-      participants.insert(i);
-  }
-  bclient[i]->BufferKey(key);
+  // TODO
 }
 
 /* Sets the value corresponding to the supplied key. */
 int
 Client::Put(const string &key, const string &value)
 {
-    // Contact the appropriate shard to set the value.
-    int i = key_to_shard(key, nshards);
-
-    // If needed, add this shard to set of participants and send BEGIN.
-    if (participants.find(i) == participants.end()) {
-        participants.insert(i);
-    }
-
     Promise promise(PUT_TIMEOUT);
 
-    // Buffering, so no need to wait.
-    bclient[i]->Put(key, value, &promise);
+    // Update the write set.
+    txn.addWriteSet(key, value);
+    promise->Reply(REPLY_OK);
+
     return promise.GetReply();
 }
 
@@ -247,42 +113,27 @@ Client::Prepare(uint64_t &ts)
     // 0. go get a timestamp for OCC
     if (mode == MODE_OCC) {
         // Have to go to timestamp server
-        unique_lock<mutex> lk(cv_m);
-
-        transport.Timer(0, [=]() {
-		        tss->Invoke("", bind(&Client::tssCallback, this,
-                placeholders::_1,
-                placeholders::_2));
-	      });
-
-        cv.wait(lk);
-        ts = stol(replica_reply, NULL, 10);
+        ts = 0;
     }
 
     // 1. Send commit-prepare to all shards.
-    list<Promise *> promises;
-
-    for (auto& p : participants) {
-        promises.push_back(new Promise(PREPARE_TIMEOUT));
-        bclient[p]->Prepare(Timestamp(),promises.back());
-    }
+    Promise promise(PUT_TIMEOUT);
+    // TODO: Ask the server to prepare
+    promise.Reply(REPLY_OK, Timestamp());
 
     // 2. Wait for reply from all shards. (abort on timeout)
-
     status = REPLY_OK;
-    for (auto& p : promises) {
-        // If any shard returned false, abort the transaction.
-        if (p->GetReply() != REPLY_OK) {
-            if (status != REPLY_FAIL) {
-                status = p->GetReply();
-            }
+    // If any shard returned false, abort the transaction.
+    if (promise->GetReply() != REPLY_OK) {
+        if (status != REPLY_FAIL) {
+            status = p->GetReply();
         }
-        // Also, find the max of all prepare timestamp returned.
-        if (p->GetTimestamp().getTimestamp() > ts) {
-            ts = p->GetTimestamp().getTimestamp();
-        }
-        delete p;
     }
+    // Also, find the max of all prepare timestamp returned.
+    if (promise->GetTimestamp().getTimestamp() > ts) {
+        ts = p->GetTimestamp().getTimestamp();
+    }
+
     return status;
 }
 
@@ -302,45 +153,7 @@ Client::Commit()
     }
 
     if (status == REPLY_OK) {
-        // For Spanner like systems, calculate timestamp.
-        if (mode == MODE_SPAN_OCC || mode == MODE_SPAN_LOCK) {
-            uint64_t now, err;
-            struct timeval t1, t2;
-
-            gettimeofday(&t1, NULL);
-            timeServer.GetTimeAndError(now, err);
-
-            if (now > ts) {
-                ts = now;
-            } else {
-                uint64_t diff = ((ts >> 32) - (now >> 32))*1000000 +
-                        ((ts & 0xffffffff) - (now & 0xffffffff));
-                err += diff;
-            }
-
-            commit_sleep = (int)err;
-
-            // how good are we at waking up on time?
-                        if (err > 1000000)
-                Warning("Sleeping for too long! %lu; now,ts: %lu,%lu", err, now, ts);
-            if (err > 150) {
-                usleep(err-150);
-            }
-            // fine grained busy-wait
-            while (1) {
-                gettimeofday(&t2, NULL);
-                if ((t2.tv_sec-t1.tv_sec)*1000000 +
-                    (t2.tv_usec-t1.tv_usec) > (int64_t)err) {
-                    break;
-                }
-            }
-        }
-
-        // Send commits
-
-        for (auto& p : participants) {
-                        bclient[p]->Commit(ts);
-        }
+        // TODO: Send commits
         return true;
     }
 
@@ -362,66 +175,25 @@ bool Client::Commit(std::map<int, std::map<uint64_t, std::vector<std::string>>>&
     }
 
     if (status == REPLY_OK) {
-        // For Spanner like systems, calculate timestamp.
-        if (mode == MODE_SPAN_OCC || mode == MODE_SPAN_LOCK) {
-            uint64_t now, err;
-            struct timeval t1, t2;
-
-            gettimeofday(&t1, NULL);
-            timeServer.GetTimeAndError(now, err);
-
-            if (now > ts) {
-                ts = now;
-            } else {
-                uint64_t diff = ((ts >> 32) - (now >> 32))*1000000 +
-                        ((ts & 0xffffffff) - (now & 0xffffffff));
-                err += diff;
-            }
-
-            commit_sleep = (int)err;
-
-            // how good are we at waking up on time?
-                        if (err > 1000000)
-                Warning("Sleeping for too long! %lu; now,ts: %lu,%lu", err, now, ts);
-            if (err > 150) {
-                usleep(err-150);
-            }
-            // fine grained busy-wait
-            while (1) {
-                gettimeofday(&t2, NULL);
-                if ((t2.tv_sec-t1.tv_sec)*1000000 +
-                    (t2.tv_usec-t1.tv_usec) > (int64_t)err) {
-                    break;
-                }
-            }
-        }
-
         // Send commits
+        Promise promise(PREPARE_TIMEOUT);
+        bclient[p]->Commit(ts, promise);
 
-        map<int, Promise *> promises;
-        for (auto& p : participants) {
-                        promises.emplace(p, new Promise(PREPARE_TIMEOUT));
-            bclient[p]->Commit(ts, promises[p]);
-        }
-        for (auto& entry : promises) {
-            Promise *p = entry.second;
-            p->GetReply();
-            for (size_t i = 0; i < p->EstimateBlockSize(); ++i) {
-              auto block = p->GetEstimateBlock(i);
-              auto key = p->GetUnverifiedKey(i);
-              if (keys.find(entry.first) != keys.end()) {
-                if (keys[entry.first].find(block) != keys[entry.first].end()) {
-                  keys[entry.first][block].emplace_back(key);
-                } else {
-                  keys[entry.first].emplace(block, std::vector<std::string>{key});
-                }
-              } else {
-                std::map<uint64_t, std::vector<std::string>> innermap;
-                innermap.emplace(block, std::vector<std::string>{key});
-                keys.emplace(entry.first, innermap);
-              }
+        promise->GetReply();
+        for (size_t i = 0; i < promise->EstimateBlockSize(); ++i) {
+          auto block = promise->GetEstimateBlock(i);
+          auto key = promise->GetUnverifiedKey(i);
+          if (keys.find(entry.first) != keys.end()) {
+            if (keys[entry.first].find(block) != keys[entry.first].end()) {
+              keys[entry.first][block].emplace_back(key);
+            } else {
+              keys[entry.first].emplace(block, std::vector<std::string>{key});
             }
-            delete p;
+          } else {
+            std::map<uint64_t, std::vector<std::string>> innermap;
+            innermap.emplace(block, std::vector<std::string>{key});
+            keys.emplace(entry.first, innermap);
+          }
         }
         return true;
     }

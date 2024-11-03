@@ -58,21 +58,13 @@ private:
     // Ongoing transaction ID.
     uint64_t t_id;
 
-    // Number of shards in SpanStore.
-    long nshards;
+    // Transaction to keep track of read and write set.
+    Transaction txn;
 
-    // List of participants in the ongoing transaction.
-    std::set<int> participants;
-
-    
-    // Thread running the transport event loop.
-    std::thread *clientTransport;
-
-    // Buffering client for each shard.
-    std::vector<BufferClient *> bclient;
+    std::vector<std::pair<std::string, size_t>> history;
 
     // Mode in which spanstore runs.
-    Mode mode;
+    strongstore::Mode mode;
 
     // Timestamp server shard.
     replication::vr::VRClient *tss; 
