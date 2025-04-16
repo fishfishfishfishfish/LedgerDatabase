@@ -42,6 +42,15 @@ LIST(APPEND dist_srcs ${store_common_frontend_srcs})
 AUX_SOURCE_DIRECTORY(store/strongstore strongstore_srcs)
 LIST(APPEND dist_srcs ${strongstore_srcs})
 
+AUX_SOURCE_DIRECTORY(mocks mocks_srcs)
+LIST(APPEND dist_srcs ${mocks_srcs})
+
+AUX_SOURCE_DIRECTORY(mocks/strongstore mocks_strongstore_srcs)
+LIST(APPEND dist_srcs ${mocks_strongstore_srcs})
+
+AUX_SOURCE_DIRECTORY(mocks/letus mocks_letus_srcs)
+LIST(APPEND dist_srcs ${mocks_letus_srcs})
+
 AUX_SOURCE_DIRECTORY(lib lib_srcs)
 LIST(APPEND dist_srcs ${lib_srcs})
 
@@ -59,18 +68,23 @@ LIST(APPEND DIST_LINKER_LIBS crypto)
 LIST(APPEND DIST_LINKER_LIBS ${PROTOBUF_LIBRARY})
 TARGET_LINK_LIBRARIES(dist ${DIST_LINKER_LIBS})
 
-ADD_EXECUTABLE(timeserver "exes/timeserver.cc")
-ADD_DEPENDENCIES(timeserver copy_dist_protobuf)
-ADD_DEPENDENCIES(timeserver ledger)
-ADD_DEPENDENCIES(timeserver dist)
-TARGET_LINK_LIBRARIES(timeserver dist ledger)
-SET_TARGET_PROPERTIES(timeserver PROPERTIES LINK_FLAGS "${LINK_FLAGS}")
-
-
-
-ADD_EXECUTABLE(verifyClient "exes/verifyClient.cc")
+# ADD_EXECUTABLE(verifyClient "exes/blank.cc")
+ADD_EXECUTABLE(verifyClient "exes/verifyClient-mock.cc")
+FIND_LIBRARY(LIB_TCMALLOC tcmalloc jsoncpp)
 ADD_DEPENDENCIES(verifyClient copy_dist_protobuf)
 ADD_DEPENDENCIES(verifyClient dist)
 ADD_DEPENDENCIES(verifyClient ledger)
-TARGET_LINK_LIBRARIES(verifyClient dist ledger)
+TARGET_LINK_LIBRARIES(verifyClient dist ledger tcmalloc jsoncpp)
+# TARGET_LINK_LIBRARIES(verifyClient dist ledger)
 SET_TARGET_PROPERTIES(verifyClient PROPERTIES LINK_FLAGS "${LINK_FLAGS}")
+
+
+ADD_EXECUTABLE(tpccClient "exes/tpccClient-mock.cc")
+FIND_LIBRARY(LIB_TCMALLOC tcmalloc jsoncpp)
+ADD_DEPENDENCIES(tpccClient copy_dist_protobuf)
+ADD_DEPENDENCIES(tpccClient dist)
+ADD_DEPENDENCIES(tpccClient ledger)
+TARGET_LINK_LIBRARIES(tpccClient dist ledger tcmalloc jsoncpp)
+# TARGET_LINK_LIBRARIES(verifyClient dist ledger)
+SET_TARGET_PROPERTIES(tpccClient PROPERTIES LINK_FLAGS "${LINK_FLAGS}")
+

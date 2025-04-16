@@ -1,16 +1,20 @@
 #ifndef _STRONG_CLIENT_H_
 #define _STRONG_CLIENT_H_
+#include <iostream>
+#include <fstream>
 
 #include "distributed/lib/assert.h"
 #include "distributed/lib/message.h"
 #include "distributed/lib/configuration.h"
 #include "distributed/lib/tcptransport.h"
-#include "distributed/replication/vr/client.h"
-#include "distributed/store/common/frontend/bufferclient.h"
 #include "distributed/store/common/frontend/client.h"
-#include "distributed/store/common/truetime.h"
 #include "distributed/store/strongstore/shardclient.h"
+#include "distributed/store/common/transaction.h"
 #include "distributed/proto/strong-proto.pb.h"
+#include "distributed/proto/request.pb.h"
+#include "distributed/mocks/letus/letus.h"
+
+
 
 #include <set>
 #include <thread>
@@ -21,6 +25,7 @@ class Client : public ::Client
 {
 public:
     Client();
+    Client(int timeout, const std::string& db_path = "/tmp/letusdb");
     ~Client();
 
     // Overriding functions from ::Client
@@ -35,7 +40,9 @@ public:
         std::map<std::string, std::string>& values, std::map<int,
         std::map<uint64_t, std::vector<std::string>>>& unverified_keys);
     int Put(const string &key, const string &value);
+    // commit without verification
     bool Commit();
+    // commit with verification
     bool Commit(std::map<int, std::map<uint64_t, std::vector<std::string>>>& keys);
     void Abort();
     bool Verify(std::map<int, std::map<uint64_t, std::vector<std::string>>>& keys);
@@ -43,14 +50,11 @@ public:
     bool Audit(std::map<int, uint64_t>& seqs);
 
 private:
-    /* Private helper functions. */
-    void run_client(); // Runs the transport event loop.
-
-    // timestamp server call back
-    void tssCallback(const string &request, const string &reply);
-
     // local Prepare function
     int Prepare(uint64_t &ts);
+
+    // get timestamp
+    uint64_t GetTime();
 
     // Unique ID for this client.
     uint64_t client_id;
@@ -63,14 +67,9 @@ private:
 
     std::vector<std::pair<std::string, size_t>> history;
 
-    // Mode in which spanstore runs.
-    strongstore::Mode mode;
-
-    // Timestamp server shard.
-    replication::vr::VRClient *tss; 
-
-    // TrueTime server.
-    TrueTime timeServer;
+    // std::ofstream log;
+    // std::string db_path;
+    std::unique_ptr<letus::Letus> store;
 
     // Synchronization variables.
     std::condition_variable cv;

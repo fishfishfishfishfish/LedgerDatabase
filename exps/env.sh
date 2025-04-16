@@ -1,7 +1,7 @@
 #===== Parameters to Fill =====
 
 # project root directory
-rootdir=
+rootdir="/home/xinyu.chen/LedgerDatabase"
 
 # log directory
 logdir=

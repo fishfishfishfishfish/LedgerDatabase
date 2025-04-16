@@ -10,6 +10,7 @@
 
 using namespace std;
 
+
 struct Task {
   std::vector<int> ops;
   std::vector<std::string> keys;
@@ -70,12 +71,14 @@ void millisleep(size_t t) {
   nanosleep(&req, NULL); 
 }
 
-int taskGenerator(int clientid, int tid, int tlen, int wPer, int rPer, int timeout) {
+int taskGenerator(int clientid, int tid, int tLen, int wPer, int rPer, int timeout) {
+  fprintf(stderr, "[taskGenerator] client %d, batch size %d, %d% write, %d% read, generation interval %lfs\n", 
+          clientid, tLen, wPer, rPer, timeout*0.001);
   timeval t0;
   gettimeofday(&t0, NULL);
   srand(t0.tv_sec*10000000000 + t0.tv_usec*10000 + clientid*10 + tid);
 
-  row_num = 100000;
+  row_num = 100000; // mock
   zetan = zeta(row_num);
   zeta_2_theta = zeta(2);
 
@@ -87,7 +90,7 @@ int taskGenerator(int clientid, int tid, int tlen, int wPer, int rPer, int timeo
     }
 
     Task task;
-    for (int j = 0; j < tlen; j++) {
+    for (int j = 0; j < tLen; j++) {
       auto key = std::to_string(zipf(row_num));
       auto val = default_val[j%10];
       int op, n = 0;
@@ -113,7 +116,10 @@ int taskGenerator(int clientid, int tid, int tlen, int wPer, int rPer, int timeo
 
 #ifndef AMZQLDB
 
-int verifyThread(strongstore::Client* client, int idx, int tLen, int wPer, int duration, size_t timeout) {
+int verifyThread(mockstrongstore::Client* client, int idx, int tLen, int wPer, int duration, size_t timeout) {
+  
+  fprintf(stderr, "[verifier] client %d, batch size %d, %d% write, runtime %ds, generation interval %lfs\n", 
+          idx, tLen, wPer, duration, timeout*0.001);
   while (1) {
     millisleep(timeout);
     if (!running) {
@@ -166,7 +172,9 @@ int verifyThread(strongstore::Client* client, int idx, int tLen, int wPer, int d
 #endif
 
 int
-txnThread(strongstore::Client* client, int idx, int tLen, int wPer, int rPer, int duration) {
+txnThread(mockstrongstore::Client* client, int idx, int tLen, int wPer, int rPer, int duration) {
+  fprintf(stderr, "[transaction] client %d, batch size %d, %d% write, %d% read, runtime %ds\n", 
+          idx, tLen, wPer, rPer, duration);
   // Read in the keys from a file.
   struct timeval t0, t1, t2;
   size_t nTransactions = 0;
@@ -238,6 +246,7 @@ txnThread(strongstore::Client* client, int idx, int tLen, int wPer, int rPer, in
     }
 #endif
     gettimeofday(&t1, NULL);
+    // fprintf(stderr, "elapsed time: %d/%d us", ((t1.tv_sec-t0.tv_sec)*1000000 + (t1.tv_usec-t0.tv_usec)), duration*1000000);
     if (((t1.tv_sec-t0.tv_sec)*1000000 + (t1.tv_usec-t0.tv_usec)) >
         duration*1000000) {
       std::cout << "txn thread terminated" << std::endl;
@@ -260,7 +269,7 @@ int main(int argc, char **argv) {
   int error = 0; // error bars
   int idx = 0;
   int txn_rate = 0;
-  size_t timeout = 0;
+  size_t timeout = 0; // 100
 
   int opt;
   while ((opt = getopt(argc, argv, "c:d:N:l:w:g:k:f:m:e:s:z:r:i:t:x:")) != -1) {
@@ -427,10 +436,11 @@ int main(int argc, char **argv) {
       break;
     }
   }
-  mockstrongstore::Client *client = new mockstrongstore::Client(); // mock
+  mockstrongstore::Client *client = new mockstrongstore::Client(
+    timeout, "/home/xinyu.chen/LedgerDatabase/logs/log"); // mock
 
   std::vector<std::future<int>> actual_ops;
-  int numThread = 10;
+  int numThread = 2;
   int interval = 1000 / txn_rate;
   for (int i = 0; i < numThread; ++i) {
     actual_ops.emplace_back(std::async(std::launch::async, taskGenerator, idx, i, tLen, wPer, rPer, interval));

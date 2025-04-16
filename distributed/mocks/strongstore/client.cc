@@ -1,28 +1,23 @@
-#include "distributed/store/strongstore/client.h"
+#include "distributed/mocks/strongstore/client.h"
 
 using namespace std;
 
 namespace mockstrongstore {
 
 Client::Client()
+{}
+
+Client::Client(int timeout, const std::string& db_path)
 {
     // Initialize all state here;
     client_id = 0;
-    while (client_id == 0) {
-        random_device rd;
-        mt19937_64 gen(rd());
-        uniform_int_distribution<uint64_t> dis;
-        client_id = dis(gen);
-    }
-    t_id = (client_id/10000)*10000;
+    t_id = 0;
+
+    // TODO: open a rocksdb with db_path
+    store.reset(new letus::Letus(timeout, db_path));
 }
 
 Client::~Client()
-{}
-
-/* Runs the transport event loop. */
-void
-Client::run_client()
 {}
 
 /* Begins a transaction. All subsequent operations before a commit() or
@@ -34,11 +29,9 @@ void
 Client::Begin()
 {
     t_id++;
-    participants.clear();
-    commit_sleep = -1;
-
     // Initialize a transaction.
     txn = Transaction();
+    history.clear();
 }
 
 int Client::GetNVersions(const string& key, size_t n) {
@@ -46,7 +39,7 @@ int Client::GetNVersions(const string& key, size_t n) {
 
     history.emplace_back(std::make_pair(key, n));
 
-    promise->Reply(REPLY_OK);
+    promise.Reply(REPLY_OK);
     return promise.GetReply();
 }
 
@@ -56,14 +49,14 @@ int Client::Get(const string &key)
 
     // Read your own writes, check the write set first.
     if (txn.getWriteSet().find(key) != txn.getWriteSet().end()) {
-        promise->Reply(REPLY_OK);
-        return;
+        promise.Reply(REPLY_OK);
+        return REPLY_OK;
     }
 
     if (txn.getReadSet().find(key) == txn.getReadSet().end()) {
         txn.addReadSet(key, Timestamp());
     }
-    promise->Reply(REPLY_OK);
+    promise.Reply(REPLY_OK);
     return promise.GetReply();
 }
 
@@ -100,7 +93,7 @@ Client::Put(const string &key, const string &value)
 
     // Update the write set.
     txn.addWriteSet(key, value);
-    promise->Reply(REPLY_OK);
+    promise.Reply(REPLY_OK);
 
     return promise.GetReply();
 }
@@ -111,28 +104,26 @@ Client::Prepare(uint64_t &ts)
     int status;
 
     // 0. go get a timestamp for OCC
-    if (mode == MODE_OCC) {
-        // Have to go to timestamp server
-        ts = 0;
-    }
 
     // 1. Send commit-prepare to all shards.
     Promise promise(PUT_TIMEOUT);
-    // TODO: Ask the server to prepare
-    promise.Reply(REPLY_OK, Timestamp());
+    // TODO: send current transaction to the server
+    // prepared[tid] = transaction
+    // generate request str
+    // string request_str;
+    // strongstore::proto::Request request;
+    // request.set_op(strongstore::proto::Request::PREPARE);
+    // request.set_txnid(t_id);
+    // txn.serialize(request.mutable_prepare()->mutable_txn());
+    // ofstream log(db_path + to_string(t_id) + "Prepare");
+    // request.SerializeToOstream(&log);
+
+    promise.Reply(REPLY_OK, Timestamp(GetTime()));
 
     // 2. Wait for reply from all shards. (abort on timeout)
-    status = REPLY_OK;
-    // If any shard returned false, abort the transaction.
-    if (promise->GetReply() != REPLY_OK) {
-        if (status != REPLY_FAIL) {
-            status = p->GetReply();
-        }
-    }
-    // Also, find the max of all prepare timestamp returned.
-    if (promise->GetTimestamp().getTimestamp() > ts) {
-        ts = p->GetTimestamp().getTimestamp();
-    }
+    status = promise.GetReply();
+    ts = promise.GetTimestamp().getTimestamp();
+    // TODO: If any shard returned false, abort the transaction.
 
     return status;
 }
@@ -141,164 +132,130 @@ Client::Prepare(uint64_t &ts)
 bool
 Client::Commit()
 {
-    // Implementing 2 Phase Commit
-    uint64_t ts = 0;
-    int status;
-
-    for (int i = 0; i < COMMIT_RETRIES; i++) {
-        status = Prepare(ts);
-        if (status == REPLY_OK || status == REPLY_FAIL) {
-            break;
-        }
-    }
-
-    if (status == REPLY_OK) {
-        // TODO: Send commits
-        return true;
-    }
-
-    // 4. If not, send abort to all shards.
-    Abort();
-    return false;
+    return true;
 }
 
-bool Client::Commit(std::map<int, std::map<uint64_t, std::vector<std::string>>>& keys) {
+bool Client::Commit(std::map<int, std::map<uint64_t, std::vector<std::string>>>& vkeys) {
+    /* keys: 2d mapping, (shard, block) -> key */
   // Implementing 2 Phase Commit
-    uint64_t ts = 0;
-    int status;
+  uint64_t ts = 0;
+  int status;
 
-    for (int i = 0; i < COMMIT_RETRIES; i++) {
-        status = Prepare(ts);
-        if (status == REPLY_OK || status == REPLY_FAIL) {
-            break;
-        }
+  for (int i = 0; i < COMMIT_RETRIES; i++) {
+      status = Prepare(ts);
+      if (status == REPLY_OK || status == REPLY_FAIL) {
+          break;
+      }
+  }
+
+  if (status == REPLY_OK) {
+    //   Promise promise(PREPARE_TIMEOUT);
+    // generate request str
+    //   string request_str;
+    //   strongstore::proto::Request request;
+    //   request.set_op(strongstore::proto::Request::COMMIT);
+    //   request.set_txnid(t_id);
+    //   request.mutable_commit()->set_timestamp(ts);
+    //   if (history.size() > 0) {
+    //       auto ver_msg = request.mutable_version();
+    //       for (auto& vk : history) {
+    //       auto ver_keys = ver_msg->add_versionedkeys();
+    //       ver_keys->set_key(vk.first);
+    //       ver_keys->set_nversions(vk.second);
+    //       }
+    //   }
+    //   ofstream log(db_path + to_string(t_id) + "Commit");
+    //   request.SerializeToOstream(&log);
+    // Send commits
+    Promise promise(PREPARE_TIMEOUT);
+    strongstore::proto::Reply reply;
+
+    store->GetDigest(&reply);
+    std::vector<std::string> keys, vals;
+    for (auto &read: txn.getReadSet()) {
+      keys.push_back(read.first);
+    }
+    if (keys.size() > 0) {
+      store->BatchGet(keys, &reply);
+      keys.clear();
     }
 
-    if (status == REPLY_OK) {
-        // Send commits
-        Promise promise(PREPARE_TIMEOUT);
-        bclient[p]->Commit(ts, promise);
-
-        promise->GetReply();
-        for (size_t i = 0; i < promise->EstimateBlockSize(); ++i) {
-          auto block = promise->GetEstimateBlock(i);
-          auto key = promise->GetUnverifiedKey(i);
-          if (keys.find(entry.first) != keys.end()) {
-            if (keys[entry.first].find(block) != keys[entry.first].end()) {
-              keys[entry.first][block].emplace_back(key);
-            } else {
-              keys[entry.first].emplace(block, std::vector<std::string>{key});
-            }
-          } else {
-            std::map<uint64_t, std::vector<std::string>> innermap;
-            innermap.emplace(block, std::vector<std::string>{key});
-            keys.emplace(entry.first, innermap);
-          }
-        }
-        return true;
+    if (history.size() > 0) {
+      store->GetNVersions(history, &reply);
     }
 
-    // 4. If not, send abort to all shards.
-    Abort();
-    return false;
+    for (auto &write : txn.getWriteSet()) {
+      keys.push_back(write.first);
+      vals.push_back(write.second);
+    }
+    if (keys.size() > 0) {
+      store->put(keys, vals, Timestamp(ts), &reply);
+    }
+    reply.set_status(0);
+
+    for (size_t i = 0; i < reply.values_size(); ++i) {
+      auto values = reply.values(i);
+      auto block = values.estimate_block();
+      auto key = values.key();
+      /* we only use one shard, shard = 0 */
+      if (vkeys.find(0) != vkeys.end()) {
+        if (vkeys[0].find(block) != vkeys[0].end()) {
+          vkeys[0][block].emplace_back(key);
+        } else {
+          vkeys[0].emplace(block, std::vector<std::string>{key});
+        }
+      } else {
+        std::map<uint64_t, std::vector<std::string>> innermap;
+        innermap.emplace(block, std::vector<std::string>{key});
+        vkeys.emplace(0, innermap);
+      }
+    }
+      
+    return true;
+  }
+
+  // 4. If not, send abort to all shards.
+  Abort();
+  return false;
 }
 
 /* Aborts the ongoing transaction. */
 void
 Client::Abort()
-{
-        for (auto& p : participants) {
-        bclient[p]->Abort();
-    }
-}
+{}
 
 bool Client::Verify(std::map<int, std::map<uint64_t, std::vector<std::string>>>& keys) {
-    // Contact the appropriate shard to set the value.
-    bool is_successful = true;
-
-#ifndef AMZQLDB
-    list<Promise*> promises;
-    size_t nkeys = 0;
-
-    for (auto k = keys.begin(); k != keys.end();) {
-        bool verifiable = true;
-        for (auto block = k->second.begin(); block != k->second.end();) {
-            if (!verifiable) {
-                block = k->second.erase(block);
-            } else {
-                while (block->second.size() > 10000) {
-                  promises.push_back(new Promise());
-                  std::vector<std::string> newvec(block->second.begin(),
-                      block->second.begin() + 10000);
-                  if (!bclient[k->first]->Verify(block->first, newvec,
-                      promises.back())) {
-                    verifiable = false;
-                    promises.pop_back();
-                    break;
-                  }
-                  block->second.erase(block->second.begin(), block->second.begin() + 10000);
-                  nkeys += 10000;
-                }
-
-                promises.push_back(new Promise());
-                if (!verifiable || !bclient[k->first]->Verify(block->first,
-                                            block->second,
-                                            promises.back())) {
-                    verifiable = false;
-                    block = k->second.erase(block);
-                    promises.pop_back();
-                } else {
-                    nkeys += block->second.size();
-                    ++block;
-                }
-            }
-        }
-        if (k->second.size() == 0) {
-            k = keys.erase(k);
-        } else {
-            ++k;
-        }
+  strongstore::proto::Reply reply;
+  size_t nkeys = 0;
+  for (auto k = keys.begin(); k != keys.end();) {
+    for (auto block = k->second.begin(); block != k->second.end();) {
+      while (block->second.size() > 10000) {
+        std::vector<std::string> newvec(block->second.begin(), block->second.begin() + 10000);
+        std::map<uint64_t, std::vector<std::string>> keys;
+        keys.emplace(block->first, newvec);
+        store->GetProof(keys, &reply);
+        block->second.erase(block->second.begin(), block->second.begin() + 10000);
+        nkeys += 10000;
+      }
+      std::map<uint64_t, std::vector<std::string>> keys;
+      keys.emplace(block->first, block->second);
+      store->GetProof(keys, &reply);
+      nkeys += block->second.size();
+      ++block;
     }
-    std::cout << "verifynkeys " << nkeys << std::endl;
-
-    for (auto& p : promises) {
-        if (p->GetReply() != REPLY_OK ||
-            p->GetVerifyStatus() != VerifyStatus::PASS) {
-          is_successful = false;
-        }
-        delete p;
+    if (k->second.size() == 0) {
+        k = keys.erase(k);
+    } else {
+        ++k;
     }
-#endif
-
-    return is_successful;
+  }
+  return true;
 }
 
 bool Client::Audit(std::map<int, uint64_t>& seqs) {
     // Contact the appropriate shard to set the value.
     bool status = true;
-    list<Promise *> promises;
-
-    if (seqs.size() == 0) {
-      for(size_t n = 0; n < nshards; ++n) {
-        seqs.emplace(n, 0);
-      }
-    }
-
-    for (auto k = seqs.begin(); k != seqs.end(); ++k) {
-        promises.push_back(new Promise());
-        bclient[k->first]->Audit(k->second, promises.back());
-    }
-
-    int n = 0;
-    for (auto p : promises) {
-        if (p->GetReply() != REPLY_OK) {
-          status = false;
-        } else if (p->GetVerifyStatus() != VerifyStatus::UNVERIFIED) {
-          ++seqs[n];
-        }
-        ++n;
-        delete p;
-    }
+    // TODO: audit
     return status;
 }
 
@@ -311,17 +268,29 @@ Client::Stats()
     return v;
 }
 
-/* Callback from a tss replica upon any request. */
-void
-Client::tssCallback(const string &request, const string &reply)
+
+uint64_t
+Client::GetTime()
 {
-    lock_guard<mutex> lock(cv_m);
+    struct timeval now;
+    uint64_t timestamp;
 
-    // Copy reply to "replica_reply".
-    replica_reply = reply;
+    gettimeofday(&now, NULL);
 
-    // Wake up thread waiting for the reply.
-    cv.notify_all();
+    // now.tv_usec += simSkew;
+    if (now.tv_usec > 999999) {
+        now.tv_usec -= 1000000;
+        now.tv_sec++;
+    } else if (now.tv_usec < 0) {
+        now.tv_usec += 1000000;
+        now.tv_sec--;
+    }
+
+    timestamp = ((uint64_t)now.tv_sec << 32) | (uint64_t) (now.tv_usec);
+
+    
+    return timestamp;
 }
+
 
 } // namespace strongstore
