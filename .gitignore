@@ -2,3 +2,7 @@ build/
 exps/result/
 exps/shard*
 .vscode
+
+CMakeFiles/
+bin/
+build/

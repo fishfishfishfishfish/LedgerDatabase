@@ -5,7 +5,7 @@
 
 using namespace std;
 
-VersionedKVStore::VersionedKVStore() { }
+VersionedKVStore::VersionedKVStore() {}
 
 VersionedKVStore::VersionedKVStore(const string& db_path, int timeout) {
 #ifdef LEDGERDB
@@ -20,8 +20,8 @@ VersionedKVStore::VersionedKVStore(const string& db_path, int timeout) {
   sqlledger_.reset(new ledgebase::sqlledger::SQLLedger(timeout, db_path));
 #endif
 }
-    
-VersionedKVStore::~VersionedKVStore() { }
+
+VersionedKVStore::~VersionedKVStore() {}
 
 bool VersionedKVStore::GetDigest(strongstore::proto::Reply* reply) {
   uint64_t tip;
@@ -33,6 +33,7 @@ bool VersionedKVStore::GetDigest(strongstore::proto::Reply* reply) {
 #ifdef SQLLEDGER
   sqlledger_->GetDigest(&tip, &hash);
 #endif
+  // Note: why no AMZQLDB
 
   auto digest = reply->mutable_digest();
   digest->set_block(tip);
@@ -45,8 +46,8 @@ bool VersionedKVStore::GetNVersions(
     std::vector<std::pair<std::string, size_t>>& ver_keys,
     strongstore::proto::Reply* reply) {
 #ifdef LEDGERDB
-  std::vector<std::vector<
-      std::pair<uint64_t, std::pair<size_t, std::string>>>> get_val_res;
+  std::vector<std::vector<std::pair<uint64_t, std::pair<size_t, std::string>>>>
+      get_val_res;
   std::vector<std::string> keys;
   for (auto& k : ver_keys) {
     keys.emplace_back(k.first);
@@ -69,8 +70,9 @@ bool VersionedKVStore::GetNVersions(
     auto result = qldb_->GetHistory("test", key.first, key.second);
     for (auto& res : result) {
       ledgebase::qldb::Document doc(&res);
-      auto proofres = qldb_->getProof("test", digestInfo.tip,
-          doc.getAddr().seq_no, doc.getMetaData().doc_seq);
+      auto proofres =
+          qldb_->getProof("test", digestInfo.tip, doc.getAddr().seq_no,
+                          doc.getMetaData().doc_seq);
       auto p = reply->add_qproof();
       p->set_key(key.first);
       p->set_value(proofres.data.val.ToString());
@@ -105,7 +107,7 @@ bool VersionedKVStore::GetNVersions(
 }
 
 bool VersionedKVStore::BatchGet(const std::vector<std::string>& keys,
-    strongstore::proto::Reply* reply) {
+                                strongstore::proto::Reply* reply) {
 #ifdef LEDGERDB
   std::vector<std::pair<uint64_t, std::pair<size_t, std::string>>> get_val_res;
   ldb->GetValues(keys, get_val_res);
@@ -131,8 +133,9 @@ bool VersionedKVStore::BatchGet(const std::vector<std::string>& keys,
       continue;
     }
     ledgebase::qldb::Document doc(&result);
-    auto proofres = qldb_->getProof("test", digestInfo.tip, doc.getAddr().seq_no,
-        doc.getMetaData().doc_seq);
+    auto proofres =
+        qldb_->getProof("test", digestInfo.tip, doc.getAddr().seq_no,
+                        doc.getMetaData().doc_seq);
     auto p = reply->add_qproof();
     p->set_key(key);
     p->set_value(proofres.data.val.ToString());
@@ -155,7 +158,7 @@ bool VersionedKVStore::BatchGet(const std::vector<std::string>& keys,
       continue;
     }
     auto docs = ledgebase::Utils::splitBy(result, '|');
-    
+
     auto kv = reply->add_values();
     kv->set_key(docs[3]);
     kv->set_val(docs[4]);
@@ -167,11 +170,12 @@ bool VersionedKVStore::BatchGet(const std::vector<std::string>& keys,
   return true;
 }
 
-bool VersionedKVStore::GetRange(const std::string &start,
-    const std::string &end, strongstore::proto::Reply* reply) {
+bool VersionedKVStore::GetRange(const std::string& start,
+                                const std::string& end,
+                                strongstore::proto::Reply* reply) {
 #ifdef LEDGERDB
-  std::map<std::string,
-      std::pair<uint64_t, std::pair<size_t, std::string>>> range_res;
+  std::map<std::string, std::pair<uint64_t, std::pair<size_t, std::string>>>
+      range_res;
   ldb->GetRange(start, end, range_res);
   for (auto& res : range_res) {
     auto kv = reply->add_values();
@@ -191,8 +195,9 @@ bool VersionedKVStore::GetRange(const std::string &start,
     ledgebase::Slice valslice(r.second);
     ledgebase::Chunk valchunk(valslice.data());
     ledgebase::qldb::Document doc(&valchunk);
-    auto proofres = qldb_->getProof("test", digestInfo.tip, doc.getAddr().seq_no,
-        doc.getMetaData().doc_seq);
+    auto proofres =
+        qldb_->getProof("test", digestInfo.tip, doc.getAddr().seq_no,
+                        doc.getMetaData().doc_seq);
     auto p = reply->add_qproof();
     p->set_key(r.first);
     p->set_value(proofres.data.val.ToString());
@@ -245,14 +250,13 @@ bool VersionedKVStore::GetProof(
     }
   }
   nkey = ks.size();
-  
-  ldb->GetProofs(ks, blks, mtproof, mptproof, &mtdigest,
-      &block, &mptdigest);
+
+  ldb->GetProofs(ks, blks, mtproof, mptproof, &mtdigest, &block, &mptdigest);
   auto digest = reply->mutable_digest();
   digest->set_block(block);
   digest->set_hash(mtdigest);
   digest->set_mpthash(mptdigest);
-  
+
   for (size_t i = 0; i < mtproof.size(); ++i) {
     auto p = reply->add_proof();
     p->set_val(mtproof[i].value);
@@ -273,9 +277,9 @@ bool VersionedKVStore::GetProof(
   for (auto& entry : keys) {
     int level;
 
-    auto block_proof = sqlledger_->getBlockProof(entry.first,
-        reply->digest().block(), &level);
-    //ledgebase::sqlledger::BlockProof block_proof;
+    auto block_proof =
+        sqlledger_->getBlockProof(entry.first, reply->digest().block(), &level);
+    // ledgebase::sqlledger::BlockProof block_proof;
     auto p = reply->add_sproof();
     for (size_t i = 0; i < block_proof.blks.size(); ++i) {
       p->add_blocks(block_proof.blks[i]);
@@ -303,13 +307,13 @@ bool VersionedKVStore::GetProof(
 #endif
 
   gettimeofday(&t1, NULL);
-  auto lat = (t1.tv_sec - t0.tv_sec)*1000000 + t1.tv_usec - t0.tv_usec;
+  auto lat = (t1.tv_sec - t0.tv_sec) * 1000000 + t1.tv_usec - t0.tv_usec;
   std::cout << "getproof " << lat << " " << nkey << std::endl;
   return true;
 }
 
 bool VersionedKVStore::GetProof(const uint64_t& seq,
-    strongstore::proto::Reply* reply) {
+                                strongstore::proto::Reply* reply) {
 #ifdef LEDGERDB
   auto auditor = ldb->GetAudit(seq);
   auto reply_auditor = reply->mutable_laudit();
@@ -344,11 +348,9 @@ bool VersionedKVStore::GetProof(const uint64_t& seq,
   return true;
 }
 
-
-void VersionedKVStore::put(const vector<string> &keys,
-    const vector<string> &values, const Timestamp &t,
-    strongstore::proto::Reply* reply)
-{
+void VersionedKVStore::put(const vector<string>& keys,
+                           const vector<string>& values, const Timestamp& t,
+                           strongstore::proto::Reply* reply) {
 #ifdef LEDGERDB
   auto estimate_blocks = ldb->Set(keys, values, t.getTimestamp());
   if (reply != nullptr) {
@@ -379,21 +381,19 @@ void VersionedKVStore::put(const vector<string> &keys,
 #endif
 }
 
-bool VersionedKVStore::get(const std::string &key,
-                           const Timestamp &t,
-                           std::pair<Timestamp, std::string> &value)
-{
+bool VersionedKVStore::get(const std::string& key, const Timestamp& t,
+                           std::pair<Timestamp, std::string>& value) {
 #ifdef LEDGERDB
-    std::vector<std::pair<uint64_t, std::pair<size_t, std::string>>> get_val_res;
-    ldb->GetValues({key}, get_val_res);
-    value = std::make_pair(get_val_res[0].second.first,
-        get_val_res[0].second.second);
+  std::vector<std::pair<uint64_t, std::pair<size_t, std::string>>> get_val_res;
+  ldb->GetValues({key}, get_val_res);
+  value =
+      std::make_pair(get_val_res[0].second.first, get_val_res[0].second.second);
 #endif
 #ifdef AMZQLDB
-    auto result = qldb_->GetCommitted("test", key);
-    ledgebase::qldb::Document doc(&result);
-    value = std::make_pair(Timestamp(doc.getMetaData().time),
-        doc.getData().val.ToString());
+  auto result = qldb_->GetCommitted("test", key);
+  ledgebase::qldb::Document doc(&result);
+  value = std::make_pair(Timestamp(doc.getMetaData().time),
+                         doc.getData().val.ToString());
 #endif
-    return true;
+  return true;
 }
