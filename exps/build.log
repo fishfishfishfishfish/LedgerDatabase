@@ -1,0 +1,445 @@
+./build.sh: line 1: [: ==: unary operator expected
+-- The C compiler identification is GNU 11.2.0
+-- The CXX compiler identification is GNU 11.2.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Use LedgerDB
+-- Found Protobuf: /usr/local/lib/libprotobuf.so (found version "2.6.1") 
+-- Protobuf 版本: 2.6.1
+-- Protobuf 包含路径: /usr/local/include
+-- Protobuf 库路径: /usr/local/lib/libprotobuf.so
+-- Protobuf 编译器路径: /usr/local/bin/protoc
+-- Found LibEvent: /usr/local/lib/libevent.so;/usr/local/lib/libevent_openssl.so;/usr/local/lib/libevent_core.so;/usr/local/lib/libevent_extra.so;/usr/local/lib/libevent_pthreads.so;/usr/local/lib/libevent_extra.so  
+-- Found libevent at /usr/local/include
+-- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.71.0/BoostConfig.cmake (found version "1.71.0") found components: filesystem program_options thread 
+-- Found Rocksdb: /usr/local/include  
+-- Found Rocksdb at /usr/local/include
+-- Found CryptoPP: /usr/local/include (found version "6.1.0") 
+-- TBB 版本: 2021.11.0
+-- TBB 包含路径: 
+-- TBB 库路径: 
+-- TBB 编译器路径: /usr/local/bin/protoc
+-- /usr/local/bin/protoc
+-- include: /media/nvme/cxy_test/LedgerDatabase;/media/nvme/cxy_test/LedgerDatabase/build
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /media/nvme/cxy_test/LedgerDatabase/build
+[  1%] Running cpp protocol buffer compiler on /media/nvme/cxy_test/LedgerDatabase/distributed/proto/vr-proto.proto
+[  2%] Running cpp protocol buffer compiler on /media/nvme/cxy_test/LedgerDatabase/distributed/proto/common-proto.proto
+[  3%] Running cpp protocol buffer compiler on /media/nvme/cxy_test/LedgerDatabase/distributed/proto/request.proto
+[  5%] Running cpp protocol buffer compiler on /media/nvme/cxy_test/LedgerDatabase/distributed/proto/strong-proto.proto
+[  6%] Building CXX object test/CMakeFiles/gtest.dir/gtest/gtest-all.cc.o
+[  7%] Building CXX object ledger/CMakeFiles/ledger_objs.dir/common/chunk.cc.o
+[  9%] Building CXX object ledger/CMakeFiles/ledger_objs.dir/common/hash.cc.o
+[ 10%] Building CXX object ledger/CMakeFiles/ledger_objs.dir/common/logger.cc.o
+[ 11%] Building CXX object ledger/CMakeFiles/ledger_objs.dir/common/utils.cc.o
+[ 12%] Copying Protobuf headers
+[ 12%] Built target copy_dist_protobuf
+[ 14%] Building CXX object ledger/CMakeFiles/ledger_objs.dir/ledgerdb/ledgerdb.cc.o
+[ 15%] Building CXX object ledger/CMakeFiles/ledger_objs.dir/ledgerdb/merkletree.cc.o
+/media/nvme/cxy_test/LedgerDatabase/ledger/common/logger.cc: In static member function ‘static ledgebase::Chunk ledgebase::TxnEntry::Encode(uint64_t, const std::vector<std::__cxx11::basic_string<char> >&, const std::vector<std::__cxx11::basic_string<char> >&, const ledgebase::Hash&, uint64_t)’:
+/media/nvme/cxy_test/LedgerDatabase/ledger/common/logger.cc:44:19: warning: moving a local object in a return statement prevents copy elision [-Wpessimizing-move]
+   44 |   return std::move(chunk);
+      |          ~~~~~~~~~^~~~~~~
+/media/nvme/cxy_test/LedgerDatabase/ledger/common/logger.cc:44:19: note: remove ‘std::move’ call
+[ 16%] Building CXX object ledger/CMakeFiles/ledger_objs.dir/ledgerdb/mpt/mpt_node.cc.o
+[ 18%] Building CXX object ledger/CMakeFiles/ledger_objs.dir/ledgerdb/mpt/trie.cc.o
+/media/nvme/cxy_test/LedgerDatabase/ledger/ledgerdb/mpt/mpt_node.cc: In static member function ‘static ledgebase::Chunk ledgebase::ledgerdb::MPTFullNode::Encode(const std::vector<ledgebase::Chunk>&)’:
+/media/nvme/cxy_test/LedgerDatabase/ledger/ledgerdb/mpt/mpt_node.cc:100:19: warning: moving a local object in a return statement prevents copy elision [-Wpessimizing-move]
+  100 |   return std::move(chunk);
+      |          ~~~~~~~~~^~~~~~~
+/media/nvme/cxy_test/LedgerDatabase/ledger/ledgerdb/mpt/mpt_node.cc:100:19: note: remove ‘std::move’ call
+/media/nvme/cxy_test/LedgerDatabase/ledger/ledgerdb/mpt/mpt_node.cc: In static member function ‘static ledgebase::Chunk ledgebase::ledgerdb::MPTShortNode::Encode(const string&, const ledgebase::Chunk*)’:
+/media/nvme/cxy_test/LedgerDatabase/ledger/ledgerdb/mpt/mpt_node.cc:136:19: warning: moving a local object in a return statement prevents copy elision [-Wpessimizing-move]
+  136 |   return std::move(chunk);
+      |          ~~~~~~~~~^~~~~~~
+/media/nvme/cxy_test/LedgerDatabase/ledger/ledgerdb/mpt/mpt_node.cc:136:19: note: remove ‘std::move’ call
+/media/nvme/cxy_test/LedgerDatabase/ledger/ledgerdb/mpt/mpt_node.cc: In static member function ‘static ledgebase::Chunk ledgebase::ledgerdb::MPTHashNode::Encode(const ledgebase::Chunk*)’:
+/media/nvme/cxy_test/LedgerDatabase/ledger/ledgerdb/mpt/mpt_node.cc:143:19: warning: moving a local object in a return statement prevents copy elision [-Wpessimizing-move]
+  143 |   return std::move(chunk);
+      |          ~~~~~~~~~^~~~~~~
+/media/nvme/cxy_test/LedgerDatabase/ledger/ledgerdb/mpt/mpt_node.cc:143:19: note: remove ‘std::move’ call
+/media/nvme/cxy_test/LedgerDatabase/ledger/ledgerdb/mpt/mpt_node.cc: In static member function ‘static ledgebase::Chunk ledgebase::ledgerdb::MPTValueNode::Encode(const string&)’:
+/media/nvme/cxy_test/LedgerDatabase/ledger/ledgerdb/mpt/mpt_node.cc:150:19: warning: moving a local object in a return statement prevents copy elision [-Wpessimizing-move]
+  150 |   return std::move(chunk);
+      |          ~~~~~~~~~^~~~~~~
+/media/nvme/cxy_test/LedgerDatabase/ledger/ledgerdb/mpt/mpt_node.cc:150:19: note: remove ‘std::move’ call
+/media/nvme/cxy_test/LedgerDatabase/ledger/ledgerdb/mpt/mpt_node.cc: In static member function ‘static ledgebase::Chunk ledgebase::ledgerdb::MPTNilNode::Encode()’:
+/media/nvme/cxy_test/LedgerDatabase/ledger/ledgerdb/mpt/mpt_node.cc:155:19: warning: moving a local object in a return statement prevents copy elision [-Wpessimizing-move]
+  155 |   return std::move(chunk);
+      |          ~~~~~~~~~^~~~~~~
+/media/nvme/cxy_test/LedgerDatabase/ledger/ledgerdb/mpt/mpt_node.cc:155:19: note: remove ‘std::move’ call
+/media/nvme/cxy_test/LedgerDatabase/ledger/ledgerdb/mpt/mpt_node.cc: In member function ‘ledgebase::Chunk ledgebase::ledgerdb::MPTFullNode::setChildAtIndex(size_t, const ledgebase::Chunk*, const ledgebase::Chunk*) const’:
+/media/nvme/cxy_test/LedgerDatabase/ledger/ledgerdb/mpt/mpt_node.cc:201:19: warning: moving a local object in a return statement prevents copy elision [-Wpessimizing-move]
+  201 |   return std::move(chunk);
+      |          ~~~~~~~~~^~~~~~~
+/media/nvme/cxy_test/LedgerDatabase/ledger/ledgerdb/mpt/mpt_node.cc:201:19: note: remove ‘std::move’ call
+[ 19%] Building CXX object ledger/CMakeFiles/ledger_objs.dir/ledgerdb/skiplist/skiplist.cc.o
+[ 20%] Building CXX object ledger/CMakeFiles/ledger_objs.dir/qldb/ql_btree.cc.o
+In file included from /media/nvme/cxy_test/LedgerDatabase/ledger/ledgerdb/ledgerdb.cc:10:
+/media/nvme/cxy_test/LedgerDatabase/ledger/ledgerdb/types.h: In constructor ‘ledgebase::ledgerdb::BlockData::BlockData(std::string)’:
+/media/nvme/cxy_test/LedgerDatabase/ledger/ledgerdb/types.h:78:16: warning: unused variable ‘kv’ [-Wunused-variable]
+   78 |     for (auto& kv : kvs) {
+      |                ^~
+/media/nvme/cxy_test/LedgerDatabase/ledger/ledgerdb/ledgerdb.cc: In member function ‘void ledgebase::ledgerdb::LedgerDB::buildTree(int)’:
+/media/nvme/cxy_test/LedgerDatabase/ledger/ledgerdb/ledgerdb.cc:104:12: warning: unused variable ‘latency’ [-Wunused-variable]
+  104 |       auto latency = (t1.tv_sec - t0.tv_sec)*1000000 + t1.tv_usec - t0.tv_usec;
+      |            ^~~~~~~
+/media/nvme/cxy_test/LedgerDatabase/ledger/ledgerdb/ledgerdb.cc: In member function ‘bool ledgebase::ledgerdb::LedgerDB::GetVersions(const std::vector<std::__cxx11::basic_string<char> >&, std::vector<std::vector<std::pair<long unsigned int, std::pair<long unsigned int, std::__cxx11::basic_string<char> > > > >&, size_t)’:
+/media/nvme/cxy_test/LedgerDatabase/ledger/ledgerdb/ledgerdb.cc:196:21: warning: comparison of integer expressions of different signedness: ‘int’ and ‘std::vector<std::__cxx11::basic_string<char> >::size_type’ {aka ‘long unsigned int’} [-Wsign-compare]
+  196 |   for (int i = 0; i < keys.size(); i++) {
+      |                   ~~^~~~~~~~~~~~~
+/media/nvme/cxy_test/LedgerDatabase/ledger/ledgerdb/ledgerdb.cc: In member function ‘bool ledgebase::ledgerdb::Auditor::Audit(ledgebase::DB*)’:
+/media/nvme/cxy_test/LedgerDatabase/ledger/ledgerdb/ledgerdb.cc:349:12: warning: variable ‘last_block’ set but not used [-Wunused-but-set-variable]
+  349 |   uint64_t last_block;
+      |            ^~~~~~~~~~
+/media/nvme/cxy_test/LedgerDatabase/ledger/ledgerdb/mpt/trie.cc: In member function ‘std::string ledgebase::ledgerdb::Trie::Get(const string&) const’:
+/media/nvme/cxy_test/LedgerDatabase/ledger/ledgerdb/mpt/trie.cc:27:19: warning: moving a local object in a return statement prevents copy elision [-Wpessimizing-move]
+   27 |   return std::move(result);
+      |          ~~~~~~~~~^~~~~~~~
+/media/nvme/cxy_test/LedgerDatabase/ledger/ledgerdb/mpt/trie.cc:27:19: note: remove ‘std::move’ call
+/media/nvme/cxy_test/LedgerDatabase/ledger/ledgerdb/mpt/trie.cc: In member function ‘ledgebase::Chunk ledgebase::ledgerdb::Trie::Insert(const ledgebase::Chunk*, const string&, const ledgebase::Chunk*) const’:
+/media/nvme/cxy_test/LedgerDatabase/ledger/ledgerdb/mpt/trie.cc:101:21: warning: moving a local object in a return statement prevents copy elision [-Wpessimizing-move]
+  101 |     return std::move(root);
+      |            ~~~~~~~~~^~~~~~
+/media/nvme/cxy_test/LedgerDatabase/ledger/ledgerdb/mpt/trie.cc:101:21: note: remove ‘std::move’ call
+/media/nvme/cxy_test/LedgerDatabase/ledger/ledgerdb/mpt/trie.cc: In member function ‘ledgebase::Chunk ledgebase::ledgerdb::Trie::GetHashNodeChild(const ledgebase::Chunk*) const’:
+/media/nvme/cxy_test/LedgerDatabase/ledger/ledgerdb/mpt/trie.cc:303:21: warning: moving a local object in a return statement prevents copy elision [-Wpessimizing-move]
+  303 |     return std::move(value);
+      |            ~~~~~~~~~^~~~~~~
+/media/nvme/cxy_test/LedgerDatabase/ledger/ledgerdb/mpt/trie.cc:303:21: note: remove ‘std::move’ call
+/media/nvme/cxy_test/LedgerDatabase/ledger/qldb/ql_btree.cc: In member function ‘ledgebase::Slice ledgebase::qldb::QLBTree::Get(const ledgebase::Slice&) const’:
+/media/nvme/cxy_test/LedgerDatabase/ledger/qldb/ql_btree.cc:25:19: warning: moving a local object in a return statement prevents copy elision [-Wpessimizing-move]
+   25 |   return std::move(result);
+      |          ~~~~~~~~~^~~~~~~~
+/media/nvme/cxy_test/LedgerDatabase/ledger/qldb/ql_btree.cc:25:19: note: remove ‘std::move’ call
+/media/nvme/cxy_test/LedgerDatabase/ledger/qldb/ql_btree.cc: In member function ‘ledgebase::qldb::QLBTreeInsertResult ledgebase::qldb::QLBTree::Insert(const ledgebase::Chunk*, const ledgebase::Slice&, const ledgebase::Slice&) const’:
+/media/nvme/cxy_test/LedgerDatabase/ledger/qldb/ql_btree.cc:207:23: warning: moving a local object in a return statement prevents copy elision [-Wpessimizing-move]
+  207 |       return std::move(result);
+      |              ~~~~~~~~~^~~~~~~~
+/media/nvme/cxy_test/LedgerDatabase/ledger/qldb/ql_btree.cc:207:23: note: remove ‘std::move’ call
+/media/nvme/cxy_test/LedgerDatabase/ledger/qldb/ql_btree.cc:268:23: warning: moving a local object in a return statement prevents copy elision [-Wpessimizing-move]
+  268 |       return std::move(retval);
+      |              ~~~~~~~~~^~~~~~~~
+/media/nvme/cxy_test/LedgerDatabase/ledger/qldb/ql_btree.cc:268:23: note: remove ‘std::move’ call
+/media/nvme/cxy_test/LedgerDatabase/test/gtest/gtest-all.cc: In function ‘bool testing::internal::StackGrowsDown()’:
+/media/nvme/cxy_test/LedgerDatabase/test/gtest/gtest-all.cc:7485:24: warning: ‘dummy’ may be used uninitialized [-Wmaybe-uninitialized]
+ 7485 |   StackLowerThanAddress(&dummy, &result);
+      |   ~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+/media/nvme/cxy_test/LedgerDatabase/test/gtest/gtest-all.cc:7477:6: note: by argument 1 of type ‘const void*’ to ‘void testing::internal::StackLowerThanAddress(const void*, bool*)’ declared here
+ 7477 | void StackLowerThanAddress(const void* ptr, bool* result) {
+      |      ^~~~~~~~~~~~~~~~~~~~~
+/media/nvme/cxy_test/LedgerDatabase/test/gtest/gtest-all.cc:7483:7: note: ‘dummy’ declared here
+ 7483 |   int dummy;
+      |       ^~~~~
+[ 22%] Building CXX object ledger/CMakeFiles/ledger_objs.dir/qldb/ql_btree_node.cc.o
+[ 23%] Building CXX object ledger/CMakeFiles/ledger_objs.dir/qldb/qldb.cc.o
+[ 24%] Building CXX object ledger/CMakeFiles/ledger_objs.dir/qldb/qldb_store.cc.o
+In file included from /media/nvme/cxy_test/LedgerDatabase/ledger/ledgerdb/ledgerdb.cc:10:
+/media/nvme/cxy_test/LedgerDatabase/ledger/ledgerdb/types.h: In member function ‘void ledgebase::ledgerdb::LedgerDB::buildTree(int)’:
+/media/nvme/cxy_test/LedgerDatabase/ledger/ledgerdb/types.h:54:25: warning: ‘last_block’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+   54 |       : commit_seq(cs), tip_block(tb), digest(di) {}
+      |                         ^~~~~~~~~~~~~
+/media/nvme/cxy_test/LedgerDatabase/ledger/ledgerdb/ledgerdb.cc:45:14: note: ‘last_block’ was declared here
+   45 |     uint64_t last_block;
+      |              ^~~~~~~~~~
+/media/nvme/cxy_test/LedgerDatabase/ledger/qldb/ql_btree_node.cc: In static member function ‘static ledgebase::Chunk ledgebase::qldb::QLBTreeMeta::Encode(size_t, const std::vector<ledgebase::Slice>&, const std::vector<long unsigned int>&)’:
+/media/nvme/cxy_test/LedgerDatabase/ledger/qldb/ql_btree_node.cc:114:19: warning: moving a local object in a return statement prevents copy elision [-Wpessimizing-move]
+  114 |   return std::move(chunk);
+      |          ~~~~~~~~~^~~~~~~
+/media/nvme/cxy_test/LedgerDatabase/ledger/qldb/ql_btree_node.cc:114:19: note: remove ‘std::move’ call
+/media/nvme/cxy_test/LedgerDatabase/ledger/qldb/ql_btree_node.cc: In static member function ‘static ledgebase::Chunk ledgebase::qldb::QLBTreeMap::Encode(size_t, const std::vector<ledgebase::Slice>&, const std::vector<ledgebase::Slice>&, const ledgebase::Slice&)’:
+/media/nvme/cxy_test/LedgerDatabase/ledger/qldb/ql_btree_node.cc:156:19: warning: moving a local object in a return statement prevents copy elision [-Wpessimizing-move]
+  156 |   return std::move(chunk);
+      |          ~~~~~~~~~^~~~~~~
+/media/nvme/cxy_test/LedgerDatabase/ledger/qldb/ql_btree_node.cc:156:19: note: remove ‘std::move’ call
+/media/nvme/cxy_test/LedgerDatabase/ledger/qldb/ql_btree_node.cc: In static member function ‘static ledgebase::Chunk ledgebase::qldb::QLBTreeMap::EmptyMap()’:
+/media/nvme/cxy_test/LedgerDatabase/ledger/qldb/ql_btree_node.cc:177:19: warning: moving a local object in a return statement prevents copy elision [-Wpessimizing-move]
+  177 |   return std::move(chunk);
+      |          ~~~~~~~~~^~~~~~~
+/media/nvme/cxy_test/LedgerDatabase/ledger/qldb/ql_btree_node.cc:177:19: note: remove ‘std::move’ call
+/media/nvme/cxy_test/LedgerDatabase/ledger/qldb/ql_btree_node.cc: In member function ‘ledgebase::qldb::QLBTreeInsertResult ledgebase::qldb::QLBTreeMeta::UpdateChild(size_t, const ledgebase::qldb::QLBTreeInsertResult&, ledgebase::qldb::QLBTreeDelta*, const string&) const’:
+/media/nvme/cxy_test/LedgerDatabase/ledger/qldb/ql_btree_node.cc:261:19: warning: moving a local object in a return statement prevents copy elision [-Wpessimizing-move]
+  261 |   return std::move(result);
+      |          ~~~~~~~~~^~~~~~~~
+/media/nvme/cxy_test/LedgerDatabase/ledger/qldb/ql_btree_node.cc:261:19: note: remove ‘std::move’ call
+[ 25%] Building CXX object ledger/CMakeFiles/ledger_objs.dir/qldb/qlnode.cc.o
+In file included from /media/nvme/cxy_test/LedgerDatabase/ledger/qldb/qldb_store.cc:1:
+/media/nvme/cxy_test/LedgerDatabase/ledger/qldb/qldb_store.h: In member function ‘bool ledgebase::qldb::QLDBStore::Open(const string&)’:
+/media/nvme/cxy_test/LedgerDatabase/ledger/qldb/qldb_store.h:24:3: warning: no return statement in function returning non-void [-Wreturn-type]
+   24 |   }
+      |   ^
+[ 27%] Building CXX object ledger/CMakeFiles/ledger_objs.dir/sqlledger/sqlldg_mt.cc.o
+/media/nvme/cxy_test/LedgerDatabase/ledger/qldb/qlnode.cc: In static member function ‘static ledgebase::Chunk ledgebase::qldb::Document::Encode(const ledgebase::Slice&, const ledgebase::Slice&, const ledgebase::qldb::BlockAddress&, const ledgebase::qldb::MetaData&)’:
+/media/nvme/cxy_test/LedgerDatabase/ledger/qldb/qlnode.cc:38:19: warning: moving a local object in a return statement prevents copy elision [-Wpessimizing-move]
+   38 |   return std::move(chunk);
+      |          ~~~~~~~~~^~~~~~~
+/media/nvme/cxy_test/LedgerDatabase/ledger/qldb/qlnode.cc:38:19: note: remove ‘std::move’ call
+/media/nvme/cxy_test/LedgerDatabase/ledger/qldb/qlnode.cc: In static member function ‘static ledgebase::Chunk ledgebase::qldb::QLBlock::Encode(const ledgebase::qldb::BlockAddress&, const ledgebase::qldb::Statement&, uint64_t, const ledgebase::Hash&, const ledgebase::Hash&, const std::vector<ledgebase::Chunk>&)’:
+/media/nvme/cxy_test/LedgerDatabase/ledger/qldb/qlnode.cc:101:19: warning: moving a local object in a return statement prevents copy elision [-Wpessimizing-move]
+  101 |   return std::move(chunk);
+      |          ~~~~~~~~~^~~~~~~
+/media/nvme/cxy_test/LedgerDatabase/ledger/qldb/qlnode.cc:101:19: note: remove ‘std::move’ call
+[ 28%] Building CXX object ledger/CMakeFiles/ledger_objs.dir/sqlledger/sqlledger.cc.o
+[ 29%] Building CXX object distributed/CMakeFiles/dist_objs.dir/common-proto.pb.cc.o
+[ 31%] Building CXX object distributed/CMakeFiles/dist_objs.dir/request.pb.cc.o
+[ 32%] Building CXX object distributed/CMakeFiles/dist_objs.dir/strong-proto.pb.cc.o
+[ 33%] Building CXX object distributed/CMakeFiles/dist_objs.dir/vr-proto.pb.cc.o
+[ 35%] Linking CXX static library ../lib/libgtest.a
+[ 35%] Built target gtest
+[ 36%] Building CXX object distributed/CMakeFiles/dist_objs.dir/replication/common/client.cc.o
+[ 37%] Building CXX object distributed/CMakeFiles/dist_objs.dir/replication/common/log.cc.o
+[ 38%] Building CXX object distributed/CMakeFiles/dist_objs.dir/replication/common/replica.cc.o
+[ 40%] Building CXX object distributed/CMakeFiles/dist_objs.dir/replication/vr/client.cc.o
+[ 41%] Building CXX object distributed/CMakeFiles/dist_objs.dir/replication/vr/replica.cc.o
+/media/nvme/cxy_test/LedgerDatabase/ledger/sqlledger/sqlledger.cc: In member function ‘void ledgebase::sqlledger::SQLLedger::updateLedger(int)’:
+/media/nvme/cxy_test/LedgerDatabase/ledger/sqlledger/sqlledger.cc:77:10: warning: unused variable ‘lat’ [-Wunused-variable]
+   77 |     auto lat = (t1.tv_sec - t0.tv_sec)*1000000 + t1.tv_usec - t0.tv_usec;
+      |          ^~~
+/media/nvme/cxy_test/LedgerDatabase/ledger/sqlledger/sqlledger.cc: In member function ‘std::vector<std::__cxx11::basic_string<char> > ledgebase::sqlledger::SQLLedger::GetHistory(const string&, size_t)’:
+/media/nvme/cxy_test/LedgerDatabase/ledger/sqlledger/sqlledger.cc:177:13: warning: comparison of integer expressions of different signedness: ‘int’ and ‘size_t’ {aka ‘long unsigned int’} [-Wsign-compare]
+  177 |     if (cnt >= n) break;
+      |         ~~~~^~~~
+/media/nvme/cxy_test/LedgerDatabase/ledger/sqlledger/sqlledger.cc: In member function ‘ledgebase::sqlledger::Auditor ledgebase::sqlledger::SQLLedger::getAudit(const uint64_t&)’:
+/media/nvme/cxy_test/LedgerDatabase/ledger/sqlledger/sqlledger.cc:269:33: warning: comparison of integer expressions of different signedness: ‘size_t’ {aka ‘long unsigned int’} and ‘int’ [-Wsign-compare]
+  269 |   for (size_t i = block_addr; i <= tip; ++i) {
+      |                               ~~^~~~~~
+/media/nvme/cxy_test/LedgerDatabase/ledger/sqlledger/sqlledger.cc:267:7: warning: variable ‘level’ set but not used [-Wunused-but-set-variable]
+  267 |   int level;
+      |       ^~~~~
+[ 42%] Building CXX object distributed/CMakeFiles/dist_objs.dir/store/common/promise.cc.o
+[ 44%] Building CXX object distributed/CMakeFiles/dist_objs.dir/store/common/timestamp.cc.o
+In file included from /media/nvme/cxy_test/LedgerDatabase/ledger/sqlledger/sqlledger.h:7,
+                 from /media/nvme/cxy_test/LedgerDatabase/ledger/sqlledger/sqlledger.cc:1:
+/media/nvme/cxy_test/LedgerDatabase/ledger/common/logger.h: In member function ‘void ledgebase::Logger::index(uint64_t)’:
+/media/nvme/cxy_test/LedgerDatabase/ledger/common/logger.h:108:10: warning: ignoring return value of ‘ssize_t write(int, const void*, size_t)’ declared with attribute ‘warn_unused_result’ [-Wunused-result]
+  108 |     write(idx_, entry.get(), size);
+      |     ~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+/media/nvme/cxy_test/LedgerDatabase/ledger/common/logger.h: In member function ‘void ledgebase::Logger::log(const byte_t*, size_t)’:
+/media/nvme/cxy_test/LedgerDatabase/ledger/common/logger.h:85:10: warning: ignoring return value of ‘ssize_t write(int, const void*, size_t)’ declared with attribute ‘warn_unused_result’ [-Wunused-result]
+   85 |     write(wal_, data, size);
+      |     ~~~~~^~~~~~~~~~~~~~~~~~
+/media/nvme/cxy_test/LedgerDatabase/ledger/common/logger.h: In member function ‘std::string ledgebase::Logger::read(uint64_t, uint64_t*)’:
+/media/nvme/cxy_test/LedgerDatabase/ledger/common/logger.h:74:10: warning: ignoring return value of ‘ssize_t pread(int, void*, size_t, __off_t)’ declared with attribute ‘warn_unused_result’ [-Wunused-result]
+   74 |     pread(idx_, buffer, idxEntrySize, idxOffset);
+      |     ~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/media/nvme/cxy_test/LedgerDatabase/ledger/common/logger.h:80:10: warning: ignoring return value of ‘ssize_t pread(int, void*, size_t, __off_t)’ declared with attribute ‘warn_unused_result’ [-Wunused-result]
+   80 |     pread(wal_, buf, walSize, walOffset);
+      |     ~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[ 45%] Building CXX object distributed/CMakeFiles/dist_objs.dir/store/common/tracer.cc.o
+[ 46%] Building CXX object distributed/CMakeFiles/dist_objs.dir/store/common/transaction.cc.o
+[ 48%] Building CXX object distributed/CMakeFiles/dist_objs.dir/store/common/truetime.cc.o
+[ 49%] Building CXX object distributed/CMakeFiles/dist_objs.dir/store/common/backend/kvstore.cc.o
+[ 50%] Building CXX object distributed/CMakeFiles/dist_objs.dir/store/common/backend/txnstore.cc.o
+[ 51%] Building CXX object distributed/CMakeFiles/dist_objs.dir/store/common/backend/versionstore.cc.o
+[ 53%] Building CXX object distributed/CMakeFiles/dist_objs.dir/store/common/frontend/bufferclient.cc.o
+[ 54%] Building CXX object distributed/CMakeFiles/dist_objs.dir/store/strongstore/client.cc.o
+[ 55%] Building CXX object distributed/CMakeFiles/dist_objs.dir/store/strongstore/occstore.cc.o
+[ 57%] Building CXX object distributed/CMakeFiles/dist_objs.dir/store/strongstore/shardclient.cc.o
+[ 58%] Building CXX object distributed/CMakeFiles/dist_objs.dir/lib/configuration.cc.o
+[ 59%] Building CXX object distributed/CMakeFiles/dist_objs.dir/lib/message.cc.o
+[ 59%] Built target ledger_objs
+[ 61%] Building CXX object distributed/CMakeFiles/dist_objs.dir/lib/tcptransport.cc.o
+[ 62%] Linking CXX shared library ../lib/libledger.so
+[ 62%] Built target ledger
+[ 63%] Building CXX object distributed/CMakeFiles/dist_objs.dir/lib/transport.cc.o
+/media/nvme/cxy_test/LedgerDatabase/distributed/store/strongstore/client.cc: In member function ‘bool strongstore::Client::Audit(std::map<int, long unsigned int>&)’:
+/media/nvme/cxy_test/LedgerDatabase/distributed/store/strongstore/client.cc:511:27: warning: comparison of integer expressions of different signedness: ‘size_t’ {aka ‘long unsigned int’} and ‘long int’ [-Wsign-compare]
+  511 |       for(size_t n = 0; n < nshards; ++n) {
+      |                         ~~^~~~~~~~~
+[ 64%] Building CXX object test/CMakeFiles/test_ledger.dir/gtest/gtest_main.cc.o
+[ 66%] Building CXX object test/CMakeFiles/test_ledger.dir/ledger/test_merkle_tree.cc.o
+/media/nvme/cxy_test/LedgerDatabase/distributed/store/strongstore/shardclient.cc: In member function ‘void strongstore::ShardClient::GetProofCallback(size_t, const std::vector<std::__cxx11::basic_string<char> >&, const string&, const string&)’:
+/media/nvme/cxy_test/LedgerDatabase/distributed/store/strongstore/shardclient.cc:362:26: warning: comparison of integer expressions of different signedness: ‘size_t’ {aka ‘long unsigned int’} and ‘int’ [-Wsign-compare]
+  362 |     for (size_t i = 0; i < reply.proof_size(); ++i) {
+      |                        ~~^~~~~~~~~~~~~~~~~~~~
+/media/nvme/cxy_test/LedgerDatabase/distributed/store/strongstore/shardclient.cc:366:28: warning: comparison of integer expressions of different signedness: ‘size_t’ {aka ‘long unsigned int’} and ‘int’ [-Wsign-compare]
+  366 |       for (size_t j = 0; j < p.mpt_chunks_size(); ++j) {
+      |                          ~~^~~~~~~~~~~~~~~~~~~~~
+/media/nvme/cxy_test/LedgerDatabase/distributed/store/strongstore/shardclient.cc:378:28: warning: comparison of integer expressions of different signedness: ‘size_t’ {aka ‘long unsigned int’} and ‘int’ [-Wsign-compare]
+  378 |       for (size_t j = 0; j < p.proof_size(); ++j) {
+      |                          ~~^~~~~~~~~~~~~~~~
+/media/nvme/cxy_test/LedgerDatabase/distributed/store/strongstore/shardclient.cc:381:28: warning: comparison of integer expressions of different signedness: ‘size_t’ {aka ‘long unsigned int’} and ‘int’ [-Wsign-compare]
+  381 |       for (size_t j = 0; j < p.mt_pos_size(); ++j) {
+      |                          ~~^~~~~~~~~~~~~~~~~
+/media/nvme/cxy_test/LedgerDatabase/distributed/store/strongstore/shardclient.cc:433:10: warning: unused variable ‘elapsed’ [-Wunused-variable]
+  433 |     auto elapsed = ((t1.tv_sec - t0.tv_sec)*1000000 +
+      |          ^~~~~~~
+/media/nvme/cxy_test/LedgerDatabase/distributed/store/strongstore/shardclient.cc: In member function ‘void strongstore::ShardClient::GetRangeCallback(const string&, const string&)’:
+/media/nvme/cxy_test/LedgerDatabase/distributed/store/strongstore/shardclient.cc:456:26: warning: comparison of integer expressions of different signedness: ‘size_t’ {aka ‘long unsigned int’} and ‘int’ [-Wsign-compare]
+  456 |     for (size_t i = 0; i < reply.values_size(); ++i) {
+      |                        ~~^~~~~~~~~~~~~~~~~~~~~
+/media/nvme/cxy_test/LedgerDatabase/distributed/store/strongstore/shardclient.cc:462:26: warning: comparison of integer expressions of different signedness: ‘size_t’ {aka ‘long unsigned int’} and ‘int’ [-Wsign-compare]
+  462 |     for (size_t i = 0; i < reply.timestamps_size(); ++i) {
+      |                        ~~^~~~~~~~~~~~~~~~~~~~~~~~~
+/media/nvme/cxy_test/LedgerDatabase/distributed/store/strongstore/shardclient.cc: In member function ‘void strongstore::ShardClient::BatchGetCallback(const string&, const string&)’:
+/media/nvme/cxy_test/LedgerDatabase/distributed/store/strongstore/shardclient.cc:516:26: warning: comparison of integer expressions of different signedness: ‘size_t’ {aka ‘long unsigned int’} and ‘int’ [-Wsign-compare]
+  516 |     for (size_t i = 0; i < reply.values_size(); ++i) {
+      |                        ~~^~~~~~~~~~~~~~~~~~~~~
+/media/nvme/cxy_test/LedgerDatabase/distributed/store/strongstore/shardclient.cc:522:26: warning: comparison of integer expressions of different signedness: ‘size_t’ {aka ‘long unsigned int’} and ‘int’ [-Wsign-compare]
+  522 |     for (size_t i = 0; i < reply.timestamps_size(); ++i) {
+      |                        ~~^~~~~~~~~~~~~~~~~~~~~~~~~
+/media/nvme/cxy_test/LedgerDatabase/distributed/store/strongstore/shardclient.cc: In member function ‘void strongstore::ShardClient::CommitCallback(const string&, const string&)’:
+/media/nvme/cxy_test/LedgerDatabase/distributed/store/strongstore/shardclient.cc:586:26: warning: comparison of integer expressions of different signedness: ‘size_t’ {aka ‘long unsigned int’} and ‘int’ [-Wsign-compare]
+  586 |     for (size_t i = 0; i < reply.values_size(); ++i) {
+      |                        ~~^~~~~~~~~~~~~~~~~~~~~
+[ 67%] Building CXX object test/CMakeFiles/test_ledger.dir/ledger/test_mpt.cc.o
+[ 68%] Building CXX object test/CMakeFiles/test_ledger.dir/ledger/test_range.cc.o
+In file included from /media/nvme/cxy_test/LedgerDatabase/test/ledger/test_merkle_tree.cc:9:
+/media/nvme/cxy_test/LedgerDatabase/ledger/ledgerdb/types.h: In constructor ‘ledgebase::ledgerdb::BlockData::BlockData(std::string)’:
+/media/nvme/cxy_test/LedgerDatabase/ledger/ledgerdb/types.h:78:16: warning: unused variable ‘kv’ [-Wunused-variable]
+   78 |     for (auto& kv : kvs) {
+      |                ^~
+/media/nvme/cxy_test/LedgerDatabase/test/ledger/test_merkle_tree.cc: In member function ‘virtual void MERKLETREE_UPD_Test::TestBody()’:
+/media/nvme/cxy_test/LedgerDatabase/test/ledger/test_merkle_tree.cc:20:15: warning: unused variable ‘t1’ [-Wunused-variable]
+   20 |   timeval t0, t1;
+      |               ^~
+[ 70%] Building CXX object test/CMakeFiles/test_ledger.dir/ledger/test_skiplist.cc.o
+[ 71%] Building CXX object test/CMakeFiles/test_ledger.dir/ledger/test_storage.cc.o
+/media/nvme/cxy_test/LedgerDatabase/distributed/store/strongstore/shardclient.cc: In member function ‘void strongstore::ShardClient::AuditCallback(uint64_t, size_t, const string&, const string&)’:
+/media/nvme/cxy_test/LedgerDatabase/distributed/store/strongstore/shardclient.cc:341:13: warning: ‘res’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+  341 |     w->Reply(reply.status(), res);
+      |     ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+[ 76%] Built target dist_objs
+[ 77%] Linking CXX shared library ../lib/libdist.so
+[ 77%] Built target dist
+[ 79%] Building CXX object distributed/CMakeFiles/smallbankClient.dir/exes/smallbankClient.cc.o
+[ 80%] Building CXX object distributed/CMakeFiles/timeserver.dir/exes/timeserver.cc.o
+[ 81%] Building CXX object distributed/CMakeFiles/strongstore.dir/exes/strong-server.cc.o
+[ 83%] Building CXX object distributed/CMakeFiles/verifyClient.dir/exes/verifyClient.cc.o
+[ 84%] Building CXX object distributed/CMakeFiles/tpccClient.dir/exes/tpccClient.cc.o
+[ 85%] Linking CXX executable ../bin/timeserver
+/usr/bin/ld: ../lib/libledger.so: undefined reference to `tbb::detail::r1::throw_exception(tbb::detail::d0::exception_id)'
+/usr/bin/ld: ../lib/libledger.so: undefined reference to `tbb::detail::r1::cache_aligned_allocate(unsigned long)'
+/usr/bin/ld: ../lib/libledger.so: undefined reference to `tbb::detail::r1::cache_aligned_deallocate(void*)'
+/usr/bin/ld: ../lib/libledger.so: undefined reference to `tbb::detail::r1::allocate_memory(unsigned long)'
+/usr/bin/ld: ../lib/libdist.so: undefined reference to `tbb::detail::r1::deallocate_memory(void*)'
+collect2: error: ld returned 1 exit status
+make[2]: *** [distributed/CMakeFiles/timeserver.dir/build.make:113: bin/timeserver] Error 1
+make[1]: *** [CMakeFiles/Makefile2:289: distributed/CMakeFiles/timeserver.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+/media/nvme/cxy_test/LedgerDatabase/distributed/exes/strong-server.cc: In member function ‘virtual void strongstore::Server::LeaderUpcall(opnum_t, const string&, bool&, std::string&)’:
+/media/nvme/cxy_test/LedgerDatabase/distributed/exes/strong-server.cc:68:30: warning: comparison of integer expressions of different signedness: ‘size_t’ {aka ‘long unsigned int’} and ‘int’ [-Wsign-compare]
+   68 |         for (size_t i = 0; i < ver_msg.versionedkeys_size(); ++i) {
+      |                            ~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/media/nvme/cxy_test/LedgerDatabase/distributed/exes/strong-server.cc: In member function ‘virtual void strongstore::Server::UnloggedUpcall(const string&, std::string&)’:
+/media/nvme/cxy_test/LedgerDatabase/distributed/exes/strong-server.cc:136:26: warning: comparison of integer expressions of different signedness: ‘size_t’ {aka ‘long unsigned int’} and ‘int’ [-Wsign-compare]
+  136 |     for (size_t i = 0; i < request.batchget().keys_size(); ++i) {
+      |                        ~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/media/nvme/cxy_test/LedgerDatabase/distributed/exes/strong-server.cc:143:26: warning: comparison of integer expressions of different signedness: ‘size_t’ {aka ‘long unsigned int’} and ‘int’ [-Wsign-compare]
+  143 |     for (size_t i = 0; i < request.verify().keys_size(); ++i) {
+      |                        ~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/media/nvme/cxy_test/LedgerDatabase/distributed/exes/strong-server.cc: In function ‘int main(int, char**)’:
+/media/nvme/cxy_test/LedgerDatabase/distributed/exes/strong-server.cc:345:31: warning: comparison of integer expressions of different signedness: ‘int’ and ‘unsigned int’ [-Wsign-compare]
+  345 |       for (int iter = 0; iter < version; ++iter) {
+      |                          ~~~~~^~~~~~~~~
+[ 87%] Linking CXX executable ../bin/test_ledger
+/usr/bin/ld: CMakeFiles/test_ledger.dir/ledger/test_merkle_tree.cc.o: in function `tbb::detail::d2::concurrent_hash_map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, ledgebase::Chunk, tbb::detail::d1::tbb_hash_compare<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, tbb::detail::d1::tbb_allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, ledgebase::Chunk> > >::clear()':
+test_merkle_tree.cc:(.text._ZN3tbb6detail2d219concurrent_hash_mapINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEN9ledgebase5ChunkENS0_2d116tbb_hash_compareIS8_EENSB_13tbb_allocatorISt4pairIKS8_SA_EEEE5clearEv[_ZN3tbb6detail2d219concurrent_hash_mapINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEN9ledgebase5ChunkENS0_2d116tbb_hash_compareIS8_EENSB_13tbb_allocatorISt4pairIKS8_SA_EEEE5clearEv]+0x98): undefined reference to `tbb::detail::r1::deallocate_memory(void*)'
+/usr/bin/ld: test_merkle_tree.cc:(.text._ZN3tbb6detail2d219concurrent_hash_mapINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEN9ledgebase5ChunkENS0_2d116tbb_hash_compareIS8_EENSB_13tbb_allocatorISt4pairIKS8_SA_EEEE5clearEv[_ZN3tbb6detail2d219concurrent_hash_mapINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEN9ledgebase5ChunkENS0_2d116tbb_hash_compareIS8_EENSB_13tbb_allocatorISt4pairIKS8_SA_EEEE5clearEv]+0xc2): undefined reference to `tbb::detail::r1::deallocate_memory(void*)'
+/usr/bin/ld: ../lib/libledger.so: undefined reference to `tbb::detail::r1::cache_aligned_allocate(unsigned long)'
+/usr/bin/ld: ../lib/libledger.so: undefined reference to `tbb::detail::r1::allocate_memory(unsigned long)'
+/usr/bin/ld: ../lib/libledger.so: undefined reference to `tbb::detail::r1::cache_aligned_deallocate(void*)'
+/usr/bin/ld: ../lib/libledger.so: undefined reference to `tbb::detail::r1::throw_exception(tbb::detail::d0::exception_id)'
+collect2: error: ld returned 1 exit status
+make[2]: *** [test/CMakeFiles/test_ledger.dir/build.make:185: bin/test_ledger] Error 1
+make[1]: *** [CMakeFiles/Makefile2:538: test/CMakeFiles/test_ledger.dir/all] Error 2
+/media/nvme/cxy_test/LedgerDatabase/distributed/exes/smallbankClient.cc: In function ‘bool GetBalance(unsigned int, strongstore::Client*, std::map<int, std::map<long unsigned int, std::vector<std::__cxx11::basic_string<char> > > >&)’:
+/media/nvme/cxy_test/LedgerDatabase/distributed/exes/smallbankClient.cc:60:18: warning: unused variable ‘balance’ [-Wunused-variable]
+   60 |     unsigned int balance = bal1 + bal2;
+      |                  ^~~~~~~
+/media/nvme/cxy_test/LedgerDatabase/distributed/exes/tpccClient.cc: In function ‘void execDelivery(std::vector<std::__cxx11::basic_string<char> >&, strongstore::Client*)’:
+/media/nvme/cxy_test/LedgerDatabase/distributed/exes/tpccClient.cc:308:26: warning: comparison of integer expressions of different signedness: ‘size_t’ {aka ‘long unsigned int’} and ‘int’ [-Wsign-compare]
+  308 |     for (size_t j = 1; j <= ol_cnt; ++j) {
+      |                        ~~^~~~~~~~~
+/media/nvme/cxy_test/LedgerDatabase/distributed/exes/tpccClient.cc: In function ‘void execStockLevel(std::vector<std::__cxx11::basic_string<char> >&, strongstore::Client*)’:
+/media/nvme/cxy_test/LedgerDatabase/distributed/exes/tpccClient.cc:365:24: warning: comparison of integer expressions of different signedness: ‘int’ and ‘size_t’ {aka ‘long unsigned int’} [-Wsign-compare]
+  365 |     for (auto j = 0; j < ol_cnt; ++j) {
+      |                      ~~^~~~~~~~
+/media/nvme/cxy_test/LedgerDatabase/distributed/exes/tpccClient.cc:375:24: warning: comparison of integer expressions of different signedness: ‘int’ and ‘__gnu_cxx::__alloc_traits<std::allocator<long unsigned int>, long unsigned int>::value_type’ {aka ‘long unsigned int’} [-Wsign-compare]
+  375 |     for (auto j = 0; j < ol_cnts[ol_cnt_idx]; ++j) {
+/media/nvme/cxy_test/LedgerDatabase/distributed/exes/tpccClient.cc:403:22: warning: comparison of integer expressions of different signedness: ‘size_t’ {aka ‘long unsigned int’} and ‘long int’ [-Wsign-compare]
+  403 |         if (quantity < threshold) {
+      |             ~~~~~~~~~^~~~~~~~~~~
+/media/nvme/cxy_test/LedgerDatabase/distributed/exes/tpccClient.cc:394:10: warning: unused variable ‘i_id_idx’ [-Wunused-variable]
+  394 |   size_t i_id_idx = 0;
+      |          ^~~~~~~~
+/media/nvme/cxy_test/LedgerDatabase/distributed/exes/strong-server.cc:339:83: warning: ‘mode’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+  339 |     strongstore::Server server(mode, skew, error, index, stored_procedure, timeout);
+      |                                                                                   ^
+/media/nvme/cxy_test/LedgerDatabase/distributed/exes/strong-server.cc:339:83: warning: ‘timeout’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+[ 88%] Linking CXX executable ../bin/strongstore
+/usr/bin/ld: ../lib/libledger.so: undefined reference to `tbb::detail::r1::throw_exception(tbb::detail::d0::exception_id)'
+/usr/bin/ld: ../lib/libledger.so: undefined reference to `tbb::detail::r1::cache_aligned_allocate(unsigned long)'
+/usr/bin/ld: ../lib/libledger.so: undefined reference to `tbb::detail::r1::cache_aligned_deallocate(void*)'
+/usr/bin/ld: ../lib/libledger.so: undefined reference to `tbb::detail::r1::allocate_memory(unsigned long)'
+/usr/bin/ld: ../lib/libdist.so: undefined reference to `tbb::detail::r1::deallocate_memory(void*)'
+collect2: error: ld returned 1 exit status
+make[2]: *** [distributed/CMakeFiles/strongstore.dir/build.make:113: bin/strongstore] Error 1
+make[1]: *** [CMakeFiles/Makefile2:317: distributed/CMakeFiles/strongstore.dir/all] Error 2
+/media/nvme/cxy_test/LedgerDatabase/distributed/exes/smallbankClient.cc: In function ‘int txnThread(strongstore::Client*, int)’:
+/media/nvme/cxy_test/LedgerDatabase/distributed/exes/smallbankClient.cc:176:12: warning: ‘status’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+  176 |     fprintf(stderr, "%d %ld.%06ld %ld.%06ld %ld %d %d\n", nTransactions,
+      |     ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  177 |         t1.tv_sec, t1.tv_usec, t2.tv_sec, t2.tv_usec, latency, status?1:0, task.op);
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[ 89%] Linking CXX executable ../bin/smallbankClient
+/usr/bin/ld: CMakeFiles/smallbankClient.dir/exes/smallbankClient.cc.o: in function `txnThread(strongstore::Client*, int)':
+smallbankClient.cc:(.text+0x22e2): undefined reference to `tbb::detail::r1::cache_aligned_deallocate(void*)'
+/usr/bin/ld: CMakeFiles/smallbankClient.dir/exes/smallbankClient.cc.o: in function `taskGenerator(int)':
+smallbankClient.cc:(.text+0x31f7): undefined reference to `tbb::detail::r1::throw_exception(tbb::detail::d0::exception_id)'
+/usr/bin/ld: smallbankClient.cc:(.text+0x329f): undefined reference to `tbb::detail::r1::cache_aligned_allocate(unsigned long)'
+/usr/bin/ld: CMakeFiles/smallbankClient.dir/exes/smallbankClient.cc.o: in function `tbb::detail::d2::concurrent_queue<Task, tbb::detail::d1::cache_aligned_allocator<Task> >::~concurrent_queue()':
+smallbankClient.cc:(.text._ZN3tbb6detail2d216concurrent_queueI4TaskNS0_2d123cache_aligned_allocatorIS3_EEED2Ev[_ZN3tbb6detail2d216concurrent_queueI4TaskNS0_2d123cache_aligned_allocatorIS3_EEED5Ev]+0x60): undefined reference to `tbb::detail::r1::cache_aligned_deallocate(void*)'
+/usr/bin/ld: smallbankClient.cc:(.text._ZN3tbb6detail2d216concurrent_queueI4TaskNS0_2d123cache_aligned_allocatorIS3_EEED2Ev[_ZN3tbb6detail2d216concurrent_queueI4TaskNS0_2d123cache_aligned_allocatorIS3_EEED5Ev]+0x100): undefined reference to `tbb::detail::r1::cache_aligned_deallocate(void*)'
+/usr/bin/ld: smallbankClient.cc:(.text._ZN3tbb6detail2d216concurrent_queueI4TaskNS0_2d123cache_aligned_allocatorIS3_EEED2Ev[_ZN3tbb6detail2d216concurrent_queueI4TaskNS0_2d123cache_aligned_allocatorIS3_EEED5Ev]+0x15b): undefined reference to `tbb::detail::r1::cache_aligned_deallocate(void*)'
+/usr/bin/ld: CMakeFiles/smallbankClient.dir/exes/smallbankClient.cc.o: in function `__static_initialization_and_destruction_0(int, int) [clone .constprop.0]':
+smallbankClient.cc:(.text.startup+0x1146): undefined reference to `tbb::detail::r1::cache_aligned_allocate(unsigned long)'
+/usr/bin/ld: ../lib/libledger.so: undefined reference to `tbb::detail::r1::allocate_memory(unsigned long)'
+/usr/bin/ld: ../lib/libdist.so: undefined reference to `tbb::detail::r1::deallocate_memory(void*)'
+collect2: error: ld returned 1 exit status
+make[2]: *** [distributed/CMakeFiles/smallbankClient.dir/build.make:113: bin/smallbankClient] Error 1
+make[1]: *** [CMakeFiles/Makefile2:373: distributed/CMakeFiles/smallbankClient.dir/all] Error 2
+[ 90%] Linking CXX executable ../bin/verifyClient
+/usr/bin/ld: CMakeFiles/verifyClient.dir/exes/verifyClient.cc.o: in function `txnThread(strongstore::Client*, int, int, int, int, int)':
+verifyClient.cc:(.text+0x1a5f): undefined reference to `tbb::detail::r1::cache_aligned_deallocate(void*)'
+/usr/bin/ld: CMakeFiles/verifyClient.dir/exes/verifyClient.cc.o: in function `taskGenerator(int, int, int, int, int, int)':
+verifyClient.cc:(.text+0x2833): undefined reference to `tbb::detail::r1::throw_exception(tbb::detail::d0::exception_id)'
+/usr/bin/ld: verifyClient.cc:(.text+0x2bda): undefined reference to `tbb::detail::r1::cache_aligned_allocate(unsigned long)'
+/usr/bin/ld: CMakeFiles/verifyClient.dir/exes/verifyClient.cc.o: in function `tbb::detail::d2::concurrent_queue_rep<Task, tbb::detail::d1::cache_aligned_allocator<Task> >::clear(tbb::detail::d1::cache_aligned_allocator<tbb::detail::d2::concurrent_queue_rep<Task, tbb::detail::d1::cache_aligned_allocator<Task> > >&) [clone .isra.0]':
+verifyClient.cc:(.text._ZN3tbb6detail2d220concurrent_queue_repI4TaskNS0_2d123cache_aligned_allocatorIS3_EEE5clearERNS5_IS7_EE.isra.0[_ZN3tbb6detail2d216concurrent_queueI4TaskNS0_2d123cache_aligned_allocatorIS3_EEED5Ev]+0x129): undefined reference to `tbb::detail::r1::cache_aligned_deallocate(void*)'
+/usr/bin/ld: CMakeFiles/verifyClient.dir/exes/verifyClient.cc.o: in function `tbb::detail::d2::concurrent_queue<Task, tbb::detail::d1::cache_aligned_allocator<Task> >::~concurrent_queue()':
+verifyClient.cc:(.text._ZN3tbb6detail2d216concurrent_queueI4TaskNS0_2d123cache_aligned_allocatorIS3_EEED2Ev[_ZN3tbb6detail2d216concurrent_queueI4TaskNS0_2d123cache_aligned_allocatorIS3_EEED5Ev]+0x1f): undefined reference to `tbb::detail::r1::cache_aligned_deallocate(void*)'
+/usr/bin/ld: CMakeFiles/verifyClient.dir/exes/verifyClient.cc.o: in function `__static_initialization_and_destruction_0(int, int) [clone .constprop.0]':
+verifyClient.cc:(.text.startup+0x1146): undefined reference to `tbb::detail::r1::cache_aligned_allocate(unsigned long)'
+/usr/bin/ld: ../lib/libledger.so: undefined reference to `tbb::detail::r1::allocate_memory(unsigned long)'
+/usr/bin/ld: ../lib/libdist.so: undefined reference to `tbb::detail::r1::deallocate_memory(void*)'
+collect2: error: ld returned 1 exit status
+make[2]: *** [distributed/CMakeFiles/verifyClient.dir/build.make:113: bin/verifyClient] Error 1
+make[1]: *** [CMakeFiles/Makefile2:345: distributed/CMakeFiles/verifyClient.dir/all] Error 2
+[ 92%] Linking CXX executable ../bin/tpccClient
+/usr/bin/ld: CMakeFiles/tpccClient.dir/exes/tpccClient.cc.o: in function `taskGenerator(int, int, int)':
+tpccClient.cc:(.text+0x1cdf): undefined reference to `tbb::detail::r1::throw_exception(tbb::detail::d0::exception_id)'
+/usr/bin/ld: tpccClient.cc:(.text+0x1db5): undefined reference to `tbb::detail::r1::cache_aligned_allocate(unsigned long)'
+/usr/bin/ld: CMakeFiles/tpccClient.dir/exes/tpccClient.cc.o: in function `txnThread(Mode, strongstore::Mode, char const*, int, int, int, int, int, int, int, int)':
+tpccClient.cc:(.text+0xbdf7): undefined reference to `tbb::detail::r1::cache_aligned_deallocate(void*)'
+/usr/bin/ld: CMakeFiles/tpccClient.dir/exes/tpccClient.cc.o: in function `tbb::detail::d2::concurrent_queue_rep<Task, tbb::detail::d1::cache_aligned_allocator<Task> >::clear(tbb::detail::d1::cache_aligned_allocator<tbb::detail::d2::concurrent_queue_rep<Task, tbb::detail::d1::cache_aligned_allocator<Task> > >&) [clone .isra.0]':
+tpccClient.cc:(.text._ZN3tbb6detail2d220concurrent_queue_repI4TaskNS0_2d123cache_aligned_allocatorIS3_EEE5clearERNS5_IS7_EE.isra.0[_ZN3tbb6detail2d216concurrent_queueI4TaskNS0_2d123cache_aligned_allocatorIS3_EEED5Ev]+0xd3): undefined reference to `tbb::detail::r1::cache_aligned_deallocate(void*)'
+/usr/bin/ld: CMakeFiles/tpccClient.dir/exes/tpccClient.cc.o: in function `tbb::detail::d2::concurrent_queue<Task, tbb::detail::d1::cache_aligned_allocator<Task> >::~concurrent_queue()':
+tpccClient.cc:(.text._ZN3tbb6detail2d216concurrent_queueI4TaskNS0_2d123cache_aligned_allocatorIS3_EEED2Ev[_ZN3tbb6detail2d216concurrent_queueI4TaskNS0_2d123cache_aligned_allocatorIS3_EEED5Ev]+0x1f): undefined reference to `tbb::detail::r1::cache_aligned_deallocate(void*)'
+/usr/bin/ld: CMakeFiles/tpccClient.dir/exes/tpccClient.cc.o: in function `__static_initialization_and_destruction_0(int, int) [clone .constprop.0]':
+tpccClient.cc:(.text.startup+0x1146): undefined reference to `tbb::detail::r1::cache_aligned_allocate(unsigned long)'
+/usr/bin/ld: ../lib/libledger.so: undefined reference to `tbb::detail::r1::allocate_memory(unsigned long)'
+/usr/bin/ld: ../lib/libdist.so: undefined reference to `tbb::detail::r1::deallocate_memory(void*)'
+collect2: error: ld returned 1 exit status
+make[2]: *** [distributed/CMakeFiles/tpccClient.dir/build.make:113: bin/tpccClient] Error 1
+make[1]: *** [CMakeFiles/Makefile2:401: distributed/CMakeFiles/tpccClient.dir/all] Error 2
+make: *** [Makefile:146: all] Error 2

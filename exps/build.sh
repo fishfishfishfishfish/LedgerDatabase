@@ -11,6 +11,7 @@ fi
 
 cd ..
 mkdir -p build
+rm -rf build/*
 cd build
 cmake -DLEDGERDB=${ledgerdbopt} -DAMZQLDB=${qldbopt} ..
 make -j6
