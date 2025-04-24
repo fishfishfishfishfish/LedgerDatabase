@@ -9,9 +9,8 @@ fi
 
 . env.sh
 
-cd ..
-mkdir -p build
-# rm -rf build/*
-cd build
-cmake -DLEDGERDB=${ledgerdbopt} -DAMZQLDB=${qldbopt} ..
+mkdir -p build_debug
+# rm -rf build_debug/*
+cd build_debug
+cmake -DCMAKE_BUILD_TYPE=DEBUG -DLEDGERDB=${ledgerdbopt} -DAMZQLDB=${qldbopt} ..
 make -j6 VERBOSE=1 

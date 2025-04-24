@@ -122,3 +122,42 @@ VersionedKVStore的构造函数会根据编译的宏定义（`#ifdef`）选取�
            const Timestamp &t,
            std::pair<Timestamp, std::string> &value);
 ```
+
+
+value的形式
+## LEDGERDB
+嵌套的pair
+```
+(timestamp, (block, value))
+```
+
+## SQLLEDGER
+string
+```
+"block|<unknown>|<unknown>|key|value|timestamp"
+```
+
+
+## AMZQLDB
+Document类型，使用string进行构造
+```
+class Document{
+  BlockAddress addr_;
+  Data data_;
+  MetaData metadata_;
+}
+struct BlockAddress {
+  Slice ledger_name;
+  uint64_t seq_no;
+};
+
+struct Data {
+  Slice key;
+  Slice val;
+};
+struct MetaData{
+  size_t doc_seq;
+  size_t version;
+  uint64_t time;
+}
+```

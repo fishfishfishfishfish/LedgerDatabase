@@ -1,4 +1,5 @@
 #include "distributed/store/common/backend/versionstore.h"
+
 #include <sys/time.h>
 
 #include "ledger/common/utils.h"
@@ -9,7 +10,8 @@ VersionedKVStore::VersionedKVStore() {}
 
 VersionedKVStore::VersionedKVStore(const string& db_path, int timeout) {
 #ifdef LEDGERDB
-  ldb.reset(new ledgebase::ledgerdb::LedgerDB(timeout));
+  // ldb.reset(new ledgebase::ledgerdb::LedgerDB(timeout));
+  ldb.reset(new ledgebase::ledgerdb::LedgerDB(timeout, db_path));
 #endif
 #ifdef AMZQLDB
   ledgebase::qldb::BPlusConfig::Init(45, 15);
@@ -354,8 +356,8 @@ void VersionedKVStore::put(const vector<string>& keys,
 #ifdef LEDGERDB
   auto estimate_blocks = ldb->Set(keys, values, t.getTimestamp());
   if (reply != nullptr) {
-    auto kv = reply->add_values();
     for (size_t i = 0; i < keys.size(); ++i) {
+      auto kv = reply->add_values();
       kv->set_key(keys[i]);
       kv->set_val(values[i]);
       kv->set_estimate_block(estimate_blocks);

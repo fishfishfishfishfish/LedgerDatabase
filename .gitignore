@@ -1,10 +1,11 @@
 build/
+build_*/
 exps/result/
 exps/shard*
 .vscode
 
 CMakeFiles/
 bin/
-build/
+data/
 
 *.log

@@ -9,9 +9,8 @@ fi
 
 . env.sh
 
-cd ..
-mkdir -p build
-# rm -rf build/*
-cd build
+mkdir -p build_release
+# rm -rf build_release/*
+cd build_release
 cmake -DLEDGERDB=${ledgerdbopt} -DAMZQLDB=${qldbopt} ..
 make -j6 VERBOSE=1 
