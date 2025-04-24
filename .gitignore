@@ -6,3 +6,5 @@ exps/shard*
 CMakeFiles/
 bin/
 build/
+
+*.log

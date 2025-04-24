@@ -51,7 +51,58 @@ install -C -m 755 librocksdb.so.5.8.0 /usr/local/lib && \
 $ protoc --version
 libprotoc 3.0.0
 ```
+安装1
+1. 下载安装包
+```bash
+wget https://github.com/protocolbuffers/protobuf/releases/download/v2.6.1/protobuf-2.6.1.tar.gz
+tar -xvzf protobuf-2.6.1.tar.gz
+cd protobuf-2.6.1
+```
+2. 编译安装
+```bash
+./configure
+make
+make check
+sudo make install
+sudo ldconfig # refresh shared library cache.
+```
+3. 检查是否安装成功
+```bash
+protoc --version
+libprotoc 2.6.1
+```
 
+安装2
+1. 先安装bazel
+https://github.com/bazelbuild/bazel/releases/tag/8.2.1
+```bash
+wget https://github.com/bazelbuild/bazel/releases/download/8.2.1/bazel-8.2.1-installer-linux-x86_64.sh
+chmod +x bazel-8.2.1-installer-linux-x86_64.sh
+./bazel-8.2.1-installer-linux-x86_64.sh
+```
+
+2. 下载protobuf
+```bash
+git clone https://github.com/protocolbuffers/protobuf.git
+cd protobuf
+git submodule update --init --recursive
+git checkout v30.2
+```
+3. 编译protobuf
+```bash
+bazel build :protoc :protobuf
+cp bazel-bin/protoc /usr/local/bin
+```
+4. 如果cmake仍然找出旧版本的protobuf
+```bash
+sudo ldconfig
+# 检查 protobuf 库是否被正确识别
+ldconfig -p | grep libprotobuf
+# 确认库文件权限（应有执行权限）
+ls -l /usr/local/lib/libprotobuf.so*
+# 示例：删除Ubuntu自带版本
+sudo apt remove libprotobuf-dev protobuf-compiler
+```
 
 # cryptopp (≥ 6.1.0)
 检查是否已经安装
@@ -157,3 +208,10 @@ Performing configuration checks
 
 ```
 
+# Intel Threading Building Block (tbb_2020 version)
+检查是否安装
+```bash
+$ dpkg -l | grep tbb
+ii  libtbb2                   2020.3-0ubuntu1       amd64        Intel Threading Building Blocks
+ii  libtbb-dev                2020.3-0ubuntu1       amd64        Intel Threading Building Blocks development files
+```
