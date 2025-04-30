@@ -1,0 +1,1195 @@
+db_name: qldb
+data_path: /media/nvme/cxy_test/LedgerDatabase/exps/../data/
+result_dir: /media/nvme/cxy_test/LedgerDatabase/exps/results_qldb/range_benchmark
++++ rm -rf /media/nvme/cxy_test/LedgerDatabase/exps/../data//000013.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000014.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000015.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000016.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000017.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000018.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000019.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000020.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000022.log /media/nvme/cxy_test/LedgerDatabase/exps/../data//000023.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//CURRENT /media/nvme/cxy_test/LedgerDatabase/exps/../data//IDENTITY /media/nvme/cxy_test/LedgerDatabase/exps/../data//LOCK /media/nvme/cxy_test/LedgerDatabase/exps/../data//LOG /media/nvme/cxy_test/LedgerDatabase/exps/../data//MANIFEST-000009 /media/nvme/cxy_test/LedgerDatabase/exps/../data//OPTIONS-000005
++++ result_path=/media/nvme/cxy_test/LedgerDatabase/exps/results_qldb/range_benchmark/e10000000bv1024.csv
+++++ date '+%Y-%m-%d %H:%M:%S'
++++ echo 2025-04-29 10:52:47
+2025-04-29 10:52:47
++++ echo 'num account: 10000000, batch_size: , value_size: 1024, key_size: 32'
+num account: 10000000, batch_size: , value_size: 1024, key_size: 32
++++ ../build_release_qldb/bin/rangeBenchmark -a 10000000 -b 10000 -t 20 -k 32 -v 1024 -l 5,50,100,200,300,400,500,1000,2000 -d /media/nvme/cxy_test/LedgerDatabase/exps/../data/ -r /media/nvme/cxy_test/LedgerDatabase/exps/results_qldb/range_benchmark/e10000000bv1024.csv
+version 0, load latnecy:3.73283, load throughput:2678.93
+version 1, load latnecy:3.83797, load throughput:2605.55
+version 2, load latnecy:3.75034, load throughput:2666.42
+version 3, load latnecy:3.83452, load throughput:2607.89
+version 4, load latnecy:3.86006, load throughput:2590.63
+version 5, load latnecy:3.73631, load throughput:2676.44
+version 6, load latnecy:3.79716, load throughput:2633.55
+version 7, load latnecy:3.86286, load throughput:2588.76
+version 8, load latnecy:3.82264, load throughput:2615.99
+version 9, load latnecy:3.85486, load throughput:2594.13
+version 10, load latnecy:4.06563, load throughput:2459.64
+version 11, load latnecy:4.12578, load throughput:2423.79
+version 12, load latnecy:4.1114, load throughput:2432.26
+version 13, load latnecy:4.00033, load throughput:2499.79
+version 14, load latnecy:4.05436, load throughput:2466.48
+version 15, load latnecy:4.43375, load throughput:2255.43
+version 16, load latnecy:4.11008, load throughput:2433.04
+version 17, load latnecy:4.44058, load throughput:2251.96
+version 18, load latnecy:4.47759, load throughput:2233.35
+version 19, load latnecy:4.43155, load throughput:2256.55
+version 20, load latnecy:4.46352, load throughput:2240.38
+version 21, load latnecy:4.14739, load throughput:2411.15
+version 22, load latnecy:4.01375, load throughput:2491.43
+version 23, load latnecy:4.2179, load throughput:2370.85
+version 24, load latnecy:3.84895, load throughput:2598.11
+version 25, load latnecy:3.97143, load throughput:2517.98
+version 26, load latnecy:3.82936, load throughput:2611.4
+version 27, load latnecy:3.98997, load throughput:2506.28
+version 28, load latnecy:4.07921, load throughput:2451.46
+version 29, load latnecy:4.20692, load throughput:2377.04
+version 30, load latnecy:4.09277, load throughput:2443.33
+version 31, load latnecy:6.93239, load throughput:1442.5
+version 32, load latnecy:3.96737, load throughput:2520.56
+version 33, load latnecy:4.09917, load throughput:2439.52
+version 34, load latnecy:4.23467, load throughput:2361.46
+version 35, load latnecy:4.27804, load throughput:2337.52
+version 36, load latnecy:4.21767, load throughput:2370.98
+version 37, load latnecy:4.06601, load throughput:2459.41
+version 38, load latnecy:4.08246, load throughput:2449.51
+version 39, load latnecy:4.20494, load throughput:2378.15
+version 40, load latnecy:3.99736, load throughput:2501.65
+version 41, load latnecy:4.13403, load throughput:2418.95
+version 42, load latnecy:4.2162, load throughput:2371.8
+version 43, load latnecy:4.00651, load throughput:2495.94
+version 44, load latnecy:3.9257, load throughput:2547.32
+version 45, load latnecy:4.01712, load throughput:2489.35
+version 46, load latnecy:3.95067, load throughput:2531.22
+version 47, load latnecy:3.96542, load throughput:2521.8
+version 48, load latnecy:3.87278, load throughput:2582.12
+version 49, load latnecy:4.05888, load throughput:2463.73
+version 50, load latnecy:4.22294, load throughput:2368.02
+version 51, load latnecy:4.36144, load throughput:2292.82
+version 52, load latnecy:4.07746, load throughput:2452.5
+version 53, load latnecy:3.82746, load throughput:2612.7
+version 54, load latnecy:3.93643, load throughput:2540.37
+version 55, load latnecy:4.10761, load throughput:2434.51
+version 56, load latnecy:3.99733, load throughput:2501.67
+version 57, load latnecy:4.12253, load throughput:2425.7
+version 58, load latnecy:3.75291, load throughput:2664.6
+version 59, load latnecy:3.75275, load throughput:2664.71
+version 60, load latnecy:3.7877, load throughput:2640.12
+version 61, load latnecy:3.91839, load throughput:2552.07
+version 62, load latnecy:4.01285, load throughput:2491.99
+version 63, load latnecy:4.25508, load throughput:2350.13
+version 64, load latnecy:3.91706, load throughput:2552.93
+version 65, load latnecy:3.80792, load throughput:2626.11
+version 66, load latnecy:3.84478, load throughput:2600.93
+version 67, load latnecy:3.93454, load throughput:2541.59
+version 68, load latnecy:3.75159, load throughput:2665.54
+version 69, load latnecy:3.89968, load throughput:2564.31
+version 70, load latnecy:4.05746, load throughput:2464.59
+version 71, load latnecy:4.28049, load throughput:2336.18
+version 72, load latnecy:4.11726, load throughput:2428.8
+version 73, load latnecy:4.26038, load throughput:2347.21
+version 74, load latnecy:4.09166, load throughput:2444
+version 75, load latnecy:4.16584, load throughput:2400.48
+version 76, load latnecy:4.20002, load throughput:2380.94
+version 77, load latnecy:4.1767, load throughput:2394.23
+version 78, load latnecy:4.19252, load throughput:2385.2
+version 79, load latnecy:65.8255, load throughput:151.917
+version 80, load latnecy:3.90961, load throughput:2557.8
+version 81, load latnecy:4.04253, load throughput:2473.7
+version 82, load latnecy:4.07183, load throughput:2455.9
+version 83, load latnecy:4.14628, load throughput:2411.8
+version 84, load latnecy:4.1842, load throughput:2389.94
+version 85, load latnecy:4.15691, load throughput:2405.63
+version 86, load latnecy:4.27079, load throughput:2341.49
+version 87, load latnecy:4.38337, load throughput:2281.35
+version 88, load latnecy:4.20774, load throughput:2376.57
+version 89, load latnecy:4.21071, load throughput:2374.89
+version 90, load latnecy:4.15015, load throughput:2409.55
+version 91, load latnecy:4.20053, load throughput:2380.65
+version 92, load latnecy:4.21646, load throughput:2371.66
+version 93, load latnecy:4.09165, load throughput:2444
+version 94, load latnecy:4.28481, load throughput:2333.83
+version 95, load latnecy:7.4693, load throughput:1338.81
+version 96, load latnecy:4.05018, load throughput:2469.03
+version 97, load latnecy:4.30747, load throughput:2321.55
+version 98, load latnecy:4.08749, load throughput:2446.49
+version 99, load latnecy:3.92803, load throughput:2545.81
+version 100, load latnecy:4.09352, load throughput:2442.89
+version 101, load latnecy:4.20714, load throughput:2376.91
+version 102, load latnecy:4.13146, load throughput:2420.45
+version 103, load latnecy:4.03573, load throughput:2477.87
+version 104, load latnecy:3.80172, load throughput:2630.39
+version 105, load latnecy:3.98266, load throughput:2510.88
+version 106, load latnecy:4.22663, load throughput:2365.95
+version 107, load latnecy:4.03204, load throughput:2480.13
+version 108, load latnecy:3.76552, load throughput:2655.68
+version 109, load latnecy:3.92707, load throughput:2546.43
+version 110, load latnecy:3.91829, load throughput:2552.13
+version 111, load latnecy:4.04233, load throughput:2473.82
+version 112, load latnecy:3.87801, load throughput:2578.64
+version 113, load latnecy:3.84074, load throughput:2603.66
+version 114, load latnecy:3.92726, load throughput:2546.3
+version 115, load latnecy:4.13343, load throughput:2419.3
+version 116, load latnecy:4.36953, load throughput:2288.58
+version 117, load latnecy:3.98518, load throughput:2509.3
+version 118, load latnecy:3.8477, load throughput:2598.95
+version 119, load latnecy:4.03774, load throughput:2476.63
+version 120, load latnecy:4.0839, load throughput:2448.64
+version 121, load latnecy:4.15984, load throughput:2403.94
+version 122, load latnecy:4.09476, load throughput:2442.15
+version 123, load latnecy:4.22473, load throughput:2367.02
+version 124, load latnecy:4.38746, load throughput:2279.22
+version 125, load latnecy:4.34534, load throughput:2301.31
+version 126, load latnecy:4.43701, load throughput:2253.77
+version 127, load latnecy:4.82034, load throughput:2074.54
+version 128, load latnecy:4.20308, load throughput:2379.21
+version 129, load latnecy:4.10217, load throughput:2437.74
+version 130, load latnecy:4.06713, load throughput:2458.74
+version 131, load latnecy:3.83404, load throughput:2608.21
+version 132, load latnecy:3.95536, load throughput:2528.21
+version 133, load latnecy:4.18172, load throughput:2391.36
+version 134, load latnecy:4.29698, load throughput:2327.21
+version 135, load latnecy:4.28286, load throughput:2334.89
+version 136, load latnecy:3.98596, load throughput:2508.8
+version 137, load latnecy:3.90187, load throughput:2562.87
+version 138, load latnecy:3.92277, load throughput:2549.22
+version 139, load latnecy:4.02915, load throughput:2481.91
+version 140, load latnecy:4.23496, load throughput:2361.3
+version 141, load latnecy:4.21123, load throughput:2374.6
+version 142, load latnecy:4.36945, load throughput:2288.62
+version 143, load latnecy:99.6448, load throughput:100.356
+version 144, load latnecy:4.27553, load throughput:2338.89
+version 145, load latnecy:4.00917, load throughput:2494.28
+version 146, load latnecy:3.77861, load throughput:2646.48
+version 147, load latnecy:3.84006, load throughput:2604.13
+version 148, load latnecy:3.88599, load throughput:2573.35
+version 149, load latnecy:3.91231, load throughput:2556.04
+version 150, load latnecy:4.07567, load throughput:2453.58
+version 151, load latnecy:4.26455, load throughput:2344.91
+version 152, load latnecy:4.11889, load throughput:2427.84
+version 153, load latnecy:4.11839, load throughput:2428.13
+version 154, load latnecy:3.9358, load throughput:2540.78
+version 155, load latnecy:4.1681, load throughput:2399.18
+version 156, load latnecy:4.04819, load throughput:2470.24
+version 157, load latnecy:4.24778, load throughput:2354.17
+version 158, load latnecy:4.21509, load throughput:2372.43
+version 159, load latnecy:12.7702, load throughput:783.073
+version 160, load latnecy:4.16612, load throughput:2400.32
+version 161, load latnecy:4.10921, load throughput:2433.56
+version 162, load latnecy:4.16429, load throughput:2401.37
+version 163, load latnecy:4.37562, load throughput:2285.39
+version 164, load latnecy:4.30861, load throughput:2320.93
+version 165, load latnecy:4.29768, load throughput:2326.84
+version 166, load latnecy:4.32161, load throughput:2313.95
+version 167, load latnecy:3.88377, load throughput:2574.82
+version 168, load latnecy:3.81651, load throughput:2620.2
+version 169, load latnecy:3.95982, load throughput:2525.37
+version 170, load latnecy:3.97598, load throughput:2515.1
+version 171, load latnecy:4.14879, load throughput:2410.34
+version 172, load latnecy:4.2404, load throughput:2358.27
+version 173, load latnecy:4.16109, load throughput:2403.22
+version 174, load latnecy:4.37786, load throughput:2284.22
+version 175, load latnecy:141.97, load throughput:70.4374
+version 176, load latnecy:4.0962, load throughput:2441.29
+version 177, load latnecy:4.2633, load throughput:2345.6
+version 178, load latnecy:4.25095, load throughput:2352.41
+version 179, load latnecy:4.23994, load throughput:2358.52
+version 180, load latnecy:4.04712, load throughput:2470.89
+version 181, load latnecy:3.86924, load throughput:2584.48
+version 182, load latnecy:4.07488, load throughput:2454.06
+version 183, load latnecy:4.31354, load throughput:2318.28
+version 184, load latnecy:3.97854, load throughput:2513.49
+version 185, load latnecy:3.96514, load throughput:2521.98
+version 186, load latnecy:4.04612, load throughput:2471.51
+version 187, load latnecy:4.18551, load throughput:2389.19
+version 188, load latnecy:4.07498, load throughput:2454
+version 189, load latnecy:4.0132, load throughput:2491.78
+version 190, load latnecy:4.19599, load throughput:2383.23
+version 191, load latnecy:11.5235, load throughput:867.792
+version 192, load latnecy:4.24525, load throughput:2355.57
+version 193, load latnecy:4.5544, load throughput:2195.68
+version 194, load latnecy:4.56066, load throughput:2192.66
+version 195, load latnecy:4.46409, load throughput:2240.1
+version 196, load latnecy:4.28113, load throughput:2335.83
+version 197, load latnecy:4.55824, load throughput:2193.83
+version 198, load latnecy:4.43982, load throughput:2252.35
+version 199, load latnecy:4.57371, load throughput:2186.41
+version 200, load latnecy:4.42078, load throughput:2262.04
+version 201, load latnecy:4.15692, load throughput:2405.63
+version 202, load latnecy:3.88907, load throughput:2571.31
+version 203, load latnecy:4.0487, load throughput:2469.93
+version 204, load latnecy:4.13479, load throughput:2418.5
+version 205, load latnecy:4.33534, load throughput:2306.63
+version 206, load latnecy:4.40694, load throughput:2269.15
+version 207, load latnecy:4.58209, load throughput:2182.41
+version 208, load latnecy:4.31135, load throughput:2319.46
+version 209, load latnecy:4.25293, load throughput:2351.32
+version 210, load latnecy:3.91321, load throughput:2555.45
+version 211, load latnecy:4.00019, load throughput:2499.88
+version 212, load latnecy:4.04804, load throughput:2470.33
+version 213, load latnecy:4.17123, load throughput:2397.38
+version 214, load latnecy:4.29203, load throughput:2329.9
+version 215, load latnecy:4.43476, load throughput:2254.91
+version 216, load latnecy:4.25423, load throughput:2350.6
+version 217, load latnecy:4.3622, load throughput:2292.42
+version 218, load latnecy:4.46237, load throughput:2240.96
+version 219, load latnecy:4.60618, load throughput:2171
+version 220, load latnecy:4.52403, load throughput:2210.42
+version 221, load latnecy:4.35765, load throughput:2294.82
+version 222, load latnecy:4.1051, load throughput:2435.99
+version 223, load latnecy:13.7323, load throughput:728.209
+version 224, load latnecy:4.50024, load throughput:2222.1
+version 225, load latnecy:4.40727, load throughput:2268.98
+version 226, load latnecy:4.45289, load throughput:2245.73
+version 227, load latnecy:4.37989, load throughput:2283.16
+version 228, load latnecy:4.35187, load throughput:2297.86
+version 229, load latnecy:4.16386, load throughput:2401.62
+version 230, load latnecy:4.06083, load throughput:2462.55
+version 231, load latnecy:4.15728, load throughput:2405.42
+version 232, load latnecy:3.92398, load throughput:2548.44
+version 233, load latnecy:4.14085, load throughput:2414.96
+version 234, load latnecy:4.44843, load throughput:2247.98
+version 235, load latnecy:4.05949, load throughput:2463.36
+version 236, load latnecy:4.21926, load throughput:2370.08
+version 237, load latnecy:4.34502, load throughput:2301.49
+version 238, load latnecy:4.48788, load throughput:2228.23
+version 239, load latnecy:63.8074, load throughput:156.722
+version 240, load latnecy:4.36805, load throughput:2289.35
+version 241, load latnecy:4.42606, load throughput:2259.35
+version 242, load latnecy:4.36962, load throughput:2288.53
+version 243, load latnecy:4.12654, load throughput:2423.34
+version 244, load latnecy:4.08828, load throughput:2446.02
+version 245, load latnecy:4.13548, load throughput:2418.1
+version 246, load latnecy:4.22287, load throughput:2368.06
+version 247, load latnecy:4.33247, load throughput:2308.15
+version 248, load latnecy:4.36253, load throughput:2292.25
+version 249, load latnecy:4.48249, load throughput:2230.91
+version 250, load latnecy:4.69176, load throughput:2131.39
+version 251, load latnecy:4.74007, load throughput:2109.68
+version 252, load latnecy:4.37911, load throughput:2283.57
+version 253, load latnecy:4.10659, load throughput:2435.11
+version 254, load latnecy:4.28781, load throughput:2332.19
+version 255, load latnecy:12.5864, load throughput:794.51
+version 256, load latnecy:4.10059, load throughput:2438.67
+version 257, load latnecy:4.13443, load throughput:2418.71
+version 258, load latnecy:3.96895, load throughput:2519.56
+version 259, load latnecy:3.98955, load throughput:2506.55
+version 260, load latnecy:4.05148, load throughput:2468.24
+version 261, load latnecy:4.23453, load throughput:2361.53
+version 262, load latnecy:4.33605, load throughput:2306.25
+version 263, load latnecy:4.46433, load throughput:2239.98
+version 264, load latnecy:4.2954, load throughput:2328.07
+version 265, load latnecy:4.07266, load throughput:2455.4
+version 266, load latnecy:4.2932, load throughput:2329.27
+version 267, load latnecy:4.38793, load throughput:2278.98
+version 268, load latnecy:4.36406, load throughput:2291.45
+version 269, load latnecy:4.31675, load throughput:2316.56
+version 270, load latnecy:4.52404, load throughput:2210.41
+version 271, load latnecy:122.911, load throughput:81.3595
+version 272, load latnecy:4.31391, load throughput:2318.09
+version 273, load latnecy:4.50005, load throughput:2222.2
+version 274, load latnecy:4.4712, load throughput:2236.54
+version 275, load latnecy:4.60934, load throughput:2169.51
+version 276, load latnecy:4.39741, load throughput:2274.07
+version 277, load latnecy:4.5618, load throughput:2192.12
+version 278, load latnecy:4.56205, load throughput:2192
+version 279, load latnecy:4.68387, load throughput:2134.99
+version 280, load latnecy:4.08331, load throughput:2448.99
+version 281, load latnecy:4.09014, load throughput:2444.91
+version 282, load latnecy:4.07507, load throughput:2453.94
+version 283, load latnecy:4.13284, load throughput:2419.64
+version 284, load latnecy:4.33462, load throughput:2307.01
+version 285, load latnecy:4.4623, load throughput:2241
+version 286, load latnecy:4.49272, load throughput:2225.83
+version 287, load latnecy:12.6439, load throughput:790.893
+version 288, load latnecy:4.12517, load throughput:2424.14
+version 289, load latnecy:4.19513, load throughput:2383.72
+version 290, load latnecy:4.39962, load throughput:2272.93
+version 291, load latnecy:4.31719, load throughput:2316.32
+version 292, load latnecy:4.23773, load throughput:2359.75
+version 293, load latnecy:4.07657, load throughput:2453.04
+version 294, load latnecy:3.93881, load throughput:2538.84
+version 295, load latnecy:4.05052, load throughput:2468.82
+version 296, load latnecy:4.06006, load throughput:2463.02
+version 297, load latnecy:4.13024, load throughput:2421.17
+version 298, load latnecy:4.03848, load throughput:2476.18
+version 299, load latnecy:4.11805, load throughput:2428.34
+version 300, load latnecy:4.17504, load throughput:2395.19
+version 301, load latnecy:4.20759, load throughput:2376.66
+version 302, load latnecy:4.42498, load throughput:2259.9
+version 303, load latnecy:121.149, load throughput:82.5432
+version 304, load latnecy:4.22274, load throughput:2368.13
+version 305, load latnecy:4.41849, load throughput:2263.21
+version 306, load latnecy:4.57838, load throughput:2184.18
+version 307, load latnecy:4.42003, load throughput:2262.43
+version 308, load latnecy:4.30032, load throughput:2325.41
+version 309, load latnecy:4.05947, load throughput:2463.38
+version 310, load latnecy:4.13185, load throughput:2420.22
+version 311, load latnecy:4.31471, load throughput:2317.65
+version 312, load latnecy:4.32521, load throughput:2312.03
+version 313, load latnecy:4.48867, load throughput:2227.83
+version 314, load latnecy:4.39386, load throughput:2275.9
+version 315, load latnecy:4.27149, load throughput:2341.1
+version 316, load latnecy:4.48679, load throughput:2228.76
+version 317, load latnecy:4.57635, load throughput:2185.15
+version 318, load latnecy:4.49074, load throughput:2226.81
+version 319, load latnecy:14.2544, load throughput:701.536
+version 320, load latnecy:4.02516, load throughput:2484.37
+version 321, load latnecy:4.23076, load throughput:2363.64
+version 322, load latnecy:4.18569, load throughput:2389.09
+version 323, load latnecy:4.41577, load throughput:2264.61
+version 324, load latnecy:4.6495, load throughput:2150.77
+version 325, load latnecy:4.5305, load throughput:2207.26
+version 326, load latnecy:4.64394, load throughput:2153.34
+version 327, load latnecy:4.58283, load throughput:2182.06
+version 328, load latnecy:4.20191, load throughput:2379.87
+version 329, load latnecy:4.00492, load throughput:2496.93
+version 330, load latnecy:4.15203, load throughput:2408.46
+version 331, load latnecy:4.1471, load throughput:2411.33
+version 332, load latnecy:4.15992, load throughput:2403.89
+version 333, load latnecy:4.14727, load throughput:2411.22
+version 334, load latnecy:4.03704, load throughput:2477.06
+version 335, load latnecy:119.378, load throughput:83.7678
+version 336, load latnecy:4.30689, load throughput:2321.86
+version 337, load latnecy:4.34481, load throughput:2301.6
+version 338, load latnecy:4.33472, load throughput:2306.95
+version 339, load latnecy:4.39717, load throughput:2274.19
+version 340, load latnecy:4.31599, load throughput:2316.97
+version 341, load latnecy:4.26757, load throughput:2343.25
+version 342, load latnecy:4.47875, load throughput:2232.77
+version 343, load latnecy:4.07933, load throughput:2451.38
+version 344, load latnecy:3.97816, load throughput:2513.72
+version 345, load latnecy:4.10593, load throughput:2435.5
+version 346, load latnecy:3.98855, load throughput:2507.18
+version 347, load latnecy:4.1932, load throughput:2384.81
+version 348, load latnecy:4.09613, load throughput:2441.33
+version 349, load latnecy:4.13116, load throughput:2420.63
+version 350, load latnecy:4.34503, load throughput:2301.48
+version 351, load latnecy:11.1246, load throughput:898.913
+version 352, load latnecy:4.18743, load throughput:2388.1
+version 353, load latnecy:4.22511, load throughput:2366.8
+version 354, load latnecy:4.32264, load throughput:2313.4
+version 355, load latnecy:4.54804, load throughput:2198.75
+version 356, load latnecy:4.43212, load throughput:2256.26
+version 357, load latnecy:4.3867, load throughput:2279.62
+version 358, load latnecy:4.29729, load throughput:2327.05
+version 359, load latnecy:4.01419, load throughput:2491.17
+version 360, load latnecy:3.97782, load throughput:2513.94
+version 361, load latnecy:3.97424, load throughput:2516.21
+version 362, load latnecy:4.19097, load throughput:2386.08
+version 363, load latnecy:4.34211, load throughput:2303.03
+version 364, load latnecy:4.37805, load throughput:2284.12
+version 365, load latnecy:4.42952, load throughput:2257.58
+version 366, load latnecy:4.35388, load throughput:2296.8
+version 367, load latnecy:4.04015, load throughput:2475.16
+version 368, load latnecy:3.92783, load throughput:2545.94
+version 369, load latnecy:4.09597, load throughput:2441.43
+version 370, load latnecy:4.07254, load throughput:2455.47
+version 371, load latnecy:4.18588, load throughput:2388.99
+version 372, load latnecy:4.04006, load throughput:2475.21
+version 373, load latnecy:4.04018, load throughput:2475.14
+version 374, load latnecy:4.05072, load throughput:2468.7
+version 375, load latnecy:4.13062, load throughput:2420.94
+version 376, load latnecy:3.98515, load throughput:2509.32
+version 377, load latnecy:4.15008, load throughput:2409.59
+version 378, load latnecy:4.21519, load throughput:2372.37
+version 379, load latnecy:4.40803, load throughput:2268.59
+version 380, load latnecy:4.46255, load throughput:2240.87
+version 381, load latnecy:4.62119, load throughput:2163.94
+version 382, load latnecy:4.51364, load throughput:2215.51
+version 383, load latnecy:12.8803, load throughput:776.382
+version 384, load latnecy:4.18013, load throughput:2392.27
+version 385, load latnecy:4.16182, load throughput:2402.8
+version 386, load latnecy:4.15905, load throughput:2404.39
+version 387, load latnecy:4.17587, load throughput:2394.71
+version 388, load latnecy:4.19207, load throughput:2385.45
+version 389, load latnecy:4.47147, load throughput:2236.4
+version 390, load latnecy:4.47843, load throughput:2232.92
+version 391, load latnecy:4.68452, load throughput:2134.69
+version 392, load latnecy:4.38689, load throughput:2279.52
+version 393, load latnecy:4.42137, load throughput:2261.74
+version 394, load latnecy:4.31305, load throughput:2318.54
+version 395, load latnecy:4.53757, load throughput:2203.82
+version 396, load latnecy:4.07964, load throughput:2451.2
+version 397, load latnecy:4.06183, load throughput:2461.95
+version 398, load latnecy:4.08013, load throughput:2450.9
+version 399, load latnecy:112.894, load throughput:88.5784
+version 400, load latnecy:3.91683, load throughput:2553.09
+version 401, load latnecy:4.08828, load throughput:2446.01
+version 402, load latnecy:4.32438, load throughput:2312.47
+version 403, load latnecy:4.34458, load throughput:2301.72
+version 404, load latnecy:3.97885, load throughput:2513.29
+version 405, load latnecy:3.78818, load throughput:2639.79
+version 406, load latnecy:3.90748, load throughput:2559.19
+version 407, load latnecy:4.12376, load throughput:2424.97
+version 408, load latnecy:4.24391, load throughput:2356.32
+version 409, load latnecy:4.23716, load throughput:2360.07
+version 410, load latnecy:4.26961, load throughput:2342.14
+version 411, load latnecy:4.4669, load throughput:2238.69
+version 412, load latnecy:4.52957, load throughput:2207.71
+version 413, load latnecy:4.64028, load throughput:2155.04
+version 414, load latnecy:4.69118, load throughput:2131.66
+version 415, load latnecy:16.4853, load throughput:606.601
+version 416, load latnecy:4.20325, load throughput:2379.11
+version 417, load latnecy:4.28424, load throughput:2334.14
+version 418, load latnecy:4.14538, load throughput:2412.33
+version 419, load latnecy:3.89041, load throughput:2570.42
+version 420, load latnecy:4.00859, load throughput:2494.64
+version 421, load latnecy:4.16487, load throughput:2401.04
+version 422, load latnecy:4.25923, load throughput:2347.84
+version 423, load latnecy:4.37625, load throughput:2285.06
+version 424, load latnecy:4.21041, load throughput:2375.06
+version 425, load latnecy:4.34645, load throughput:2300.73
+version 426, load latnecy:4.2402, load throughput:2358.38
+version 427, load latnecy:4.31889, load throughput:2315.41
+version 428, load latnecy:4.36139, load throughput:2292.85
+version 429, load latnecy:4.15016, load throughput:2409.55
+version 430, load latnecy:4.24225, load throughput:2357.24
+version 431, load latnecy:4.49613, load throughput:2224.13
+version 432, load latnecy:4.16112, load throughput:2403.2
+version 433, load latnecy:4.22208, load throughput:2368.5
+version 434, load latnecy:4.36105, load throughput:2293.03
+version 435, load latnecy:4.40404, load throughput:2270.64
+version 436, load latnecy:3.93479, load throughput:2541.43
+version 437, load latnecy:4.07487, load throughput:2454.06
+version 438, load latnecy:4.07669, load throughput:2452.97
+version 439, load latnecy:4.20056, load throughput:2380.63
+version 440, load latnecy:4.13219, load throughput:2420.02
+version 441, load latnecy:4.19896, load throughput:2381.54
+version 442, load latnecy:4.02281, load throughput:2485.82
+version 443, load latnecy:4.13455, load throughput:2418.64
+version 444, load latnecy:4.20137, load throughput:2380.18
+version 445, load latnecy:4.11705, load throughput:2428.92
+version 446, load latnecy:4.11056, load throughput:2432.76
+version 447, load latnecy:4.41962, load throughput:2262.64
+version 448, load latnecy:4.24203, load throughput:2357.36
+version 449, load latnecy:4.35548, load throughput:2295.96
+version 450, load latnecy:4.1432, load throughput:2413.59
+version 451, load latnecy:4.36187, load throughput:2292.59
+version 452, load latnecy:4.3243, load throughput:2312.51
+version 453, load latnecy:4.40779, load throughput:2268.71
+version 454, load latnecy:4.18648, load throughput:2388.64
+version 455, load latnecy:4.0267, load throughput:2483.42
+version 456, load latnecy:4.10799, load throughput:2434.28
+version 457, load latnecy:4.34628, load throughput:2300.82
+version 458, load latnecy:4.47642, load throughput:2233.93
+version 459, load latnecy:4.65987, load throughput:2145.98
+version 460, load latnecy:4.76601, load throughput:2098.19
+version 461, load latnecy:4.72301, load throughput:2117.29
+version 462, load latnecy:4.33486, load throughput:2306.88
+version 463, load latnecy:104.391, load throughput:95.7941
+version 464, load latnecy:4.02409, load throughput:2485.03
+version 465, load latnecy:4.30114, load throughput:2324.97
+version 466, load latnecy:4.5102, load throughput:2217.2
+version 467, load latnecy:4.30358, load throughput:2323.65
+version 468, load latnecy:4.37882, load throughput:2283.72
+version 469, load latnecy:4.46109, load throughput:2241.61
+version 470, load latnecy:4.54818, load throughput:2198.68
+version 471, load latnecy:4.90571, load throughput:2038.44
+version 472, load latnecy:4.40737, load throughput:2268.93
+version 473, load latnecy:4.46376, load throughput:2240.27
+version 474, load latnecy:4.41119, load throughput:2266.96
+version 475, load latnecy:4.44724, load throughput:2248.58
+version 476, load latnecy:4.54908, load throughput:2198.25
+version 477, load latnecy:4.60829, load throughput:2170
+version 478, load latnecy:4.5705, load throughput:2187.95
+version 479, load latnecy:16.8196, load throughput:594.543
+version 480, load latnecy:4.09272, load throughput:2443.36
+version 481, load latnecy:3.9699, load throughput:2518.95
+version 482, load latnecy:4.01357, load throughput:2491.55
+version 483, load latnecy:4.28652, load throughput:2332.89
+version 484, load latnecy:4.27037, load throughput:2341.72
+version 485, load latnecy:4.43097, load throughput:2256.84
+version 486, load latnecy:4.50293, load throughput:2220.78
+version 487, load latnecy:4.48536, load throughput:2229.47
+version 488, load latnecy:4.35454, load throughput:2296.45
+version 489, load latnecy:4.45327, load throughput:2245.54
+version 490, load latnecy:4.4633, load throughput:2240.49
+version 491, load latnecy:4.53202, load throughput:2206.52
+version 492, load latnecy:4.80204, load throughput:2082.45
+version 493, load latnecy:4.63829, load throughput:2155.97
+version 494, load latnecy:4.55263, load throughput:2196.53
+version 495, load latnecy:4.63185, load throughput:2158.97
+version 496, load latnecy:4.23777, load throughput:2359.73
+version 497, load latnecy:4.3507, load throughput:2298.48
+version 498, load latnecy:4.27738, load throughput:2337.88
+version 499, load latnecy:4.06279, load throughput:2461.36
+version 500, load latnecy:4.25237, load throughput:2351.63
+version 501, load latnecy:4.03496, load throughput:2478.34
+version 502, load latnecy:4.27764, load throughput:2337.74
+version 503, load latnecy:4.67789, load throughput:2137.72
+version 504, load latnecy:4.61026, load throughput:2169.08
+version 505, load latnecy:4.43646, load throughput:2254.05
+version 506, load latnecy:4.57268, load throughput:2186.9
+version 507, load latnecy:4.47951, load throughput:2232.39
+version 508, load latnecy:4.53129, load throughput:2206.88
+version 509, load latnecy:4.71454, load throughput:2121.1
+version 510, load latnecy:4.86141, load throughput:2057.01
+version 511, load latnecy:20.05, load throughput:498.754
+version 512, load latnecy:4.51819, load throughput:2213.27
+version 513, load latnecy:4.54103, load throughput:2202.15
+version 514, load latnecy:4.47938, load throughput:2232.45
+version 515, load latnecy:4.29731, load throughput:2327.04
+version 516, load latnecy:4.2809, load throughput:2335.96
+version 517, load latnecy:4.14997, load throughput:2409.65
+version 518, load latnecy:3.97487, load throughput:2515.8
+version 519, load latnecy:4.17542, load throughput:2394.97
+version 520, load latnecy:4.19088, load throughput:2386.14
+version 521, load latnecy:4.57869, load throughput:2184.03
+version 522, load latnecy:4.70766, load throughput:2124.2
+version 523, load latnecy:4.54807, load throughput:2198.74
+version 524, load latnecy:4.63107, load throughput:2159.33
+version 525, load latnecy:4.62862, load throughput:2160.47
+version 526, load latnecy:4.60675, load throughput:2170.73
+version 527, load latnecy:5.07597, load throughput:1970.07
+version 528, load latnecy:4.35146, load throughput:2298.08
+version 529, load latnecy:4.41046, load throughput:2267.34
+version 530, load latnecy:4.45323, load throughput:2245.56
+version 531, load latnecy:4.51107, load throughput:2216.77
+version 532, load latnecy:4.63583, load throughput:2157.11
+version 533, load latnecy:4.75241, load throughput:2104.2
+version 534, load latnecy:4.66895, load throughput:2141.81
+version 535, load latnecy:4.6012, load throughput:2173.35
+version 536, load latnecy:4.48215, load throughput:2231.07
+version 537, load latnecy:4.23718, load throughput:2360.06
+version 538, load latnecy:4.06308, load throughput:2461.19
+version 539, load latnecy:4.30757, load throughput:2321.49
+version 540, load latnecy:4.41153, load throughput:2266.79
+version 541, load latnecy:4.34261, load throughput:2302.76
+version 542, load latnecy:4.3267, load throughput:2311.23
+version 543, load latnecy:8.65442, load throughput:1155.48
+version 544, load latnecy:4.29086, load throughput:2330.54
+version 545, load latnecy:4.5169, load throughput:2213.91
+version 546, load latnecy:4.42044, load throughput:2262.22
+version 547, load latnecy:4.4048, load throughput:2270.25
+version 548, load latnecy:4.46183, load throughput:2241.23
+version 549, load latnecy:4.2969, load throughput:2327.26
+version 550, load latnecy:4.04374, load throughput:2472.96
+version 551, load latnecy:4.25649, load throughput:2349.35
+version 552, load latnecy:4.26158, load throughput:2346.55
+version 553, load latnecy:3.95188, load throughput:2530.44
+version 554, load latnecy:4.09464, load throughput:2442.22
+version 555, load latnecy:4.41213, load throughput:2266.48
+version 556, load latnecy:4.29241, load throughput:2329.69
+version 557, load latnecy:4.17126, load throughput:2397.35
+version 558, load latnecy:4.1787, load throughput:2393.09
+version 559, load latnecy:4.09716, load throughput:2440.72
+version 560, load latnecy:4.02183, load throughput:2486.43
+version 561, load latnecy:4.20021, load throughput:2380.84
+version 562, load latnecy:4.41931, load throughput:2262.8
+version 563, load latnecy:4.4328, load throughput:2255.91
+version 564, load latnecy:3.96465, load throughput:2522.29
+version 565, load latnecy:3.96789, load throughput:2520.23
+version 566, load latnecy:4.22491, load throughput:2366.91
+version 567, load latnecy:4.44387, load throughput:2250.29
+version 568, load latnecy:4.2356, load throughput:2360.94
+version 569, load latnecy:4.24199, load throughput:2357.38
+version 570, load latnecy:4.50406, load throughput:2220.22
+version 571, load latnecy:4.44232, load throughput:2251.08
+version 572, load latnecy:4.38607, load throughput:2279.94
+version 573, load latnecy:4.44836, load throughput:2248.02
+version 574, load latnecy:4.50248, load throughput:2221
+version 575, load latnecy:19.3824, load throughput:515.932
+version 576, load latnecy:4.23062, load throughput:2363.72
+version 577, load latnecy:4.28675, load throughput:2332.77
+version 578, load latnecy:4.08996, load throughput:2445.01
+version 579, load latnecy:4.18983, load throughput:2386.73
+version 580, load latnecy:4.30773, load throughput:2321.41
+version 581, load latnecy:4.33495, load throughput:2306.83
+version 582, load latnecy:4.54066, load throughput:2202.32
+version 583, load latnecy:4.52729, load throughput:2208.83
+version 584, load latnecy:4.42461, load throughput:2260.09
+version 585, load latnecy:4.37789, load throughput:2284.21
+version 586, load latnecy:4.28191, load throughput:2335.41
+version 587, load latnecy:4.0245, load throughput:2484.78
+version 588, load latnecy:4.18216, load throughput:2391.11
+version 589, load latnecy:4.31759, load throughput:2316.1
+version 590, load latnecy:4.40105, load throughput:2272.19
+version 591, load latnecy:50.7239, load throughput:197.146
+version 592, load latnecy:3.94837, load throughput:2532.69
+version 593, load latnecy:4.07711, load throughput:2452.72
+version 594, load latnecy:3.9943, load throughput:2503.57
+version 595, load latnecy:4.09135, load throughput:2444.18
+version 596, load latnecy:4.33938, load throughput:2304.48
+version 597, load latnecy:4.45434, load throughput:2245
+version 598, load latnecy:4.57036, load throughput:2188.01
+version 599, load latnecy:4.66013, load throughput:2145.86
+version 600, load latnecy:4.56715, load throughput:2189.55
+version 601, load latnecy:4.55194, load throughput:2196.86
+version 602, load latnecy:4.54298, load throughput:2201.2
+version 603, load latnecy:4.49762, load throughput:2223.4
+version 604, load latnecy:4.05776, load throughput:2464.41
+version 605, load latnecy:4.22217, load throughput:2368.45
+version 606, load latnecy:4.01446, load throughput:2490.99
+version 607, load latnecy:19.7831, load throughput:505.482
+version 608, load latnecy:4.36887, load throughput:2288.92
+version 609, load latnecy:4.41961, load throughput:2262.64
+version 610, load latnecy:4.35832, load throughput:2294.46
+version 611, load latnecy:4.42242, load throughput:2261.21
+version 612, load latnecy:4.65962, load throughput:2146.1
+version 613, load latnecy:4.66528, load throughput:2143.49
+version 614, load latnecy:4.66436, load throughput:2143.92
+version 615, load latnecy:4.79498, load throughput:2085.51
+version 616, load latnecy:4.64738, load throughput:2151.75
+version 617, load latnecy:4.57993, load throughput:2183.44
+version 618, load latnecy:4.48667, load throughput:2228.82
+version 619, load latnecy:4.51418, load throughput:2215.24
+version 620, load latnecy:4.41889, load throughput:2263.01
+version 621, load latnecy:4.5514, load throughput:2197.13
+version 622, load latnecy:4.67586, load throughput:2138.65
+version 623, load latnecy:51.8915, load throughput:192.71
+version 624, load latnecy:4.21279, load throughput:2373.72
+version 625, load latnecy:4.42458, load throughput:2260.1
+version 626, load latnecy:4.52296, load throughput:2210.94
+version 627, load latnecy:4.56093, load throughput:2192.53
+version 628, load latnecy:4.53302, load throughput:2206.04
+version 629, load latnecy:4.52902, load throughput:2207.98
+version 630, load latnecy:4.61393, load throughput:2167.35
+version 631, load latnecy:4.64524, load throughput:2152.74
+version 632, load latnecy:4.46512, load throughput:2239.58
+version 633, load latnecy:4.49879, load throughput:2222.82
+version 634, load latnecy:4.61155, load throughput:2168.47
+version 635, load latnecy:4.52113, load throughput:2211.84
+version 636, load latnecy:4.67414, load throughput:2139.43
+version 637, load latnecy:4.5941, load throughput:2176.71
+version 638, load latnecy:4.66702, load throughput:2142.69
+version 639, load latnecy:19.9634, load throughput:500.917
+version 640, load latnecy:4.28744, load throughput:2332.39
+version 641, load latnecy:4.38405, load throughput:2281
+version 642, load latnecy:4.60858, load throughput:2169.86
+version 643, load latnecy:4.56358, load throughput:2191.26
+version 644, load latnecy:4.57279, load throughput:2186.85
+version 645, load latnecy:4.61552, load throughput:2166.6
+version 646, load latnecy:4.72312, load throughput:2117.25
+version 647, load latnecy:4.85442, load throughput:2059.98
+version 648, load latnecy:4.44054, load throughput:2251.98
+version 649, load latnecy:4.25342, load throughput:2351.05
+version 650, load latnecy:4.29948, load throughput:2325.86
+version 651, load latnecy:4.32791, load throughput:2310.59
+version 652, load latnecy:4.50856, load throughput:2218
+version 653, load latnecy:4.65062, load throughput:2150.25
+version 654, load latnecy:4.56447, load throughput:2190.84
+version 655, load latnecy:4.41899, load throughput:2262.96
+version 656, load latnecy:3.98832, load throughput:2507.32
+version 657, load latnecy:4.1484, load throughput:2410.57
+version 658, load latnecy:4.1672, load throughput:2399.69
+version 659, load latnecy:4.07525, load throughput:2453.84
+version 660, load latnecy:4.28109, load throughput:2335.85
+version 661, load latnecy:4.04392, load throughput:2472.85
+version 662, load latnecy:4.25476, load throughput:2350.31
+version 663, load latnecy:4.41135, load throughput:2266.88
+version 664, load latnecy:4.46609, load throughput:2239.09
+version 665, load latnecy:4.68544, load throughput:2134.27
+version 666, load latnecy:4.66365, load throughput:2144.25
+version 667, load latnecy:4.34215, load throughput:2303.01
+version 668, load latnecy:4.25217, load throughput:2351.74
+version 669, load latnecy:4.13317, load throughput:2419.45
+version 670, load latnecy:4.09038, load throughput:2444.76
+version 671, load latnecy:21.8141, load throughput:458.42
+version 672, load latnecy:4.15842, load throughput:2404.76
+version 673, load latnecy:3.9775, load throughput:2514.14
+version 674, load latnecy:4.03178, load throughput:2480.3
+version 675, load latnecy:4.32108, load throughput:2314.24
+version 676, load latnecy:4.60992, load throughput:2169.24
+version 677, load latnecy:4.60277, load throughput:2172.6
+version 678, load latnecy:4.5715, load throughput:2187.46
+version 679, load latnecy:4.59511, load throughput:2176.23
+version 680, load latnecy:4.51705, load throughput:2213.83
+version 681, load latnecy:4.58859, load throughput:2179.32
+version 682, load latnecy:4.69151, load throughput:2131.51
+version 683, load latnecy:4.57135, load throughput:2187.54
+version 684, load latnecy:4.64141, load throughput:2154.52
+version 685, load latnecy:4.73937, load throughput:2109.98
+version 686, load latnecy:4.51341, load throughput:2215.62
+version 687, load latnecy:67.7811, load throughput:147.534
+version 688, load latnecy:4.55332, load throughput:2196.2
+version 689, load latnecy:4.49615, load throughput:2224.13
+version 690, load latnecy:4.43124, load throughput:2256.7
+version 691, load latnecy:4.50143, load throughput:2221.52
+version 692, load latnecy:4.46514, load throughput:2239.57
+version 693, load latnecy:4.55106, load throughput:2197.29
+version 694, load latnecy:4.54795, load throughput:2198.79
+version 695, load latnecy:4.28754, load throughput:2332.34
+version 696, load latnecy:4.10855, load throughput:2433.95
+version 697, load latnecy:4.16691, load throughput:2399.86
+version 698, load latnecy:4.21917, load throughput:2370.13
+version 699, load latnecy:4.19956, load throughput:2381.2
+version 700, load latnecy:4.30637, load throughput:2322.14
+version 701, load latnecy:4.39876, load throughput:2273.37
+version 702, load latnecy:4.49659, load throughput:2223.91
+version 703, load latnecy:9.97411, load throughput:1002.6
+version 704, load latnecy:4.64045, load throughput:2154.96
+version 705, load latnecy:4.58092, load throughput:2182.97
+version 706, load latnecy:4.72498, load throughput:2116.41
+version 707, load latnecy:4.73301, load throughput:2112.82
+version 708, load latnecy:4.5709, load throughput:2187.75
+version 709, load latnecy:4.54084, load throughput:2202.24
+version 710, load latnecy:4.61129, load throughput:2168.59
+version 711, load latnecy:4.73983, load throughput:2109.78
+version 712, load latnecy:4.61413, load throughput:2167.25
+version 713, load latnecy:4.66816, load throughput:2142.17
+version 714, load latnecy:4.55617, load throughput:2194.83
+version 715, load latnecy:4.59717, load throughput:2175.25
+version 716, load latnecy:4.48462, load throughput:2229.84
+version 717, load latnecy:4.51922, load throughput:2212.77
+version 718, load latnecy:4.80754, load throughput:2080.06
+version 719, load latnecy:4.88148, load throughput:2048.56
+version 720, load latnecy:4.36764, load throughput:2289.57
+version 721, load latnecy:4.45238, load throughput:2245.99
+version 722, load latnecy:4.54073, load throughput:2202.29
+version 723, load latnecy:4.53031, load throughput:2207.36
+version 724, load latnecy:4.62977, load throughput:2159.93
+version 725, load latnecy:4.58233, load throughput:2182.3
+version 726, load latnecy:4.66538, load throughput:2143.45
+version 727, load latnecy:4.8263, load throughput:2071.98
+version 728, load latnecy:4.65856, load throughput:2146.59
+version 729, load latnecy:4.7862, load throughput:2089.34
+version 730, load latnecy:4.61802, load throughput:2165.43
+version 731, load latnecy:4.80274, load throughput:2082.15
+version 732, load latnecy:4.69954, load throughput:2127.87
+version 733, load latnecy:4.95488, load throughput:2018.21
+version 734, load latnecy:5.03483, load throughput:1986.16
+version 735, load latnecy:4.96521, load throughput:2014.01
+version 736, load latnecy:4.37737, load throughput:2284.48
+version 737, load latnecy:4.61217, load throughput:2168.18
+version 738, load latnecy:4.6385, load throughput:2155.87
+version 739, load latnecy:4.14974, load throughput:2409.79
+version 740, load latnecy:4.1041, load throughput:2436.59
+version 741, load latnecy:4.14367, load throughput:2413.32
+version 742, load latnecy:4.24219, load throughput:2357.27
+version 743, load latnecy:4.33588, load throughput:2306.33
+version 744, load latnecy:4.39162, load throughput:2277.07
+version 745, load latnecy:4.53282, load throughput:2206.13
+version 746, load latnecy:4.58587, load throughput:2180.61
+version 747, load latnecy:4.59523, load throughput:2176.17
+version 748, load latnecy:4.02093, load throughput:2486.99
+version 749, load latnecy:4.19772, load throughput:2382.25
+version 750, load latnecy:4.26689, load throughput:2343.63
+version 751, load latnecy:49.7131, load throughput:201.154
+version 752, load latnecy:4.356, load throughput:2295.68
+version 753, load latnecy:4.35669, load throughput:2295.32
+version 754, load latnecy:4.31059, load throughput:2319.87
+version 755, load latnecy:4.52511, load throughput:2209.89
+version 756, load latnecy:4.45431, load throughput:2245.02
+version 757, load latnecy:4.17398, load throughput:2395.79
+version 758, load latnecy:4.1524, load throughput:2408.25
+version 759, load latnecy:4.20559, load throughput:2377.79
+version 760, load latnecy:4.1611, load throughput:2403.21
+version 761, load latnecy:4.42972, load throughput:2257.48
+version 762, load latnecy:4.50879, load throughput:2217.89
+version 763, load latnecy:4.22973, load throughput:2364.21
+version 764, load latnecy:4.12322, load throughput:2425.29
+version 765, load latnecy:4.3301, load throughput:2309.41
+version 766, load latnecy:4.46968, load throughput:2237.3
+version 767, load latnecy:6.77467, load throughput:1476.09
+version 768, load latnecy:4.0247, load throughput:2484.66
+version 769, load latnecy:4.26336, load throughput:2345.57
+version 770, load latnecy:4.43034, load throughput:2257.16
+version 771, load latnecy:4.42753, load throughput:2258.59
+version 772, load latnecy:4.36928, load throughput:2288.71
+version 773, load latnecy:4.36872, load throughput:2289
+version 774, load latnecy:4.34008, load throughput:2304.11
+version 775, load latnecy:4.53336, load throughput:2205.87
+version 776, load latnecy:4.47676, load throughput:2233.76
+version 777, load latnecy:4.70222, load throughput:2126.65
+version 778, load latnecy:4.63641, load throughput:2156.84
+version 779, load latnecy:4.55824, load throughput:2193.83
+version 780, load latnecy:4.50409, load throughput:2220.2
+version 781, load latnecy:4.46575, load throughput:2239.26
+version 782, load latnecy:4.35989, load throughput:2293.64
+version 783, load latnecy:30.8448, load throughput:324.204
+version 784, load latnecy:4.42424, load throughput:2260.28
+version 785, load latnecy:4.64091, load throughput:2154.75
+version 786, load latnecy:4.69749, load throughput:2128.8
+version 787, load latnecy:3.99291, load throughput:2504.44
+version 788, load latnecy:4.03234, load throughput:2479.95
+version 789, load latnecy:4.08386, load throughput:2448.66
+version 790, load latnecy:4.01212, load throughput:2492.45
+version 791, load latnecy:4.13574, load throughput:2417.95
+version 792, load latnecy:3.99349, load throughput:2504.08
+version 793, load latnecy:3.94264, load throughput:2536.37
+version 794, load latnecy:4.16176, load throughput:2402.83
+version 795, load latnecy:4.45372, load throughput:2245.31
+version 796, load latnecy:4.59185, load throughput:2177.77
+version 797, load latnecy:4.55515, load throughput:2195.32
+version 798, load latnecy:4.59242, load throughput:2177.5
+version 799, load latnecy:21.1407, load throughput:473.021
+version 800, load latnecy:4.13322, load throughput:2419.42
+version 801, load latnecy:4.27143, load throughput:2341.14
+version 802, load latnecy:4.35109, load throughput:2298.27
+version 803, load latnecy:4.47773, load throughput:2233.27
+version 804, load latnecy:4.44348, load throughput:2250.49
+version 805, load latnecy:4.56239, load throughput:2191.83
+version 806, load latnecy:4.54053, load throughput:2202.39
+version 807, load latnecy:4.54739, load throughput:2199.06
+version 808, load latnecy:4.55162, load throughput:2197.02
+version 809, load latnecy:4.7613, load throughput:2100.27
+version 810, load latnecy:4.57614, load throughput:2185.25
+version 811, load latnecy:4.38552, load throughput:2280.23
+version 812, load latnecy:3.95469, load throughput:2528.65
+version 813, load latnecy:4.05917, load throughput:2463.56
+version 814, load latnecy:4.0906, load throughput:2444.63
+version 815, load latnecy:53.5788, load throughput:186.641
+version 816, load latnecy:4.54992, load throughput:2197.84
+version 817, load latnecy:4.56229, load throughput:2191.88
+version 818, load latnecy:4.32012, load throughput:2314.75
+version 819, load latnecy:4.00054, load throughput:2499.66
+version 820, load latnecy:4.13296, load throughput:2419.58
+version 821, load latnecy:4.31587, load throughput:2317.03
+version 822, load latnecy:4.18293, load throughput:2390.67
+version 823, load latnecy:4.40499, load throughput:2270.15
+version 824, load latnecy:4.31108, load throughput:2319.61
+version 825, load latnecy:4.16815, load throughput:2399.15
+version 826, load latnecy:4.4193, load throughput:2262.8
+version 827, load latnecy:4.06512, load throughput:2459.95
+version 828, load latnecy:4.31438, load throughput:2317.83
+version 829, load latnecy:4.52728, load throughput:2208.83
+version 830, load latnecy:4.62611, load throughput:2161.64
+version 831, load latnecy:23.0846, load throughput:433.189
+version 832, load latnecy:4.16817, load throughput:2399.14
+version 833, load latnecy:4.34646, load throughput:2300.72
+version 834, load latnecy:3.90513, load throughput:2560.73
+version 835, load latnecy:4.1345, load throughput:2418.67
+version 836, load latnecy:4.27551, load throughput:2338.9
+version 837, load latnecy:4.61309, load throughput:2167.75
+version 838, load latnecy:4.79543, load throughput:2085.32
+version 839, load latnecy:4.97712, load throughput:2009.2
+version 840, load latnecy:4.44365, load throughput:2250.4
+version 841, load latnecy:4.44454, load throughput:2249.95
+version 842, load latnecy:4.51854, load throughput:2213.11
+version 843, load latnecy:4.59672, load throughput:2175.46
+version 844, load latnecy:4.525, load throughput:2209.95
+version 845, load latnecy:4.54877, load throughput:2198.4
+version 846, load latnecy:4.57959, load throughput:2183.6
+version 847, load latnecy:34.6705, load throughput:288.43
+version 848, load latnecy:4.12123, load throughput:2426.46
+version 849, load latnecy:4.31484, load throughput:2317.58
+version 850, load latnecy:4.36062, load throughput:2293.25
+version 851, load latnecy:4.3083, load throughput:2321.1
+version 852, load latnecy:4.19044, load throughput:2386.38
+version 853, load latnecy:4.31129, load throughput:2319.49
+version 854, load latnecy:4.55554, load throughput:2195.13
+version 855, load latnecy:4.79488, load throughput:2085.56
+version 856, load latnecy:4.79744, load throughput:2084.45
+version 857, load latnecy:4.76951, load throughput:2096.65
+version 858, load latnecy:4.55582, load throughput:2195
+version 859, load latnecy:4.65806, load throughput:2146.82
+version 860, load latnecy:4.67503, load throughput:2139.02
+version 861, load latnecy:4.71283, load throughput:2121.87
+version 862, load latnecy:4.71383, load throughput:2121.42
+version 863, load latnecy:22.5815, load throughput:442.84
+version 864, load latnecy:4.06461, load throughput:2460.26
+version 865, load latnecy:4.09857, load throughput:2439.88
+version 866, load latnecy:4.30952, load throughput:2320.44
+version 867, load latnecy:4.66009, load throughput:2145.88
+version 868, load latnecy:4.49807, load throughput:2223.18
+version 869, load latnecy:4.09646, load throughput:2441.13
+version 870, load latnecy:4.24023, load throughput:2358.36
+version 871, load latnecy:4.33512, load throughput:2306.74
+version 872, load latnecy:4.43031, load throughput:2257.18
+version 873, load latnecy:4.24037, load throughput:2358.28
+version 874, load latnecy:4.20442, load throughput:2378.45
+version 875, load latnecy:4.51835, load throughput:2213.2
+version 876, load latnecy:4.64341, load throughput:2153.59
+version 877, load latnecy:4.51522, load throughput:2214.73
+version 878, load latnecy:4.82185, load throughput:2073.89
+version 879, load latnecy:34.0746, load throughput:293.474
+version 880, load latnecy:4.04084, load throughput:2474.73
+version 881, load latnecy:4.20393, load throughput:2378.72
+version 882, load latnecy:4.17885, load throughput:2393
+version 883, load latnecy:4.30501, load throughput:2322.87
+version 884, load latnecy:4.49982, load throughput:2222.31
+version 885, load latnecy:4.59108, load throughput:2178.14
+version 886, load latnecy:4.53002, load throughput:2207.49
+version 887, load latnecy:4.52462, load throughput:2210.13
+version 888, load latnecy:3.96356, load throughput:2522.98
+version 889, load latnecy:4.12292, load throughput:2425.46
+version 890, load latnecy:4.23252, load throughput:2362.66
+version 891, load latnecy:4.53162, load throughput:2206.72
+version 892, load latnecy:4.80348, load throughput:2081.82
+version 893, load latnecy:4.75699, load throughput:2102.17
+version 894, load latnecy:4.67009, load throughput:2141.28
+version 895, load latnecy:9.68003, load throughput:1033.05
+version 896, load latnecy:4.03668, load throughput:2477.28
+version 897, load latnecy:4.23781, load throughput:2359.71
+version 898, load latnecy:4.19202, load throughput:2385.49
+version 899, load latnecy:4.15075, load throughput:2409.2
+version 900, load latnecy:4.32931, load throughput:2309.84
+version 901, load latnecy:4.40543, load throughput:2269.93
+version 902, load latnecy:4.45093, load throughput:2246.72
+version 903, load latnecy:4.11447, load throughput:2430.44
+version 904, load latnecy:4.10217, load throughput:2437.74
+version 905, load latnecy:4.03914, load throughput:2475.77
+version 906, load latnecy:4.15673, load throughput:2405.74
+version 907, load latnecy:4.24726, load throughput:2354.46
+version 908, load latnecy:4.29872, load throughput:2326.28
+version 909, load latnecy:4.52563, load throughput:2209.64
+version 910, load latnecy:4.50211, load throughput:2221.18
+version 911, load latnecy:63.9608, load throughput:156.346
+version 912, load latnecy:4.30535, load throughput:2322.69
+version 913, load latnecy:4.28225, load throughput:2335.22
+version 914, load latnecy:4.35374, load throughput:2296.88
+version 915, load latnecy:4.34036, load throughput:2303.96
+version 916, load latnecy:4.3135, load throughput:2318.3
+version 917, load latnecy:4.40783, load throughput:2268.69
+version 918, load latnecy:4.26705, load throughput:2343.54
+version 919, load latnecy:4.12816, load throughput:2422.39
+version 920, load latnecy:4.01559, load throughput:2490.29
+version 921, load latnecy:4.07567, load throughput:2453.58
+version 922, load latnecy:4.39424, load throughput:2275.71
+version 923, load latnecy:4.37538, load throughput:2285.52
+version 924, load latnecy:4.40242, load throughput:2271.48
+version 925, load latnecy:4.43859, load throughput:2252.97
+version 926, load latnecy:4.58538, load throughput:2180.84
+version 927, load latnecy:26.4001, load throughput:378.786
+version 928, load latnecy:4.01302, load throughput:2491.89
+version 929, load latnecy:4.24126, load throughput:2357.79
+version 930, load latnecy:4.15935, load throughput:2404.22
+version 931, load latnecy:4.36271, load throughput:2292.15
+version 932, load latnecy:4.25147, load throughput:2352.13
+version 933, load latnecy:4.35468, load throughput:2296.38
+version 934, load latnecy:4.40558, load throughput:2269.85
+version 935, load latnecy:4.65911, load throughput:2146.33
+version 936, load latnecy:4.50224, load throughput:2221.12
+version 937, load latnecy:4.70245, load throughput:2126.55
+version 938, load latnecy:4.73906, load throughput:2110.12
+version 939, load latnecy:4.56995, load throughput:2188.21
+version 940, load latnecy:4.66977, load throughput:2141.43
+version 941, load latnecy:4.5237, load throughput:2210.58
+version 942, load latnecy:4.48094, load throughput:2231.67
+version 943, load latnecy:4.7431, load throughput:2108.33
+version 944, load latnecy:4.46966, load throughput:2237.31
+version 945, load latnecy:4.65529, load throughput:2148.09
+version 946, load latnecy:4.67003, load throughput:2141.31
+version 947, load latnecy:4.67561, load throughput:2138.76
+version 948, load latnecy:4.18061, load throughput:2392
+version 949, load latnecy:4.08057, load throughput:2450.64
+version 950, load latnecy:4.33354, load throughput:2307.58
+version 951, load latnecy:4.73851, load throughput:2110.37
+version 952, load latnecy:4.52647, load throughput:2209.23
+version 953, load latnecy:4.40809, load throughput:2268.56
+version 954, load latnecy:4.09682, load throughput:2440.92
+version 955, load latnecy:4.51075, load throughput:2216.92
+version 956, load latnecy:4.21669, load throughput:2371.53
+version 957, load latnecy:4.14728, load throughput:2411.22
+version 958, load latnecy:4.15835, load throughput:2404.8
+version 959, load latnecy:25.3672, load throughput:394.21
+version 960, load latnecy:4.07896, load throughput:2451.6
+version 961, load latnecy:4.06059, load throughput:2462.69
+version 962, load latnecy:4.11749, load throughput:2428.66
+version 963, load latnecy:4.19877, load throughput:2381.65
+version 964, load latnecy:4.20965, load throughput:2375.49
+version 965, load latnecy:4.3051, load throughput:2322.83
+version 966, load latnecy:4.27809, load throughput:2337.49
+version 967, load latnecy:4.60898, load throughput:2169.68
+version 968, load latnecy:4.4301, load throughput:2257.28
+version 969, load latnecy:4.61089, load throughput:2168.78
+version 970, load latnecy:4.94879, load throughput:2020.7
+version 971, load latnecy:4.97286, load throughput:2010.92
+version 972, load latnecy:5.03815, load throughput:1984.86
+version 973, load latnecy:4.80634, load throughput:2080.59
+version 974, load latnecy:4.08453, load throughput:2448.26
+version 975, load latnecy:30.4362, load throughput:328.556
+version 976, load latnecy:4.42164, load throughput:2261.6
+version 977, load latnecy:4.52981, load throughput:2207.6
+version 978, load latnecy:4.49782, load throughput:2223.3
+version 979, load latnecy:4.54171, load throughput:2201.81
+version 980, load latnecy:4.45388, load throughput:2245.23
+version 981, load latnecy:4.12127, load throughput:2426.44
+version 982, load latnecy:4.40179, load throughput:2271.8
+version 983, load latnecy:4.55454, load throughput:2195.61
+version 984, load latnecy:4.08687, load throughput:2446.86
+version 985, load latnecy:4.13372, load throughput:2419.13
+version 986, load latnecy:4.24678, load throughput:2354.73
+version 987, load latnecy:4.4231, load throughput:2260.86
+version 988, load latnecy:4.41824, load throughput:2263.34
+version 989, load latnecy:4.62728, load throughput:2161.1
+version 990, load latnecy:4.70842, load throughput:2123.85
+version 991, load latnecy:25.2842, load throughput:395.504
+version 992, load latnecy:4.37198, load throughput:2287.29
+version 993, load latnecy:4.33211, load throughput:2308.34
+version 994, load latnecy:4.24818, load throughput:2353.95
+version 995, load latnecy:4.26665, load throughput:2343.76
+version 996, load latnecy:4.06889, load throughput:2457.67
+version 997, load latnecy:4.1407, load throughput:2415.05
+version 998, load latnecy:4.31756, load throughput:2316.12
+version 999, load latnecy:4.54184, load throughput:2201.75
+version 1000, load latnecy:4.5316, load throughput:2206.73
+version 1001, range5, range latnecy:0.0388421, range throughput:128.726
+version 1001, range5, range latnecy:0.00632789, range throughput:790.153
+version 1001, range5, range latnecy:0.00689842, range throughput:724.803
+version 1001, range5, range latnecy:0.00666369, range throughput:750.335
+version 1001, range5, range latnecy:0.00639886, range throughput:781.389
+version 1001, range5, range latnecy:0.00626122, range throughput:798.566
+version 1001, range5, range latnecy:0.0064106, range throughput:779.959
+version 1001, range5, range latnecy:0.00639402, range throughput:781.981
+version 1001, range5, range latnecy:0.00628364, range throughput:795.717
+version 1001, range5, range latnecy:0.00647274, range throughput:772.47
+version 1001, range5, range latnecy:0.00642299, range throughput:778.454
+version 1001, range5, range latnecy:0.00640371, range throughput:780.798
+version 1001, range5, range latnecy:0.00632637, range throughput:790.343
+version 1001, range5, range latnecy:0.00646755, range throughput:773.09
+version 1001, range5, range latnecy:0.00650595, range throughput:768.527
+version 1001, range5, range latnecy:0.00653579, range throughput:765.018
+version 1001, range5, range latnecy:0.0066852, range throughput:747.92
+version 1001, range5, range latnecy:0.0062914, range throughput:794.736
+version 1001, range5, range latnecy:0.0062518, range throughput:799.77
+version 1001, range5, range latnecy:0.00634754, range throughput:787.706
+version 1001, range50, range latnecy:0.0223487, range throughput:2237.26
+version 1001, range50, range latnecy:0.0215798, range throughput:2316.98
+version 1001, range50, range latnecy:0.0211056, range throughput:2369.04
+version 1001, range50, range latnecy:0.0215168, range throughput:2323.76
+version 1001, range50, range latnecy:0.0208753, range throughput:2395.17
+version 1001, range50, range latnecy:0.0218096, range throughput:2292.57
+version 1001, range50, range latnecy:0.02299, range throughput:2174.86
+version 1001, range50, range latnecy:0.0227101, range throughput:2201.66
+version 1001, range50, range latnecy:0.0215991, range throughput:2314.91
+version 1001, range50, range latnecy:0.0217982, range throughput:2293.77
+version 1001, range50, range latnecy:0.0221019, range throughput:2262.25
+version 1001, range50, range latnecy:0.0221263, range throughput:2259.75
+version 1001, range50, range latnecy:0.0218246, range throughput:2290.99
+version 1001, range50, range latnecy:0.0221774, range throughput:2254.55
+version 1001, range50, range latnecy:0.0224166, range throughput:2230.49
+version 1001, range50, range latnecy:0.0248045, range throughput:2015.76
+version 1001, range50, range latnecy:0.021739, range throughput:2300.01
+version 1001, range50, range latnecy:0.023001, range throughput:2173.82
+version 1001, range50, range latnecy:0.0225324, range throughput:2219.03
+version 1001, range50, range latnecy:0.0220149, range throughput:2271.19
+version 1001, range100, range latnecy:0.0418774, range throughput:2387.92
+version 1001, range100, range latnecy:0.0416245, range throughput:2402.43
+version 1001, range100, range latnecy:0.0418995, range throughput:2386.66
+version 1001, range100, range latnecy:0.0420999, range throughput:2375.31
+version 1001, range100, range latnecy:0.0421745, range throughput:2371.1
+version 1001, range100, range latnecy:0.0456136, range throughput:2192.33
+version 1001, range100, range latnecy:0.0445188, range throughput:2246.24
+version 1001, range100, range latnecy:0.0438506, range throughput:2280.47
+version 1001, range100, range latnecy:0.0445319, range throughput:2245.58
+version 1001, range100, range latnecy:0.0436773, range throughput:2289.52
+version 1001, range100, range latnecy:0.0435368, range throughput:2296.91
+version 1001, range100, range latnecy:0.0432608, range throughput:2311.56
+version 1001, range100, range latnecy:0.0460775, range throughput:2170.26
+version 1001, range100, range latnecy:0.041953, range throughput:2383.62
+version 1001, range100, range latnecy:0.0419785, range throughput:2382.17
+version 1001, range100, range latnecy:0.0411625, range throughput:2429.4
+version 1001, range100, range latnecy:0.0418207, range throughput:2391.16
+version 1001, range100, range latnecy:0.0430186, range throughput:2324.58
+version 1001, range100, range latnecy:0.0426255, range throughput:2346.02
+version 1001, range100, range latnecy:0.0419872, range throughput:2381.68
+version 1001, range200, range latnecy:0.0842562, range throughput:2373.71
+version 1001, range200, range latnecy:0.0875454, range throughput:2284.53
+version 1001, range200, range latnecy:0.086416, range throughput:2314.38
+version 1001, range200, range latnecy:0.0853788, range throughput:2342.5
+version 1001, range200, range latnecy:0.0866673, range throughput:2307.67
+version 1001, range200, range latnecy:0.0848743, range throughput:2356.42
+version 1001, range200, range latnecy:0.0850185, range throughput:2352.43
+version 1001, range200, range latnecy:0.0862199, range throughput:2319.65
+version 1001, range200, range latnecy:0.0878582, range throughput:2276.4
+version 1001, range200, range latnecy:0.0847712, range throughput:2359.29
+version 1001, range200, range latnecy:0.0813889, range throughput:2457.34
+version 1001, range200, range latnecy:0.0879664, range throughput:2273.6
+version 1001, range200, range latnecy:0.0871135, range throughput:2295.85
+version 1001, range200, range latnecy:0.0877866, range throughput:2278.25
+version 1001, range200, range latnecy:0.085601, range throughput:2336.42
+version 1001, range200, range latnecy:0.0896554, range throughput:2230.76
+version 1001, range200, range latnecy:0.0887124, range throughput:2254.48
+version 1001, range200, range latnecy:0.0870812, range throughput:2296.71
+version 1001, range200, range latnecy:0.0864137, range throughput:2314.45
+version 1001, range200, range latnecy:0.0888471, range throughput:2251.06
+version 1001, range300, range latnecy:0.129641, range throughput:2314.09
+version 1001, range300, range latnecy:0.130383, range throughput:2300.91
+version 1001, range300, range latnecy:0.131466, range throughput:2281.97
+version 1001, range300, range latnecy:0.130162, range throughput:2304.82
+version 1001, range300, range latnecy:0.130548, range throughput:2298
+version 1001, range300, range latnecy:0.12967, range throughput:2313.57
+version 1001, range300, range latnecy:0.129382, range throughput:2318.71
+version 1001, range300, range latnecy:0.128882, range throughput:2327.7
+version 1001, range300, range latnecy:0.129061, range throughput:2324.48
+version 1001, range300, range latnecy:0.13343, range throughput:2248.38
+version 1001, range300, range latnecy:0.12539, range throughput:2392.54
+version 1001, range300, range latnecy:0.136643, range throughput:2195.5
+version 1001, range300, range latnecy:0.135833, range throughput:2208.6
+version 1001, range300, range latnecy:0.134729, range throughput:2226.7
+version 1001, range300, range latnecy:0.137627, range throughput:2179.8
+version 1001, range300, range latnecy:0.138003, range throughput:2173.87
+version 1001, range300, range latnecy:0.138762, range throughput:2161.98
+version 1001, range300, range latnecy:0.134906, range throughput:2223.77
+version 1001, range300, range latnecy:0.137207, range throughput:2186.47
+version 1001, range300, range latnecy:0.135892, range throughput:2207.64
+version 1001, range400, range latnecy:0.180318, range throughput:2218.3
+version 1001, range400, range latnecy:0.175828, range throughput:2274.95
+version 1001, range400, range latnecy:0.170882, range throughput:2340.8
+version 1001, range400, range latnecy:0.171618, range throughput:2330.75
+version 1001, range400, range latnecy:0.167932, range throughput:2381.91
+version 1001, range400, range latnecy:0.175808, range throughput:2275.21
+version 1001, range400, range latnecy:0.16655, range throughput:2401.68
+version 1001, range400, range latnecy:0.158463, range throughput:2524.26
+version 1001, range400, range latnecy:0.158481, range throughput:2523.96
+version 1001, range400, range latnecy:0.157659, range throughput:2537.13
+version 1001, range400, range latnecy:0.156994, range throughput:2547.87
+version 1001, range400, range latnecy:0.157621, range throughput:2537.73
+version 1001, range400, range latnecy:0.156834, range throughput:2550.47
+version 1001, range400, range latnecy:0.153844, range throughput:2600.03
+version 1001, range400, range latnecy:0.154397, range throughput:2590.73
+version 1001, range400, range latnecy:0.158938, range throughput:2516.7
+version 1001, range400, range latnecy:0.159142, range throughput:2513.47
+version 1001, range400, range latnecy:0.157265, range throughput:2543.48
+version 1001, range400, range latnecy:0.161428, range throughput:2477.89
+version 1001, range400, range latnecy:0.161838, range throughput:2471.6
+version 1001, range500, range latnecy:0.200423, range throughput:2494.72
+version 1001, range500, range latnecy:0.201787, range throughput:2477.86
+version 1001, range500, range latnecy:0.205007, range throughput:2438.94
+version 1001, range500, range latnecy:0.202164, range throughput:2473.24
+version 1001, range500, range latnecy:0.199618, range throughput:2504.78
+version 1001, range500, range latnecy:0.206534, range throughput:2420.9
+version 1001, range500, range latnecy:0.20454, range throughput:2444.5
+version 1001, range500, range latnecy:0.204754, range throughput:2441.95
+version 1001, range500, range latnecy:0.211391, range throughput:2365.29
+version 1001, range500, range latnecy:0.204288, range throughput:2447.53
+version 1001, range500, range latnecy:0.20769, range throughput:2407.44
+version 1001, range500, range latnecy:0.208593, range throughput:2397.01
+version 1001, range500, range latnecy:0.21335, range throughput:2343.57
+version 1001, range500, range latnecy:0.205145, range throughput:2437.3
+version 1001, range500, range latnecy:0.204142, range throughput:2449.27
+version 1001, range500, range latnecy:0.207968, range throughput:2404.22
+version 1001, range500, range latnecy:0.21062, range throughput:2373.94
+version 1001, range500, range latnecy:0.199293, range throughput:2508.87
+version 1001, range500, range latnecy:0.204528, range throughput:2444.65
+version 1001, range500, range latnecy:0.204654, range throughput:2443.15
+version 1001, range1000, range latnecy:0.41756, range throughput:2394.86
+version 1001, range1000, range latnecy:0.413997, range throughput:2415.48
+version 1001, range1000, range latnecy:0.399364, range throughput:2503.98
+version 1001, range1000, range latnecy:0.408093, range throughput:2450.42
+version 1001, range1000, range latnecy:0.414367, range throughput:2413.32
+version 1001, range1000, range latnecy:0.440417, range throughput:2270.58
+version 1001, range1000, range latnecy:0.473601, range throughput:2111.48
+version 1001, range1000, range latnecy:0.434804, range throughput:2299.89
+version 1001, range1000, range latnecy:0.42918, range throughput:2330.03
+version 1001, range1000, range latnecy:0.450641, range throughput:2219.06
+version 1001, range1000, range latnecy:0.446706, range throughput:2238.61
+version 1001, range1000, range latnecy:0.441439, range throughput:2265.32
+version 1001, range1000, range latnecy:0.427848, range throughput:2337.28
+version 1001, range1000, range latnecy:0.415069, range throughput:2409.24
+version 1001, range1000, range latnecy:0.442713, range throughput:2258.8
+version 1001, range1000, range latnecy:0.451874, range throughput:2213.01
+version 1001, range1000, range latnecy:0.457142, range throughput:2187.51
+version 1001, range1000, range latnecy:0.408464, range throughput:2448.19
+version 1001, range1000, range latnecy:0.394226, range throughput:2536.62
+version 1001, range1000, range latnecy:0.391656, range throughput:2553.26
+version 1001, range2000, range latnecy:0.774922, range throughput:2580.9
+version 1001, range2000, range latnecy:0.789305, range throughput:2533.88
+version 1001, range2000, range latnecy:0.791456, range throughput:2526.99
+version 1001, range2000, range latnecy:0.830991, range throughput:2406.76
+version 1001, range2000, range latnecy:0.810488, range throughput:2467.65
+version 1001, range2000, range latnecy:0.77831, range throughput:2569.67
+version 1001, range2000, range latnecy:0.797299, range throughput:2508.47
+version 1001, range2000, range latnecy:0.847027, range throughput:2361.2
+version 1001, range2000, range latnecy:0.826119, range throughput:2420.96
+version 1001, range2000, range latnecy:0.835782, range throughput:2392.97
+version 1001, range2000, range latnecy:0.83493, range throughput:2395.41
+version 1001, range2000, range latnecy:0.856192, range throughput:2335.92
+version 1001, range2000, range latnecy:0.851721, range throughput:2348.19
+version 1001, range2000, range latnecy:0.837291, range throughput:2388.65
+version 1001, range2000, range latnecy:0.776221, range throughput:2576.59
+version 1001, range2000, range latnecy:0.786319, range throughput:2543.5
+version 1001, range2000, range latnecy:0.805711, range throughput:2482.28
+version 1001, range2000, range latnecy:0.807983, range throughput:2475.3
+version 1001, range2000, range latnecy:0.834269, range throughput:2397.31
+version 1001, range2000, range latnecy:0.838343, range throughput:2385.66
+finished
++++ sleep 5
++++ set +x

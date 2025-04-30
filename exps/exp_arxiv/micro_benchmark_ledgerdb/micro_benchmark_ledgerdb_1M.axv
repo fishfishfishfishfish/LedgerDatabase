@@ -1,0 +1,915 @@
+db_name: ledgerdb
+data_path: /media/nvme/cxy_test/LedgerDatabase/exps/../data/
+result_dir: /media/nvme/cxy_test/LedgerDatabase/exps/results_ledgerdb/micro_benchmark
++++ rm -rf /media/nvme/cxy_test/LedgerDatabase/exps/../data//000025.log /media/nvme/cxy_test/LedgerDatabase/exps/../data//000033.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000034.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000035.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000036.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000037.log /media/nvme/cxy_test/LedgerDatabase/exps/../data//000038.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000039.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000040.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000041.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000042.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000043.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000044.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000045.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000046.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000047.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000048.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000049.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//CURRENT /media/nvme/cxy_test/LedgerDatabase/exps/../data//IDENTITY /media/nvme/cxy_test/LedgerDatabase/exps/../data//LOCK /media/nvme/cxy_test/LedgerDatabase/exps/../data//LOG /media/nvme/cxy_test/LedgerDatabase/exps/../data//MANIFEST-000009 /media/nvme/cxy_test/LedgerDatabase/exps/../data//OPTIONS-000005
++++ result_path=/media/nvme/cxy_test/LedgerDatabase/exps/results_ledgerdb/micro_benchmark/e1000000b500v1024.csv
+++++ date '+%Y-%m-%d %H:%M:%S'
++++ echo 2025-04-29 10:20:58
+2025-04-29 10:20:58
++++ echo 'num account: 1000000, batch_size: 500, value_size: 1024, key_size: 32'
+num account: 1000000, batch_size: 500, value_size: 1024, key_size: 32
++++ ../build_release_ledgerdb/bin/microBenchmark -a 1000000 -b 10000 -t 20 -z 500 -k 32 -v 1024 -d /media/nvme/cxy_test/LedgerDatabase/exps/../data/ -r /media/nvme/cxy_test/LedgerDatabase/exps/results_ledgerdb/micro_benchmark/e1000000b500v1024.csv
+version 0, load latnecy:0.180669, load throughput:55349.8
+version 1, load latnecy:0.147196, load throughput:67936.5
+version 2, load latnecy:0.149489, load throughput:66894.6
+version 3, load latnecy:0.178205, load throughput:56115
+version 4, load latnecy:0.161219, load throughput:62027.5
+version 5, load latnecy:0.139697, load throughput:71583.7
+version 6, load latnecy:0.156076, load throughput:64071.4
+version 7, load latnecy:0.145827, load throughput:68574.2
+version 8, load latnecy:0.161603, load throughput:61879.9
+version 9, load latnecy:0.143511, load throughput:69680.9
+version 10, load latnecy:0.2059, load throughput:48567.2
+version 11, load latnecy:0.206888, load throughput:48335.2
+version 12, load latnecy:0.173427, load throughput:57661
+version 13, load latnecy:0.153385, load throughput:65195.4
+version 14, load latnecy:0.151729, load throughput:65906.9
+version 15, load latnecy:0.150519, load throughput:66436.8
+version 16, load latnecy:0.14398, load throughput:69454.2
+version 17, load latnecy:0.157783, load throughput:63378.3
+version 18, load latnecy:0.153762, load throughput:65035.5
+version 19, load latnecy:0.155954, load throughput:64121.5
+version 20, load latnecy:0.14665, load throughput:68189.6
+version 21, load latnecy:0.157463, load throughput:63507.1
+version 22, load latnecy:0.151865, load throughput:65848.1
+version 23, load latnecy:0.159596, load throughput:62658.2
+version 24, load latnecy:0.220115, load throughput:45430.7
+version 25, load latnecy:0.174315, load throughput:57367.5
+version 26, load latnecy:0.177033, load throughput:56486.8
+version 27, load latnecy:0.185237, load throughput:53984.9
+version 28, load latnecy:0.181699, load throughput:55036.2
+version 29, load latnecy:0.188559, load throughput:53033.8
+version 30, load latnecy:0.183477, load throughput:54502.8
+version 31, load latnecy:0.226894, load throughput:44073.5
+version 32, load latnecy:0.174438, load throughput:57327.1
+version 33, load latnecy:0.165722, load throughput:60342.2
+version 34, load latnecy:0.148961, load throughput:67131.6
+version 35, load latnecy:0.199717, load throughput:50070.9
+version 36, load latnecy:0.221742, load throughput:45097.5
+version 37, load latnecy:0.199994, load throughput:50001.6
+version 38, load latnecy:0.234672, load throughput:42612.7
+version 39, load latnecy:0.231194, load throughput:43253.6
+version 40, load latnecy:0.219976, load throughput:45459.5
+version 41, load latnecy:0.237377, load throughput:42127.1
+version 42, load latnecy:0.22497, load throughput:44450.3
+version 43, load latnecy:0.220196, load throughput:45414
+version 44, load latnecy:0.21593, load throughput:46311.3
+version 45, load latnecy:0.160563, load throughput:62281
+version 46, load latnecy:0.166889, load throughput:59920.1
+version 47, load latnecy:0.175856, load throughput:56864.6
+version 48, load latnecy:0.176921, load throughput:56522.6
+version 49, load latnecy:0.234181, load throughput:42702
+version 50, load latnecy:0.270434, load throughput:36977.6
+version 51, load latnecy:0.177978, load throughput:56186.7
+version 52, load latnecy:0.17983, load throughput:55607.9
+version 53, load latnecy:0.181182, load throughput:55193.1
+version 54, load latnecy:0.180997, load throughput:55249.7
+version 55, load latnecy:0.27758, load throughput:36025.7
+version 56, load latnecy:0.224329, load throughput:44577.3
+version 57, load latnecy:0.171568, load throughput:58285.8
+version 58, load latnecy:0.220736, load throughput:45303
+version 59, load latnecy:0.167765, load throughput:59607.1
+version 60, load latnecy:0.159932, load throughput:62526.4
+version 61, load latnecy:0.18015, load throughput:55509.3
+version 62, load latnecy:0.170848, load throughput:58531.4
+version 63, load latnecy:0.177772, load throughput:56251.8
+version 64, load latnecy:0.168298, load throughput:59418.4
+version 65, load latnecy:0.176462, load throughput:56669.3
+version 66, load latnecy:0.169586, load throughput:58967
+version 67, load latnecy:0.222995, load throughput:44844
+version 68, load latnecy:0.170271, load throughput:58729.9
+version 69, load latnecy:0.173133, load throughput:57759.2
+version 70, load latnecy:0.166551, load throughput:60041.6
+version 71, load latnecy:0.164102, load throughput:60937.6
+version 72, load latnecy:0.158768, load throughput:62985.1
+version 73, load latnecy:0.160974, load throughput:62121.8
+version 74, load latnecy:0.20789, load throughput:48102.4
+version 75, load latnecy:0.170304, load throughput:58718.7
+version 76, load latnecy:0.167228, load throughput:59798.4
+version 77, load latnecy:0.171351, load throughput:58359.7
+version 78, load latnecy:0.165576, load throughput:60395.2
+version 79, load latnecy:0.163684, load throughput:61093.2
+version 80, load latnecy:0.168128, load throughput:59478.4
+version 81, load latnecy:0.236387, load throughput:42303.5
+version 82, load latnecy:0.156224, load throughput:64010.5
+version 83, load latnecy:0.154435, load throughput:64752.4
+version 84, load latnecy:0.143981, load throughput:69453.5
+version 85, load latnecy:0.142753, load throughput:70050.9
+version 86, load latnecy:0.151585, load throughput:65969.4
+version 87, load latnecy:0.161248, load throughput:62016.1
+version 88, load latnecy:0.149226, load throughput:67012.4
+version 89, load latnecy:0.155939, load throughput:64127.5
+version 90, load latnecy:0.150068, load throughput:66636.6
+version 91, load latnecy:0.156059, load throughput:64078.4
+version 92, load latnecy:0.155559, load throughput:64284.4
+version 93, load latnecy:0.158987, load throughput:62898.4
+version 94, load latnecy:0.157266, load throughput:63586.5
+version 95, load latnecy:0.155684, load throughput:64232.9
+version 96, load latnecy:0.149916, load throughput:66704.2
+version 97, load latnecy:0.164857, load throughput:60658.5
+version 98, load latnecy:0.313249, load throughput:31923.5
+version 99, load latnecy:0.165563, load throughput:60400
+version 100, load latnecy:0.156014, load throughput:64096.6
+version 101, put latnecy:0.0347064,put throughput:14406.6
+version 102, put latnecy:0.0191973,put throughput:26045.4
+version 103, put latnecy:0.0187289,put throughput:26696.7
+version 104, put latnecy:0.0401095,put throughput:12465.9
+version 105, put latnecy:0.0180355,put throughput:27723.1
+version 106, put latnecy:0.0194787,put throughput:25669.1
+version 107, put latnecy:0.018394,put throughput:27182.8
+version 108, put latnecy:0.0190533,put throughput:26242.1
+version 109, put latnecy:0.0179897,put throughput:27793.7
+version 110, put latnecy:0.0178694,put throughput:27980.8
+version 111, put latnecy:0.0177663,put throughput:28143.1
+version 112, put latnecy:0.0176664,put throughput:28302.4
+version 113, put latnecy:0.0174279,put throughput:28689.7
+version 114, put latnecy:0.0178541,put throughput:28004.8
+version 115, put latnecy:0.0178162,put throughput:28064.4
+version 116, put latnecy:0.018195,put throughput:27480.1
+version 117, put latnecy:0.0179815,put throughput:27806.4
+version 118, put latnecy:0.0179214,put throughput:27899.6
+version 119, put latnecy:0.0791573,put throughput:6316.54
+version 120, put latnecy:0.0178885,put throughput:27950.8
+version 120, get latnecy:0.00862572,get throughput:57966.2
+version 120, get latnecy:0.00842459,get throughput:59350
+version 120, get latnecy:0.00823476,get throughput:60718.2
+version 120, get latnecy:0.00912728,get throughput:54780.8
+version 120, get latnecy:0.00838615,get throughput:59622.1
+version 120, get latnecy:0.00846169,get throughput:59089.9
+version 120, get latnecy:0.00830528,get throughput:60202.6
+version 120, get latnecy:0.0115503,get throughput:43289.1
+version 120, get latnecy:0.0137946,get throughput:36246.1
+version 120, get latnecy:0.0132502,get throughput:37735.4
+version 120, get latnecy:0.00953459,get throughput:52440.6
+version 120, get latnecy:0.00852793,get throughput:58630.9
+version 120, get latnecy:0.00846348,get throughput:59077.3
+version 120, get latnecy:0.00840596,get throughput:59481.6
+version 120, get latnecy:0.00882142,get throughput:56680.2
+version 120, get latnecy:0.00866816,get throughput:57682.4
+version 120, get latnecy:0.00855107,get throughput:58472.2
+version 120, get latnecy:0.00840824,get throughput:59465.5
+version 120, get latnecy:0.00828081,get throughput:60380.5
+version 120, get latnecy:0.00849932,get throughput:58828.3
+finished
++++ sleep 5
++++ set +x
++++ rm -rf /media/nvme/cxy_test/LedgerDatabase/exps/../data//000022.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000026.log /media/nvme/cxy_test/LedgerDatabase/exps/../data//000032.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000033.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000034.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000035.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000036.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000038.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000039.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000040.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000041.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000042.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000043.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000044.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000045.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000046.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000047.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//CURRENT /media/nvme/cxy_test/LedgerDatabase/exps/../data//IDENTITY /media/nvme/cxy_test/LedgerDatabase/exps/../data//LOCK /media/nvme/cxy_test/LedgerDatabase/exps/../data//LOG /media/nvme/cxy_test/LedgerDatabase/exps/../data//MANIFEST-000009 /media/nvme/cxy_test/LedgerDatabase/exps/../data//OPTIONS-000005
++++ result_path=/media/nvme/cxy_test/LedgerDatabase/exps/results_ledgerdb/micro_benchmark/e1000000b1000v1024.csv
+++++ date '+%Y-%m-%d %H:%M:%S'
++++ echo 2025-04-29 10:21:35
+2025-04-29 10:21:35
++++ echo 'num account: 1000000, batch_size: 1000, value_size: 1024, key_size: 32'
+num account: 1000000, batch_size: 1000, value_size: 1024, key_size: 32
++++ ../build_release_ledgerdb/bin/microBenchmark -a 1000000 -b 10000 -t 20 -z 1000 -k 32 -v 1024 -d /media/nvme/cxy_test/LedgerDatabase/exps/../data/ -r /media/nvme/cxy_test/LedgerDatabase/exps/results_ledgerdb/micro_benchmark/e1000000b1000v1024.csv
+version 0, load latnecy:0.165551, load throughput:60404.4
+version 1, load latnecy:0.155154, load throughput:64452
+version 2, load latnecy:0.138204, load throughput:72356.8
+version 3, load latnecy:0.181216, load throughput:55182.7
+version 4, load latnecy:0.144194, load throughput:69350.8
+version 5, load latnecy:0.15626, load throughput:63995.9
+version 6, load latnecy:0.149066, load throughput:67084.4
+version 7, load latnecy:0.14432, load throughput:69290.5
+version 8, load latnecy:0.158065, load throughput:63265
+version 9, load latnecy:0.148019, load throughput:67559
+version 10, load latnecy:0.195705, load throughput:51097.3
+version 11, load latnecy:0.204682, load throughput:48856.2
+version 12, load latnecy:0.18838, load throughput:53084.2
+version 13, load latnecy:0.154521, load throughput:64715.9
+version 14, load latnecy:0.149314, load throughput:66973
+version 15, load latnecy:0.160497, load throughput:62306.6
+version 16, load latnecy:0.149702, load throughput:66799.4
+version 17, load latnecy:0.159644, load throughput:62639.4
+version 18, load latnecy:0.159522, load throughput:62687.2
+version 19, load latnecy:0.16048, load throughput:62313.2
+version 20, load latnecy:0.149908, load throughput:66707.6
+version 21, load latnecy:0.172742, load throughput:57889.9
+version 22, load latnecy:0.174262, load throughput:57385
+version 23, load latnecy:0.164331, load throughput:60852.6
+version 24, load latnecy:0.15569, load throughput:64230.3
+version 25, load latnecy:0.263111, load throughput:38006.7
+version 26, load latnecy:0.198335, load throughput:50419.7
+version 27, load latnecy:0.188852, load throughput:52951.6
+version 28, load latnecy:0.161571, load throughput:61892.3
+version 29, load latnecy:0.228675, load throughput:43730.2
+version 30, load latnecy:0.201781, load throughput:49558.6
+version 31, load latnecy:0.194216, load throughput:51489
+version 32, load latnecy:0.152847, load throughput:65425
+version 33, load latnecy:0.172372, load throughput:58013.9
+version 34, load latnecy:0.151172, load throughput:66150
+version 35, load latnecy:0.155298, load throughput:64392.3
+version 36, load latnecy:0.159164, load throughput:62828.3
+version 37, load latnecy:0.216023, load throughput:46291.4
+version 38, load latnecy:0.2197, load throughput:45516.6
+version 39, load latnecy:0.241049, load throughput:41485.3
+version 40, load latnecy:0.214531, load throughput:46613.4
+version 41, load latnecy:0.21611, load throughput:46272.8
+version 42, load latnecy:0.220897, load throughput:45270
+version 43, load latnecy:0.218949, load throughput:45672.7
+version 44, load latnecy:0.21937, load throughput:45585.1
+version 45, load latnecy:0.221346, load throughput:45178.2
+version 46, load latnecy:0.21847, load throughput:45772.8
+version 47, load latnecy:0.171156, load throughput:58426.4
+version 48, load latnecy:0.22005, load throughput:45444.3
+version 49, load latnecy:0.1798, load throughput:55617.3
+version 50, load latnecy:0.18524, load throughput:53984.2
+version 51, load latnecy:0.178386, load throughput:56058.1
+version 52, load latnecy:0.177944, load throughput:56197.3
+version 53, load latnecy:0.175379, load throughput:57019.2
+version 54, load latnecy:0.179741, load throughput:55635.8
+version 55, load latnecy:0.209328, load throughput:47772
+version 56, load latnecy:0.174247, load throughput:57389.8
+version 57, load latnecy:0.160184, load throughput:62428.4
+version 58, load latnecy:0.165295, load throughput:60498.1
+version 59, load latnecy:0.178027, load throughput:56171.3
+version 60, load latnecy:0.180748, load throughput:55325.5
+version 61, load latnecy:0.1801, load throughput:55524.7
+version 62, load latnecy:0.180563, load throughput:55382.3
+version 63, load latnecy:0.196264, load throughput:50951.7
+version 64, load latnecy:0.177104, load throughput:56464
+version 65, load latnecy:0.200934, load throughput:49767.5
+version 66, load latnecy:0.192899, load throughput:51840.5
+version 67, load latnecy:0.180304, load throughput:55462
+version 68, load latnecy:0.180005, load throughput:55554.1
+version 69, load latnecy:0.179165, load throughput:55814.4
+version 70, load latnecy:0.173302, load throughput:57702.6
+version 71, load latnecy:0.160514, load throughput:62299.8
+version 72, load latnecy:0.247821, load throughput:40351.7
+version 73, load latnecy:0.170063, load throughput:58801.8
+version 74, load latnecy:0.18192, load throughput:54969.1
+version 75, load latnecy:0.170497, load throughput:58652.2
+version 76, load latnecy:0.175314, load throughput:57040.4
+version 77, load latnecy:0.328718, load throughput:30421.2
+version 78, load latnecy:0.154847, load throughput:64580.1
+version 79, load latnecy:0.144677, load throughput:69119.5
+version 80, load latnecy:0.149609, load throughput:66840.9
+version 81, load latnecy:0.156166, load throughput:64034.6
+version 82, load latnecy:0.15616, load throughput:64036.7
+version 83, load latnecy:0.158564, load throughput:63066
+version 84, load latnecy:0.16177, load throughput:61816.1
+version 85, load latnecy:0.161163, load throughput:62049.1
+version 86, load latnecy:0.167676, load throughput:59638.8
+version 87, load latnecy:0.161946, load throughput:61748.9
+version 88, load latnecy:0.161483, load throughput:61926
+version 89, load latnecy:0.160135, load throughput:62447.3
+version 90, load latnecy:0.164544, load throughput:60774.2
+version 91, load latnecy:0.161021, load throughput:62103.9
+version 92, load latnecy:0.16261, load throughput:61496.9
+version 93, load latnecy:0.171839, load throughput:58193.9
+version 94, load latnecy:0.175731, load throughput:56905.1
+version 95, load latnecy:0.239454, load throughput:41761.8
+version 96, load latnecy:0.219148, load throughput:45631.2
+version 97, load latnecy:0.170751, load throughput:58564.8
+version 98, load latnecy:0.180132, load throughput:55514.7
+version 99, load latnecy:0.177806, load throughput:56241
+version 100, load latnecy:0.393846, load throughput:25390.6
+version 101, put latnecy:0.0538713,put throughput:18562.7
+version 102, put latnecy:0.0411718,put throughput:24288.5
+version 103, put latnecy:0.0391096,put throughput:25569.2
+version 104, put latnecy:0.0384423,put throughput:26013
+version 105, put latnecy:0.0381957,put throughput:26181
+version 106, put latnecy:0.0389945,put throughput:25644.7
+version 107, put latnecy:0.0378278,put throughput:26435.6
+version 108, put latnecy:0.0410825,put throughput:24341.3
+version 109, put latnecy:0.0369804,put throughput:27041.4
+version 110, put latnecy:0.0383407,put throughput:26081.9
+version 111, put latnecy:0.0381852,put throughput:26188.2
+version 112, put latnecy:0.0373864,put throughput:26747.7
+version 113, put latnecy:0.0360008,put throughput:27777.1
+version 114, put latnecy:0.0385645,put throughput:25930.6
+version 115, put latnecy:0.0644123,put throughput:15525
+version 116, put latnecy:0.0412948,put throughput:24216.1
+version 117, put latnecy:0.0386974,put throughput:25841.5
+version 118, put latnecy:0.0378465,put throughput:26422.5
+version 119, put latnecy:0.0388697,put throughput:25727
+version 120, put latnecy:0.0388489,put throughput:25740.8
+version 120, get latnecy:0.0181975,get throughput:54952.6
+version 120, get latnecy:0.0192599,get throughput:51921.4
+version 120, get latnecy:0.017923,get throughput:55794.3
+version 120, get latnecy:0.0181926,get throughput:54967.4
+version 120, get latnecy:0.0177887,get throughput:56215.4
+version 120, get latnecy:0.0177506,get throughput:56336
+version 120, get latnecy:0.0160253,get throughput:62401.4
+version 120, get latnecy:0.0180352,get throughput:55447
+version 120, get latnecy:0.0176916,get throughput:56523.9
+version 120, get latnecy:0.018252,get throughput:54788.4
+version 120, get latnecy:0.0174629,get throughput:57264.3
+version 120, get latnecy:0.0184172,get throughput:54297.2
+version 120, get latnecy:0.0180578,get throughput:55377.8
+version 120, get latnecy:0.0194911,get throughput:51305.6
+version 120, get latnecy:0.0199472,get throughput:50132.3
+version 120, get latnecy:0.0191065,get throughput:52338.1
+version 120, get latnecy:0.0184866,get throughput:54093.3
+version 120, get latnecy:0.0188884,get throughput:52942.6
+version 120, get latnecy:0.0178744,get throughput:55945.9
+version 120, get latnecy:0.0167074,get throughput:59853.8
+finished
++++ sleep 5
++++ set +x
++++ rm -rf /media/nvme/cxy_test/LedgerDatabase/exps/../data//000025.log /media/nvme/cxy_test/LedgerDatabase/exps/../data//000033.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000035.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000036.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000037.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000038.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000039.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000040.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000041.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000042.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000043.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000044.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000045.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000046.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000047.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000048.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//CURRENT /media/nvme/cxy_test/LedgerDatabase/exps/../data//IDENTITY /media/nvme/cxy_test/LedgerDatabase/exps/../data//LOCK /media/nvme/cxy_test/LedgerDatabase/exps/../data//LOG /media/nvme/cxy_test/LedgerDatabase/exps/../data//MANIFEST-000009 /media/nvme/cxy_test/LedgerDatabase/exps/../data//OPTIONS-000005
++++ result_path=/media/nvme/cxy_test/LedgerDatabase/exps/results_ledgerdb/micro_benchmark/e1000000b2000v1024.csv
+++++ date '+%Y-%m-%d %H:%M:%S'
++++ echo 2025-04-29 10:22:12
+2025-04-29 10:22:12
++++ echo 'num account: 1000000, batch_size: 2000, value_size: 1024, key_size: 32'
+num account: 1000000, batch_size: 2000, value_size: 1024, key_size: 32
++++ ../build_release_ledgerdb/bin/microBenchmark -a 1000000 -b 10000 -t 20 -z 2000 -k 32 -v 1024 -d /media/nvme/cxy_test/LedgerDatabase/exps/../data/ -r /media/nvme/cxy_test/LedgerDatabase/exps/results_ledgerdb/micro_benchmark/e1000000b2000v1024.csv
+version 0, load latnecy:0.166366, load throughput:60108.4
+version 1, load latnecy:0.154035, load throughput:64920.1
+version 2, load latnecy:0.144775, load throughput:69072.9
+version 3, load latnecy:0.19526, load throughput:51213.7
+version 4, load latnecy:0.152436, load throughput:65601.1
+version 5, load latnecy:0.137946, load throughput:72492.4
+version 6, load latnecy:0.14718, load throughput:67943.9
+version 7, load latnecy:0.14548, load throughput:68737.8
+version 8, load latnecy:0.169562, load throughput:58975.6
+version 9, load latnecy:0.146194, load throughput:68402.2
+version 10, load latnecy:0.147751, load throughput:67681.5
+version 11, load latnecy:0.221139, load throughput:45220.5
+version 12, load latnecy:0.217126, load throughput:46056.2
+version 13, load latnecy:0.155944, load throughput:64125.6
+version 14, load latnecy:0.176164, load throughput:56765.3
+version 15, load latnecy:0.155373, load throughput:64361.4
+version 16, load latnecy:0.154592, load throughput:64686.3
+version 17, load latnecy:0.158134, load throughput:63237.6
+version 18, load latnecy:0.160085, load throughput:62466.7
+version 19, load latnecy:0.158243, load throughput:63193.8
+version 20, load latnecy:0.150353, load throughput:66509.9
+version 21, load latnecy:0.164262, load throughput:60878.5
+version 22, load latnecy:0.15343, load throughput:65176.2
+version 23, load latnecy:0.159199, load throughput:62814.5
+version 24, load latnecy:0.221267, load throughput:45194.3
+version 25, load latnecy:0.173549, load throughput:57620.6
+version 26, load latnecy:0.213256, load throughput:46892
+version 27, load latnecy:0.192203, load throughput:52028.4
+version 28, load latnecy:0.191721, load throughput:52159.1
+version 29, load latnecy:0.191961, load throughput:52094
+version 30, load latnecy:0.179808, load throughput:55615
+version 31, load latnecy:0.167173, load throughput:59818.2
+version 32, load latnecy:0.299467, load throughput:33392.7
+version 33, load latnecy:0.163443, load throughput:61183.3
+version 34, load latnecy:0.149149, load throughput:67047.2
+version 35, load latnecy:0.147387, load throughput:67848.4
+version 36, load latnecy:0.153568, load throughput:65117.6
+version 37, load latnecy:0.162824, load throughput:61416.2
+version 38, load latnecy:0.208891, load throughput:47871.9
+version 39, load latnecy:0.27761, load throughput:36021.7
+version 40, load latnecy:0.238976, load throughput:41845.3
+version 41, load latnecy:0.225207, load throughput:44403.6
+version 42, load latnecy:0.212773, load throughput:46998.5
+version 43, load latnecy:0.212961, load throughput:46957
+version 44, load latnecy:0.219914, load throughput:45472.3
+version 45, load latnecy:0.215735, load throughput:46353.1
+version 46, load latnecy:0.228831, load throughput:43700.3
+version 47, load latnecy:0.266976, load throughput:37456.5
+version 48, load latnecy:0.214625, load throughput:46592.9
+version 49, load latnecy:0.224285, load throughput:44586.2
+version 50, load latnecy:0.194445, load throughput:51428.5
+version 51, load latnecy:0.239629, load throughput:41731.1
+version 52, load latnecy:0.232629, load throughput:42986.8
+version 53, load latnecy:0.197739, load throughput:50571.8
+version 54, load latnecy:0.207999, load throughput:48077.2
+version 55, load latnecy:0.191191, load throughput:52303.6
+version 56, load latnecy:0.18363, load throughput:54457.5
+version 57, load latnecy:0.161934, load throughput:61753.6
+version 58, load latnecy:0.170083, load throughput:58794.7
+version 59, load latnecy:0.185606, load throughput:53877.5
+version 60, load latnecy:0.176688, load throughput:56597
+version 61, load latnecy:0.175695, load throughput:56916.7
+version 62, load latnecy:0.170999, load throughput:58480
+version 63, load latnecy:0.228799, load throughput:43706.4
+version 64, load latnecy:0.184164, load throughput:54299.4
+version 65, load latnecy:0.18276, load throughput:54716.7
+version 66, load latnecy:0.207121, load throughput:48281
+version 67, load latnecy:0.189299, load throughput:52826.5
+version 68, load latnecy:0.22786, load throughput:43886.6
+version 69, load latnecy:0.171265, load throughput:58388.9
+version 70, load latnecy:0.207497, load throughput:48193.5
+version 71, load latnecy:0.287978, load throughput:34724.9
+version 72, load latnecy:0.202603, load throughput:49357.5
+version 73, load latnecy:0.199005, load throughput:50250.1
+version 74, load latnecy:0.216228, load throughput:46247.4
+version 75, load latnecy:0.190324, load throughput:52541.9
+version 76, load latnecy:0.340235, load throughput:29391.4
+version 77, load latnecy:0.195725, load throughput:51092.2
+version 78, load latnecy:0.16259, load throughput:61504.3
+version 79, load latnecy:0.15423, load throughput:64838.2
+version 80, load latnecy:0.167893, load throughput:59561.8
+version 81, load latnecy:0.16545, load throughput:60441.3
+version 82, load latnecy:0.184506, load throughput:54198.9
+version 83, load latnecy:0.178357, load throughput:56067.3
+version 84, load latnecy:0.177158, load throughput:56446.7
+version 85, load latnecy:0.174735, load throughput:57229.6
+version 86, load latnecy:0.178958, load throughput:55879
+version 87, load latnecy:0.181041, load throughput:55236
+version 88, load latnecy:0.182434, load throughput:54814.4
+version 89, load latnecy:0.197218, load throughput:50705.4
+version 90, load latnecy:0.177009, load throughput:56494.3
+version 91, load latnecy:0.183817, load throughput:54401.9
+version 92, load latnecy:0.19156, load throughput:52203.1
+version 93, load latnecy:0.191505, load throughput:52217.9
+version 94, load latnecy:0.210629, load throughput:47476.9
+version 95, load latnecy:0.289766, load throughput:34510.6
+version 96, load latnecy:0.210807, load throughput:47436.8
+version 97, load latnecy:0.21219, load throughput:47127.5
+version 98, load latnecy:0.188428, load throughput:53070.7
+version 99, load latnecy:0.245001, load throughput:40816.1
+version 100, load latnecy:0.205945, load throughput:48556.7
+version 101, put latnecy:0.0976148,put throughput:20488.7
+version 102, put latnecy:0.136388,put throughput:14664
+version 103, put latnecy:0.0840009,put throughput:23809.3
+version 104, put latnecy:0.0827273,put throughput:24175.8
+version 105, put latnecy:0.077688,put throughput:25744
+version 106, put latnecy:0.0734467,put throughput:27230.6
+version 107, put latnecy:0.0723963,put throughput:27625.7
+version 108, put latnecy:0.0725874,put throughput:27553
+version 109, put latnecy:0.0751103,put throughput:26627.5
+version 110, put latnecy:0.0728165,put throughput:27466.3
+version 111, put latnecy:0.0736669,put throughput:27149.2
+version 112, put latnecy:0.0760485,put throughput:26299
+version 113, put latnecy:0.0733816,put throughput:27254.8
+version 114, put latnecy:0.0715979,put throughput:27933.8
+version 115, put latnecy:0.0775061,put throughput:25804.4
+version 116, put latnecy:0.0818492,put throughput:24435.2
+version 117, put latnecy:0.0797338,put throughput:25083.5
+version 118, put latnecy:0.0739314,put throughput:27052.1
+version 119, put latnecy:0.102106,put throughput:19587.4
+version 120, put latnecy:0.0754956,put throughput:26491.6
+version 120, get latnecy:0.0363857,get throughput:54966.6
+version 120, get latnecy:0.0374396,get throughput:53419.3
+version 120, get latnecy:0.0401574,get throughput:49804
+version 120, get latnecy:0.036033,get throughput:55504.7
+version 120, get latnecy:0.0357942,get throughput:55875
+version 120, get latnecy:0.0344847,get throughput:57996.7
+version 120, get latnecy:0.0370011,get throughput:54052.4
+version 120, get latnecy:0.0438237,get throughput:45637.4
+version 120, get latnecy:0.0372377,get throughput:53709
+version 120, get latnecy:0.0361388,get throughput:55342.1
+version 120, get latnecy:0.0363978,get throughput:54948.4
+version 120, get latnecy:0.0355518,get throughput:56255.9
+version 120, get latnecy:0.0360267,get throughput:55514.3
+version 120, get latnecy:0.0367944,get throughput:54356.1
+version 120, get latnecy:0.0357297,get throughput:55975.8
+version 120, get latnecy:0.033508,get throughput:59687.2
+version 120, get latnecy:0.0473885,get throughput:42204.4
+version 120, get latnecy:0.0401249,get throughput:49844.4
+version 120, get latnecy:0.0367335,get throughput:54446.2
+version 120, get latnecy:0.0368205,get throughput:54317.6
+finished
++++ sleep 5
++++ set +x
++++ rm -rf /media/nvme/cxy_test/LedgerDatabase/exps/../data//000025.log /media/nvme/cxy_test/LedgerDatabase/exps/../data//000033.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000035.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000036.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000037.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000038.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000039.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000040.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000041.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000042.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000043.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000044.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000045.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000046.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000047.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000048.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000049.log /media/nvme/cxy_test/LedgerDatabase/exps/../data//CURRENT /media/nvme/cxy_test/LedgerDatabase/exps/../data//IDENTITY /media/nvme/cxy_test/LedgerDatabase/exps/../data//LOCK /media/nvme/cxy_test/LedgerDatabase/exps/../data//LOG /media/nvme/cxy_test/LedgerDatabase/exps/../data//MANIFEST-000009 /media/nvme/cxy_test/LedgerDatabase/exps/../data//OPTIONS-000005
++++ result_path=/media/nvme/cxy_test/LedgerDatabase/exps/results_ledgerdb/micro_benchmark/e1000000b3000v1024.csv
+++++ date '+%Y-%m-%d %H:%M:%S'
++++ echo 2025-04-29 10:22:50
+2025-04-29 10:22:50
++++ echo 'num account: 1000000, batch_size: 3000, value_size: 1024, key_size: 32'
+num account: 1000000, batch_size: 3000, value_size: 1024, key_size: 32
++++ ../build_release_ledgerdb/bin/microBenchmark -a 1000000 -b 10000 -t 20 -z 3000 -k 32 -v 1024 -d /media/nvme/cxy_test/LedgerDatabase/exps/../data/ -r /media/nvme/cxy_test/LedgerDatabase/exps/results_ledgerdb/micro_benchmark/e1000000b3000v1024.csv
+version 0, load latnecy:0.178543, load throughput:56009
+version 1, load latnecy:0.152098, load throughput:65747.2
+version 2, load latnecy:0.158908, load throughput:62929.6
+version 3, load latnecy:0.175642, load throughput:56934
+version 4, load latnecy:0.164451, load throughput:60808.3
+version 5, load latnecy:0.144291, load throughput:69304.2
+version 6, load latnecy:0.146814, load throughput:68113.6
+version 7, load latnecy:0.163423, load throughput:61191
+version 8, load latnecy:0.166088, load throughput:60209.1
+version 9, load latnecy:0.141401, load throughput:70720.9
+version 10, load latnecy:0.208688, load throughput:47918.5
+version 11, load latnecy:0.201425, load throughput:49646.2
+version 12, load latnecy:0.175942, load throughput:56837.1
+version 13, load latnecy:0.150685, load throughput:66363.4
+version 14, load latnecy:0.145763, load throughput:68604.7
+version 15, load latnecy:0.156504, load throughput:63896.2
+version 16, load latnecy:0.15055, load throughput:66422.9
+version 17, load latnecy:0.17048, load throughput:58657.9
+version 18, load latnecy:0.154427, load throughput:64755.5
+version 19, load latnecy:0.156388, load throughput:63943.5
+version 20, load latnecy:0.151972, load throughput:65801.5
+version 21, load latnecy:0.162018, load throughput:61721.4
+version 22, load latnecy:0.165967, load throughput:60253
+version 23, load latnecy:0.155175, load throughput:64443.6
+version 24, load latnecy:0.295002, load throughput:33898.1
+version 25, load latnecy:0.230283, load throughput:43424.9
+version 26, load latnecy:0.168913, load throughput:59201.9
+version 27, load latnecy:0.162127, load throughput:61680.1
+version 28, load latnecy:0.150029, load throughput:66653.9
+version 29, load latnecy:0.16725, load throughput:59790.7
+version 30, load latnecy:0.245723, load throughput:40696.3
+version 31, load latnecy:0.190894, load throughput:52385.2
+version 32, load latnecy:0.137685, load throughput:72629.4
+version 33, load latnecy:0.154734, load throughput:64627
+version 34, load latnecy:0.203753, load throughput:49079
+version 35, load latnecy:0.205779, load throughput:48595.8
+version 36, load latnecy:0.210751, load throughput:47449.3
+version 37, load latnecy:0.196441, load throughput:50905.9
+version 38, load latnecy:0.192817, load throughput:51862.7
+version 39, load latnecy:0.197879, load throughput:50536
+version 40, load latnecy:0.205596, load throughput:48639.2
+version 41, load latnecy:0.203118, load throughput:49232.6
+version 42, load latnecy:0.20181, load throughput:49551.6
+version 43, load latnecy:0.204175, load throughput:48977.6
+version 44, load latnecy:0.149184, load throughput:67031.5
+version 45, load latnecy:0.157857, load throughput:63348.5
+version 46, load latnecy:0.171268, load throughput:58388
+version 47, load latnecy:0.158907, load throughput:62930
+version 48, load latnecy:0.276658, load throughput:36145.8
+version 49, load latnecy:0.186676, load throughput:53568.8
+version 50, load latnecy:0.160878, load throughput:62158.8
+version 51, load latnecy:0.169103, load throughput:59135.4
+version 52, load latnecy:0.161593, load throughput:61883.8
+version 53, load latnecy:0.164618, load throughput:60746.8
+version 54, load latnecy:0.159896, load throughput:62540.6
+version 55, load latnecy:0.284774, load throughput:35115.6
+version 56, load latnecy:0.158768, load throughput:62985.1
+version 57, load latnecy:0.195941, load throughput:51035.9
+version 58, load latnecy:0.161286, load throughput:62001.6
+version 59, load latnecy:0.176763, load throughput:56572.8
+version 60, load latnecy:0.166536, load throughput:60046.9
+version 61, load latnecy:0.170292, load throughput:58722.8
+version 62, load latnecy:0.180469, load throughput:55411.2
+version 63, load latnecy:0.171039, load throughput:58466.2
+version 64, load latnecy:0.205171, load throughput:48739.9
+version 65, load latnecy:0.16943, load throughput:59021.4
+version 66, load latnecy:0.164468, load throughput:60802.1
+version 67, load latnecy:0.173172, load throughput:57746.1
+version 68, load latnecy:0.167645, load throughput:59649.8
+version 69, load latnecy:0.187626, load throughput:53297.5
+version 70, load latnecy:0.162492, load throughput:61541.7
+version 71, load latnecy:0.164494, load throughput:60792.6
+version 72, load latnecy:0.201851, load throughput:49541.5
+version 73, load latnecy:0.175346, load throughput:57030
+version 74, load latnecy:0.175266, load throughput:57056.1
+version 75, load latnecy:0.183065, load throughput:54625.4
+version 76, load latnecy:0.171797, load throughput:58208.3
+version 77, load latnecy:0.198184, load throughput:50458
+version 78, load latnecy:0.269545, load throughput:37099.5
+version 79, load latnecy:0.148971, load throughput:67127.3
+version 80, load latnecy:0.145663, load throughput:68651.5
+version 81, load latnecy:0.150877, load throughput:66279.3
+version 82, load latnecy:0.14373, load throughput:69574.9
+version 83, load latnecy:0.150657, load throughput:66375.8
+version 84, load latnecy:0.14932, load throughput:66970.1
+version 85, load latnecy:0.154868, load throughput:64570.9
+version 86, load latnecy:0.149686, load throughput:66806.6
+version 87, load latnecy:0.162977, load throughput:61358.3
+version 88, load latnecy:0.147811, load throughput:67654.1
+version 89, load latnecy:0.151923, load throughput:65822.7
+version 90, load latnecy:0.151946, load throughput:65812.8
+version 91, load latnecy:0.157389, load throughput:63537
+version 92, load latnecy:0.148731, load throughput:67235.6
+version 93, load latnecy:0.153174, load throughput:65285.4
+version 94, load latnecy:0.147879, load throughput:67622.8
+version 95, load latnecy:0.155416, load throughput:64343.5
+version 96, load latnecy:0.150946, load throughput:66249
+version 97, load latnecy:0.159592, load throughput:62659.9
+version 98, load latnecy:0.197474, load throughput:50639.6
+version 99, load latnecy:0.169444, load throughput:59016.5
+version 100, load latnecy:0.158889, load throughput:62936.9
+version 101, put latnecy:0.119874,put throughput:25026.3
+version 102, put latnecy:0.1188,put throughput:25252.6
+version 103, put latnecy:0.170711,put throughput:17573.5
+version 104, put latnecy:0.11049,put throughput:27151.9
+version 105, put latnecy:0.105892,put throughput:28330.7
+version 106, put latnecy:0.121888,put throughput:24612.7
+version 107, put latnecy:0.109932,put throughput:27289.5
+version 108, put latnecy:0.16388,put throughput:18306.1
+version 109, put latnecy:0.107973,put throughput:27784.6
+version 110, put latnecy:0.107241,put throughput:27974.3
+version 111, put latnecy:0.161414,put throughput:18585.7
+version 112, put latnecy:0.115256,put throughput:26028.9
+version 113, put latnecy:0.112766,put throughput:26603.6
+version 114, put latnecy:0.177453,put throughput:16905.9
+version 115, put latnecy:0.114472,put throughput:26207.4
+version 116, put latnecy:0.114798,put throughput:26132.8
+version 117, put latnecy:0.123939,put throughput:24205.4
+version 118, put latnecy:0.106626,put throughput:28135.8
+version 119, put latnecy:0.108532,put throughput:27641.7
+version 120, put latnecy:0.148974,put throughput:20137.8
+version 120, get latnecy:0.0504474,get throughput:59467.8
+version 120, get latnecy:0.0491,get throughput:61099.8
+version 120, get latnecy:0.0499299,get throughput:60084.3
+version 120, get latnecy:0.0493162,get throughput:60831.9
+version 120, get latnecy:0.0483697,get throughput:62022.3
+version 120, get latnecy:0.0509063,get throughput:58931.8
+version 120, get latnecy:0.0500267,get throughput:59968
+version 120, get latnecy:0.0504193,get throughput:59501
+version 120, get latnecy:0.0499311,get throughput:60082.8
+version 120, get latnecy:0.0497244,get throughput:60332.5
+version 120, get latnecy:0.0494477,get throughput:60670.2
+version 120, get latnecy:0.0591943,get throughput:50680.5
+version 120, get latnecy:0.0725329,get throughput:41360.6
+version 120, get latnecy:0.0675359,get throughput:44420.8
+version 120, get latnecy:0.0680772,get throughput:44067.6
+version 120, get latnecy:0.0606286,get throughput:49481.6
+version 120, get latnecy:0.0552654,get throughput:54283.6
+version 120, get latnecy:0.0502616,get throughput:59687.7
+version 120, get latnecy:0.0498897,get throughput:60132.6
+version 120, get latnecy:0.0506583,get throughput:59220.3
+finished
++++ sleep 5
++++ set +x
++++ rm -rf /media/nvme/cxy_test/LedgerDatabase/exps/../data//000025.log /media/nvme/cxy_test/LedgerDatabase/exps/../data//000031.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000032.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000033.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000034.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000035.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000037.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000038.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000039.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000040.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000041.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000042.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000043.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000044.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000045.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000046.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000047.log /media/nvme/cxy_test/LedgerDatabase/exps/../data//CURRENT /media/nvme/cxy_test/LedgerDatabase/exps/../data//IDENTITY /media/nvme/cxy_test/LedgerDatabase/exps/../data//LOCK /media/nvme/cxy_test/LedgerDatabase/exps/../data//LOG /media/nvme/cxy_test/LedgerDatabase/exps/../data//MANIFEST-000009 /media/nvme/cxy_test/LedgerDatabase/exps/../data//OPTIONS-000005
++++ result_path=/media/nvme/cxy_test/LedgerDatabase/exps/results_ledgerdb/micro_benchmark/e1000000b4000v1024.csv
+++++ date '+%Y-%m-%d %H:%M:%S'
++++ echo 2025-04-29 10:23:26
+2025-04-29 10:23:26
++++ echo 'num account: 1000000, batch_size: 4000, value_size: 1024, key_size: 32'
+num account: 1000000, batch_size: 4000, value_size: 1024, key_size: 32
++++ ../build_release_ledgerdb/bin/microBenchmark -a 1000000 -b 10000 -t 20 -z 4000 -k 32 -v 1024 -d /media/nvme/cxy_test/LedgerDatabase/exps/../data/ -r /media/nvme/cxy_test/LedgerDatabase/exps/results_ledgerdb/micro_benchmark/e1000000b4000v1024.csv
+version 0, load latnecy:0.174892, load throughput:57178.2
+version 1, load latnecy:0.154694, load throughput:64643.7
+version 2, load latnecy:0.1436, load throughput:69637.9
+version 3, load latnecy:0.17494, load throughput:57162.6
+version 4, load latnecy:0.143885, load throughput:69500.2
+version 5, load latnecy:0.139602, load throughput:71632
+version 6, load latnecy:0.154383, load throughput:64773.8
+version 7, load latnecy:0.151106, load throughput:66178.9
+version 8, load latnecy:0.163419, load throughput:61192.4
+version 9, load latnecy:0.147393, load throughput:67846
+version 10, load latnecy:0.174987, load throughput:57147.1
+version 11, load latnecy:0.210663, load throughput:47469.2
+version 12, load latnecy:0.211048, load throughput:47382.5
+version 13, load latnecy:0.156866, load throughput:63748.7
+version 14, load latnecy:0.154576, load throughput:64693
+version 15, load latnecy:0.156644, load throughput:63838.9
+version 16, load latnecy:0.15532, load throughput:64383.1
+version 17, load latnecy:0.155416, load throughput:64343.6
+version 18, load latnecy:0.157011, load throughput:63689.8
+version 19, load latnecy:0.160497, load throughput:62306.6
+version 20, load latnecy:0.153277, load throughput:65241.5
+version 21, load latnecy:0.157882, load throughput:63338.4
+version 22, load latnecy:0.148947, load throughput:67138.1
+version 23, load latnecy:0.16327, load throughput:61248.4
+version 24, load latnecy:0.16218, load throughput:61660
+version 25, load latnecy:0.295543, load throughput:33836
+version 26, load latnecy:0.178289, load throughput:56088.7
+version 27, load latnecy:0.167755, load throughput:59610.7
+version 28, load latnecy:0.156751, load throughput:63795.3
+version 29, load latnecy:0.169084, load throughput:59142.1
+version 30, load latnecy:0.260585, load throughput:38375.1
+version 31, load latnecy:0.185693, load throughput:53852.2
+version 32, load latnecy:0.152721, load throughput:65478.8
+version 33, load latnecy:0.167518, load throughput:59695.2
+version 34, load latnecy:0.164351, load throughput:60845.4
+version 35, load latnecy:0.174335, load throughput:57360.8
+version 36, load latnecy:0.176879, load throughput:56535.9
+version 37, load latnecy:0.226609, load throughput:44128.8
+version 38, load latnecy:0.223319, load throughput:44779
+version 39, load latnecy:0.217766, load throughput:45920.9
+version 40, load latnecy:0.233761, load throughput:42778.7
+version 41, load latnecy:0.227557, load throughput:43945.1
+version 42, load latnecy:0.236783, load throughput:42232.8
+version 43, load latnecy:0.231342, load throughput:43226
+version 44, load latnecy:0.222012, load throughput:45042.6
+version 45, load latnecy:0.222883, load throughput:44866.7
+version 46, load latnecy:0.225174, load throughput:44410
+version 47, load latnecy:0.177062, load throughput:56477.4
+version 48, load latnecy:0.17746, load throughput:56350.7
+version 49, load latnecy:0.173141, load throughput:57756.4
+version 50, load latnecy:0.190088, load throughput:52607.1
+version 51, load latnecy:0.186866, load throughput:53514.4
+version 52, load latnecy:0.185179, load throughput:54001.7
+version 53, load latnecy:0.18314, load throughput:54603.1
+version 54, load latnecy:0.298585, load throughput:33491.3
+version 55, load latnecy:0.178936, load throughput:55885.8
+version 56, load latnecy:0.193281, load throughput:51738.2
+version 57, load latnecy:0.164459, load throughput:60805.5
+version 58, load latnecy:0.175004, load throughput:57141.5
+version 59, load latnecy:0.173194, load throughput:57738.7
+version 60, load latnecy:0.192305, load throughput:52000.8
+version 61, load latnecy:0.168322, load throughput:59409.9
+version 62, load latnecy:0.189067, load throughput:52891.3
+version 63, load latnecy:0.164844, load throughput:60663.3
+version 64, load latnecy:0.170418, load throughput:58679.4
+version 65, load latnecy:0.170834, load throughput:58536.4
+version 66, load latnecy:0.170235, load throughput:58742.5
+version 67, load latnecy:0.174053, load throughput:57453.7
+version 68, load latnecy:0.197461, load throughput:50642.9
+version 69, load latnecy:0.166813, load throughput:59947.4
+version 70, load latnecy:0.165982, load throughput:60247.4
+version 71, load latnecy:0.227974, load throughput:43864.6
+version 72, load latnecy:0.19129, load throughput:52276.6
+version 73, load latnecy:0.1735, load throughput:57636.8
+version 74, load latnecy:0.170677, load throughput:58590.3
+version 75, load latnecy:0.178281, load throughput:56091.2
+version 76, load latnecy:0.21749, load throughput:45979.1
+version 77, load latnecy:0.23245, load throughput:43020
+version 78, load latnecy:0.159531, load throughput:62683.7
+version 79, load latnecy:0.136256, load throughput:73391.4
+version 80, load latnecy:0.138213, load throughput:72352.2
+version 81, load latnecy:0.152886, load throughput:65408.3
+version 82, load latnecy:0.156471, load throughput:63909.6
+version 83, load latnecy:0.16027, load throughput:62394.7
+version 84, load latnecy:0.169625, load throughput:58953.7
+version 85, load latnecy:0.159629, load throughput:62645.1
+version 86, load latnecy:0.164949, load throughput:60624.7
+version 87, load latnecy:0.159134, load throughput:62840.2
+version 88, load latnecy:0.157655, load throughput:63429.8
+version 89, load latnecy:0.160773, load throughput:62199.5
+version 90, load latnecy:0.165982, load throughput:60247.5
+version 91, load latnecy:0.157767, load throughput:63384.7
+version 92, load latnecy:0.161181, load throughput:62042.1
+version 93, load latnecy:0.164851, load throughput:60660.7
+version 94, load latnecy:0.159636, load throughput:62642.6
+version 95, load latnecy:0.27361, load throughput:36548.4
+version 96, load latnecy:0.214166, load throughput:46692.8
+version 97, load latnecy:0.16722, load throughput:59801.5
+version 98, load latnecy:0.173056, load throughput:57784.7
+version 99, load latnecy:0.160614, load throughput:62261
+version 100, load latnecy:0.167429, load throughput:59726.6
+version 101, put latnecy:0.16768,put throughput:23854.9
+version 102, put latnecy:0.196456,put throughput:20360.8
+version 103, put latnecy:0.146376,put throughput:27326.9
+version 104, put latnecy:0.135649,put throughput:29487.8
+version 105, put latnecy:0.144597,put throughput:27663
+version 106, put latnecy:0.152318,put throughput:26260.8
+version 107, put latnecy:0.145936,put throughput:27409.3
+version 108, put latnecy:0.175446,put throughput:22799
+version 109, put latnecy:0.169296,put throughput:23627.3
+version 110, put latnecy:0.158594,put throughput:25221.6
+version 111, put latnecy:0.150082,put throughput:26652.1
+version 112, put latnecy:0.206164,put throughput:19402
+version 113, put latnecy:0.150026,put throughput:26662.1
+version 114, put latnecy:0.199382,put throughput:20062
+version 115, put latnecy:0.155777,put throughput:25677.7
+version 116, put latnecy:0.183775,put throughput:21765.7
+version 117, put latnecy:0.160505,put throughput:24921.4
+version 118, put latnecy:0.163363,put throughput:24485.4
+version 119, put latnecy:0.172993,put throughput:23122.3
+version 120, put latnecy:0.15683,put throughput:25505.3
+version 120, get latnecy:0.0746345,get throughput:53594.5
+version 120, get latnecy:0.078402,get throughput:51019.1
+version 120, get latnecy:0.0812472,get throughput:49232.5
+version 120, get latnecy:0.0827964,get throughput:48311.3
+version 120, get latnecy:0.0795346,get throughput:50292.6
+version 120, get latnecy:0.0833555,get throughput:47987.3
+version 120, get latnecy:0.0792713,get throughput:50459.6
+version 120, get latnecy:0.0786013,get throughput:50889.7
+version 120, get latnecy:0.0720549,get throughput:55513.3
+version 120, get latnecy:0.0760047,get throughput:52628.3
+version 120, get latnecy:0.0874678,get throughput:45731.1
+version 120, get latnecy:0.0763323,get throughput:52402.4
+version 120, get latnecy:0.073129,get throughput:54697.8
+version 120, get latnecy:0.0749461,get throughput:53371.7
+version 120, get latnecy:0.0762366,get throughput:52468.2
+version 120, get latnecy:0.0709837,get throughput:56350.9
+version 120, get latnecy:0.0695968,get throughput:57473.9
+version 120, get latnecy:0.0708175,get throughput:56483.2
+version 120, get latnecy:0.0683746,get throughput:58501.3
+version 120, get latnecy:0.07428,get throughput:53850.3
+finished
++++ sleep 5
++++ set +x
++++ rm -rf /media/nvme/cxy_test/LedgerDatabase/exps/../data//000025.log /media/nvme/cxy_test/LedgerDatabase/exps/../data//000033.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000035.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000036.log /media/nvme/cxy_test/LedgerDatabase/exps/../data//000037.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000038.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000039.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000040.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000041.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000042.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000043.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000044.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000045.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000046.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000047.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000048.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000049.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//CURRENT /media/nvme/cxy_test/LedgerDatabase/exps/../data//IDENTITY /media/nvme/cxy_test/LedgerDatabase/exps/../data//LOCK /media/nvme/cxy_test/LedgerDatabase/exps/../data//LOG /media/nvme/cxy_test/LedgerDatabase/exps/../data//MANIFEST-000009 /media/nvme/cxy_test/LedgerDatabase/exps/../data//OPTIONS-000005
++++ result_path=/media/nvme/cxy_test/LedgerDatabase/exps/results_ledgerdb/micro_benchmark/e1000000b5000v1024.csv
+++++ date '+%Y-%m-%d %H:%M:%S'
++++ echo 2025-04-29 10:24:03
+2025-04-29 10:24:03
++++ echo 'num account: 1000000, batch_size: 5000, value_size: 1024, key_size: 32'
+num account: 1000000, batch_size: 5000, value_size: 1024, key_size: 32
++++ ../build_release_ledgerdb/bin/microBenchmark -a 1000000 -b 10000 -t 20 -z 5000 -k 32 -v 1024 -d /media/nvme/cxy_test/LedgerDatabase/exps/../data/ -r /media/nvme/cxy_test/LedgerDatabase/exps/results_ledgerdb/micro_benchmark/e1000000b5000v1024.csv
+version 0, load latnecy:0.170461, load throughput:58664.5
+version 1, load latnecy:0.148844, load throughput:67184.4
+version 2, load latnecy:0.130794, load throughput:76455.9
+version 3, load latnecy:0.197004, load throughput:50760.4
+version 4, load latnecy:0.142346, load throughput:70251.5
+version 5, load latnecy:0.132969, load throughput:75205.3
+version 6, load latnecy:0.146837, load throughput:68102.6
+version 7, load latnecy:0.1434, load throughput:69734.9
+version 8, load latnecy:0.189547, load throughput:52757.4
+version 9, load latnecy:0.146534, load throughput:68243.6
+version 10, load latnecy:0.150768, load throughput:66327.1
+version 11, load latnecy:0.14311, load throughput:69876.2
+version 12, load latnecy:0.189897, load throughput:52660
+version 13, load latnecy:0.289151, load throughput:34584
+version 14, load latnecy:0.310351, load throughput:32221.6
+version 15, load latnecy:0.189867, load throughput:52668.3
+version 16, load latnecy:0.189, load throughput:52910
+version 17, load latnecy:0.171918, load throughput:58167.1
+version 18, load latnecy:0.156616, load throughput:63850.6
+version 19, load latnecy:0.158299, load throughput:63171.4
+version 20, load latnecy:0.161218, load throughput:62027.7
+version 21, load latnecy:0.162386, load throughput:61581.7
+version 22, load latnecy:0.154652, load throughput:64661.4
+version 23, load latnecy:0.162509, load throughput:61535.1
+version 24, load latnecy:0.182021, load throughput:54938.7
+version 25, load latnecy:0.238013, load throughput:42014.4
+version 26, load latnecy:0.176183, load throughput:56759.2
+version 27, load latnecy:0.177059, load throughput:56478.5
+version 28, load latnecy:0.178308, load throughput:56082.8
+version 29, load latnecy:0.192658, load throughput:51905.6
+version 30, load latnecy:0.183622, load throughput:54459.6
+version 31, load latnecy:0.231896, load throughput:43122.7
+version 32, load latnecy:0.166324, load throughput:60123.6
+version 33, load latnecy:0.172435, load throughput:57992.8
+version 34, load latnecy:0.158075, load throughput:63261
+version 35, load latnecy:0.16487, load throughput:60654
+version 36, load latnecy:0.162014, load throughput:61723
+version 37, load latnecy:0.159871, load throughput:62550.4
+version 38, load latnecy:0.161444, load throughput:61940.8
+version 39, load latnecy:0.164374, load throughput:60836.8
+version 40, load latnecy:0.16383, load throughput:61038.8
+version 41, load latnecy:0.176665, load throughput:56604.4
+version 42, load latnecy:0.166647, load throughput:60006.9
+version 43, load latnecy:0.177421, load throughput:56363.3
+version 44, load latnecy:0.21623, load throughput:46247.1
+version 45, load latnecy:0.215452, load throughput:46414
+version 46, load latnecy:0.217116, load throughput:46058.3
+version 47, load latnecy:0.225019, load throughput:44440.6
+version 48, load latnecy:0.230727, load throughput:43341.2
+version 49, load latnecy:0.21358, load throughput:46820.9
+version 50, load latnecy:0.232958, load throughput:42926.2
+version 51, load latnecy:0.239085, load throughput:41826.1
+version 52, load latnecy:0.222459, load throughput:44952.2
+version 53, load latnecy:0.225755, load throughput:44295.7
+version 54, load latnecy:0.271088, load throughput:36888.4
+version 55, load latnecy:0.229475, load throughput:43577.7
+version 56, load latnecy:0.224498, load throughput:44543.8
+version 57, load latnecy:0.167097, load throughput:59845.5
+version 58, load latnecy:0.161363, load throughput:61972
+version 59, load latnecy:0.180345, load throughput:55449.4
+version 60, load latnecy:0.169468, load throughput:59008.2
+version 61, load latnecy:0.175964, load throughput:56829.8
+version 62, load latnecy:0.190795, load throughput:52412.2
+version 63, load latnecy:0.176756, load throughput:56575.2
+version 64, load latnecy:0.176511, load throughput:56653.6
+version 65, load latnecy:0.177578, load throughput:56313.3
+version 66, load latnecy:0.250602, load throughput:39904
+version 67, load latnecy:0.222029, load throughput:45039.1
+version 68, load latnecy:0.172829, load throughput:57860.5
+version 69, load latnecy:0.163219, load throughput:61267.4
+version 70, load latnecy:0.17334, load throughput:57690.1
+version 71, load latnecy:0.227743, load throughput:43909.1
+version 72, load latnecy:0.203355, load throughput:49175.1
+version 73, load latnecy:0.192454, load throughput:51960.5
+version 74, load latnecy:0.196881, load throughput:50792
+version 75, load latnecy:0.20731, load throughput:48236.9
+version 76, load latnecy:0.228797, load throughput:43706.8
+version 77, load latnecy:0.192024, load throughput:52076.9
+version 78, load latnecy:0.195474, load throughput:51157.7
+version 79, load latnecy:0.187385, load throughput:53365.9
+version 80, load latnecy:0.320951, load throughput:31157.4
+version 81, load latnecy:0.187409, load throughput:53359.2
+version 82, load latnecy:0.163866, load throughput:61025.5
+version 83, load latnecy:0.163938, load throughput:60998.8
+version 84, load latnecy:0.208402, load throughput:47984.3
+version 85, load latnecy:0.156389, load throughput:63943.3
+version 86, load latnecy:0.155779, load throughput:64193.4
+version 87, load latnecy:0.157308, load throughput:63569.6
+version 88, load latnecy:0.15978, load throughput:62586.1
+version 89, load latnecy:0.155222, load throughput:64423.7
+version 90, load latnecy:0.159541, load throughput:62679.6
+version 91, load latnecy:0.160074, load throughput:62471
+version 92, load latnecy:0.164141, load throughput:60923.3
+version 93, load latnecy:0.166259, load throughput:60147
+version 94, load latnecy:0.167501, load throughput:59701.2
+version 95, load latnecy:0.155651, load throughput:64246.3
+version 96, load latnecy:0.225956, load throughput:44256.4
+version 97, load latnecy:0.194785, load throughput:51338.7
+version 98, load latnecy:0.196261, load throughput:50952.7
+version 99, load latnecy:0.181694, load throughput:55037.7
+version 100, load latnecy:0.201653, load throughput:49590.2
+version 101, put latnecy:0.27619,put throughput:18103.5
+version 102, put latnecy:0.22878,put throughput:21855
+version 103, put latnecy:0.262182,put throughput:19070.7
+version 104, put latnecy:0.213808,put throughput:23385.4
+version 105, put latnecy:0.19548,put throughput:25578.1
+version 106, put latnecy:0.232234,put throughput:21530
+version 107, put latnecy:0.214165,put throughput:23346.4
+version 108, put latnecy:0.244836,put throughput:20421.8
+version 109, put latnecy:0.28948,put throughput:17272.4
+version 110, put latnecy:0.248176,put throughput:20147
+version 111, put latnecy:0.227957,put throughput:21934
+version 112, put latnecy:0.311066,put throughput:16073.8
+version 113, put latnecy:0.246095,put throughput:20317.4
+version 114, put latnecy:0.228078,put throughput:21922.4
+version 115, put latnecy:0.248605,put throughput:20112.2
+version 116, put latnecy:0.23733,put throughput:21067.7
+version 117, put latnecy:0.3,put throughput:16666.6
+version 118, put latnecy:0.293282,put throughput:17048.4
+version 119, put latnecy:0.239154,put throughput:20907.1
+version 120, put latnecy:0.280961,put throughput:17796.1
+version 120, get latnecy:0.113576,get throughput:44023.5
+version 120, get latnecy:0.123742,get throughput:40406.8
+version 120, get latnecy:0.102285,get throughput:48882.8
+version 120, get latnecy:0.119699,get throughput:41771.5
+version 120, get latnecy:0.137473,get throughput:36370.7
+version 120, get latnecy:0.111961,get throughput:44658.4
+version 120, get latnecy:0.101902,get throughput:49066.6
+version 120, get latnecy:0.104599,get throughput:47801.6
+version 120, get latnecy:0.0985994,get throughput:50710.2
+version 120, get latnecy:0.0989411,get throughput:50535.1
+version 120, get latnecy:0.0989605,get throughput:50525.2
+version 120, get latnecy:0.0967398,get throughput:51685
+version 120, get latnecy:0.100391,get throughput:49805.4
+version 120, get latnecy:0.099479,get throughput:50261.8
+version 120, get latnecy:0.0990214,get throughput:50494.2
+version 120, get latnecy:0.104945,get throughput:47644
+version 120, get latnecy:0.10921,get throughput:45783.3
+version 120, get latnecy:0.105389,get throughput:47443.4
+version 120, get latnecy:0.102016,get throughput:49011.8
+version 120, get latnecy:0.104157,get throughput:48004.3
+finished
++++ sleep 5
++++ set +x

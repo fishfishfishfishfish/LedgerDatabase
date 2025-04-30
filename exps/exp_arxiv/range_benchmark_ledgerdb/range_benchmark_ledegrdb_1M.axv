@@ -1,0 +1,244 @@
+data_path: /media/nvme/cxy_test/LedgerDatabase/exps/../data/
+result_dir: /media/nvme/cxy_test/LedgerDatabase/exps/results_ledgerdb/range_benchmark
+++ rm -rf /media/nvme/cxy_test/LedgerDatabase/exps/../data//000207.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000269.log /media/nvme/cxy_test/LedgerDatabase/exps/../data//000282.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000283.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000284.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000285.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000286.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000287.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000288.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000289.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000290.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000291.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000292.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//CURRENT /media/nvme/cxy_test/LedgerDatabase/exps/../data//IDENTITY /media/nvme/cxy_test/LedgerDatabase/exps/../data//LOCK /media/nvme/cxy_test/LedgerDatabase/exps/../data//LOG /media/nvme/cxy_test/LedgerDatabase/exps/../data//MANIFEST-000009 /media/nvme/cxy_test/LedgerDatabase/exps/../data//OPTIONS-000005
+++ result_path=/media/nvme/cxy_test/LedgerDatabase/exps/results_ledgerdb/range_benchmark/e100000bv1024.csv
++++ date '+%Y-%m-%d %H:%M:%S'
+++ echo 2025-04-29 06:18:33
+2025-04-29 06:18:33
+++ echo 'num account: 100000, batch_size: , value_size: 1024, key_size: 65'
+num account: 100000, batch_size: , value_size: 1024, key_size: 65
+++ ../build_release_ledgerdb/bin/rangeBenchmark -a 100000 -b 2000 -t 20 -k 65 -v 1024 -l 5,50,100,200,300,400,500,1000,2000 -d /media/nvme/cxy_test/LedgerDatabase/exps/../data/ -r /media/nvme/cxy_test/LedgerDatabase/exps/results_ledgerdb/range_benchmark/e100000bv1024.csv
+version 0, load latnecy:0.0329088, load throughput:60773.9
+version 1, load latnecy:0.0352085, load throughput:56804.5
+version 2, load latnecy:0.0362381, load throughput:55190.6
+version 3, load latnecy:0.0314945, load throughput:63503.2
+version 4, load latnecy:0.0301131, load throughput:66416.3
+version 5, load latnecy:0.0324313, load throughput:61668.8
+version 6, load latnecy:0.0310764, load throughput:64357.5
+version 7, load latnecy:0.0294974, load throughput:67802.6
+version 8, load latnecy:0.041375, load throughput:48338.4
+version 9, load latnecy:0.041284, load throughput:48444.9
+version 10, load latnecy:0.0307165, load throughput:65111.6
+version 11, load latnecy:0.0287442, load throughput:69579.2
+version 12, load latnecy:0.0285701, load throughput:70003.3
+version 13, load latnecy:0.0307472, load throughput:65046.6
+version 14, load latnecy:0.0352135, load throughput:56796.4
+version 15, load latnecy:0.0291176, load throughput:68686.9
+version 16, load latnecy:0.0310147, load throughput:64485.5
+version 17, load latnecy:0.0338108, load throughput:59152.7
+version 18, load latnecy:0.0292681, load throughput:68333.8
+version 19, load latnecy:0.0293504, load throughput:68142.2
+version 20, load latnecy:0.0292137, load throughput:68461.1
+version 21, load latnecy:0.0306292, load throughput:65297.2
+version 22, load latnecy:0.0321656, load throughput:62178.2
+version 23, load latnecy:0.030544, load throughput:65479.2
+version 24, load latnecy:0.0293793, load throughput:68075.1
+version 25, load latnecy:0.0374051, load throughput:53468.6
+version 26, load latnecy:0.031461, load throughput:63570.7
+version 27, load latnecy:0.029869, load throughput:66959
+version 28, load latnecy:0.0302322, load throughput:66154.6
+version 29, load latnecy:0.0292824, load throughput:68300.5
+version 30, load latnecy:0.0301717, load throughput:66287.4
+version 31, load latnecy:0.0306709, load throughput:65208.3
+version 32, load latnecy:0.0298974, load throughput:66895.4
+version 33, load latnecy:0.0309658, load throughput:64587.3
+version 34, load latnecy:0.0286836, load throughput:69726.4
+version 35, load latnecy:0.0348279, load throughput:57425.2
+version 36, load latnecy:0.0288849, load throughput:69240.4
+version 37, load latnecy:0.0300974, load throughput:66451
+version 38, load latnecy:0.0321597, load throughput:62189.6
+version 39, load latnecy:0.0290879, load throughput:68757.2
+version 40, load latnecy:0.0333658, load throughput:59941.6
+version 41, load latnecy:0.0428436, load throughput:46681.4
+version 42, load latnecy:0.0455445, load throughput:43913.1
+version 43, load latnecy:0.0458001, load throughput:43668.1
+version 44, load latnecy:0.0486986, load throughput:41068.9
+version 45, load latnecy:0.0454789, load throughput:43976.4
+version 46, load latnecy:0.0428438, load throughput:46681.2
+version 47, load latnecy:0.0459345, load throughput:43540.2
+version 48, load latnecy:0.0501334, load throughput:39893.6
+version 49, load latnecy:0.0417582, load throughput:47894.8
+version 50, load latnecy:0.0429922, load throughput:46520
+version 51, range5, range latnecy:0.00363093, range throughput:1377.06
+version 51, range5, range latnecy:0.000490181, range throughput:10200.3
+version 51, range5, range latnecy:0.000313278, range throughput:15960.3
+version 51, range5, range latnecy:0.000379486, range throughput:13175.7
+version 51, range5, range latnecy:0.000495273, range throughput:10095.4
+version 51, range5, range latnecy:0.000467999, range throughput:10683.8
+version 51, range5, range latnecy:0.000355544, range throughput:14063
+version 51, range5, range latnecy:0.000383346, range throughput:13043
+version 51, range5, range latnecy:0.000314868, range throughput:15879.7
+version 51, range5, range latnecy:0.00015502, range throughput:32253.9
+version 51, range5, range latnecy:0.000192927, range throughput:25916.5
+version 51, range5, range latnecy:0.000200132, range throughput:24983.5
+version 51, range5, range latnecy:0.000166345, range throughput:30058
+version 51, range5, range latnecy:0.000131295, range throughput:38082.2
+version 51, range5, range latnecy:0.000102083, range throughput:48979.8
+version 51, range5, range latnecy:0.00017308, range throughput:28888.4
+version 51, range5, range latnecy:0.000177715, range throughput:28134.9
+version 51, range5, range latnecy:0.000130434, range throughput:38333.6
+version 51, range5, range latnecy:0.00012307, range throughput:40627.3
+version 51, range5, range latnecy:0.000141225, range throughput:35404.5
+version 51, range50, range latnecy:0.000996737, range throughput:50163.7
+version 51, range50, range latnecy:0.000905402, range throughput:55224.1
+version 51, range50, range latnecy:0.000790109, range throughput:63282.4
+version 51, range50, range latnecy:0.000852524, range throughput:58649.4
+version 51, range50, range latnecy:0.00066197, range throughput:75532.1
+version 51, range50, range latnecy:0.000825788, range throughput:60548.2
+version 51, range50, range latnecy:0.000344703, range throughput:145052
+version 51, range50, range latnecy:0.000350769, range throughput:142544
+version 51, range50, range latnecy:0.000397292, range throughput:125852
+version 51, range50, range latnecy:0.00035247, range throughput:141856
+version 51, range50, range latnecy:0.000366769, range throughput:136326
+version 51, range50, range latnecy:0.00034903, range throughput:143254
+version 51, range50, range latnecy:0.000356701, range throughput:140173
+version 51, range50, range latnecy:0.000356367, range throughput:140305
+version 51, range50, range latnecy:0.000340842, range throughput:146696
+version 51, range50, range latnecy:0.000354528, range throughput:141033
+version 51, range50, range latnecy:0.000375608, range throughput:133118
+version 51, range50, range latnecy:0.000347845, range throughput:143742
+version 51, range50, range latnecy:0.000389233, range throughput:128458
+version 51, range50, range latnecy:0.000362761, range throughput:137832
+version 51, range100, range latnecy:0.00074676, range throughput:133912
+version 51, range100, range latnecy:0.000736862, range throughput:135711
+version 51, range100, range latnecy:0.000641887, range throughput:155791
+version 51, range100, range latnecy:0.00101903, range throughput:98132.2
+version 51, range100, range latnecy:0.000940485, range throughput:106328
+version 51, range100, range latnecy:0.000601769, range throughput:166177
+version 51, range100, range latnecy:0.000515342, range throughput:194046
+version 51, range100, range latnecy:0.000529866, range throughput:188727
+version 51, range100, range latnecy:0.000521024, range throughput:191930
+version 51, range100, range latnecy:0.000504201, range throughput:198334
+version 51, range100, range latnecy:0.000540771, range throughput:184921
+version 51, range100, range latnecy:0.000523682, range throughput:190956
+version 51, range100, range latnecy:0.000521729, range throughput:191670
+version 51, range100, range latnecy:0.00052681, range throughput:189822
+version 51, range100, range latnecy:0.00052195, range throughput:191589
+version 51, range100, range latnecy:0.000502638, range throughput:198950
+version 51, range100, range latnecy:0.000857162, range throughput:116664
+version 51, range100, range latnecy:0.000508469, range throughput:196669
+version 51, range100, range latnecy:0.00059538, range throughput:167960
+version 51, range100, range latnecy:0.000509155, range throughput:196404
+version 51, range200, range latnecy:0.00106767, range throughput:187324
+version 51, range200, range latnecy:0.00132707, range throughput:150708
+version 51, range200, range latnecy:0.00113254, range throughput:176595
+version 51, range200, range latnecy:0.00103005, range throughput:194166
+version 51, range200, range latnecy:0.00137825, range throughput:145112
+version 51, range200, range latnecy:0.001145, range throughput:174673
+version 51, range200, range latnecy:0.00102779, range throughput:194592
+version 51, range200, range latnecy:0.000943518, range throughput:211973
+version 51, range200, range latnecy:0.00104954, range throughput:190561
+version 51, range200, range latnecy:0.00158756, range throughput:125979
+version 51, range200, range latnecy:0.00109069, range throughput:183370
+version 51, range200, range latnecy:0.00133654, range throughput:149640
+version 51, range200, range latnecy:0.00109544, range throughput:182576
+version 51, range200, range latnecy:0.0010424, range throughput:191865
+version 51, range200, range latnecy:0.00102373, range throughput:195364
+version 51, range200, range latnecy:0.00104431, range throughput:191515
+version 51, range200, range latnecy:0.00113499, range throughput:176212
+version 51, range200, range latnecy:0.00123471, range throughput:161982
+version 51, range200, range latnecy:0.00168618, range throughput:118611
+version 51, range200, range latnecy:0.00105606, range throughput:189384
+version 51, range300, range latnecy:0.00161644, range throughput:185593
+version 51, range300, range latnecy:0.00169122, range throughput:177387
+version 51, range300, range latnecy:0.00144562, range throughput:207523
+version 51, range300, range latnecy:0.0026198, range throughput:114513
+version 51, range300, range latnecy:0.00496535, range throughput:60418.7
+version 51, range300, range latnecy:0.00282193, range throughput:106310
+version 51, range300, range latnecy:0.00188862, range throughput:158846
+version 51, range300, range latnecy:0.00156762, range throughput:191373
+version 51, range300, range latnecy:0.00170995, range throughput:175444
+version 51, range300, range latnecy:0.00184653, range throughput:162467
+version 51, range300, range latnecy:0.00166641, range throughput:180028
+version 51, range300, range latnecy:0.00157283, range throughput:190739
+version 51, range300, range latnecy:0.00228142, range throughput:131497
+version 51, range300, range latnecy:0.00148049, range throughput:202635
+version 51, range300, range latnecy:0.00195164, range throughput:153717
+version 51, range300, range latnecy:0.00156237, range throughput:192015
+version 51, range300, range latnecy:0.00172468, range throughput:173946
+version 51, range300, range latnecy:0.001548, range throughput:193798
+version 51, range300, range latnecy:0.00216882, range throughput:138324
+version 51, range300, range latnecy:0.00152224, range throughput:197078
+version 51, range400, range latnecy:0.00213826, range throughput:187068
+version 51, range400, range latnecy:0.00213062, range throughput:187739
+version 51, range400, range latnecy:0.00273873, range throughput:146053
+version 51, range400, range latnecy:0.00224855, range throughput:177892
+version 51, range400, range latnecy:0.00233561, range throughput:171262
+version 51, range400, range latnecy:0.00254675, range throughput:157063
+version 51, range400, range latnecy:0.00213738, range throughput:187145
+version 51, range400, range latnecy:0.00206158, range throughput:194026
+version 51, range400, range latnecy:0.00218674, range throughput:182921
+version 51, range400, range latnecy:0.00233702, range throughput:171158
+version 51, range400, range latnecy:0.00218475, range throughput:183087
+version 51, range400, range latnecy:0.0023146, range throughput:172816
+version 51, range400, range latnecy:0.00226588, range throughput:176532
+version 51, range400, range latnecy:0.00207262, range throughput:192992
+version 51, range400, range latnecy:0.00227365, range throughput:175929
+version 51, range400, range latnecy:0.00291361, range throughput:137287
+version 51, range400, range latnecy:0.00617612, range throughput:64765.6
+version 51, range400, range latnecy:0.00574775, range throughput:69592.4
+version 51, range400, range latnecy:0.00237999, range throughput:168068
+version 51, range400, range latnecy:0.00286838, range throughput:139451
+version 51, range500, range latnecy:0.00279451, range throughput:178922
+version 51, range500, range latnecy:0.00316752, range throughput:157852
+version 51, range500, range latnecy:0.00315429, range throughput:158514
+version 51, range500, range latnecy:0.00258678, range throughput:193290
+version 51, range500, range latnecy:0.00337446, range throughput:148172
+version 51, range500, range latnecy:0.00414272, range throughput:120694
+version 51, range500, range latnecy:0.00373616, range throughput:133827
+version 51, range500, range latnecy:0.00270185, range throughput:185058
+version 51, range500, range latnecy:0.00310548, range throughput:161005
+version 51, range500, range latnecy:0.0028149, range throughput:177626
+version 51, range500, range latnecy:0.00309529, range throughput:161536
+version 51, range500, range latnecy:0.00361186, range throughput:138433
+version 51, range500, range latnecy:0.00294577, range throughput:169735
+version 51, range500, range latnecy:0.00293068, range throughput:170609
+version 51, range500, range latnecy:0.00297934, range throughput:167823
+version 51, range500, range latnecy:0.00297838, range throughput:167876
+version 51, range500, range latnecy:0.00346731, range throughput:144204
+version 51, range500, range latnecy:0.00311631, range throughput:160446
+version 51, range500, range latnecy:0.00258538, range throughput:193395
+version 51, range500, range latnecy:0.00292182, range throughput:171126
+version 51, range1000, range latnecy:0.00674834, range throughput:148185
+version 51, range1000, range latnecy:0.00792491, range throughput:126184
+version 51, range1000, range latnecy:0.00571484, range throughput:174983
+version 51, range1000, range latnecy:0.00584969, range throughput:170949
+version 51, range1000, range latnecy:0.00774768, range throughput:129071
+version 51, range1000, range latnecy:0.00552396, range throughput:181030
+version 51, range1000, range latnecy:0.00606994, range throughput:164746
+version 51, range1000, range latnecy:0.00825565, range throughput:121129
+version 51, range1000, range latnecy:0.00790036, range throughput:126577
+version 51, range1000, range latnecy:0.0065241, range throughput:153278
+version 51, range1000, range latnecy:0.00678435, range throughput:147398
+version 51, range1000, range latnecy:0.00773982, range throughput:129202
+version 51, range1000, range latnecy:0.00697094, range throughput:143453
+version 51, range1000, range latnecy:0.0059812, range throughput:167190
+version 51, range1000, range latnecy:0.00548871, range throughput:182192
+version 51, range1000, range latnecy:0.00680962, range throughput:146851
+version 51, range1000, range latnecy:0.00709537, range throughput:140937
+version 51, range1000, range latnecy:0.0067274, range throughput:148646
+version 51, range1000, range latnecy:0.00536648, range throughput:186342
+version 51, range1000, range latnecy:0.00744919, range throughput:134243
+version 51, range2000, range latnecy:0.0132074, range throughput:151431
+version 51, range2000, range latnecy:0.0137914, range throughput:145018
+version 51, range2000, range latnecy:0.011047, range throughput:181044
+version 51, range2000, range latnecy:0.012573, range throughput:159071
+version 51, range2000, range latnecy:0.0122775, range throughput:162900
+version 51, range2000, range latnecy:0.0103978, range throughput:192349
+version 51, range2000, range latnecy:0.0112175, range throughput:178293
+version 51, range2000, range latnecy:0.0134957, range throughput:148196
+version 51, range2000, range latnecy:0.0135929, range throughput:147135
+version 51, range2000, range latnecy:0.0129423, range throughput:154532
+version 51, range2000, range latnecy:0.0147394, range throughput:135690
+version 51, range2000, range latnecy:0.012934, range throughput:154632
+version 51, range2000, range latnecy:0.0124342, range throughput:160846
+version 51, range2000, range latnecy:0.0110707, range throughput:180657
+version 51, range2000, range latnecy:0.0107033, range throughput:186858
+version 51, range2000, range latnecy:0.01368, range throughput:146198
+version 51, range2000, range latnecy:0.0132533, range throughput:150906
+version 51, range2000, range latnecy:0.0140964, range throughput:141880
+version 51, range2000, range latnecy:0.0117927, range throughput:169596
+version 51, range2000, range latnecy:0.0108299, range throughput:184674
+finished
+++ sleep 5
+++ set +x
