@@ -8,4 +8,5 @@ CMakeFiles/
 bin/
 data/
 
+result*/
 *.log

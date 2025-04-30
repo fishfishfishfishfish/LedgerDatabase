@@ -308,9 +308,11 @@ bool VersionedKVStore::GetProof(
   }
 #endif
 
+#ifdef DEBUG
   gettimeofday(&t1, NULL);
   auto lat = (t1.tv_sec - t0.tv_sec) * 1000000 + t1.tv_usec - t0.tv_usec;
   std::cout << "getproof " << lat << " " << nkey << std::endl;
+#endif
   return true;
 }
 

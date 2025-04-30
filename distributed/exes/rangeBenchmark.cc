@@ -23,10 +23,10 @@ std::string BuildKeyName(uint64_t key_num, int key_len) {
 int main(int argc, char** argv) {
   uint64_t num_accout = 5000;  // 40,000,000(40M) 2,000,000(2M)
   uint64_t load_batch_size = 100;
-  uint64_t num_txn_version = 10;
-  uint64_t txn_batch_size = 50;
+  uint64_t num_range_test = 10;
   uint64_t key_len = 32;
   uint64_t value_len = 1024;
+  std::vector<uint64_t> ranges = {5, 50, 100, 200, 300, 400, 500, 1000, 2000};
   std::string data_path = "data/";
   std::string result_path = "exps/results/test.csv";
 
@@ -57,20 +57,9 @@ int main(int argc, char** argv) {
       case 't':  // num_txn
       {
         char* strtolPtr;
-        num_txn_version = strtoul(optarg, &strtolPtr, 10);
+        num_range_test = strtoul(optarg, &strtolPtr, 10);
         if ((*optarg == '\0') || (*strtolPtr != '\0') ||
-            (num_txn_version <= 0)) {
-          std::cerr << "option -k requires a numeric arg\n" << std::endl;
-        }
-        break;
-      }
-
-      case 'z':  // txn_batch_size
-      {
-        char* strtolPtr;
-        txn_batch_size = strtoul(optarg, &strtolPtr, 10);
-        if ((*optarg == '\0') || (*strtolPtr != '\0') ||
-            (txn_batch_size <= 0)) {
+            (num_range_test <= 0)) {
           std::cerr << "option -k requires a numeric arg\n" << std::endl;
         }
         break;
@@ -92,6 +81,27 @@ int main(int argc, char** argv) {
         value_len = strtoul(optarg, &strtolPtr, 10);
         if ((*optarg == '\0') || (*strtolPtr != '\0') || (value_len <= 0)) {
           std::cerr << "option -v requires a numeric arg\n" << std::endl;
+        }
+        break;
+      }
+
+      case 'l': {  // range for range query
+        std::string str = optarg;
+        std::stringstream ss(str);
+        std::string item;
+        ranges.clear();
+        while (std::getline(ss, item, ',')) {
+          try {
+            ranges.push_back(std::stoull(item));
+          } catch (const std::invalid_argument& e) {
+            std::cerr << "Invalid number format for option -l: " << item
+                      << std::endl;
+            return 1;
+          } catch (const std::out_of_range& e) {
+            std::cerr << "Number out of range for option -l: " << item
+                      << std::endl;
+            return 1;
+          }
         }
         break;
       }
@@ -120,13 +130,13 @@ int main(int argc, char** argv) {
   // prepare result file
   std::ofstream rs_file;
   rs_file.open(result_path, std::ios::trunc);
-  rs_file << "version,operation,latency,throughput" << std::endl;
+  rs_file << "version,range,latency,throughput" << std::endl;
   rs_file.close();
   rs_file.open(result_path, std::ios::app);
 
   // load data
-  uint64_t num_load_version = num_accout / load_batch_size;
-  uint64_t version = 0;
+  int num_load_version = num_accout / load_batch_size;
+  int version = 0;
   CounterGenerator key_generator(1);
   for (; version <= num_load_version; version++) {
     std::vector<std::string> keys;
@@ -157,77 +167,45 @@ int main(int argc, char** argv) {
       std::cout << "version " << version << ", load latnecy:" << load_latency
                 << ", load throughput:" << load_batch_size / load_latency
                 << std::endl;
-      rs_file << version << ",LOAD," << load_latency << ","
+      rs_file << version << ",-1," << load_latency << ","
               << load_batch_size / load_latency << std::endl;
     }
   }
   sleep(1);
 
-  int num_txn = num_txn_version * txn_batch_size * 2;
-  uint64_t random_keys[num_txn];
-  UniformGenerator txn_key_generator(1, num_accout);
-  for (int i = 0; i < num_txn; i++) {
-    random_keys[i] = txn_key_generator.Next();
+  uint64_t max_range = *std::max_element(ranges.begin(), ranges.end());
+  uint64_t random_keys[num_range_test];
+  UniformGenerator q_key_generator(1, (num_accout - max_range));
+  for (int i = 0; i < int(num_range_test); i++) {
+    random_keys[i] = q_key_generator.Next();
   }
 
-  // updates
-  int txn_key_id = 0;
-  for (; version <= num_load_version + num_txn_version; version++) {
-    std::vector<std::string> put_keys;
-    std::vector<std::string> put_values;
-    strongstore::proto::Reply reply;
-    auto start = std::chrono::system_clock::now();
-    for (int i = 0; i < int(txn_batch_size); i++) {
+  // range query
+
+  for (uint64_t r : ranges) {
+    int txn_key_id = 0;
+    for (int t = 0; t < int(num_range_test); t++) {
       uint64_t num = random_keys[txn_key_id];
-      std::string key = BuildKeyName(num, key_len);
-      std::string val = "";
-      val = val.append(value_len, RandomPrintChar(num));
-      put_keys.push_back(key);
-      put_values.push_back(val);
-      txn_key_id++;
+      strongstore::proto::Reply reply;
+      std::string start_key = BuildKeyName(num, key_len);
+      std::string end_key =
+          BuildKeyName(num + r > num_accout ? num_accout : num + r, key_len);
+      auto start = std::chrono::system_clock::now();
+      store.GetRange(start_key, end_key, &reply);
+      auto end = std::chrono::system_clock::now();
+      auto duration =
+          std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+      double range_latency = double(duration.count()) *
+                             std::chrono::nanoseconds::period::num /
+                             std::chrono::nanoseconds::period::den;
+      std::cout << "version " << version << ", range" << r
+                << ", range latnecy:" << range_latency
+                << ", range throughput:" << r / range_latency << std::endl;
+      rs_file << version << "," << r << "," << range_latency << ","
+              << r / range_latency << std::endl;
+      txn_key_id += 1;
     }
-    store.put(put_keys, put_values, Timestamp(), &reply);
-    auto end = std::chrono::system_clock::now();
-    auto duration =
-        std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
-    double put_latency = double(duration.count()) *
-                         std::chrono::nanoseconds::period::num /
-                         std::chrono::nanoseconds::period::den;
-    std::cout << "version " << version << ", put latnecy:" << put_latency << ","
-              << "put throughput:" << txn_batch_size / put_latency << std::endl;
-    rs_file << version << ",PUT," << put_latency << ","
-            << txn_batch_size / put_latency << std::endl;
   }
-
-  version -= 1;  // the follows are all reads and query the latest version
-  // gets
-  for (int t = 0; t < int(num_txn_version); t++) {
-    strongstore::proto::Reply reply;
-    // std::map<uint64_t, std::vector<std::string>> get_keys;
-    std::vector<std::string> get_keys;
-    // test get
-    auto start = std::chrono::system_clock::now();
-    // get_keys.insert(std::make_pair(version, std::vector<std::string>()));
-    for (int i = 0; i < int(txn_batch_size); i++) {
-      std::string key = BuildKeyName(random_keys[txn_key_id], key_len);
-      // get_keys[version].push_back(key);
-      get_keys.push_back(key);
-      txn_key_id++;
-    }
-    store.BatchGet(get_keys, &reply);
-    // store.GetProof(get_keys, &reply);
-    auto end = std::chrono::system_clock::now();
-    auto duration =
-        std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
-    double get_latency = double(duration.count()) *
-                         std::chrono::nanoseconds::period::num /
-                         std::chrono::nanoseconds::period::den;
-    std::cout << "version " << version << ", get latnecy:" << get_latency << ","
-              << "get throughput:" << txn_batch_size / get_latency << std::endl;
-    rs_file << version << ",GET," << get_latency << ","
-            << txn_batch_size / get_latency << std::endl;
-  }
-
   std::cout << "finished" << std::endl;
   rs_file.close();
 

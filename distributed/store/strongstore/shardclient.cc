@@ -1,4 +1,5 @@
 #include "distributed/store/strongstore/shardclient.h"
+
 #include <sys/time.h>
 
 namespace strongstore {
@@ -7,14 +8,13 @@ using namespace std;
 using namespace proto;
 
 ShardClient::ShardClient(Mode mode, const string &configPath,
-             Transport *transport, uint64_t client_id, int
-             shard, int closestReplica)
-  : transport(transport), client_id(client_id), shard(shard)
-{
+                         Transport *transport, uint64_t client_id, int shard,
+                         int closestReplica)
+    : transport(transport), client_id(client_id), shard(shard) {
   ifstream configStream(configPath);
   if (configStream.fail()) {
     fprintf(stderr, "unable to read configuration file: %s\n",
-        configPath.c_str());
+            configPath.c_str());
   }
   transport::Configuration config(configStream);
 
@@ -26,7 +26,7 @@ ShardClient::ShardClient(Mode mode, const string &configPath,
     } else {
       replica = closestReplica;
     }
-      } else {
+  } else {
     replica = 0;
   }
 
@@ -35,20 +35,14 @@ ShardClient::ShardClient(Mode mode, const string &configPath,
   uid = 0;
   tip_block = 0;
   audit_block = -1;
-  auto status = db_.Open("/tmp/auditor"+std::to_string(shard)+".store");
+  auto status = db_.Open("/tmp/auditor" + std::to_string(shard) + ".store");
   if (!status) std::cout << "auditor db open failed" << std::endl;
 }
 
-ShardClient::~ShardClient()
-{
-  delete client;
-}
+ShardClient::~ShardClient() { delete client; }
 
 /* Sends BEGIN to a single shard indexed by i. */
-void
-ShardClient::Begin(uint64_t id)
-{
-
+void ShardClient::Begin(uint64_t id) {
   // Wait for any previous pending requests.
   if (blockingBegin != NULL) {
     blockingBegin->GetReply();
@@ -57,9 +51,8 @@ ShardClient::Begin(uint64_t id)
   }
 }
 
-void
-ShardClient::BatchGet(uint64_t id, const std::vector<std::string> &keys,
-    Promise *promise) {
+void ShardClient::BatchGet(uint64_t id, const std::vector<std::string> &keys,
+                           Promise *promise) {
   // create prepare request
   string request_str;
   Request request;
@@ -74,21 +67,15 @@ ShardClient::BatchGet(uint64_t id, const std::vector<std::string> &keys,
   int timeout = 100000;
   transport->Timer(0, [=]() {
     waiting = promise;
-    client->InvokeUnlogged(replica,
-                           request_str,
-                           bind(&ShardClient::BatchGetCallback,
-                            this,
-                            placeholders::_1,
-                            placeholders::_2),
-                           bind(&ShardClient::GetTimeout,
-                            this),
-                           timeout);
+    client->InvokeUnlogged(replica, request_str,
+                           bind(&ShardClient::BatchGetCallback, this,
+                                placeholders::_1, placeholders::_2),
+                           bind(&ShardClient::GetTimeout, this), timeout);
   });
 }
 
-void
-ShardClient::GetRange(uint64_t id, const std::string& from,
-                      const std::string& to, Promise* promise) {
+void ShardClient::GetRange(uint64_t id, const std::string &from,
+                           const std::string &to, Promise *promise) {
   // create request
   string request_str;
   Request request;
@@ -103,22 +90,16 @@ ShardClient::GetRange(uint64_t id, const std::string& from,
   int timeout = 100000;
   transport->Timer(0, [=]() {
     waiting = promise;
-    client->InvokeUnlogged(replica,
-                 request_str,
-                 bind(&ShardClient::GetRangeCallback,
-                  this,
-                  placeholders::_1,
-                  placeholders::_2),
-                 bind(&ShardClient::GetTimeout,
-                  this),
-                 timeout); // timeout in ms
+    client->InvokeUnlogged(replica, request_str,
+                           bind(&ShardClient::GetRangeCallback, this,
+                                placeholders::_1, placeholders::_2),
+                           bind(&ShardClient::GetTimeout, this),
+                           timeout);  // timeout in ms
   });
 }
 
-bool
-ShardClient::GetProof(const uint64_t block,
-                      const std::vector<string>& keys,
-                      Promise* promise) {
+bool ShardClient::GetProof(const uint64_t block,
+                           const std::vector<string> &keys, Promise *promise) {
   if (tip_block < block) {
     promise->Reply(REPLY_OK);
     return false;
@@ -130,7 +111,7 @@ ShardClient::GetProof(const uint64_t block,
   request.set_txnid(0);
   auto verify = request.mutable_verify();
   verify->set_block(block);
-  for (auto& k : keys) {
+  for (auto &k : keys) {
     verify->add_keys(k);
   }
   request.SerializeToString(&request_str);
@@ -140,23 +121,16 @@ ShardClient::GetProof(const uint64_t block,
   transport->Timer(0, [=]() {
     verifyPromise.emplace(uid, promise);
     ++uid;
-    client->InvokeUnlogged(replica,
-                 request_str,
-                 bind(&ShardClient::GetProofCallback,
-                  this,
-                  uid - 1,
-                  keys,
-                  placeholders::_1,
-                  placeholders::_2),
-                 bind(&ShardClient::GetTimeout,
-                  this),
-                 timeout); // timeout in ms
+    client->InvokeUnlogged(replica, request_str,
+                           bind(&ShardClient::GetProofCallback, this, uid - 1,
+                                keys, placeholders::_1, placeholders::_2),
+                           bind(&ShardClient::GetTimeout, this),
+                           timeout);  // timeout in ms
   });
   return true;
 }
 
-bool
-ShardClient::Audit(const uint64_t& seq, Promise* promise) {
+bool ShardClient::Audit(const uint64_t &seq, Promise *promise) {
   // create request
   string request_str;
   Request request;
@@ -171,26 +145,17 @@ ShardClient::Audit(const uint64_t& seq, Promise* promise) {
   transport->Timer(0, [=]() {
     verifyPromise.emplace(uid, promise);
     ++uid;
-    client->InvokeUnlogged(replica,
-                 request_str,
-                 bind(&ShardClient::AuditCallback,
-                  this,
-                  seq,
-                  uid - 1,
-                  placeholders::_1,
-                  placeholders::_2),
-                 bind(&ShardClient::GetTimeout,
-                  this),
-                 timeout); // timeout in ms
+    client->InvokeUnlogged(replica, request_str,
+                           bind(&ShardClient::AuditCallback, this, seq, uid - 1,
+                                placeholders::_1, placeholders::_2),
+                           bind(&ShardClient::GetTimeout, this),
+                           timeout);  // timeout in ms
   });
   return true;
 }
 
-void
-ShardClient::Prepare(uint64_t id, const Transaction &txn,
-          const Timestamp &timestamp, Promise *promise)
-{
-
+void ShardClient::Prepare(uint64_t id, const Transaction &txn,
+                          const Timestamp &timestamp, Promise *promise) {
   // create prepare request
   string request_str;
   Request request;
@@ -202,20 +167,16 @@ ShardClient::Prepare(uint64_t id, const Transaction &txn,
   timeval t;
   gettimeofday(&t, NULL);
   transport->Timer(0, [=]() {
-	  waiting = promise;
-      client->Invoke(request_str,
-               bind(&ShardClient::PrepareCallback,
-                this,
-                placeholders::_1,
-                placeholders::_2));
-    });
+    waiting = promise;
+    client->Invoke(request_str, bind(&ShardClient::PrepareCallback, this,
+                                     placeholders::_1, placeholders::_2));
+  });
 }
 
-void
-ShardClient::Commit(uint64_t id, const Transaction &txn,
-    const std::vector<std::pair<std::string, size_t>>& versionedKeys,
-    uint64_t timestamp, Promise *promise)
-{
+void ShardClient::Commit(
+    uint64_t id, const Transaction &txn,
+    const std::vector<std::pair<std::string, size_t>> &versionedKeys,
+    uint64_t timestamp, Promise *promise) {
   // create commit request
   string request_str;
   Request request;
@@ -224,7 +185,7 @@ ShardClient::Commit(uint64_t id, const Transaction &txn,
   request.mutable_commit()->set_timestamp(timestamp);
   if (versionedKeys.size() > 0) {
     auto ver_msg = request.mutable_version();
-    for (auto& vk : versionedKeys) {
+    for (auto &vk : versionedKeys) {
       auto ver_keys = ver_msg->add_versionedkeys();
       ver_keys->set_key(vk.first);
       ver_keys->set_nversions(vk.second);
@@ -238,19 +199,13 @@ ShardClient::Commit(uint64_t id, const Transaction &txn,
   transport->Timer(0, [=]() {
     waiting = promise;
 
-    client->Invoke(request_str,
-      bind(&ShardClient::CommitCallback,
-        this,
-        placeholders::_1,
-        placeholders::_2));
+    client->Invoke(request_str, bind(&ShardClient::CommitCallback, this,
+                                     placeholders::_1, placeholders::_2));
   });
 }
 
 /* Aborts the ongoing transaction. */
-void
-ShardClient::Abort(uint64_t id, const Transaction &txn, Promise *promise)
-{
-
+void ShardClient::Abort(uint64_t id, const Transaction &txn, Promise *promise) {
   // create abort request
   string request_str;
   Request request;
@@ -261,20 +216,16 @@ ShardClient::Abort(uint64_t id, const Transaction &txn, Promise *promise)
 
   blockingBegin = new Promise(ABORT_TIMEOUT);
   transport->Timer(0, [=]() {
-	  waiting = promise;
+    waiting = promise;
 
-	  client->Invoke(request_str,
-			   bind(&ShardClient::AbortCallback,
-				this,
-				placeholders::_1,
-				placeholders::_2));
+    client->Invoke(request_str, bind(&ShardClient::AbortCallback, this,
+                                     placeholders::_1, placeholders::_2));
   });
 }
 
-void
-ShardClient::AuditCallback(uint64_t seq, size_t uid,
-                           const std::string& request_str,
-                           const std::string& reply_str) {
+void ShardClient::AuditCallback(uint64_t seq, size_t uid,
+                                const std::string &request_str,
+                                const std::string &reply_str) {
   /* Replies back from a shard. */
   Reply reply;
   reply.ParseFromString(reply_str);
@@ -321,7 +272,7 @@ ShardClient::AuditCallback(uint64_t seq, size_t uid,
         mptproof.SetValue(p.value());
         for (int j = 0; j < p.chunks_size(); ++j) {
           mptproof.AppendProof(
-              reinterpret_cast<const unsigned char*>(p.chunks(j).c_str()),
+              reinterpret_cast<const unsigned char *>(p.chunks(j).c_str()),
               p.pos(j));
         }
         auditor.mptproofs.emplace_back(mptproof);
@@ -342,11 +293,10 @@ ShardClient::AuditCallback(uint64_t seq, size_t uid,
   }
 }
 
-void
-ShardClient::GetProofCallback(size_t uid,
-                              const std::vector<std::string>& keys,
-                              const std::string& request_str,
-                              const std::string& reply_str) {
+void ShardClient::GetProofCallback(size_t uid,
+                                   const std::vector<std::string> &keys,
+                                   const std::string &request_str,
+                                   const std::string &reply_str) {
   /* Replies back from a shard. */
   Reply reply;
   reply.ParseFromString(reply_str);
@@ -358,14 +308,15 @@ ShardClient::GetProofCallback(size_t uid,
     gettimeofday(&t0, NULL);
 
 #ifdef LEDGERDB
-    ledgebase::Hash mptdigest = ledgebase::Hash::FromBase32(reply.digest().mpthash());
+    ledgebase::Hash mptdigest =
+        ledgebase::Hash::FromBase32(reply.digest().mpthash());
     for (size_t i = 0; i < reply.proof_size(); ++i) {
       auto p = reply.proof(i);
       ledgebase::ledgerdb::MPTProof prover;
       prover.SetValue(p.mptvalue());
       for (size_t j = 0; j < p.mpt_chunks_size(); ++j) {
         prover.AppendProof(
-            reinterpret_cast<const unsigned char*>(p.mpt_chunks(j).c_str()),
+            reinterpret_cast<const unsigned char *>(p.mpt_chunks(j).c_str()),
             p.mpt_pos(j));
       }
       if (p.mpt_chunks_size() > 0 && !prover.VerifyProof(mptdigest, keys[i])) {
@@ -407,7 +358,7 @@ ShardClient::GetProofCallback(size_t uid,
 
         auto txn_proof = curr_proof.txn_proof(j);
         dtl_prover.txn_proof.digest = txn_proof.digest();
-        dtl_prover.txn_proof.value  = txn_proof.value();
+        dtl_prover.txn_proof.value = txn_proof.value();
         for (int k = 0; k < txn_proof.proof_size(); ++k) {
           dtl_prover.txn_proof.proof.emplace_back(txn_proof.proof(k));
           dtl_prover.txn_proof.pos.emplace_back(txn_proof.pos(k));
@@ -415,7 +366,7 @@ ShardClient::GetProofCallback(size_t uid,
 
         auto data_proof = curr_proof.data_proof(j);
         dtl_prover.data_proof.digest = data_proof.digest();
-        dtl_prover.data_proof.value  = data_proof.value();
+        dtl_prover.data_proof.value = data_proof.value();
         for (int k = 0; k < data_proof.proof_size(); ++k) {
           dtl_prover.data_proof.proof.emplace_back(data_proof.proof(k));
           dtl_prover.data_proof.pos.emplace_back(data_proof.pos(k));
@@ -430,9 +381,10 @@ ShardClient::GetProofCallback(size_t uid,
 #endif
 
     gettimeofday(&t1, NULL);
-    auto elapsed = ((t1.tv_sec - t0.tv_sec)*1000000 +
-                    (t1.tv_usec - t0.tv_usec));
-    //std::cout << "verify " << elapsed << " " << reply.ByteSizeLong() << " " << keys.size() << " " << res << std::endl;
+    auto elapsed =
+        ((t1.tv_sec - t0.tv_sec) * 1000000 + (t1.tv_usec - t0.tv_usec));
+    // std::cout << "verify " << elapsed << " " << reply.ByteSizeLong() << " "
+    // << keys.size() << " " << res << std::endl;
 
     Promise *w = verifyPromise[uid];
     verifyPromise.erase(uid);
@@ -440,9 +392,8 @@ ShardClient::GetProofCallback(size_t uid,
   }
 }
 
-void
-ShardClient::GetRangeCallback(const string &request_str, const string &reply_str)
-{
+void ShardClient::GetRangeCallback(const string &request_str,
+                                   const string &reply_str) {
   Reply reply;
   reply.ParseFromString(reply_str);
   if (waiting != NULL) {
@@ -496,13 +447,13 @@ ShardClient::GetRangeCallback(const string &request_str, const string &reply_str
 
     Promise *w = waiting;
     waiting = NULL;
-    w->Reply(reply.status(), timestamps, values, unverified_keys, estimate_blocks);
+    w->Reply(reply.status(), timestamps, values, unverified_keys,
+             estimate_blocks);
   }
 }
 
-void
-ShardClient::BatchGetCallback(const string &request_str, const string &reply_str)
-{
+void ShardClient::BatchGetCallback(const string &request_str,
+                                   const string &reply_str) {
   Reply reply;
   reply.ParseFromString(reply_str);
   if (waiting != NULL) {
@@ -555,20 +506,21 @@ ShardClient::BatchGetCallback(const string &request_str, const string &reply_str
       }
     }
     gettimeofday(&t1, NULL);
-    auto elapsed = ((t1.tv_sec - t0.tv_sec)*1000000 +
-                    (t1.tv_usec - t0.tv_usec));
-    // std::cout << "verify " << elapsed << " " << reply.ByteSizeLong() << " " << reply.qproof_size() << " " << vs << std::endl;
+    auto elapsed =
+        ((t1.tv_sec - t0.tv_sec) * 1000000 + (t1.tv_usec - t0.tv_usec));
+    // std::cout << "verify " << elapsed << " " << reply.ByteSizeLong() << " "
+    // << reply.qproof_size() << " " << vs << std::endl;
 #endif
 
     Promise *w = waiting;
     waiting = NULL;
-    w->Reply(reply.status(), timestamps, values, unverified_keys, estimate_blocks);
+    w->Reply(reply.status(), timestamps, values, unverified_keys,
+             estimate_blocks);
   }
 }
 
-void
-ShardClient::CommitCallback(const string &request_str, const string &reply_str)
-{
+void ShardClient::CommitCallback(const string &request_str,
+                                 const string &reply_str) {
   Reply reply;
   reply.ParseFromString(reply_str);
   ASSERT(reply.status() == REPLY_OK);
@@ -616,9 +568,10 @@ ShardClient::CommitCallback(const string &request_str, const string &reply_str)
       }
     }
     gettimeofday(&t1, NULL);
-    auto elapsed = ((t1.tv_sec - t0.tv_sec)*1000000 +
-                    (t1.tv_usec - t0.tv_usec));
-    std::cout << "verify " << elapsed << " " << reply.ByteSizeLong() << " " << reply.qproof_size() << " " << vs << std::endl;
+    auto elapsed =
+        ((t1.tv_sec - t0.tv_sec) * 1000000 + (t1.tv_usec - t0.tv_usec));
+    // std::cout << "verify " << elapsed << " " << reply.ByteSizeLong() << " "
+    // << reply.qproof_size() << " " << vs << std::endl;
 #endif
 
     Promise *w = waiting;
@@ -627,9 +580,7 @@ ShardClient::CommitCallback(const string &request_str, const string &reply_str)
   }
 }
 
-void
-ShardClient::GetTimeout()
-{
+void ShardClient::GetTimeout() {
   if (waiting != NULL) {
     Promise *w = waiting;
     waiting = NULL;
@@ -638,15 +589,14 @@ ShardClient::GetTimeout()
 }
 
 /* Callback from a shard replica on prepare operation completion. */
-void
-ShardClient::PrepareCallback(const string &request_str, const string &reply_str)
-{
+void ShardClient::PrepareCallback(const string &request_str,
+                                  const string &reply_str) {
   Reply reply;
 
   timeval t;
   gettimeofday(&t, NULL);
-  // std::cout << "plat " << (t.tv_sec * 1000000 + t.tv_usec - psend) << std::endl;
-  // std::cout << "pressize " << reply_str.size() << std::endl;
+  // std::cout << "plat " << (t.tv_sec * 1000000 + t.tv_usec - psend) <<
+  // std::endl; std::cout << "pressize " << reply_str.size() << std::endl;
   reply.ParseFromString(reply_str);
 
   if (waiting != NULL) {
@@ -661,9 +611,8 @@ ShardClient::PrepareCallback(const string &request_str, const string &reply_str)
 }
 
 /* Callback from a shard replica on abort operation completion. */
-void
-ShardClient::AbortCallback(const string &request_str, const string &reply_str)
-{
+void ShardClient::AbortCallback(const string &request_str,
+                                const string &reply_str) {
   // ABORTs always succeed.
   Reply reply;
   reply.ParseFromString(reply_str);
@@ -677,6 +626,6 @@ ShardClient::AbortCallback(const string &request_str, const string &reply_str)
     waiting = NULL;
     w->Reply(reply.status());
   }
-  }
+}
 
-} // namespace strongstore
+}  // namespace strongstore
