@@ -1,3 +1,7 @@
+#include <dirent.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+
 #include <chrono>
 #include <fstream>
 
@@ -20,13 +24,48 @@ std::string BuildKeyName(uint64_t key_num, int key_len) {
   return key_name.append(zeros, '0').append(key_num_str);
 }
 
+//计算某目录所占空间大小（包含本身的4096Byte）
+uint64_t GetDirectorySize(std::string dir) {
+  DIR* dp;
+  struct dirent* entry;
+  struct stat statbuf;
+  uint64_t totalSize = 0;
+
+  if ((dp = opendir(dir.c_str())) == NULL) {
+    fprintf(stderr, "Cannot open dir: %s\n", dir.c_str());
+    return -1;  //可能是个文件，或者目录不存在
+  }
+
+  //先加上自身目录的大小
+  lstat(dir.c_str(), &statbuf);
+  totalSize += statbuf.st_size;
+
+  while ((entry = readdir(dp)) != NULL) {
+    char subdir[256];
+    sprintf(subdir, "%s/%s", dir.c_str(), entry->d_name);
+    lstat(subdir, &statbuf);
+
+    if (S_ISDIR(statbuf.st_mode)) {
+      if (strcmp(".", entry->d_name) == 0 || strcmp("..", entry->d_name) == 0) {
+        continue;
+      }
+
+      long long int subDirSize = GetDirectorySize(subdir);
+      totalSize += subDirSize;
+    } else {
+      totalSize += statbuf.st_size;
+    }
+  }
+
+  closedir(dp);
+  return totalSize;
+}
+
 int main(int argc, char** argv) {
   uint64_t num_accout = 5000;  // 40,000,000(40M) 2,000,000(2M)
-  uint64_t load_batch_size = 100;
-  uint64_t num_range_test = 10;
+  uint64_t update_count = 10;
   uint64_t key_len = 32;
   uint64_t value_len = 1024;
-  std::vector<uint64_t> ranges = {5, 50, 100, 200, 300, 400, 500, 1000, 2000};
   std::string data_path = "data/";
   std::string result_path = "exps/results/test.csv";
 
@@ -43,23 +82,11 @@ int main(int argc, char** argv) {
         break;
       }
 
-      case 'b':  // load_batch_size
-      {
-        char* strtolPtr;
-        load_batch_size = strtoul(optarg, &strtolPtr, 10);
-        if ((*optarg == '\0') || (*strtolPtr != '\0') ||
-            (load_batch_size <= 0)) {
-          std::cerr << "option -n requires a numeric arg\n" << std::endl;
-        }
-        break;
-      }
-
       case 't':  // num_txn
       {
         char* strtolPtr;
-        num_range_test = strtoul(optarg, &strtolPtr, 10);
-        if ((*optarg == '\0') || (*strtolPtr != '\0') ||
-            (num_range_test <= 0)) {
+        update_count = strtoul(optarg, &strtolPtr, 10);
+        if ((*optarg == '\0') || (*strtolPtr != '\0') || (update_count <= 0)) {
           std::cerr << "option -k requires a numeric arg\n" << std::endl;
         }
         break;
@@ -85,27 +112,6 @@ int main(int argc, char** argv) {
         break;
       }
 
-      case 'l': {  // range for range query
-        std::string str = optarg;
-        std::stringstream ss(str);
-        std::string item;
-        ranges.clear();
-        while (std::getline(ss, item, ',')) {
-          try {
-            ranges.push_back(std::stoull(item));
-          } catch (const std::invalid_argument& e) {
-            std::cerr << "Invalid number format for option -l: " << item
-                      << std::endl;
-            return 1;
-          } catch (const std::out_of_range& e) {
-            std::cerr << "Number out of range for option -l: " << item
-                      << std::endl;
-            return 1;
-          }
-        }
-        break;
-      }
-
       case 'd':  // data path
       {
         data_path = optarg;
@@ -123,6 +129,7 @@ int main(int argc, char** argv) {
         break;
     }
   }
+
   // init database
   // timeout = 100ms, the time between update the tree
   VersionedKVStore store(data_path, 100);
@@ -130,20 +137,18 @@ int main(int argc, char** argv) {
   // prepare result file
   std::ofstream rs_file;
   rs_file.open(result_path, std::ios::trunc);
-  rs_file << "version,range,latency,throughput" << std::endl;
+  rs_file << "version,latency,throughput,size" << std::endl;
   rs_file.close();
   rs_file.open(result_path, std::ios::app);
 
-  // load data
-  int num_load_version = num_accout / load_batch_size;
-  int version = 0;
+  uint64_t version = 0;
   CounterGenerator key_generator(1);
-  for (; version <= num_load_version; version++) {
+  for (; version <= update_count; version++) {
     std::vector<std::string> keys;
     std::vector<std::string> values;
     strongstore::proto::Reply reply;
     auto start = std::chrono::system_clock::now();
-    for (int i = 0; i < int(load_batch_size); i++) {
+    for (int i = 0; i < int(num_accout); i++) {
       uint64_t num = key_generator.Next();
       std::string key = BuildKeyName(num, key_len);
       std::string val = "";
@@ -158,55 +163,17 @@ int main(int argc, char** argv) {
     double load_latency = double(duration.count()) *
                           std::chrono::nanoseconds::period::num /
                           std::chrono::nanoseconds::period::den;
-    // for (int i = 0; i < reply.values_size(); i++) {
-    //   std::cout << "key:" << reply.values(i).key() << ", value"
-    //             << reply.values(i).val() << ", estimated block "
-    //             << reply.values(i).estimate_block() << std::endl;
-    // }
+    uint64_t data_size = GetDirectorySize(data_path);
     if (version % 1 == 0) {
       std::cout << "version " << version << ", load latnecy:" << load_latency
-                << ", load throughput:" << load_batch_size / load_latency
-                << std::endl;
-      rs_file << version << ",-1," << load_latency << ","
-              << load_batch_size / load_latency << std::endl;
+                << ", load throughput:" << num_accout / load_latency
+                << ", data dir is " << data_size << std::endl;
+      rs_file << version << "," << load_latency << ","
+              << num_accout / load_latency << "," << data_size << std::endl;
     }
   }
-  sleep(1);
 
-  uint64_t max_range = *std::max_element(ranges.begin(), ranges.end());
-  uint64_t random_keys[num_range_test];
-  UniformGenerator q_key_generator(1, (num_accout - max_range));
-  for (int i = 0; i < int(num_range_test); i++) {
-    random_keys[i] = q_key_generator.Next();
-  }
-
-  // range query
-  for (uint64_t r : ranges) {
-    int txn_key_id = 0;
-    for (int t = 0; t < int(num_range_test); t++) {
-      uint64_t num = random_keys[txn_key_id];
-      strongstore::proto::Reply reply;
-      std::string start_key = BuildKeyName(num, key_len);
-      std::string end_key =
-          BuildKeyName(num + r > num_accout ? num_accout : num + r, key_len);
-      auto start = std::chrono::system_clock::now();
-      store.GetRange(start_key, end_key, &reply);
-      auto end = std::chrono::system_clock::now();
-      auto duration =
-          std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
-      double range_latency = double(duration.count()) *
-                             std::chrono::nanoseconds::period::num /
-                             std::chrono::nanoseconds::period::den;
-      std::cout << "version " << version << ", range" << r
-                << ", range latnecy:" << range_latency
-                << ", range throughput:" << r / range_latency << std::endl;
-      rs_file << version << "," << r << "," << range_latency << ","
-              << r / range_latency << std::endl;
-      txn_key_id += 1;
-    }
-  }
   std::cout << "finished" << std::endl;
   rs_file.close();
-
   return 0;
 }
