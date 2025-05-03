@@ -1,0 +1,2 @@
+entry_count, batch_size, value_size, key_size, folder_size
+1000000, 4000, 1024, 32, 2183520

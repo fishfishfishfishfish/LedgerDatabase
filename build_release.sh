@@ -13,8 +13,8 @@ else
     build_dir=build_release_ledgerdb
   else
     qldbopt=OFF
-    ledgerdbopt=ON
-    sqlledgeropt=OFF
+    ledgerdbopt=OFF
+    sqlledgeropt=ON
     build_dir=build_release_sqlledger
   fi  
 fi

@@ -1,13 +1,14 @@
 #include "ledger/sqlledger/sqlledger.h"
+
 #include "ledger/common/utils.h"
 
 namespace ledgebase {
 
 namespace sqlledger {
 
-SQLLedger::SQLLedger(int t, const std::string& dbpath) :
-    logger_("/tmp/wal", "/tmp/index") {
-  db_.Open(dbpath);
+SQLLedger::SQLLedger(int t, const std::string& dbpath)
+    : logger_((dbpath + "/wal").c_str(), (dbpath + "/index").c_str()) {
+  db_.Open(dbpath + "/data");
   mt_.reset(new MerkleTree(&db_));
   block_seq_ = 0;
   tid_ = 0;
@@ -31,7 +32,7 @@ void SQLLedger::updateLedger(int timeout) {
     uint64_t new_blk_seq;
     {
       boost::unique_lock<boost::shared_mutex> blockseqlock(lock_);
-      new_blk_seq = block_seq_ ++;
+      new_blk_seq = block_seq_++;
       new_txns = std::move(buffer_);
       buffer_.reset(new std::map<uint64_t, std::vector<std::string>>());
       logger_.index(new_blk_seq);
@@ -49,8 +50,9 @@ void SQLLedger::updateLedger(int timeout) {
       mt_->Build(txnid, entry.second, &level, &txnroot);
 
       // create transaction entries
-      std::string txn_entry = txnid + "|" + std::to_string(new_blk_seq) + "|" + 
-          std::to_string(txn_seq) + "|" + txnroot + "|" + level;
+      std::string txn_entry = txnid + "|" + std::to_string(new_blk_seq) + "|" +
+                              std::to_string(txn_seq) + "|" + txnroot + "|" +
+                              level;
       db_.Put(txnid, txn_entry);
 
       leaves.emplace_back(txn_entry);
@@ -74,8 +76,9 @@ void SQLLedger::updateLedger(int timeout) {
     db_.Put("digest", newhash + "|" + std::to_string(new_blk_seq));
 
     gettimeofday(&t1, NULL);
-    auto lat = (t1.tv_sec - t0.tv_sec)*1000000 + t1.tv_usec - t0.tv_usec;
-    //std::cerr << "persist " << lat << " " << nkey << " " << new_txns->size() << std::endl;
+    auto lat = (t1.tv_sec - t0.tv_sec) * 1000000 + t1.tv_usec - t0.tv_usec;
+    // std::cerr << "persist " << lat << " " << nkey << " " << new_txns->size()
+    // << std::endl;
   }
 }
 
@@ -85,7 +88,8 @@ uint64_t SQLLedger::Set(const std::vector<std::string>& keys,
   std::string txnid = "txn" + std::to_string(tid_);
 
   uint64_t now = std::chrono::duration_cast<std::chrono::milliseconds>(
-      std::chrono::system_clock::now().time_since_epoch()).count();
+                     std::chrono::system_clock::now().time_since_epoch())
+                     .count();
 
   uint64_t next_blk_seq = 0;
   std::vector<std::string> docs;
@@ -96,8 +100,8 @@ uint64_t SQLLedger::Set(const std::vector<std::string>& keys,
     // create documents & update index
     for (size_t i = 0; i < keys.size(); ++i) {
       std::string document = std::to_string(next_blk_seq) + "|" + txnid + "|" +
-                            std::to_string(i) + "|" + keys[i] + "|" +
-                            vals[i] + "|" + std::to_string(now);
+                             std::to_string(i) + "|" + keys[i] + "|" + vals[i] +
+                             "|" + std::to_string(now);
       docs.emplace_back(document);
     }
     buffer_->emplace(tid_, docs);
@@ -113,7 +117,7 @@ uint64_t SQLLedger::Set(const std::vector<std::string>& keys,
   indexed_->Set(ks, ds);
 
   // append to wal log
-  auto txn_chunk = TxnEntry::Encode(now, keys, vals, dummy_, tid_-1);
+  auto txn_chunk = TxnEntry::Encode(now, keys, vals, dummy_, tid_ - 1);
   logger_.log(txn_chunk.head(), txn_chunk.numBytes());
 
   {
@@ -156,22 +160,20 @@ std::string SQLLedger::GetDataAtBlock(const std::string& key,
 }
 
 std::map<std::string, std::string> SQLLedger::Range(const std::string& from,
-    const std::string& to) {
+                                                    const std::string& to) {
   auto result = indexed_->Range(Slice(from), Slice(to));
   return result;
 }
 
 std::vector<std::string> SQLLedger::GetHistory(const std::string& key,
-    size_t n) {
+                                               size_t n) {
   std::vector<std::string> retval;
   if (n == 0) return retval;
 
   auto iter = db_.NewIterater();
   int cnt = 0;
   for (iter->Seek(key + "|");
-       iter->Valid() && iter->key().starts_with(key + "|");
-       iter->Next()) {
-    
+       iter->Valid() && iter->key().starts_with(key + "|"); iter->Next()) {
     retval.emplace_back(iter->value().ToString());
     ++cnt;
     if (cnt >= n) break;
@@ -180,7 +182,7 @@ std::vector<std::string> SQLLedger::GetHistory(const std::string& key,
 }
 
 BlockProof SQLLedger::getBlockProof(const uint64_t block_addr,
-    const uint64_t tip, int* level) {
+                                    const uint64_t tip, int* level) {
   BlockProof proof;
   for (size_t i = block_addr; i <= tip; ++i) {
     std::string block;
@@ -195,7 +197,7 @@ BlockProof SQLLedger::getBlockProof(const uint64_t block_addr,
 }
 
 DetailProof SQLLedger::getDetailProof(const std::string& key,
-    const uint64_t block_addr, int level) {
+                                      const uint64_t block_addr, int level) {
   DetailProof proof;
 
   std::string doc = GetDataAtBlock(key, block_addr);
@@ -210,12 +212,12 @@ DetailProof SQLLedger::getDetailProof(const std::string& key,
   auto txnroot = txnitems[3];
   auto txnrootlevel = std::stoul(txnitems[4]);
 
-  proof.txn_proof = mt_->GetProof("blk" + std::to_string(block_addr),
-      level, txnseq);
+  proof.txn_proof =
+      mt_->GetProof("blk" + std::to_string(block_addr), level, txnseq);
   proof.txn_proof.value = txn;
   proof.data_proof = mt_->GetProof("txn" + txnid, txnrootlevel, docseq);
   proof.data_proof.value = doc;
-  //std::cout << "height " << level + txnrootlevel << std::endl;
+  // std::cout << "height " << level + txnrootlevel << std::endl;
   return proof;
 }
 
@@ -299,8 +301,9 @@ bool Auditor::Audit(DB* db, size_t* ntxn) {
     std::vector<std::string> documents;
     for (size_t i = 0; i < entry.keysize(); ++i) {
       std::string document = std::to_string(block_seq) + "|" + txnid + "|" +
-          std::to_string(i) + "|" + entry.key(i).ToString() + "|" +
-          entry.val(i).ToString() + "|" + std::to_string(entry.time());
+                             std::to_string(i) + "|" + entry.key(i).ToString() +
+                             "|" + entry.val(i).ToString() + "|" +
+                             std::to_string(entry.time());
       documents.emplace_back(document);
     }
     // build merkle txn merkle tree
@@ -308,8 +311,8 @@ bool Auditor::Audit(DB* db, size_t* ntxn) {
     mt.Build(txnid, documents, &level, &txnroot);
 
     // create transaction entries
-    std::string txn_entry = txnid + "|" + std::to_string(block_seq) + "|" + 
-        std::to_string(j) + "|" + txnroot + "|" + level;
+    std::string txn_entry = txnid + "|" + std::to_string(block_seq) + "|" +
+                            std::to_string(j) + "|" + txnroot + "|" + level;
 
     buffer.emplace_back(txn_entry);
   }

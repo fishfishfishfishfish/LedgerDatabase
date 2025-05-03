@@ -13,8 +13,8 @@ else
     build_dir=build_debug_ledgerdb
   else
     qldbopt=OFF
-    ledgerdbopt=ON
-    sqlledgeropt=OFF
+    ledgerdbopt=OFF
+    sqlledgeropt=ON
     build_dir=build_debug_sqlledger
   fi  
 fi
@@ -24,5 +24,5 @@ mkdir -p ./${build_dir}
 # rm -rf ./${build_dir}
 cd ./${build_dir}
 
-cmake -DCMAKE_BUILD_TYPE=DEBUG -DLEDGERDB=${ledgerdbopt} -DAMZQLDB=${qldbopt} ..
+cmake -DCMAKE_BUILD_TYPE=DEBUG -DLEDGERDB=${ledgerdbopt} -DAMZQLDB=${qldbopt} -DSQLLEDGER=${sqlledgeropt} ..
 make -j6 VERBOSE=1 

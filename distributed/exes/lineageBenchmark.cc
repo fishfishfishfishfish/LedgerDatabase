@@ -27,12 +27,13 @@ int main(int argc, char** argv) {
   uint64_t num_txn_account = 50;
   uint64_t key_len = 32;
   uint64_t value_len = 1024;
+  bool is_get_with_proof = false;
   std::vector<size_t> query_versions = {2, 4, 10, 20, 40};
   std::string data_path = "data/";
   std::string result_path = "exps/results/test.csv";
 
   int opt;
-  while ((opt = getopt(argc, argv, "a:b:t:z:k:v:l:d:i:r:")) != -1) {
+  while ((opt = getopt(argc, argv, "a:b:t:z:p:k:v:l:d:i:r:")) != -1) {
     switch (opt) {
       case 'a':  // num_accout
       {
@@ -74,6 +75,12 @@ int main(int argc, char** argv) {
             (num_txn_account <= 0)) {
           std::cerr << "option -z requires a numeric arg\n" << std::endl;
         }
+        break;
+      }
+
+      case 'p':  // is get with proof?
+      {
+        is_get_with_proof = true;
         break;
       }
 
@@ -149,6 +156,7 @@ int main(int argc, char** argv) {
   // load data
   uint64_t num_load_version = num_accout / load_batch_size;
   uint64_t version = 0;
+  uint64_t cur_version = 0;
   CounterGenerator key_generator(1);
   for (; version <= num_load_version; version++) {
     std::vector<std::string> keys;
@@ -170,8 +178,15 @@ int main(int argc, char** argv) {
     double load_latency = double(duration.count()) *
                           std::chrono::nanoseconds::period::num /
                           std::chrono::nanoseconds::period::den;
+#ifndef AMZQLDB
+    cur_version = reply.values(0).estimate_block();
+#endif
+#ifdef AMZQLDB
+    cur_version = version;
+#endif
     if (version % 1 == 0) {
-      std::cout << "version " << version << ", load latnecy:" << load_latency
+      std::cout << "version " << version << "/" << cur_version
+                << ", load latnecy:" << load_latency
                 << ", load throughput:" << load_batch_size / load_latency
                 << std::endl;
       rs_file << version << ",LOAD," << load_latency << ","
@@ -201,36 +216,59 @@ int main(int argc, char** argv) {
       put_values.push_back(val);
     }
     store.put(put_keys, put_values, Timestamp(), &reply);
+    sleep(1);
     auto end = std::chrono::system_clock::now();
     auto duration =
         std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
     double put_latency = double(duration.count()) *
                          std::chrono::nanoseconds::period::num /
                          std::chrono::nanoseconds::period::den;
-    std::cout << "version " << version << ", put latnecy:" << put_latency << ","
+#ifndef AMZQLDB
+    cur_version = reply.values(0).estimate_block();
+#endif
+#ifdef AMZQLDB
+    cur_version = version;
+#endif
+    std::cout << "version " << version << "/" << cur_version
+              << ", put latnecy:" << put_latency << ","
               << "put throughput:" << num_txn_account / put_latency
               << std::endl;
     rs_file << version << ",PUT," << put_latency << ","
             << num_txn_account / put_latency << std::endl;
   }
-
   // version get
+
   for (size_t nv : query_versions) {
     for (int t = 0; t < int(num_txn_account); t++) {
       strongstore::proto::Reply reply;
-      std::vector<std::pair<std::string, size_t>> ver_keys;
-      // test get
-      auto start = std::chrono::system_clock::now();
+      double get_latency = 0;
       std::string key = BuildKeyName(random_keys[t], key_len);
-      ver_keys.push_back(std::make_pair(key, nv));
-
-      store.GetNVersions(ver_keys, &reply);
-      auto end = std::chrono::system_clock::now();
-      auto duration =
-          std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
-      double get_latency = double(duration.count()) *
-                           std::chrono::nanoseconds::period::num /
-                           std::chrono::nanoseconds::period::den;
+      // test get
+      if (is_get_with_proof) {
+        std::map<uint64_t, std::vector<std::string>> keys;
+        auto start = std::chrono::system_clock::now();
+        for (size_t v = 0; v < nv; ++v) {
+          keys[cur_version - v].push_back(key);
+        }
+        store.GetProof(keys, &reply);
+        auto end = std::chrono::system_clock::now();
+        auto duration =
+            std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+        get_latency = double(duration.count()) *
+                      std::chrono::nanoseconds::period::num /
+                      std::chrono::nanoseconds::period::den;
+      } else {
+        std::vector<std::pair<std::string, size_t>> ver_keys;
+        auto start = std::chrono::system_clock::now();
+        ver_keys.push_back(std::make_pair(key, nv));
+        store.GetNVersions(ver_keys, &reply);
+        auto end = std::chrono::system_clock::now();
+        auto duration =
+            std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+        get_latency = double(duration.count()) *
+                      std::chrono::nanoseconds::period::num /
+                      std::chrono::nanoseconds::period::den;
+      }
       std::cout << "nv: " << nv << ", get latnecy:" << get_latency << ","
                 << "get throughput:" << nv / get_latency << std::endl;
       rs_file << nv << ",GET," << get_latency << "," << nv / get_latency
