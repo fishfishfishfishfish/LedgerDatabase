@@ -11,3 +11,5 @@ data/
 result*/
 *.log
 !exps/exp_arxiv/
+
+nohup.out

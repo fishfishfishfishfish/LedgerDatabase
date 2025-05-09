@@ -1,0 +1,687 @@
+db_name: sqlledger
+data_path: /media/nvme/cxy_test/LedgerDatabase/exps/../data/
+result_dir: /media/nvme/cxy_test/LedgerDatabase/exps/results_sqlledger/update_benchmark
+++ rm -rf /media/nvme/cxy_test/LedgerDatabase/exps/../data//000039.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000042.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000044.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000045.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000046.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000053.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000054.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000068.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000069.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000076.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000092.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000152.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000172.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000173.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000174.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000175.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000176.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000177.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000182.log /media/nvme/cxy_test/LedgerDatabase/exps/../data//000184.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000185.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000186.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000187.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000188.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000189.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000190.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000191.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000192.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000193.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000194.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000195.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000196.sst /media/nvme/cxy_test/LedgerDatabase/exps/../data//000197.log /media/nvme/cxy_test/LedgerDatabase/exps/../data//CURRENT /media/nvme/cxy_test/LedgerDatabase/exps/../data//IDENTITY /media/nvme/cxy_test/LedgerDatabase/exps/../data//LOCK /media/nvme/cxy_test/LedgerDatabase/exps/../data//LOG /media/nvme/cxy_test/LedgerDatabase/exps/../data//MANIFEST-000009 /media/nvme/cxy_test/LedgerDatabase/exps/../data//OPTIONS-000005
+++ result_path=/media/nvme/cxy_test/LedgerDatabase/exps/results_sqlledger/update_benchmark/e500u100v1024.csv
++++ date '+%Y-%m-%d %H:%M:%S'
+++ echo 2025-05-05 00:54:00
+2025-05-05 00:54:00
+++ echo 'num account: 500, update count:100, value_size: 1024, key_size: 32'
+num account: 500, update count:100, value_size: 1024, key_size: 32
+++ ../build_release_sqlledger/bin/updateBenchmark -a 500 -t 100 -k 32 -v 1024 -d /media/nvme/cxy_test/LedgerDatabase/exps/../data/ -r /media/nvme/cxy_test/LedgerDatabase/exps/results_sqlledger/update_benchmark/e500u100v1024.csv
+version 0, load latnecy:0.00753627, load throughput:66345.8, data dir is 1693144
+version 1, load latnecy:0.00682825, load throughput:73225.2, data dir is 3405024
+version 2, load latnecy:0.00681073, load throughput:73413.5, data dir is 5111349
+version 3, load latnecy:0.00672944, load throughput:74300.4, data dir is 6810787
+version 4, load latnecy:0.00687856, load throughput:72689.6, data dir is 8529411
+version 5, load latnecy:0.0068474, load throughput:73020.4, data dir is 10241298
+version 6, load latnecy:0.0068856, load throughput:72615.4, data dir is 11946458
+version 7, load latnecy:0.00680483, load throughput:73477.2, data dir is 13644724
+version 8, load latnecy:0.00693852, load throughput:72061.4, data dir is 15362182
+version 9, load latnecy:0.00689103, load throughput:72558.1, data dir is 17072908
+version 10, load latnecy:0.00696809, load throughput:71755.6, data dir is 18777902
+version 11, load latnecy:0.00701248, load throughput:71301.5, data dir is 20476035
+version 12, load latnecy:0.00706051, load throughput:70816.4, data dir is 22193370
+version 13, load latnecy:0.00702148, load throughput:71210.1, data dir is 23903967
+version 14, load latnecy:0.010256, load throughput:48752, data dir is 25634088
+version 15, load latnecy:0.0112812, load throughput:44321.5, data dir is 27404051
+version 16, load latnecy:0.0104357, load throughput:47912.6, data dir is 29220110
+version 17, load latnecy:0.0105516, load throughput:47386.3, data dir is 31027108
+version 18, load latnecy:0.0106017, load throughput:47162.1, data dir is 32830606
+version 19, load latnecy:0.0101752, load throughput:49138.9, data dir is 34619902
+version 20, load latnecy:0.0107818, load throughput:46374.5, data dir is 36434720
+version 21, load latnecy:0.010417, load throughput:47998.3, data dir is 38238335
+version 22, load latnecy:0.010529, load throughput:47488, data dir is 40040594
+version 23, load latnecy:0.0101487, load throughput:49267.5, data dir is 41827665
+version 24, load latnecy:0.0111444, load throughput:44865.7, data dir is 43621951
+version 25, load latnecy:0.00713353, load throughput:70091.5, data dir is 45330015
+version 26, load latnecy:0.00703473, load throughput:71075.9, data dir is 47031184
+version 27, load latnecy:0.00711117, load throughput:70311.9, data dir is 48751557
+version 28, load latnecy:0.00714251, load throughput:70003.4, data dir is 50465192
+version 29, load latnecy:0.00710415, load throughput:70381.4, data dir is 52172089
+version 30, load latnecy:0.00707532, load throughput:70668.2, data dir is 53872086
+version 31, load latnecy:0.00716511, load throughput:69782.6, data dir is 55591299
+version 32, load latnecy:0.00715814, load throughput:69850.5, data dir is 57303762
+version 33, load latnecy:0.00712022, load throughput:70222.6, data dir is 59009485
+version 34, load latnecy:0.0071059, load throughput:70364, data dir is 60708322
+version 35, load latnecy:0.00723323, load throughput:69125.4, data dir is 62426221
+version 36, load latnecy:0.00719551, load throughput:69487.8, data dir is 64138490
+version 37, load latnecy:0.00727872, load throughput:68693.4, data dir is 65844021
+version 38, load latnecy:0.00755219, load throughput:66206, data dir is 67554912
+version 39, load latnecy:0.0108942, load throughput:45895.9, data dir is 69308174
+version 40, load latnecy:0.0110424, load throughput:45280, data dir is 71104990
+version 41, load latnecy:0.0105599, load throughput:47348.9, data dir is 72908726
+version 42, load latnecy:0.0107708, load throughput:46422, data dir is 74710162
+version 43, load latnecy:0.0109166, load throughput:45801.8, data dir is 76528934
+version 44, load latnecy:0.010926, load throughput:45762.6, data dir is 78342754
+version 45, load latnecy:0.0109147, load throughput:45809.7, data dir is 80151365
+version 46, load latnecy:0.0106672, load throughput:46872.6, data dir is 81948966
+version 47, load latnecy:0.010734, load throughput:46580.9, data dir is 83768390
+version 48, load latnecy:0.0108351, load throughput:46146.3, data dir is 85582141
+version 49, load latnecy:0.0109569, load throughput:45633.3, data dir is 87391031
+version 50, load latnecy:0.0108658, load throughput:46015.8, data dir is 89216717
+version 51, load latnecy:0.0107648, load throughput:46447.8, data dir is 91031843
+version 52, load latnecy:0.0111239, load throughput:44948.3, data dir is 92848431
+version 53, load latnecy:0.0111671, load throughput:44774.3, data dir is 94657137
+version 54, load latnecy:0.012539, load throughput:39875.7, data dir is 96430812
+version 55, load latnecy:0.00741915, load throughput:67393.1, data dir is 98144060
+version 56, load latnecy:0.00730313, load throughput:68463.8, data dir is 99850556
+version 57, load latnecy:0.00737277, load throughput:67817.1, data dir is 101550166
+version 58, load latnecy:0.00738942, load throughput:67664.3, data dir is 103268978
+version 59, load latnecy:0.00739495, load throughput:67613.7, data dir is 104981052
+version 60, load latnecy:0.00743522, load throughput:67247.5, data dir is 106686388
+version 61, load latnecy:0.00738135, load throughput:67738.3, data dir is 108384831
+version 62, load latnecy:0.00752259, load throughput:66466.5, data dir is 110102476
+version 63, load latnecy:0.00752131, load throughput:66477.8, data dir is 111813383
+version 64, load latnecy:0.00751039, load throughput:66574.5, data dir is 113517552
+version 65, load latnecy:0.00745861, load throughput:67036.7, data dir is 115214817
+version 66, load latnecy:0.00755344, load throughput:66195, data dir is 116931295
+version 67, load latnecy:0.00768029, load throughput:65101.7, data dir is 118647977
+version 68, load latnecy:0.0115485, load throughput:43295.6, data dir is 120452439
+version 69, load latnecy:0.0106246, load throughput:47060.7, data dir is 122251771
+version 70, load latnecy:0.0109788, load throughput:45542.3, data dir is 124068846
+version 71, load latnecy:0.010989, load throughput:45500, data dir is 125882477
+version 72, load latnecy:0.010968, load throughput:45587, data dir is 127688977
+version 73, load latnecy:0.0109969, load throughput:45467.6, data dir is 129513796
+version 74, load latnecy:0.0108662, load throughput:46014.3, data dir is 131333064
+version 75, load latnecy:0.010578, load throughput:47267.8, data dir is 133140108
+version 76, load latnecy:0.0107274, load throughput:46609.6, data dir is 134943063
+version 77, load latnecy:0.0106907, load throughput:46769.7, data dir is 136765839
+version 78, load latnecy:0.0108687, load throughput:46003.7, data dir is 138583617
+version 79, load latnecy:0.0108263, load throughput:46184, data dir is 140397915
+version 80, load latnecy:0.0106496, load throughput:46950.1, data dir is 142201079
+version 81, load latnecy:0.0111127, load throughput:44993.7, data dir is 144027202
+version 82, load latnecy:0.0109318, load throughput:45738, data dir is 145845136
+version 83, load latnecy:0.0109219, load throughput:45779.6, data dir is 147654236
+version 84, load latnecy:0.0109033, load throughput:45857.7, data dir is 149458487
+version 85, load latnecy:0.0115125, load throughput:43431, data dir is 151270253
+version 86, load latnecy:0.00775153, load throughput:64503.4, data dir is 152980896
+version 87, load latnecy:0.00753309, load throughput:66373.8, data dir is 154684794
+version 88, load latnecy:0.00748719, load throughput:66780.8, data dir is 156381802
+version 89, load latnecy:0.00756795, load throughput:66068.1, data dir is 158098016
+version 90, load latnecy:0.00753416, load throughput:66364.4, data dir is 159807352
+version 91, load latnecy:0.00750453, load throughput:66626.5, data dir is 161511058
+version 92, load latnecy:0.00754505, load throughput:66268.6, data dir is 163207864
+version 93, load latnecy:0.00757935, load throughput:65968.7, data dir is 164923879
+version 94, load latnecy:0.00761321, load throughput:65675.3, data dir is 166633156
+version 95, load latnecy:0.00757324, load throughput:66021.9, data dir is 168335540
+version 96, load latnecy:0.00762419, load throughput:65580.7, data dir is 170057126
+version 97, load latnecy:0.00767545, load throughput:65142.8, data dir is 171771981
+version 98, load latnecy:0.00773286, load throughput:64659.2, data dir is 173483992
+version 99, load latnecy:0.0104818, load throughput:47701.8, data dir is 175229200
+version 100, load latnecy:0.0109481, load throughput:45670.2, data dir is 177046997
+finished
+terminate called without an active exception
+./update_benchmark.sh: line 21: 248349 Segmentation fault      (core dumped) ../build_release_${db_name}/bin/updateBenchmark -a $n_acc -t $update_count -k $key_size -v $value_size -d $data_path -r $result_path
+++ sleep 5
+++ set +x
+++ rm -rf /media/nvme/cxy_test/LedgerDatabase/exps/../data//data /media/nvme/cxy_test/LedgerDatabase/exps/../data//index /media/nvme/cxy_test/LedgerDatabase/exps/../data//wal
+++ result_path=/media/nvme/cxy_test/LedgerDatabase/exps/results_sqlledger/update_benchmark/e1000u100v1024.csv
++++ date '+%Y-%m-%d %H:%M:%S'
+++ echo 2025-05-05 00:54:06
+2025-05-05 00:54:06
+++ echo 'num account: 1000, update count:100, value_size: 1024, key_size: 32'
+num account: 1000, update count:100, value_size: 1024, key_size: 32
+++ ../build_release_sqlledger/bin/updateBenchmark -a 1000 -t 100 -k 32 -v 1024 -d /media/nvme/cxy_test/LedgerDatabase/exps/../data/ -r /media/nvme/cxy_test/LedgerDatabase/exps/results_sqlledger/update_benchmark/e1000u100v1024.csv
+version 0, load latnecy:0.016157, load throughput:61892.5, data dir is 3359299
+version 1, load latnecy:0.0141922, load throughput:70461.4, data dir is 6731753
+version 2, load latnecy:0.0140053, load throughput:71401.3, data dir is 10116672
+version 3, load latnecy:0.0137609, load throughput:72669.4, data dir is 13487960
+version 4, load latnecy:0.0138417, load throughput:72245.5, data dir is 16871707
+version 5, load latnecy:0.0138487, load throughput:72208.7, data dir is 20241841
+version 6, load latnecy:0.0140879, load throughput:70982.8, data dir is 23629086
+version 7, load latnecy:0.0211792, load throughput:47216.2, data dir is 27112120
+version 8, load latnecy:0.0205837, load throughput:48582, data dir is 30672958
+version 9, load latnecy:0.0203601, load throughput:49115.7, data dir is 34211638
+version 10, load latnecy:0.0212802, load throughput:46992.1, data dir is 37783411
+version 11, load latnecy:0.0203175, load throughput:49218.7, data dir is 41333153
+version 12, load latnecy:0.0172635, load throughput:57925.6, data dir is 44762156
+version 13, load latnecy:0.0139725, load throughput:71569, data dir is 48130615
+version 14, load latnecy:0.0139648, load throughput:71608.5, data dir is 51511545
+version 15, load latnecy:0.0140124, load throughput:71365.2, data dir is 54878837
+version 16, load latnecy:0.0138607, load throughput:72146.2, data dir is 58258600
+version 17, load latnecy:0.0138823, load throughput:72034.4, data dir is 61624585
+version 18, load latnecy:0.0140415, load throughput:71217.3, data dir is 65004142
+version 19, load latnecy:0.0163428, load throughput:61188.9, data dir is 68402125
+version 20, load latnecy:0.0213808, load throughput:46771, data dir is 71938661
+version 21, load latnecy:0.0209189, load throughput:47803.7, data dir is 75492966
+version 22, load latnecy:0.0211855, load throughput:47202.1, data dir is 79053884
+version 23, load latnecy:0.0210853, load throughput:47426.4, data dir is 82614857
+version 24, load latnecy:0.0210541, load throughput:47496.8, data dir is 86187522
+version 25, load latnecy:0.0209431, load throughput:47748.3, data dir is 89762155
+version 26, load latnecy:0.0214602, load throughput:46597.9, data dir is 93335016
+version 27, load latnecy:0.0211317, load throughput:47322.3, data dir is 96921425
+version 28, load latnecy:0.0229271, load throughput:43616.4, data dir is 100419505
+version 29, load latnecy:0.0146895, load throughput:68075.7, data dir is 103805605
+version 30, load latnecy:0.0146554, load throughput:68234.4, data dir is 107178081
+version 31, load latnecy:0.014583, load throughput:68573.2, data dir is 110563017
+version 32, load latnecy:0.0148177, load throughput:67486.6, data dir is 113934319
+version 33, load latnecy:0.014655, load throughput:68236.1, data dir is 117318092
+version 34, load latnecy:0.0145471, load throughput:68742, data dir is 120688227
+version 35, load latnecy:0.0155643, load throughput:64249.7, data dir is 124102536
+version 36, load latnecy:0.0219353, load throughput:45588.7, data dir is 127644400
+version 37, load latnecy:0.0210663, load throughput:47469.1, data dir is 131226913
+version 38, load latnecy:0.0211197, load throughput:47349.2, data dir is 134782868
+version 39, load latnecy:0.0210315, load throughput:47547.7, data dir is 138363590
+version 40, load latnecy:0.0212485, load throughput:47062.2, data dir is 141924484
+version 41, load latnecy:0.0216424, load throughput:46205.5, data dir is 145498324
+version 42, load latnecy:0.0214719, load throughput:46572.5, data dir is 149065346
+version 43, load latnecy:0.0218198, load throughput:45830, data dir is 152643237
+version 44, load latnecy:0.0219079, load throughput:45645.7, data dir is 156202447
+version 45, load latnecy:0.0220534, load throughput:45344.4, data dir is 159788263
+version 46, load latnecy:0.0232622, load throughput:42988.2, data dir is 163229016
+version 47, load latnecy:0.0150784, load throughput:66320, data dir is 166605426
+version 48, load latnecy:0.0149054, load throughput:67089.6, data dir is 169994307
+version 49, load latnecy:0.0146344, load throughput:68332.1, data dir is 173369698
+version 50, load latnecy:0.014493, load throughput:68999, data dir is 176756445
+version 51, load latnecy:0.0145179, load throughput:68880.7, data dir is 180129554
+version 52, load latnecy:0.0146686, load throughput:68172.7, data dir is 183515128
+version 53, load latnecy:0.0197179, load throughput:50715.3, data dir is 186946241
+version 54, load latnecy:0.0216647, load throughput:46158.1, data dir is 190530004
+version 55, load latnecy:0.0215326, load throughput:46441.2, data dir is 194096166
+version 56, load latnecy:0.0219104, load throughput:45640.5, data dir is 197680764
+version 57, load latnecy:0.0213475, load throughput:46844, data dir is 201247221
+version 58, load latnecy:0.0220285, load throughput:45395.7, data dir is 204832380
+version 59, load latnecy:0.0215162, load throughput:46476.6, data dir is 208397809
+version 60, load latnecy:0.021997, load throughput:45460.7, data dir is 211982114
+version 61, load latnecy:0.021883, load throughput:45697.6, data dir is 215541575
+version 62, load latnecy:0.0217347, load throughput:46009.4, data dir is 219122847
+version 63, load latnecy:0.0218974, load throughput:45667.5, data dir is 222687848
+version 64, load latnecy:0.0215148, load throughput:46479.7, data dir is 226265434
+version 65, load latnecy:0.023285, load throughput:42946.2, data dir is 229712366
+version 66, load latnecy:0.014809, load throughput:67526.7, data dir is 233090738
+version 67, load latnecy:0.0148307, load throughput:67427.9, data dir is 236455482
+version 68, load latnecy:0.0149376, load throughput:66945.2, data dir is 239832687
+version 69, load latnecy:0.0147717, load throughput:67697, data dir is 243196261
+version 70, load latnecy:0.0149668, load throughput:66814.4, data dir is 246572151
+version 71, load latnecy:0.0149818, load throughput:66747.7, data dir is 249960501
+version 72, load latnecy:0.0200688, load throughput:49828.7, data dir is 253395063
+version 73, load latnecy:0.0220577, load throughput:45335.7, data dir is 256975838
+version 74, load latnecy:0.0208505, load throughput:47960.5, data dir is 260536773
+version 75, load latnecy:0.0209515, load throughput:47729.3, data dir is 264117021
+version 76, load latnecy:0.0212048, load throughput:47159.2, data dir is 267683673
+version 77, load latnecy:0.0218494, load throughput:45767.8, data dir is 271269161
+version 78, load latnecy:0.0215611, load throughput:46379.8, data dir is 274829965
+version 79, load latnecy:0.0219247, load throughput:45610.7, data dir is 278416139
+version 80, load latnecy:0.026137, load throughput:38260, data dir is 281992545
+version 81, load latnecy:0.0216761, load throughput:46133.7, data dir is 285572081
+version 82, load latnecy:0.0221726, load throughput:45100.8, data dir is 289133955
+version 83, load latnecy:0.0223268, load throughput:44789.3, data dir is 292723178
+version 84, load latnecy:0.0218773, load throughput:45709.5, data dir is 296280904
+version 85, load latnecy:0.0233113, load throughput:42897.7, data dir is 299699351
+version 86, load latnecy:0.0145849, load throughput:68563.8, data dir is 303065898
+version 87, load latnecy:0.0146664, load throughput:68183, data dir is 306444916
+version 88, load latnecy:0.0146995, load throughput:68029.6, data dir is 309810296
+version 89, load latnecy:0.0146933, load throughput:68058.2, data dir is 313188147
+version 90, load latnecy:0.0147306, load throughput:67885.8, data dir is 316552220
+version 91, load latnecy:0.0149177, load throughput:67034.6, data dir is 319929866
+version 92, load latnecy:0.0213802, load throughput:46772.2, data dir is 323386626
+version 93, load latnecy:0.0218784, load throughput:45707.3, data dir is 326956560
+version 94, load latnecy:0.0224205, load throughput:44602, data dir is 330526867
+version 95, load latnecy:0.0225986, load throughput:44250.5, data dir is 334101411
+version 96, load latnecy:0.0225857, load throughput:44275.9, data dir is 337678277
+version 97, load latnecy:0.0224349, load throughput:44573.4, data dir is 341249323
+version 98, load latnecy:0.0222753, load throughput:44892.9, data dir is 344824819
+version 99, load latnecy:0.022019, load throughput:45415.3, data dir is 348387242
+version 100, load latnecy:0.0223303, load throughput:44782.1, data dir is 351961087
+finished
+terminate called without an active exception
+./update_benchmark.sh: line 21: 248524 Aborted                 (core dumped) ../build_release_${db_name}/bin/updateBenchmark -a $n_acc -t $update_count -k $key_size -v $value_size -d $data_path -r $result_path
+++ sleep 5
+++ set +x
+++ rm -rf /media/nvme/cxy_test/LedgerDatabase/exps/../data//data /media/nvme/cxy_test/LedgerDatabase/exps/../data//index /media/nvme/cxy_test/LedgerDatabase/exps/../data//wal
+++ result_path=/media/nvme/cxy_test/LedgerDatabase/exps/results_sqlledger/update_benchmark/e2000u100v1024.csv
++++ date '+%Y-%m-%d %H:%M:%S'
+++ echo 2025-05-05 00:54:13
+2025-05-05 00:54:13
+++ echo 'num account: 2000, update count:100, value_size: 1024, key_size: 32'
+num account: 2000, update count:100, value_size: 1024, key_size: 32
+++ ../build_release_sqlledger/bin/updateBenchmark -a 2000 -t 100 -k 32 -v 1024 -d /media/nvme/cxy_test/LedgerDatabase/exps/../data/ -r /media/nvme/cxy_test/LedgerDatabase/exps/results_sqlledger/update_benchmark/e2000u100v1024.csv
+version 0, load latnecy:0.0318548, load throughput:62784.8, data dir is 6693796
+version 1, load latnecy:0.0282262, load throughput:70856.3, data dir is 13413186
+version 2, load latnecy:0.027493, load throughput:72745.9, data dir is 20131411
+version 3, load latnecy:0.0283699, load throughput:70497.3, data dir is 26911426
+version 4, load latnecy:0.04072, load throughput:49115.9, data dir is 33979594
+version 5, load latnecy:0.0413697, load throughput:48344.5, data dir is 41076783
+version 6, load latnecy:0.0419632, load throughput:47660.8, data dir is 48016575
+version 7, load latnecy:0.0281627, load throughput:71016, data dir is 54729927
+version 8, load latnecy:0.0283844, load throughput:70461.2, data dir is 61441978
+version 9, load latnecy:0.0283191, load throughput:70623.7, data dir is 68153970
+version 10, load latnecy:0.0437328, load throughput:45732.2, data dir is 75173926
+version 11, load latnecy:0.0433351, load throughput:46152, data dir is 82279422
+version 12, load latnecy:0.0428056, load throughput:46722.8, data dir is 89389560
+version 13, load latnecy:0.0429807, load throughput:46532.6, data dir is 96486332
+version 14, load latnecy:0.0443714, load throughput:45074.1, data dir is 103503015
+version 15, load latnecy:0.0297946, load throughput:67126.2, data dir is 110212098
+version 16, load latnecy:0.0295389, load throughput:67707.3, data dir is 116920020
+version 17, load latnecy:0.0296913, load throughput:67359.7, data dir is 123626767
+version 18, load latnecy:0.0436872, load throughput:45780, data dir is 130661802
+version 19, load latnecy:0.0421778, load throughput:47418.3, data dir is 137742312
+version 20, load latnecy:0.0423718, load throughput:47201.2, data dir is 144847018
+version 21, load latnecy:0.0430229, load throughput:46486.9, data dir is 151952619
+version 22, load latnecy:0.0441454, load throughput:45304.8, data dir is 158955338
+version 23, load latnecy:0.0301044, load throughput:66435.6, data dir is 165655890
+version 24, load latnecy:0.0299338, load throughput:66814, data dir is 172381392
+version 25, load latnecy:0.0290175, load throughput:68923.8, data dir is 179106037
+version 26, load latnecy:0.0431886, load throughput:46308.5, data dir is 186151786
+version 27, load latnecy:0.0421969, load throughput:47396.8, data dir is 193263491
+version 28, load latnecy:0.0434268, load throughput:46054.5, data dir is 200399469
+version 29, load latnecy:0.0436279, load throughput:45842.2, data dir is 207518648
+version 30, load latnecy:0.0443586, load throughput:45087.1, data dir is 214658219
+version 31, load latnecy:0.0391108, load throughput:51136.8, data dir is 221492079
+version 32, load latnecy:0.0292754, load throughput:68316.7, data dir is 228208088
+version 33, load latnecy:0.0297114, load throughput:67314.2, data dir is 234922928
+version 34, load latnecy:0.0310729, load throughput:64364.7, data dir is 241674947
+version 35, load latnecy:0.0443371, load throughput:45109, data dir is 248772657
+version 36, load latnecy:0.0438545, load throughput:45605.4, data dir is 255898183
+version 37, load latnecy:0.0422411, load throughput:47347.2, data dir is 263000107
+version 38, load latnecy:0.0426267, load throughput:46918.9, data dir is 270119126
+version 39, load latnecy:0.0481347, load throughput:41550, data dir is 277241985
+version 40, load latnecy:0.0543005, load throughput:36832.1, data dir is 284230025
+version 41, load latnecy:0.0302335, load throughput:66151.8, data dir is 290936486
+version 42, load latnecy:0.030023, load throughput:66615.7, data dir is 297641915
+version 43, load latnecy:0.0294048, load throughput:68016, data dir is 304347404
+version 44, load latnecy:0.043009, load throughput:46501.9, data dir is 311374263
+version 45, load latnecy:0.0432454, load throughput:46247.7, data dir is 318461019
+version 46, load latnecy:0.043578, load throughput:45894.7, data dir is 325564396
+version 47, load latnecy:0.0439585, load throughput:45497.5, data dir is 332693194
+version 48, load latnecy:0.0438449, load throughput:45615.4, data dir is 339826371
+version 49, load latnecy:0.0447134, load throughput:44729.4, data dir is 346950117
+version 50, load latnecy:0.0417922, load throughput:47855.9, data dir is 353675120
+version 51, load latnecy:0.0304182, load throughput:65750.2, data dir is 360395715
+version 52, load latnecy:0.0302775, load throughput:66055.7, data dir is 367115142
+version 53, load latnecy:0.0315705, load throughput:63350.4, data dir is 373913426
+version 54, load latnecy:0.0432205, load throughput:46274.3, data dir is 381028770
+version 55, load latnecy:0.0427137, load throughput:46823.4, data dir is 388158162
+version 56, load latnecy:0.0424117, load throughput:47156.8, data dir is 395275653
+version 57, load latnecy:0.0421621, load throughput:47435.9, data dir is 402391036
+version 58, load latnecy:0.0434364, load throughput:46044.4, data dir is 409521087
+version 59, load latnecy:0.0445261, load throughput:44917.5, data dir is 416653120
+version 60, load latnecy:0.0349886, load throughput:57161.4, data dir is 423428612
+version 61, load latnecy:0.0299524, load throughput:66772.6, data dir is 430138635
+version 62, load latnecy:0.0298507, load throughput:67000, data dir is 436846375
+version 63, load latnecy:0.0314741, load throughput:63544.3, data dir is 443622014
+version 64, load latnecy:0.0431591, load throughput:46340.2, data dir is 450724160
+version 65, load latnecy:0.0439309, load throughput:45526, data dir is 457851114
+version 66, load latnecy:0.043103, load throughput:46400.5, data dir is 464973516
+version 67, load latnecy:0.0426361, load throughput:46908.6, data dir is 472078432
+version 68, load latnecy:0.0430528, load throughput:46454.6, data dir is 479191805
+version 69, load latnecy:0.0430444, load throughput:46463.7, data dir is 486291604
+version 70, load latnecy:0.0364864, load throughput:54814.9, data dir is 493095513
+version 71, load latnecy:0.0302657, load throughput:66081.4, data dir is 499819531
+version 72, load latnecy:0.0303797, load throughput:65833.4, data dir is 506542234
+version 73, load latnecy:0.031713, load throughput:63065.6, data dir is 513330653
+version 74, load latnecy:0.0431321, load throughput:46369.1, data dir is 520438643
+version 75, load latnecy:0.0438923, load throughput:45566.1, data dir is 527571160
+version 76, load latnecy:0.0448168, load throughput:44626.1, data dir is 534706099
+version 77, load latnecy:0.0452915, load throughput:44158.4, data dir is 541837809
+version 78, load latnecy:0.0447463, load throughput:44696.4, data dir is 548983623
+version 79, load latnecy:0.0429678, load throughput:46546.5, data dir is 556092475
+version 80, load latnecy:0.0352692, load throughput:56706.8, data dir is 562885828
+version 81, load latnecy:0.0308691, load throughput:64789.7, data dir is 569598019
+version 82, load latnecy:0.0300726, load throughput:66505.8, data dir is 576310150
+version 83, load latnecy:0.0311277, load throughput:64251.5, data dir is 583089330
+version 84, load latnecy:0.0439372, load throughput:45519.5, data dir is 590208463
+version 85, load latnecy:0.0432114, load throughput:46284.1, data dir is 597339075
+version 86, load latnecy:0.0436756, load throughput:45792.2, data dir is 604455487
+version 87, load latnecy:0.0434427, load throughput:46037.7, data dir is 611566222
+version 88, load latnecy:0.0441556, load throughput:45294.4, data dir is 618696535
+version 89, load latnecy:0.0435863, load throughput:45886, data dir is 625809013
+version 90, load latnecy:0.0372636, load throughput:53671.7, data dir is 632606614
+version 91, load latnecy:0.0301878, load throughput:66251.9, data dir is 639314257
+version 92, load latnecy:0.0297457, load throughput:67236.5, data dir is 646020575
+version 93, load latnecy:0.0306636, load throughput:65223.8, data dir is 652808002
+version 94, load latnecy:0.0435862, load throughput:45886.1, data dir is 659931481
+version 95, load latnecy:0.0438063, load throughput:45655.6, data dir is 667080302
+version 96, load latnecy:0.0441265, load throughput:45324.3, data dir is 674218895
+version 97, load latnecy:0.0438659, load throughput:45593.5, data dir is 681359756
+version 98, load latnecy:0.0431531, load throughput:46346.6, data dir is 688495867
+version 99, load latnecy:0.0439145, load throughput:45543, data dir is 695630762
+version 100, load latnecy:0.0359972, load throughput:55559.8, data dir is 702441046
+finished
+terminate called without an active exception
+./update_benchmark.sh: line 21: 248636 Aborted                 (core dumped) ../build_release_${db_name}/bin/updateBenchmark -a $n_acc -t $update_count -k $key_size -v $value_size -d $data_path -r $result_path
+++ sleep 5
+++ set +x
+++ rm -rf /media/nvme/cxy_test/LedgerDatabase/exps/../data//data /media/nvme/cxy_test/LedgerDatabase/exps/../data//index /media/nvme/cxy_test/LedgerDatabase/exps/../data//wal
+++ result_path=/media/nvme/cxy_test/LedgerDatabase/exps/results_sqlledger/update_benchmark/e3000u100v1024.csv
++++ date '+%Y-%m-%d %H:%M:%S'
+++ echo 2025-05-05 00:54:23
+2025-05-05 00:54:23
+++ echo 'num account: 3000, update count:100, value_size: 1024, key_size: 32'
+num account: 3000, update count:100, value_size: 1024, key_size: 32
+++ ../build_release_sqlledger/bin/updateBenchmark -a 3000 -t 100 -k 32 -v 1024 -d /media/nvme/cxy_test/LedgerDatabase/exps/../data/ -r /media/nvme/cxy_test/LedgerDatabase/exps/results_sqlledger/update_benchmark/e3000u100v1024.csv
+version 0, load latnecy:0.0471354, load throughput:63646.4, data dir is 10028380
+version 1, load latnecy:0.0427629, load throughput:70154.3, data dir is 20068717
+version 2, load latnecy:0.0539573, load throughput:55599.5, data dir is 30477988
+version 3, load latnecy:0.0615495, load throughput:48741.2, data dir is 41099348
+version 4, load latnecy:0.0580411, load throughput:51687.5, data dir is 51354850
+version 5, load latnecy:0.0422645, load throughput:70981.6, data dir is 61389014
+version 6, load latnecy:0.0434343, load throughput:69069.8, data dir is 71550553
+version 7, load latnecy:0.0639793, load throughput:46890.2, data dir is 82191603
+version 8, load latnecy:0.0800403, load throughput:37481.1, data dir is 92859085
+version 9, load latnecy:0.0697086, load throughput:43036.3, data dir is 103079928
+version 10, load latnecy:0.0447325, load throughput:67065.3, data dir is 113125415
+version 11, load latnecy:0.0461128, load throughput:65057.9, data dir is 123301967
+version 12, load latnecy:0.0703116, load throughput:42667.2, data dir is 133848981
+version 13, load latnecy:0.073557, load throughput:40784.7, data dir is 144439441
+version 14, load latnecy:0.0694347, load throughput:43206.1, data dir is 154998590
+version 15, load latnecy:0.071484, load throughput:41967.4, data dir is 165213837
+version 16, load latnecy:0.0442543, load throughput:67790, data dir is 175275914
+version 17, load latnecy:0.0460285, load throughput:65177.1, data dir is 185396182
+version 18, load latnecy:0.0728785, load throughput:41164.4, data dir is 195976963
+version 19, load latnecy:0.0724228, load throughput:41423.4, data dir is 206577891
+version 20, load latnecy:0.069712, load throughput:43034.2, data dir is 217144131
+version 21, load latnecy:0.0706259, load throughput:42477.3, data dir is 227706711
+version 22, load latnecy:0.0488624, load throughput:61396.9, data dir is 237824357
+version 23, load latnecy:0.0447828, load throughput:66990, data dir is 247860972
+version 24, load latnecy:0.0480089, load throughput:62488.4, data dir is 258222621
+version 25, load latnecy:0.0979355, load throughput:30632.4, data dir is 268974715
+version 26, load latnecy:0.0735994, load throughput:40761.2, data dir is 279508081
+version 27, load latnecy:0.0717295, load throughput:41823.8, data dir is 290063657
+version 28, load latnecy:0.0724933, load throughput:41383.2, data dir is 300570519
+version 29, load latnecy:0.0751138, load throughput:39939.4, data dir is 310787782
+version 30, load latnecy:0.0443496, load throughput:67644.3, data dir is 320824895
+version 31, load latnecy:0.0472154, load throughput:63538.5, data dir is 330921286
+version 32, load latnecy:0.0737393, load throughput:40683.9, data dir is 341499126
+version 33, load latnecy:0.0737016, load throughput:40704.7, data dir is 352073254
+version 34, load latnecy:0.0724164, load throughput:41427.1, data dir is 362646805
+version 35, load latnecy:0.0737407, load throughput:40683.1, data dir is 373206096
+version 36, load latnecy:0.0711453, load throughput:42167.2, data dir is 383757854
+version 37, load latnecy:0.0444015, load throughput:67565.3, data dir is 393796714
+version 38, load latnecy:0.0436297, load throughput:68760.4, data dir is 403846729
+version 39, load latnecy:0.0627138, load throughput:47836.3, data dir is 414335821
+version 40, load latnecy:0.0721984, load throughput:41552.2, data dir is 424912894
+version 41, load latnecy:0.0699624, load throughput:42880.2, data dir is 435497065
+version 42, load latnecy:0.0698082, load throughput:42974.9, data dir is 446060258
+version 43, load latnecy:0.0693336, load throughput:43269, data dir is 456631874
+version 44, load latnecy:0.0681881, load throughput:43995.9, data dir is 467154821
+version 45, load latnecy:0.0450321, load throughput:66619.1, data dir is 477205486
+version 46, load latnecy:0.0441828, load throughput:67899.8, data dir is 487242452
+version 47, load latnecy:0.0740196, load throughput:40529.8, data dir is 497750713
+version 48, load latnecy:0.0723006, load throughput:41493.5, data dir is 508354426
+version 49, load latnecy:0.076867, load throughput:39028.4, data dir is 518974456
+version 50, load latnecy:0.070998, load throughput:42254.7, data dir is 529556100
+version 51, load latnecy:0.0704307, load throughput:42595.1, data dir is 540135940
+version 52, load latnecy:0.0728247, load throughput:41194.8, data dir is 550537499
+version 53, load latnecy:0.0438302, load throughput:68446, data dir is 560575103
+version 54, load latnecy:0.0440793, load throughput:68059.2, data dir is 570650689
+version 55, load latnecy:0.0710439, load throughput:42227.4, data dir is 581218654
+version 56, load latnecy:0.0717759, load throughput:41796.8, data dir is 591813149
+version 57, load latnecy:0.0766289, load throughput:39149.7, data dir is 602431672
+version 58, load latnecy:0.0695689, load throughput:43122.7, data dir is 612988650
+version 59, load latnecy:0.0777963, load throughput:38562.3, data dir is 623520937
+version 60, load latnecy:0.0450277, load throughput:66625.6, data dir is 633560012
+version 61, load latnecy:0.043106, load throughput:69595.8, data dir is 643611487
+version 62, load latnecy:0.0729444, load throughput:41127.2, data dir is 654168092
+version 63, load latnecy:0.0722899, load throughput:41499.6, data dir is 664759025
+version 64, load latnecy:0.0789727, load throughput:37987.8, data dir is 675422654
+version 65, load latnecy:0.0718104, load throughput:41776.7, data dir is 686000767
+version 66, load latnecy:0.0750604, load throughput:39967.8, data dir is 696559825
+version 67, load latnecy:0.0449217, load throughput:66782.8, data dir is 706609667
+version 68, load latnecy:0.0446389, load throughput:67205.9, data dir is 716670838
+version 69, load latnecy:0.0713119, load throughput:42068.7, data dir is 727196203
+version 70, load latnecy:0.0720853, load throughput:41617.3, data dir is 737772687
+version 71, load latnecy:0.0720568, load throughput:41633.8, data dir is 748378402
+version 72, load latnecy:0.0701657, load throughput:42755.9, data dir is 758969580
+version 73, load latnecy:0.0697025, load throughput:43040, data dir is 769575617
+version 74, load latnecy:0.0500756, load throughput:59909.4, data dir is 779638639
+version 75, load latnecy:0.0450548, load throughput:66585.6, data dir is 789700313
+version 76, load latnecy:0.0620124, load throughput:48377.4, data dir is 800175143
+version 77, load latnecy:0.0724811, load throughput:41390.1, data dir is 820834180
+version 78, load latnecy:0.0836756, load throughput:35852.7, data dir is 868525661
+version 79, load latnecy:0.0878384, load throughput:34153.6, data dir is 908555235
+version 80, load latnecy:0.0765859, load throughput:39171.7, data dir is 968331116
+version 81, load latnecy:0.0756487, load throughput:39657, data dir is 1037182474
+version 82, load latnecy:0.0483316, load throughput:62071.3, data dir is 1084102682
+version 83, load latnecy:0.0510474, load throughput:58768.9, data dir is 1132389877
+version 84, load latnecy:0.08584, load throughput:34948.7, data dir is 1178610840
+version 85, load latnecy:0.0865599, load throughput:34658.1, data dir is 1227681291
+version 86, load latnecy:0.0710105, load throughput:42247.3, data dir is 1305737438
+version 87, load latnecy:0.0720585, load throughput:41632.8, data dir is 1385010069
+version 88, load latnecy:0.0738621, load throughput:40616.2, data dir is 1418274193
+version 89, load latnecy:0.0456337, load throughput:65740.9, data dir is 1435662939
+version 90, load latnecy:0.0473042, load throughput:63419.3, data dir is 1452545808
+version 91, load latnecy:0.0728432, load throughput:41184.3, data dir is 1463125342
+version 92, load latnecy:0.0712684, load throughput:42094.4, data dir is 1473731887
+version 93, load latnecy:0.0734976, load throughput:40817.6, data dir is 1484348442
+version 94, load latnecy:0.0703183, load throughput:42663.1, data dir is 1494946562
+version 95, load latnecy:0.0808858, load throughput:37089.3, data dir is 988213396
+version 96, load latnecy:0.0476662, load throughput:62937.7, data dir is 998279061
+version 97, load latnecy:0.047236, load throughput:63510.8, data dir is 1008355187
+version 98, load latnecy:0.0729376, load throughput:41131.1, data dir is 1018931956
+version 99, load latnecy:0.0705838, load throughput:42502.7, data dir is 1029525436
+version 100, load latnecy:0.0712674, load throughput:42095, data dir is 1040144200
+finished
+terminate called without an active exception
+./update_benchmark.sh: line 21: 248758 Segmentation fault      (core dumped) ../build_release_${db_name}/bin/updateBenchmark -a $n_acc -t $update_count -k $key_size -v $value_size -d $data_path -r $result_path
+++ sleep 5
+++ set +x
+++ rm -rf /media/nvme/cxy_test/LedgerDatabase/exps/../data//data /media/nvme/cxy_test/LedgerDatabase/exps/../data//index /media/nvme/cxy_test/LedgerDatabase/exps/../data//wal
+++ result_path=/media/nvme/cxy_test/LedgerDatabase/exps/results_sqlledger/update_benchmark/e4000u100v1024.csv
++++ date '+%Y-%m-%d %H:%M:%S'
+++ echo 2025-05-05 00:54:35
+2025-05-05 00:54:35
+++ echo 'num account: 4000, update count:100, value_size: 1024, key_size: 32'
+num account: 4000, update count:100, value_size: 1024, key_size: 32
+++ ../build_release_sqlledger/bin/updateBenchmark -a 4000 -t 100 -k 32 -v 1024 -d /media/nvme/cxy_test/LedgerDatabase/exps/../data/ -r /media/nvme/cxy_test/LedgerDatabase/exps/results_sqlledger/update_benchmark/e4000u100v1024.csv
+version 0, load latnecy:0.0643037, load throughput:62204.9, data dir is 13362815
+version 1, load latnecy:0.0600416, load throughput:66620.5, data dir is 26867101
+version 2, load latnecy:0.0832019, load throughput:48075.8, data dir is 41022122
+version 3, load latnecy:0.0633328, load throughput:63158.4, data dir is 54547719
+version 4, load latnecy:0.0590948, load throughput:67687.8, data dir is 67978445
+version 5, load latnecy:0.0856921, load throughput:46678.7, data dir is 82161818
+version 6, load latnecy:0.0863921, load throughput:46300.5, data dir is 96229802
+version 7, load latnecy:0.0597817, load throughput:66910.1, data dir is 109605030
+version 8, load latnecy:0.060892, load throughput:65690.1, data dir is 123222928
+version 9, load latnecy:0.0857807, load throughput:46630.6, data dir is 137427745
+version 10, load latnecy:0.0882795, load throughput:45310.6, data dir is 151638398
+version 11, load latnecy:0.0688298, load throughput:58114.3, data dir is 165157708
+version 12, load latnecy:0.0618175, load throughput:64706.5, data dir is 178624697
+version 13, load latnecy:0.0859911, load throughput:46516.4, data dir is 192844675
+version 14, load latnecy:0.0870464, load throughput:45952.5, data dir is 207103143
+version 15, load latnecy:0.0876338, load throughput:45644.5, data dir is 220818110
+version 16, load latnecy:0.0599951, load throughput:66672.1, data dir is 234207136
+version 17, load latnecy:0.0888989, load throughput:44994.9, data dir is 248337860
+version 18, load latnecy:0.0866898, load throughput:46141.5, data dir is 262565010
+version 19, load latnecy:0.0936757, load throughput:42700.5, data dir is 276836328
+version 20, load latnecy:0.0753547, load throughput:53082.3, data dir is 290344543
+version 21, load latnecy:0.0631189, load throughput:63372.5, data dir is 303759915
+version 22, load latnecy:0.0883508, load throughput:45274.1, data dir is 317922389
+version 23, load latnecy:0.0888677, load throughput:45010.7, data dir is 332159981
+version 24, load latnecy:0.0912397, load throughput:43840.5, data dir is 345958807
+version 25, load latnecy:0.06075, load throughput:65843.6, data dir is 359353580
+version 26, load latnecy:0.0910282, load throughput:43942.5, data dir is 373497767
+version 27, load latnecy:0.0863103, load throughput:46344.4, data dir is 387742335
+version 28, load latnecy:0.085989, load throughput:46517.6, data dir is 401973722
+version 29, load latnecy:0.0706178, load throughput:56642.9, data dir is 415518642
+version 30, load latnecy:0.0617642, load throughput:64762.5, data dir is 428996145
+version 31, load latnecy:0.0874317, load throughput:45750, data dir is 443220996
+version 32, load latnecy:0.0902942, load throughput:44299.6, data dir is 457496653
+version 33, load latnecy:0.0776605, load throughput:51506.2, data dir is 471132341
+version 34, load latnecy:0.0602471, load throughput:66393.2, data dir is 484541470
+version 35, load latnecy:0.089909, load throughput:44489.4, data dir is 498770348
+version 36, load latnecy:0.0875918, load throughput:45666.4, data dir is 513045141
+version 37, load latnecy:0.0879415, load throughput:45484.8, data dir is 526785264
+version 38, load latnecy:0.0613049, load throughput:65247.6, data dir is 540176303
+version 39, load latnecy:0.0880455, load throughput:45431.1, data dir is 554390168
+version 40, load latnecy:0.0872166, load throughput:45862.8, data dir is 568660371
+version 41, load latnecy:0.08988, load throughput:44503.8, data dir is 582462507
+version 42, load latnecy:0.0624943, load throughput:64005.9, data dir is 595857485
+version 43, load latnecy:0.0899082, load throughput:44489.8, data dir is 610022267
+version 44, load latnecy:0.0886602, load throughput:45116.1, data dir is 624296314
+version 45, load latnecy:0.0901769, load throughput:44357.2, data dir is 638114025
+version 46, load latnecy:0.0605695, load throughput:66039.9, data dir is 651499361
+version 47, load latnecy:0.0889219, load throughput:44983.3, data dir is 665654594
+version 48, load latnecy:0.0883643, load throughput:45267.1, data dir is 679934622
+version 49, load latnecy:0.0879767, load throughput:45466.6, data dir is 694189419
+version 50, load latnecy:0.0673883, load throughput:59357.5, data dir is 707728504
+version 51, load latnecy:0.0650316, load throughput:61508.6, data dir is 721199807
+version 52, load latnecy:0.089925, load throughput:44481.5, data dir is 735418465
+version 53, load latnecy:0.0921274, load throughput:43418.1, data dir is 749695153
+version 54, load latnecy:0.0868293, load throughput:46067.4, data dir is 763407941
+version 55, load latnecy:0.0616648, load throughput:64866.9, data dir is 776811775
+version 56, load latnecy:0.106716, load throughput:37482.7, data dir is 790914927
+version 57, load latnecy:0.101122, load throughput:39556.2, data dir is 817143725
+version 58, load latnecy:0.110688, load throughput:36137.7, data dir is 902056362
+version 59, load latnecy:0.0650356, load throughput:61504.7, data dir is 969531140
+version 60, load latnecy:0.0935712, load throughput:42748.2, data dir is 1054976919
+version 61, load latnecy:0.108267, load throughput:36945.7, data dir is 1151102064
+version 62, load latnecy:0.103431, load throughput:38673.2, data dir is 1252563936
+version 63, load latnecy:0.118032, load throughput:33889.1, data dir is 1372335334
+version 64, load latnecy:0.0628578, load throughput:63635.7, data dir is 1396196828
+version 65, load latnecy:0.0738673, load throughput:54151.2, data dir is 1422646715
+version 66, load latnecy:0.104373, load throughput:38324, data dir is 1436828592
+version 67, load latnecy:0.0994821, load throughput:40208.2, data dir is 1450985342
+version 68, load latnecy:0.10543, load throughput:37940, data dir is 1464800518
+version 69, load latnecy:0.0651676, load throughput:61380.2, data dir is 959975722
+version 70, load latnecy:0.0998332, load throughput:40066.8, data dir is 974003942
+version 71, load latnecy:0.102567, load throughput:38998.7, data dir is 988158261
+version 72, load latnecy:0.101929, load throughput:39243.2, data dir is 1002342416
+version 73, load latnecy:0.107737, load throughput:37127.6, data dir is 1016113823
+version 74, load latnecy:0.0631739, load throughput:63317.3, data dir is 1029514248
+version 75, load latnecy:0.106793, load throughput:37455.5, data dir is 1043593763
+version 76, load latnecy:0.0943163, load throughput:42410.5, data dir is 1057812268
+version 77, load latnecy:0.0957287, load throughput:41784.7, data dir is 1072046137
+version 78, load latnecy:0.0872648, load throughput:45837.5, data dir is 1085691922
+version 79, load latnecy:0.0647051, load throughput:61818.9, data dir is 1099156791
+version 80, load latnecy:0.0958864, load throughput:41716, data dir is 1113376925
+version 81, load latnecy:0.0935025, load throughput:42779.6, data dir is 1127671973
+version 82, load latnecy:0.0887857, load throughput:45052.3, data dir is 1141379489
+version 83, load latnecy:0.0639665, load throughput:62532.7, data dir is 1154814583
+version 84, load latnecy:0.0935773, load throughput:42745.4, data dir is 1169037147
+version 85, load latnecy:0.0925963, load throughput:43198.3, data dir is 1183302217
+version 86, load latnecy:0.0928291, load throughput:43089.9, data dir is 1197081759
+version 87, load latnecy:0.0640662, load throughput:62435.4, data dir is 1210487335
+version 88, load latnecy:0.0932752, load throughput:42883.9, data dir is 1224682059
+version 89, load latnecy:0.0917216, load throughput:43610.2, data dir is 1238936547
+version 90, load latnecy:0.0951601, load throughput:42034.4, data dir is 1252747495
+version 91, load latnecy:0.0628934, load throughput:63599.6, data dir is 1266135941
+version 92, load latnecy:0.0936022, load throughput:42734, data dir is 1280302527
+version 93, load latnecy:0.0933756, load throughput:42837.8, data dir is 1294587319
+version 94, load latnecy:0.0946077, load throughput:42279.9, data dir is 1308424566
+version 95, load latnecy:0.0630109, load throughput:63481.1, data dir is 1321829341
+version 96, load latnecy:0.0947146, load throughput:42232.1, data dir is 1336035828
+version 97, load latnecy:0.0926193, load throughput:43187.6, data dir is 1350304077
+version 98, load latnecy:0.0945232, load throughput:42317.7, data dir is 1364122353
+version 99, load latnecy:0.064696, load throughput:61827.6, data dir is 1377518894
+version 100, load latnecy:0.094441, load throughput:42354.5, data dir is 1391719849
+finished
+terminate called without an active exception
+./update_benchmark.sh: line 21: 248892 Segmentation fault      (core dumped) ../build_release_${db_name}/bin/updateBenchmark -a $n_acc -t $update_count -k $key_size -v $value_size -d $data_path -r $result_path
+++ sleep 5
+++ set +x
+++ rm -rf /media/nvme/cxy_test/LedgerDatabase/exps/../data//data /media/nvme/cxy_test/LedgerDatabase/exps/../data//index /media/nvme/cxy_test/LedgerDatabase/exps/../data//wal
+++ result_path=/media/nvme/cxy_test/LedgerDatabase/exps/results_sqlledger/update_benchmark/e5000u100v1024.csv
++++ date '+%Y-%m-%d %H:%M:%S'
+++ echo 2025-05-05 00:54:49
+2025-05-05 00:54:49
+++ echo 'num account: 5000, update count:100, value_size: 1024, key_size: 32'
+num account: 5000, update count:100, value_size: 1024, key_size: 32
+++ ../build_release_sqlledger/bin/updateBenchmark -a 5000 -t 100 -k 32 -v 1024 -d /media/nvme/cxy_test/LedgerDatabase/exps/../data/ -r /media/nvme/cxy_test/LedgerDatabase/exps/results_sqlledger/update_benchmark/e5000u100v1024.csv
+version 0, load latnecy:0.0867205, load throughput:57656.5, data dir is 16697396
+version 1, load latnecy:0.104577, load throughput:47811.6, data dir is 34180618
+version 2, load latnecy:0.110494, load throughput:45251.3, data dir is 51403863
+version 3, load latnecy:0.0753427, load throughput:66363.5, data dir is 68178333
+version 4, load latnecy:0.113204, load throughput:44168.1, data dir is 85882495
+version 5, load latnecy:0.0892537, load throughput:56020.1, data dir is 102833133
+version 6, load latnecy:0.0782956, load throughput:63860.6, data dir is 119896290
+version 7, load latnecy:0.11412, load throughput:43813.6, data dir is 137659242
+version 8, load latnecy:0.113045, load throughput:44230, data dir is 154894426
+version 9, load latnecy:0.0806575, load throughput:61990.6, data dir is 171691193
+version 10, load latnecy:0.115111, load throughput:43436.4, data dir is 189435742
+version 11, load latnecy:0.116459, load throughput:42933.7, data dir is 206990758
+version 12, load latnecy:0.0769588, load throughput:64969.8, data dir is 223732285
+version 13, load latnecy:0.116713, load throughput:42840.1, data dir is 241445796
+version 14, load latnecy:0.114721, load throughput:43584, data dir is 259114870
+version 15, load latnecy:0.0772629, load throughput:64714.1, data dir is 275846955
+version 16, load latnecy:0.122879, load throughput:40690.6, data dir is 293520096
+version 17, load latnecy:0.116001, load throughput:43103, data dir is 311279220
+version 18, load latnecy:0.120299, load throughput:41563.2, data dir is 328616014
+version 19, load latnecy:0.0804504, load throughput:62150.1, data dir is 345435406
+version 20, load latnecy:0.117185, load throughput:42667.5, data dir is 363167235
+version 21, load latnecy:0.119135, load throughput:41969.3, data dir is 380745905
+version 22, load latnecy:0.0764068, load throughput:65439.2, data dir is 397472536
+version 23, load latnecy:0.11784, load throughput:42430.3, data dir is 415196596
+version 24, load latnecy:0.117591, load throughput:42520.4, data dir is 432864992
+version 25, load latnecy:0.0783022, load throughput:63855.2, data dir is 449594519
+version 26, load latnecy:0.116941, load throughput:42756.7, data dir is 467256943
+version 27, load latnecy:0.114316, load throughput:43738.5, data dir is 485039306
+version 28, load latnecy:0.117611, load throughput:42512.9, data dir is 502378868
+version 29, load latnecy:0.0800092, load throughput:62492.8, data dir is 519196847
+version 30, load latnecy:0.114317, load throughput:43738.2, data dir is 536988986
+version 31, load latnecy:0.117881, load throughput:42415.8, data dir is 554534745
+version 32, load latnecy:0.0772678, load throughput:64710, data dir is 571307207
+version 33, load latnecy:0.116319, load throughput:42985.1, data dir is 589094895
+version 34, load latnecy:0.116552, load throughput:42899.5, data dir is 606719245
+version 35, load latnecy:0.0795437, load throughput:62858.5, data dir is 623469510
+version 36, load latnecy:0.116099, load throughput:43066.8, data dir is 641201060
+version 37, load latnecy:0.115626, load throughput:43242.8, data dir is 658888947
+version 38, load latnecy:0.0792088, load throughput:63124.3, data dir is 675636212
+version 39, load latnecy:0.114393, load throughput:43709, data dir is 693287097
+version 40, load latnecy:0.116217, load throughput:43023.1, data dir is 711087876
+version 41, load latnecy:0.119294, load throughput:41913.2, data dir is 728447917
+version 42, load latnecy:0.0818313, load throughput:61101.3, data dir is 745264547
+version 43, load latnecy:0.145949, load throughput:34258.4, data dir is 763369211
+version 44, load latnecy:0.151375, load throughput:33030.5, data dir is 780620888
+version 45, load latnecy:0.138722, load throughput:36043.2, data dir is 829996914
+version 46, load latnecy:0.120763, load throughput:41403.4, data dir is 933348583
+version 47, load latnecy:0.0841677, load throughput:59405.2, data dir is 1023215728
+version 48, load latnecy:0.121283, load throughput:41226, data dir is 1141245211
+version 49, load latnecy:0.0833774, load throughput:59968.3, data dir is 1233991761
+version 50, load latnecy:0.0979737, load throughput:51034.1, data dir is 1357352220
+version 51, load latnecy:0.119214, load throughput:41941.5, data dir is 1403356880
+version 52, load latnecy:0.0873494, load throughput:57241.4, data dir is 1426770912
+version 53, load latnecy:0.0811968, load throughput:61578.8, data dir is 1444054032
+version 54, load latnecy:0.117488, load throughput:42557.5, data dir is 1461887505
+version 55, load latnecy:0.106281, load throughput:47044.9, data dir is 961014560
+version 56, load latnecy:0.0813869, load throughput:61434.9, data dir is 978224066
+version 57, load latnecy:0.118766, load throughput:42099.5, data dir is 996047662
+version 58, load latnecy:0.118652, load throughput:42140.1, data dir is 1013202567
+version 59, load latnecy:0.0909299, load throughput:54987.4, data dir is 1030288349
+version 60, load latnecy:0.119001, load throughput:42016.6, data dir is 1048125326
+version 61, load latnecy:0.118063, load throughput:42350.3, data dir is 1065377485
+version 62, load latnecy:0.0827434, load throughput:60427.8, data dir is 1082293606
+version 63, load latnecy:0.119883, load throughput:41707.5, data dir is 1100077159
+version 64, load latnecy:0.123458, load throughput:40499.5, data dir is 1117541789
+version 65, load latnecy:0.0832887, load throughput:60032.1, data dir is 1134337715
+version 66, load latnecy:0.11652, load throughput:42910.9, data dir is 1152125432
+version 67, load latnecy:0.118449, load throughput:42212.2, data dir is 1169719525
+version 68, load latnecy:0.0806503, load throughput:61996, data dir is 1186484848
+version 69, load latnecy:0.119082, load throughput:41988, data dir is 1204225314
+version 70, load latnecy:0.118941, load throughput:42037.7, data dir is 1221885250
+version 71, load latnecy:0.0806128, load throughput:62024.9, data dir is 1238630354
+version 72, load latnecy:0.120159, load throughput:41611.5, data dir is 1256333538
+version 73, load latnecy:0.117796, load throughput:42446.2, data dir is 1274060863
+version 74, load latnecy:0.0811106, load throughput:61644.2, data dir is 1290811076
+version 75, load latnecy:0.108496, load throughput:46084.5, data dir is 1308368694
+version 76, load latnecy:0.119702, load throughput:41770.3, data dir is 1326130535
+version 77, load latnecy:0.122615, load throughput:40777.9, data dir is 1343630845
+version 78, load latnecy:0.081262, load throughput:61529.3, data dir is 1360407830
+version 79, load latnecy:0.120456, load throughput:41508.9, data dir is 1378199443
+version 80, load latnecy:0.119974, load throughput:41675.7, data dir is 1395815599
+version 81, load latnecy:0.0808196, load throughput:61866.1, data dir is 1412568469
+version 82, load latnecy:0.122012, load throughput:40979.7, data dir is 1430306623
+version 83, load latnecy:0.118553, load throughput:42175.2, data dir is 1447986488
+version 84, load latnecy:0.0826513, load throughput:60495.1, data dir is 1464740011
+version 85, load latnecy:0.121948, load throughput:41001, data dir is 1482515433
+version 86, load latnecy:0.135573, load throughput:36880.4, data dir is 1500174577
+version 87, load latnecy:0.0828247, load throughput:60368.5, data dir is 1517000263
+version 88, load latnecy:0.11677, load throughput:42819, data dir is 1534808109
+version 89, load latnecy:0.120204, load throughput:41595.9, data dir is 1603564258
+version 90, load latnecy:0.0859516, load throughput:58172.3, data dir is 1683203683
+version 91, load latnecy:0.121651, load throughput:41101.1, data dir is 1803479043
+version 92, load latnecy:0.124445, load throughput:40178.5, data dir is 1920750745
+version 93, load latnecy:0.0878676, load throughput:56903.8, data dir is 2026531787
+version 94, load latnecy:0.123531, load throughput:40475.6, data dir is 2128001783
+version 95, load latnecy:0.120089, load throughput:41635.7, data dir is 2163858972
+version 96, load latnecy:0.0886533, load throughput:56399.5, data dir is 2180698684
+version 97, load latnecy:0.118506, load throughput:42191.9, data dir is 2198595087
+version 98, load latnecy:0.121914, load throughput:41012.4, data dir is 1702503639
+version 99, load latnecy:0.0977202, load throughput:51166.5, data dir is 1774059403
+version 100, load latnecy:0.106934, load throughput:46757.9, data dir is 1835078894
+finished
+terminate called without an active exception
+./update_benchmark.sh: line 21: 249006 Aborted                 (core dumped) ../build_release_${db_name}/bin/updateBenchmark -a $n_acc -t $update_count -k $key_size -v $value_size -d $data_path -r $result_path
+++ sleep 5
+++ set +x

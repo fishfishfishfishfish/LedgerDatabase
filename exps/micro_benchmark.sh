@@ -1,14 +1,16 @@
 db_name=$1
 echo "db_name: $db_name"
 # 定义测试参数数组
-load_account=(1000000)
+load_account=(10000000)
 # load_account=(40000000)
-# load_account=(100000000)
-batch_sizes=(4000)
-# batch_sizes=(500 1000 2000 3000 4000 5000)
-value_sizes=(1024)
+# load_account=(10000000)
+batch_sizes=(500 1000 2000 3000 4000 5000)
+if [ "$db_name" == "qldb" ]; then
+    batch_sizes=(4000 5000)
+fi
+# value_sizes=(1024)
 # value_sizes=(256 512 2048)
-# value_sizes=(256 512 1024 2048)
+value_sizes=(256 512 1024 2048)
 num_transaction_version=20
 load_batch_size=10000
 # load_batch_size=100000

@@ -1,8 +1,8 @@
 db_name=$1
 echo "db_name: $db_name"
 # 定义测试参数数组
-# load_account=(1000000 10000000)
-load_account=(10000000)
+load_account=(1000000 10000000)
+# load_account=(10000000)
 # value_sizes=(256 512 1024 2048)
 value_sizes=(1024)
 ranges="5,50,100,200,300,400,500,1000,2000"
