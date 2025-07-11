@@ -135,22 +135,31 @@ bool VersionedKVStore::BatchGet(const std::vector<std::string>& keys,
       continue;
     }
     ledgebase::qldb::Document doc(&result);
-    auto proofres =
-        qldb_->getProof("test", digestInfo.tip, doc.getAddr().seq_no,
-                        doc.getMetaData().doc_seq);
-    auto p = reply->add_qproof();
-    p->set_key(key);
-    p->set_value(proofres.data.val.ToString());
-    p->set_blockno(proofres.addr.seq_no);
-    p->set_doc_seq(proofres.meta.doc_seq);
-    p->set_version(proofres.meta.version);
-    p->set_time(proofres.meta.time);
-    for (auto& hash : proofres.proof) {
-      p->add_hashes(hash);
-    }
-    for (auto& pos : proofres.pos) {
-      p->add_pos(pos);
-    }
+
+    // make batch get no proof start
+    auto kv = reply->add_values();
+    kv->set_key(key);
+    kv->set_val(doc.getData().val.ToString());
+    kv->set_estimate_block(doc.getAddr().seq_no);
+    reply->add_timestamps(doc.getMetaData().time);
+    // make batch get no proof end
+
+    // auto proofres =
+    //     qldb_->getProof("test", digestInfo.tip, doc.getAddr().seq_no,
+    //                     doc.getMetaData().doc_seq);
+    // auto p = reply->add_qproof();
+    // p->set_key(key);
+    // p->set_value(proofres.data.val.ToString());
+    // p->set_blockno(proofres.addr.seq_no);
+    // p->set_doc_seq(proofres.meta.doc_seq);
+    // p->set_version(proofres.meta.version);
+    // p->set_time(proofres.meta.time);
+    // for (auto& hash : proofres.proof) {
+    //   p->add_hashes(hash);
+    // }
+    // for (auto& pos : proofres.pos) {
+    //   p->add_pos(pos);
+    // }
   }
 #endif
 #ifdef SQLLEDGER

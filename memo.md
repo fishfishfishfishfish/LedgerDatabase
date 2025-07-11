@@ -161,3 +161,9 @@ struct MetaData{
   uint64_t time;
 }
 ```
+
+
+
+LedgerDB再写入的时候需要显式给定一个版本号。
+LedgerDB会用skiplist_head_记录每个key最新的版本号。
+在扫描的时候，LedgerDB通过skiplist往前追溯一个key的历史版本。

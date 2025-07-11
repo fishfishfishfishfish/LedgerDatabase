@@ -1,3 +1,10 @@
-# ./micro_benchmark.sh sqlledger > micro_benchmark_sqlledger.log 2>&1
-# ./micro_benchmark.sh ledgerdb >> micro_benchmark_ledgerdb.log 2>&1
-./micro_benchmark.sh qldb >> micro_benchmark_qldb.log 2>&1
+timestamp=$(date +"%Y%m%d_%H%M%S")
+# timestamp="test"
+echo $timestamp
+
+./micro_benchmark.sh qldb $timestamp >> micro_benchmark_qldb_${timestamp}.log 2>&1
+python3 plot_micro_benchmark.py qldb micro_benchmark_${timestamp}
+./micro_benchmark.sh sqlledger $timestamp > micro_benchmark_sqlledger_${timestamp}.log 2>&1
+python3 plot_micro_benchmark.py sqlledger micro_benchmark_${timestamp}
+./micro_benchmark.sh ledgerdb $timestamp >> micro_benchmark_ledgerdb_${timestamp}.log 2>&1
+python3 plot_micro_benchmark.py ledgerdb micro_benchmark_${timestamp}

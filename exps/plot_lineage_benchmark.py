@@ -11,7 +11,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     detail_dir = f'results_{args.db_name}/{args.test_name}'
-    summary_file = f'results_{args.db_name}/{args.test_name}_summary.csv'
+    summary_file = f'results_{args.db_name}/{args.test_name}_{args.db_name}_summary.csv'
     
     
     summary_dict = {"entry_count":[], "value_size":[], "version_count":[], "latency":[], "throughput":[]}

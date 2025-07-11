@@ -2,6 +2,7 @@ SET(LEDGER_INCLUDE_DIRS "")
 SET(LEDGER_LINKER_LIBS "")
 SET(LEDGER_DEFINITIONS "")
 
+set(CMAKE_PREFIX_PATH "/media/nvme/cxy_test/protobuf")
 FIND_PACKAGE(Protobuf REQUIRED)
 # 添加调试信息输出
 message(STATUS "Protobuf 版本: ${Protobuf_VERSION}")

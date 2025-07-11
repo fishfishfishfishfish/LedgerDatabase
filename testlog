@@ -1,0 +1,5 @@
+20250622_104346: lineageBenchmarkV2.cc, 先更新再加载，屏蔽cache的影响。
+20250623_090212: lineageBenchmarkV2.cc, 先更新再加载，屏蔽cache的影响。
+20250624_142748: lineageBenchmarkV1.cc, 先加载再更新
+20250624_155354: lineageBenchmarkV1.cc, 先加载再更新, 不get proof
+20250625_144955: microBenchmark.cc, 版本多一点能够体现ViDB的优势？ 设置batch size为500

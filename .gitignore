@@ -13,3 +13,7 @@ result*/
 !exps/exp_arxiv/
 
 nohup.out
+*.data
+*.old
+*.folded
+exps/FlameGraph
