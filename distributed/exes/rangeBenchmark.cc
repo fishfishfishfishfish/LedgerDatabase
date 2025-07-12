@@ -151,7 +151,7 @@ int main(int argc, char** argv) {
       keys.push_back(key);
       values.push_back(val);
     }
-    store.put(keys, values, Timestamp(), &reply);
+    store.put(keys, values, Timestamp(version), &reply);
     auto end = std::chrono::system_clock::now();
     auto duration =
         std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);

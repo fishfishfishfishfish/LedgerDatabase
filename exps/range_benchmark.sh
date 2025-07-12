@@ -1,18 +1,20 @@
 db_name=$1
-echo "db_name: $db_name"
+test_name=$2
+echo "db_name: $db_name, test_name=$test_name"
 # 定义测试参数数组
-load_account=(1000000 10000000)
-# load_account=(10000000)
+# load_account=(1000000 10000000)
+load_account=(10000000 1000000)
 # value_sizes=(256 512 1024 2048)
 value_sizes=(1024)
-ranges="5,50,100,200,300,400,500,1000,2000"
+# ranges="5,50,100,200,300,400,500,1000,2000"
+ranges="5,2000"
 num_range_test=20
-# load_batch_size=20000
-load_batch_size=10000
+load_batch_size=50000
+# load_batch_size=10000
 key_size=32
 
 data_path="$PWD/../data/"
-result_dir="$PWD/results_${db_name}/range_benchmark"
+result_dir="$PWD/results_${db_name}/range_benchmark_${test_name}"
 echo "data_path: $data_path"
 echo "result_dir: $result_dir"
 
@@ -28,7 +30,7 @@ for n_acc in "${load_account[@]}"; do
         # 清理数据文件夹
         rm -rf $data_path/*
         
-        result_path="${result_dir}/e${n_acc}b${batch_size}v${value_size}.csv"
+        result_path="${result_dir}/e${n_acc}v${value_size}.csv"
         echo $(date "+%Y-%m-%d %H:%M:%S") 
         echo "num account: ${n_acc}, batch_size: ${batch_size}, value_size: ${value_size}, key_size: ${key_size}" 
         # 运行测试并提取结果

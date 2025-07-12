@@ -21,7 +21,7 @@ if __name__ == "__main__":
         full_path = os.path.join(detail_dir, entry)
         if os.path.isfile(full_path) and entry.endswith('.csv'):
             fname = full_path.split('/')[-1].split('.')[0]
-            fname, vl = fname.split('bv')
+            fname, vl = fname.split('v')
             vl = int(vl)
             acc = int(fname.strip('e'))
             detail_files.append((acc, vl, fname, full_path))
