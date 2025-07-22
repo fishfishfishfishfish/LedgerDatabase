@@ -51,8 +51,9 @@ for n_acc in "${load_account[@]}"; do
         echo "num account: ${n_acc}, value_size: ${value_size}, key_size: ${key_size}" 
         # 运行测试并提取结果
         # ../build_release_${db_name}/bin/lineageBenchmark -a $n_acc -b $load_batch_size -t $num_transaction_version -z $num_transaction_account -l $query_versions -k $key_size -v $value_size -d $data_path -r $result_path
-        ../build_release_${db_name}/bin/lineageBenchmarkV1 -a $n_acc -b $load_batch_size -t $num_transaction_version -z $num_transaction_account $get_proof -l $query_versions -k $key_size -v $value_size -d $data_path -r $result_path
-        # ../build_release_${db_name}/bin/lineageBenchmarkV2 -a $n_acc -b $load_batch_size -t $num_transaction_version -z $num_transaction_account $get_proof -l $query_versions -k $key_size -v $value_size -d $data_path -r $result_path
+        # ../build_release_${db_name}/bin/lineageBenchmarkV1 -a $n_acc -b $load_batch_size -t $num_transaction_version -z $num_transaction_account $get_proof -l $query_versions -k $key_size -v $value_size -d $data_path -r $result_path
+        # ../build_release_${db_name}/bin/lineageBenchmarkV1 -a $n_acc -b $load_batch_size -t $num_transaction_version -z $num_transaction_account $get_proof -l $query_versions -k $key_size -v $value_size -d $data_path -r $result_path
+        ../build_release_${db_name}/bin/lineageBenchmarkV2 -a $n_acc -b $load_batch_size -t $num_transaction_version -z $num_transaction_account $get_proof -l $query_versions -k $key_size -v $value_size -d $data_path -r $result_path
         sleep 5
         set +x
     done
