@@ -1,3 +1,25 @@
+1. 下载
+gitcode: https://gitcode.com/gh_mirrors/one/oneTBB/tree/tbb_2020
+tbb_2020分支
+2. 编译
+    cmake 3.0.0以上
+    ```bash
+    cd oneTBB-tbb_2020/
+    make
+    ```
+    会在`build/`路径下下面生成类似`linux_intel64_gcc_cc11.4.0_libc2.35_kernel4.15.0_release`的文件夹
+    或者make的时候采用：`make tbb_build_prefix=my_tbb_build`，就会生成`build/my_tbb_build`文件夹
+3. 链接
+    ```bash
+    sudo ln -s ${HOME}/oneTBB-tbb_2020/build/linux_intel64_gcc_cc11.4.0_libc2.35_kernel4.15.0_release/include/tbb /usr/local/include/tbb
+    sudo ln -s ${HOME}/oneTBB-tbb_2020/lib/libtbb.so.2 /usr/local/lib/libtbb.so
+    sudo ln -s ${HOME}/oneTBB-tbb_2020/lib/libtbbmalloc.so.2 /usr/local/lib/libtbbmalloc.so
+    sudo ln -s ${HOME}/oneTBB-tbb_2020/lib/libtbbmalloc_proxy.so.2 /usr/local/lib/libtbbmalloc_proxy.so
+    export LD_LIBRARY_PATH=${HOME}/oneTBB-tbb_2020/lib:$LD_LIBRARY_PATH
+    ```
+
+
+
 > 本文由 [简悦 SimpRead](http://ksria.com/simpread/) 转码， 原文地址 [blog.csdn.net](https://blog.csdn.net/lian740930980/article/details/126659488)
 
 1. 安装 gcc9
