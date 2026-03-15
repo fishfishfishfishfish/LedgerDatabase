@@ -42,37 +42,35 @@ class SQLLedger {
   void updateLedger(int timeout);
 
   void GetDigest(uint64_t* tip, std::string* hash);
-  
+
   uint64_t Set(const std::vector<std::string>& keys,
                const std::vector<std::string>& vals);
 
   std::string GetCommitted(const std::string& key) const;
 
-  std::string GetDataAtBlock(const std::string& key,
-      const uint64_t& block_seq);
+  std::string GetDataAtBlock(const std::string& key, const uint64_t& block_seq);
 
   std::map<std::string, std::string> Range(const std::string& from,
-      const std::string& to);
-  
+                                           const std::string& to);
+
   std::vector<std::string> GetHistory(const std::string& key, size_t n);
 
-  BlockProof getBlockProof(const uint64_t block_addr, const uint64_t tip, 
-      int* level);
+  BlockProof getBlockProof(const uint64_t block_addr, const uint64_t tip,
+                           int* level);
 
   DetailProof getDetailProof(const std::string& key, const uint64_t block_addr,
-      int level);
+                             int level);
 
   Auditor getAudit(const uint64_t& seq);
-
+  bool isBuildThreadIdle() const { return buffer_->size() == 0; }
   size_t size() { return db_.size(); }
 
  private:
-
   Logger logger_;
   DB db_;
   std::unique_ptr<std::thread> buildThread_;
   std::unique_ptr<MerkleTree> mt_;
-  //std::vector<std::string> *buffer_;
+  // std::vector<std::string> *buffer_;
   std::unique_ptr<std::map<uint64_t, std::vector<std::string>>> buffer_;
   uint64_t block_seq_;
   uint64_t tid_;
@@ -87,4 +85,4 @@ class SQLLedger {
 
 }  // namespace ledgebase
 
-#endif // SQLLEDGER_H_
+#endif  // SQLLEDGER_H_

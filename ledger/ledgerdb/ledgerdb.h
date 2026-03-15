@@ -1,6 +1,7 @@
 #ifndef LEDGERDB_LEDGERDB_H
 #define LEDGERDB_LEDGERDB_H
 
+#include <unistd.h>
 #include <algorithm>
 #include <map>
 #include <memory>
@@ -8,16 +9,15 @@
 #include <sstream>
 #include <string>
 #include <thread>
-#include <vector>
 #include <unordered_map>
-#include <unistd.h>
+#include <vector>
 
 #include "tbb/concurrent_queue.h"
 
 #include "ledger/common/db.h"
 #include "ledger/ledgerdb/merkletree.h"
-#include "ledger/ledgerdb/mpt/trie.h"
 #include "ledger/ledgerdb/mpt/mpt_config.h"
+#include "ledger/ledgerdb/mpt/trie.h"
 #include "ledger/ledgerdb/skiplist/skiplist.h"
 
 namespace ledgebase {
@@ -29,8 +29,7 @@ class KeyLockMgr {
   KeyLockMgr() = default;
 
   ~KeyLockMgr() {
-    for (auto& v : key_locks)
-      delete v.second;
+    for (auto &v : key_locks) delete v.second;
   }
 
   void LockKey(std::string key) {
@@ -88,13 +87,12 @@ struct Auditor {
   std::vector<std::string> blocks;
   std::vector<MPTProof> mptproofs;
 
-  bool Audit(DB* db);
+  bool Audit(DB *db);
 };
 
 class LedgerDB {
  public:
-  LedgerDB(int timeout,
-           std::string dbpath = "/tmp/testdb",
+  LedgerDB(int timeout, std::string dbpath = "/tmp/testdb",
            std::string ledgerPath = "/tmp/testledger");
 
   ~LedgerDB();
@@ -102,41 +100,46 @@ class LedgerDB {
   void buildTree(int timeout);
 
   uint64_t Set(const std::vector<std::string> &keys,
-           const std::vector<std::string> &values,
-           const uint64_t &timestamp);
+               const std::vector<std::string> &values,
+               const uint64_t &timestamp);
 
-  int binarySearch(std::vector<std::string> &vec, int l, int r, std::string key);
+  int binarySearch(std::vector<std::string> &vec, int l, int r,
+                   std::string key);
 
-  bool GetValues(const std::vector<std::string> &keys,
-                 std::vector<std::pair<uint64_t, std::pair<size_t, std::string>>> &values);
+  bool GetValues(
+      const std::vector<std::string> &keys,
+      std::vector<std::pair<uint64_t, std::pair<size_t, std::string>>> &values);
 
-  bool GetRange(const std::string &start, const std::string &end,
-                std::map<std::string, std::pair<uint64_t, std::pair<size_t, std::string>>> &values);
-  
-  bool GetVersions(const std::vector<std::string> &keys,
-                   std::vector<std::vector<std::pair<uint64_t, std::pair<size_t, std::string>>>> &values,
-                   size_t nversions);
+  bool GetRange(
+      const std::string &start, const std::string &end,
+      std::map<std::string, std::pair<uint64_t, std::pair<size_t, std::string>>>
+          &values);
+
+  bool GetVersions(
+      const std::vector<std::string> &keys,
+      std::vector<
+          std::vector<std::pair<uint64_t, std::pair<size_t, std::string>>>>
+          &values,
+      size_t nversions);
 
   bool GetProofs(const std::vector<std::string> &keys,
                  const std::vector<size_t> key_blk_seqs,
                  std::vector<Proof> &mt_proofs,
-                 std::vector<MPTProof> &mpt_proofs,
-                 std::string *root_digest,
-                 size_t *blk_seq,
-                 std::string *mpt_hash);
+                 std::vector<MPTProof> &mpt_proofs, std::string *root_digest,
+                 size_t *blk_seq, std::string *mpt_hash);
 
   Auditor GetAudit(const uint64_t seq);
-  
-  bool GetRootDigest(uint64_t *blk_seq,
-                     std::string *root_digest);
 
+  bool GetRootDigest(uint64_t *blk_seq, std::string *root_digest);
+  bool isBuildThreadIdle() const { return tree_queue_.empty(); }
   inline size_t size() { return db_.size(); }
 
  private:
-  std::string splitAndFind(const std::string &str, char delim, const::std::string &target);
+  std::string splitAndFind(const std::string &str, char delim,
+                           const ::std::string &target);
 
   DB db_;
-  //DB ledger_;
+  // DB ledger_;
   std::atomic<bool> stop_;
   uint64_t next_block_seq_;
   uint64_t commit_seq_;

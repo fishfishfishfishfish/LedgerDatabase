@@ -419,3 +419,18 @@ bool VersionedKVStore::get(const std::string& key, const Timestamp& t,
 #endif
   return true;
 }
+
+void VersionedKVStore::flush() {
+#ifdef LEDGERDB
+  while (!ldb->isBuildThreadIdle()) {
+    sleep(1);
+  }
+#endif
+#ifdef AMZQLDB
+#endif
+#ifdef SQLLEDGER
+  // while (!sqlledger_->isBuildThreadIdle()) {
+  //   sleep(1);
+  // }
+#endif
+}

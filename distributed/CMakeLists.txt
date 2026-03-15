@@ -122,6 +122,13 @@ ADD_DEPENDENCIES(microseqBenchmark ledger)
 TARGET_LINK_LIBRARIES(microseqBenchmark dist ledger)
 SET_TARGET_PROPERTIES(microseqBenchmark PROPERTIES LINK_FLAGS "${LINK_FLAGS}")
 
+ADD_EXECUTABLE(scaleBenchmark "exes/scaleBenchmark.cc")
+ADD_DEPENDENCIES(scaleBenchmark copy_dist_protobuf)
+ADD_DEPENDENCIES(scaleBenchmark dist)
+ADD_DEPENDENCIES(scaleBenchmark ledger)
+TARGET_LINK_LIBRARIES(scaleBenchmark dist ledger)
+SET_TARGET_PROPERTIES(scaleBenchmark PROPERTIES LINK_FLAGS "${LINK_FLAGS}")
+
 ADD_EXECUTABLE(rangeBenchmark "exes/rangeBenchmark.cc")
 ADD_DEPENDENCIES(rangeBenchmark copy_dist_protobuf)
 ADD_DEPENDENCIES(rangeBenchmark dist)

@@ -167,3 +167,14 @@ struct MetaData{
 LedgerDB再写入的时候需要显式给定一个版本号。
 LedgerDB会用skiplist_head_记录每个key最新的版本号。
 在扫描的时候，LedgerDB通过skiplist往前追溯一个key的历史版本。
+
+
+
+测试指令
+```bash
+  cd exps/
+  cd ../ && ./build_release_all.sh && cd exps/
+  DB_NAME=ledgerdb ./scale_benchmark.sh 
+  DB_NAME=qldb ./scale_benchmark.sh 
+  DB_NAME=sqlledger ./scale_benchmark.sh 
+```

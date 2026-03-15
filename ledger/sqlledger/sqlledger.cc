@@ -134,7 +134,13 @@ void SQLLedger::GetDigest(uint64_t* tip, std::string* hash) {
   db_.Get("digest", &digest);
   auto res = Utils::splitBy(digest, '|');
   *hash = res[0];
-  *tip = std::stoul(res[1]);
+  // 安全的字符串转换
+  // *tip = std::stoul(res[1]);
+  if (res.size() > 1 && res[1].size() > 0) {
+    *tip = std::stoul(res[1]);
+  } else {
+    *tip = 0;
+  }
 }
 
 std::string SQLLedger::GetCommitted(const std::string& key) const {
