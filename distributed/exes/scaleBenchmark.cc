@@ -1,5 +1,6 @@
 #include <dirent.h>
 #include <errno.h>
+#include <sys/resource.h>
 #include <sys/stat.h>
 #include <unistd.h>
 #include <algorithm>
@@ -82,6 +83,37 @@ uint64_t get_directory_total_size(const std::string& dir_path) {
 
   closedir(dir);
   return total_size;
+}
+
+// Get current process memory usage in bytes
+uint64_t get_process_memory_usage() {
+  FILE* file = fopen("/proc/self/statm", "r");
+  if (!file) {
+    return 0;
+  }
+
+  uint64_t size, resident, share, text, lib, data, dt;
+  if (fscanf(file, "%lu %lu %lu %lu %lu %lu %lu", &size, &resident, &share,
+             &text, &lib, &data, &dt) != 7) {
+    fclose(file);
+    return 0;
+  }
+  fclose(file);
+
+  // resident is the resident set size in pages
+  // page size is typically 4096 bytes on Linux
+  long page_size = sysconf(_SC_PAGESIZE);
+  return resident * page_size;
+}
+
+// Get peak memory usage using getrusage
+uint64_t get_peak_memory_usage() {
+  struct rusage usage;
+  if (getrusage(RUSAGE_SELF, &usage) == 0) {
+    // ru_maxrss is in kilobytes
+    return usage.ru_maxrss * 1024;
+  }
+  return 0;
 }
 
 // Simple command-line argument parser
@@ -169,6 +201,14 @@ double bytes_to_mb(uint64_t bytes) {
   return static_cast<double>(bytes) / (1024.0 * 1024.0);
 }
 
+// Format number with comma as thousands separator
+std::string format_with_commas(uint64_t number) {
+  std::stringstream ss;
+  ss.imbue(std::locale(""));  // Use system locale for formatting
+  ss << number;
+  return ss.str();
+}
+
 int main(int argc, char* argv[]) {
   // ====================== Command-Line Parameter Parsing
   // ====================== Parse command-line arguments
@@ -237,8 +277,8 @@ int main(int argc, char* argv[]) {
   // Database storage directory and result file are now configurable via command
   // line Test scales: 1000 → 10k → 100k → 1M → 10M → 100M (1B requires
   // distributed environment)
-  const std::vector<uint64_t> BASE_DATA_SIZES = {1000,    10000,    100000,
-                                                 1000000, 10000000, 100000000};
+  const std::vector<uint64_t> BASE_DATA_SIZES = {
+      1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000};
 
   // ====================== Initialization ======================
   // Create database directory (Linux-only)
@@ -264,7 +304,8 @@ int main(int argc, char* argv[]) {
   result_file
       << "Base Data Scale,Write Batch Size,Read Batch Size,Key Length,Value "
          "Length,Write Throughput (records/sec),Read Throughput "
-         "(records/sec),Total Disk Usage (MB),Average Per Record (bytes)"
+         "(records/sec),Total Disk Usage (MB),Average Per Record (bytes),"
+         "Memory (MB),Peak Memory (MB),Memory Per Record (bytes)"
       << std::endl;
 
   // Print test configuration (for verification)
@@ -313,8 +354,8 @@ int main(int argc, char* argv[]) {
     uint64_t target_size = BASE_DATA_SIZES[i];
     uint64_t incremental_size = incremental_sizes[i];
 
-    std::cout << "\n========== Testing at data scale: " << target_size
-              << " ==========" << std::endl;
+    std::cout << "\n========== Testing at data scale: "
+              << format_with_commas(target_size) << " ==========" << std::endl;
 
     // Write incremental base data starting from next_key
     if (incremental_size > 0) {
@@ -359,7 +400,16 @@ int main(int argc, char* argv[]) {
     double avg_per_record = static_cast<double>(total_db_size - empty_db_size) /
                             static_cast<double>(current_size);
 
-    // Step 6: Output results (console + CSV)
+    // Step 7: Calculate memory usage at current data scale
+    uint64_t current_memory = get_process_memory_usage();
+    uint64_t peak_memory = get_peak_memory_usage();
+    double current_memory_mb = bytes_to_mb(current_memory);
+    double peak_memory_mb = bytes_to_mb(peak_memory);
+    // Memory per record = Current memory usage / Current data scale
+    double memory_per_record =
+        static_cast<double>(current_memory) / static_cast<double>(current_size);
+
+    // Step 8: Output results (console + CSV)
     std::cout << "Test Results: " << std::endl;
     std::cout << "  Write Throughput: " << std::fixed << std::setprecision(2)
               << write_throughput << " records/sec" << std::endl;
@@ -369,6 +419,12 @@ int main(int argc, char* argv[]) {
               << total_db_mb << " MB" << std::endl;
     std::cout << "  Average Per Record: " << std::fixed << std::setprecision(2)
               << avg_per_record << " bytes" << std::endl;
+    std::cout << "  Current Memory:   " << std::fixed << std::setprecision(2)
+              << current_memory_mb << " MB" << std::endl;
+    std::cout << "  Peak Memory:      " << std::fixed << std::setprecision(2)
+              << peak_memory_mb << " MB" << std::endl;
+    std::cout << "  Memory Per Record: " << std::fixed << std::setprecision(2)
+              << memory_per_record << " bytes" << std::endl;
 
     // Write to CSV (full parameter traceability)
     result_file << target_size << "," << TEST_WRITE_BATCH << ","
@@ -377,7 +433,10 @@ int main(int argc, char* argv[]) {
                 << "," << std::fixed << std::setprecision(2) << read_throughput
                 << "," << std::fixed << std::setprecision(2) << total_db_mb
                 << "," << std::fixed << std::setprecision(2) << avg_per_record
-                << std::endl;
+                << "," << std::fixed << std::setprecision(2)
+                << current_memory_mb << "," << std::fixed
+                << std::setprecision(2) << peak_memory_mb << "," << std::fixed
+                << std::setprecision(2) << memory_per_record << std::endl;
   }
 
   // ====================== Cleanup ======================

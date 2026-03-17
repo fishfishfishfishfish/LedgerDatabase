@@ -36,7 +36,7 @@ class MyDatabase {
   bool write_base_data(uint64_t count, int key_len, int value_len,
                        uint64_t start_key = 1) {
     // Generate fixed value for consistency (same value for all records)
-    std::string fixed_value = generate_random_string(value_len);
+    // std::string fixed_value = generate_random_string(value_len);
 
     const size_t BATCH_SIZE = 1000;  // Batch size for efficient writing
     std::vector<std::string> keys;
@@ -55,9 +55,10 @@ class MyDatabase {
       } else if (key.size() > static_cast<size_t>(key_len)) {
         key = key.substr(0, static_cast<size_t>(key_len));
       }
+      std::string value = generate_random_string(value_len);
 
       keys.push_back(key);
-      values.push_back(fixed_value);
+      values.push_back(value);
 
       // Process batch when batch size is reached or at the end
       if (keys.size() >= BATCH_SIZE || i == count - 1) {
@@ -68,6 +69,9 @@ class MyDatabase {
           version++;
           keys.clear();
           values.clear();
+          if (version % 100 == 0) {
+            std::cout << "write base data version: " << version << std::endl;
+          }
         }
       }
     }

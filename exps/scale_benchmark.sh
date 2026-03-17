@@ -9,14 +9,16 @@
 CLEAN_DB="${CLEAN_DB:-true}"  # 默认为 true
 DB_NAME="${DB_NAME:-ledgerdb}"
 # 脚本配置
+TIMESTAMP=$(date +%Y%m%d_%H%M%S)
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BUILD_DIR="$SCRIPT_DIR/../build_release_${DB_NAME}"
 BENCHMARK_BIN="$BUILD_DIR/bin/scaleBenchmark"
 DEFAULT_DB_DIR="$SCRIPT_DIR/data/"
 DEFAULT_RESULT_DIR="$SCRIPT_DIR/results_${DB_NAME}/"
+DEFAULT_RESULT_FILE="scaleBenchmark_${TIMESTAMP}.csv"
 # 日志配置
 LOG_DIR="$SCRIPT_DIR/logs"
-LOG_FILE="$LOG_DIR/scale_benchmark_$(date +%Y%m%d_%H%M%S).log"
+LOG_FILE="$LOG_DIR/scale_benchmark_${TIMESTAMP}.log"
 
 # 颜色定义
 RED='\033[0;31m'
@@ -134,7 +136,8 @@ default_mode() {
                 "--key-length=32" 
                 "--value-length=512"
                 "--db-dir=$DEFAULT_DB_DIR"
-                "--result-dir=$DEFAULT_RESULT_DIR")
+                "--result-dir=$DEFAULT_RESULT_DIR"
+                "--result-file=$DEFAULT_RESULT_FILE")
     run_benchmark "${args[@]}"
 }
 
@@ -145,7 +148,8 @@ quick_mode() {
     
     local args=("--write-batch=1000" "--read-batch=1000" "--key-length=16" "--value-length=128"
                 "--db-dir=$DEFAULT_DB_DIR"
-                "--result-dir=$DEFAULT_RESULT_DIR")
+                "--result-dir=$DEFAULT_RESULT_DIR"
+                "--result-file=$DEFAULT_RESULT_FILE")
     run_benchmark "${args[@]}"
 }
 
@@ -170,7 +174,7 @@ stress_mode() {
             "--value-length=$value_len" 
             "--db-dir=$DEFAULT_DB_DIR"
             "--result-dir=$DEFAULT_RESULT_DIR"
-            "--result-file=scaleBenchmark_value_${value_len}.csv"
+            "--result-file=scaleBenchmark_value_${value_len}_${TIMESTAMP}.csv"
         )
         
         # 运行基准测试

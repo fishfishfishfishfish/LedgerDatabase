@@ -35,7 +35,11 @@ bool VersionedKVStore::GetDigest(strongstore::proto::Reply* reply) {
 #ifdef SQLLEDGER
   sqlledger_->GetDigest(&tip, &hash);
 #endif
-  // Note: why no AMZQLDB
+#ifdef AMZQLDB
+  auto digestInfo = qldb_->digest("test");
+  tip = digestInfo.tip;
+  hash = digestInfo.digest;
+#endif
 
   auto digest = reply->mutable_digest();
   digest->set_block(tip);
