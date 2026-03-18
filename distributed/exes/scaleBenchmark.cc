@@ -376,7 +376,7 @@ int main(int argc, char* argv[]) {
     }
 
     current_size = target_size;
-
+    std::cout << "Test Results: " << std::endl;
     // Step 4: Test write throughput at current data scale
     double write_throughput = 0.0;
     if (!db.test_batch_write(current_size, TEST_WRITE_BATCH, KEY_LENGTH,
@@ -384,6 +384,8 @@ int main(int argc, char* argv[]) {
       std::cerr << "Write throughput test failed" << std::endl;
       write_throughput = -1;
     }
+    std::cout << "  Write Throughput: " << std::fixed << std::setprecision(2)
+              << write_throughput << " records/sec" << std::endl;
 
     // Step 5: Test read throughput at current data scale
     double read_throughput = 0.0;
@@ -392,6 +394,8 @@ int main(int argc, char* argv[]) {
       std::cerr << "Read throughput test failed" << std::endl;
       read_throughput = -1;
     }
+    std::cout << "  Read Throughput:  " << std::fixed << std::setprecision(2)
+              << read_throughput << " records/sec" << std::endl;
 
     // Step 6: Calculate disk usage at current data scale
     uint64_t total_db_size = get_directory_total_size(DB_DIR);
@@ -410,11 +414,6 @@ int main(int argc, char* argv[]) {
         static_cast<double>(current_memory) / static_cast<double>(current_size);
 
     // Step 8: Output results (console + CSV)
-    std::cout << "Test Results: " << std::endl;
-    std::cout << "  Write Throughput: " << std::fixed << std::setprecision(2)
-              << write_throughput << " records/sec" << std::endl;
-    std::cout << "  Read Throughput:  " << std::fixed << std::setprecision(2)
-              << read_throughput << " records/sec" << std::endl;
     std::cout << "  Total Disk Usage: " << std::fixed << std::setprecision(2)
               << total_db_mb << " MB" << std::endl;
     std::cout << "  Average Per Record: " << std::fixed << std::setprecision(2)

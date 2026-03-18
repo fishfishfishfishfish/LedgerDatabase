@@ -108,15 +108,18 @@ class MyDatabase {
         generate_random_keys(total_base_count, batch_size, key_len);
     std::vector<std::string> test_values;
     test_values.reserve(batch_size);
+    std::cout << "[test batch write] generate key value" << std::endl;
     for (const auto& key : test_keys) {
       std::string value = generate_random_string(value_len);
       test_values.push_back(value);
     }
 
+    std::cout << "[test batch write] write data" << std::endl;
     auto start = std::chrono::high_resolution_clock::now();
     write_data(test_keys, test_values);
     version++;
     // Force flush to disk (critical for accurate IO measurement)
+    std::cout << "[test batch write] flush" << std::endl;
     flush();
 
     auto end = std::chrono::high_resolution_clock::now();
