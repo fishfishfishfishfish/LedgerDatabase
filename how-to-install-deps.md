@@ -6,6 +6,7 @@ rocksdb_dump: command not found
 ```
 
 ```bash
+~$ git clone git@github.com:facebook/rocksdb.git
 ~$ git clone https://github.com/facebook/rocksdb.git
 Cloning into 'rocksdb'...
 remote: Enumerating objects: 138060, done.
@@ -102,6 +103,10 @@ ldconfig -p | grep libprotobuf
 ls -l /usr/local/lib/libprotobuf.so*
 # 示例：删除Ubuntu自带版本
 sudo apt remove libprotobuf-dev protobuf-compiler
+```
+5. 如果发现conda的path在最前面
+```
+conda init --reverse # 移除 Conda 对 Shell 的影响
 ```
 
 # cryptopp (≥ 6.1.0)

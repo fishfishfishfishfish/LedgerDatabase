@@ -8,7 +8,7 @@ tbb_2020分支
     make
     ```
     会在`build/`路径下下面生成类似`linux_intel64_gcc_cc11.4.0_libc2.35_kernel4.15.0_release`的文件夹
-    或者make的时候采用：`make tbb_build_prefix=my_tbb_build`，就会生成`build/my_tbb_build`文件夹
+    或者make的时候采用：`make tbb_build_prefix=my_tbb_build`，就会生成`build/my_tbb_build_release`文件夹
 3. 链接
     ```bash
     sudo ln -s ${HOME}/oneTBB-tbb_2020/build/linux_intel64_gcc_cc11.4.0_libc2.35_kernel4.15.0_release/include/tbb /usr/local/include/tbb
