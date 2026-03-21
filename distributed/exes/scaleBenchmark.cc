@@ -201,7 +201,9 @@ int main(int argc, char* argv[]) {
     return -1;
   }
 
+  std::cout << "initialize database ..." << DB_DIR << std::endl;
   MyDatabase db(DB_DIR);
+  std::cout << "initialized database" << std::endl;
 
   // Open result CSV file and write header
   if (!create_directory_recursive(RESULT_DIR)) {

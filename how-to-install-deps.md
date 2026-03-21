@@ -16,7 +16,7 @@ remote: Total 138060 (delta 326), reused 177 (delta 175), pack-reused 137589 (fr
 Receiving objects: 100% (138060/138060), 222.78 MiB | 1.36 MiB/s, done.
 Resolving deltas: 100% (105734/105734), done.
 ~$ cd rocksdb/
-~/rocksdb$ git checkout rocksdb-5.8
+~/rocksdb$ git checkout rocksdb-5.8.8
 HEAD is now at 266ac245a Bumping version to 5.8
 ~/rocksdb$ make shared_lib
   GEN      util/build_version.cc
@@ -45,6 +45,23 @@ install -C -m 755 librocksdb.so.5.8.0 /usr/local/lib && \
         ln -fs librocksdb.so.5.8.0 /usr/local/lib/librocksdb.so
 ```
 
+示例错误
+```
+open error: Invalid argument: Compression type Snappy is not linked with the binary
+```
+解决方法
+1. 安装 Snappy 库
+确保系统已安装 Snappy 库及其开发文件。如果使用的是 Ubuntu，可以运行以下命令：
+```
+sudo apt-get update
+sudo apt-get install libsnappy-dev
+```
+2. 重新编译 RocksDB
+安装 Snappy 后，需要重新编译 RocksDB，以确保其正确链接到 Snappy 库。
+```
+make clean
+make -j$(nproc)
+```
 
 # protobuf (≥ 2.6.1)
 检查是否已经安装
@@ -170,6 +187,8 @@ ii  libboost-atomic-dev:amd64   1.65.1.0ubuntu1     amd64       atomic data type
 安装
 ```bash
 $ wget https://archives.boost.io/release/1.67.0/source/boost_1_67_0.tar.gz
+```
+```
 --2025-04-16 09:50:45--  https://archives.boost.io/release/1.67.0/source/boost_1_67_0.tar.gz
 ...
 Saving to: ‘boost_1_67_0.tar.gz’
@@ -184,7 +203,32 @@ boost_1_67_0/tools/quickbook/index.html
 boost_1_67_0/tools/Jamfile.v2
 boost_1_67_0/tools/index.html
 boost_1_67_0/tools/make-cputime-page.pl
-$ ./b2 install
+```
+```bash
+$ ./bootstrap.sh --with-libraries=all
+$ ./b2
+```
+```
+The Boost C++ Libraries were successfully built!
+
+The following directory should be added to compiler include paths:
+
+    /home/xinyuchen/boost_1_67_0
+
+The following directory should be added to linker library paths:
+
+    /home/xinyuchen/boost_1_67_0/stage/lib
+```
+
+> 如果没有输出最后的sucessful built, 则说明安装失败
+> 一种情况是找不到pyconfig.h: No such file or directory，说明没有安装python3的开发库
+>    solution: `sudo apt install python-dev`, 注意不是python3-dev, 可能要对应系统默认的python版本
+
+```bash
+$ sudo ./b2 install --prefix=/usr/local/opt/boost1.67
+$ sudo ./b2 install
+```
+```
 (base) xinyu.chen@246:~/Ledgerdatabase_deps/boost_1_67_0$ ./b2 install
 /home/xinyu.chen/Ledgerdatabase_deps/boost_1_67_0/libs/predef/check/../tools/check/predef.jam:46: Unescaped special character in argument $(language)::$(expression)
 Performing configuration checks
@@ -210,8 +254,13 @@ Performing configuration checks
     - Boost.Config Feature Check: cxx11_variadic_templates : yes
     - has_icu builds           : yes
 ...
-
 ```
+最后，如果cmake一直没有正确找到boost安装的位置，需要在`cmake/Dependencies.cmake`里指定Boost的路径
+```cmake
+set(BOOST_ROOT "/usr/local/opt/boost1.67")
+set(Boost_NO_SYSTEM_PATHS ON) # 只搜索指定路径
+```
+
 
 # Intel Threading Building Block (tbb_2020 version)
 检查是否安装

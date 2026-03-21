@@ -433,8 +433,8 @@ void VersionedKVStore::flush() {
 #ifdef AMZQLDB
 #endif
 #ifdef SQLLEDGER
-  // while (!sqlledger_->isBuildThreadIdle()) {
-  //   sleep(1);
-  // }
+  while (!sqlledger_->isBuildThreadIdle()) {
+    sleep(1);
+  }
 #endif
 }

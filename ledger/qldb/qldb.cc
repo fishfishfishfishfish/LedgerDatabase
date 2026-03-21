@@ -35,7 +35,7 @@ bool QLProofResult::Verify(const Hash digest) {
 }
 
 QLDB::QLDB(std::string dbpath) {
-  db_.Open(dbpath);
+  bool ok = db_.Open(dbpath);
   indexed_.reset(new QLBTree(&db_, "COMMITTED_"));
   history_.reset(new QLBTree(&db_, "HISTORY_"));
 }

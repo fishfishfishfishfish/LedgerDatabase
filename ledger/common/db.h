@@ -36,7 +36,13 @@ class DB {
         rocksdb::NewBloomFilterPolicy(10, true));
     options_db.table_factory.reset(
         rocksdb::NewBlockBasedTableFactory(db_blk_tab_opts));
-    return rocksdb::DB::Open(options_db, db_path, &db_).ok();
+    // return rocksdb::DB::Open(options_db, db_path, &db_).ok();
+    rocksdb::Status status = rocksdb::D8  B::Open(options_db, db_path, &db_);
+    if (!status.ok()) {
+        std::cerr << "RocksDB Open failed: " << status.ToString() << std::endl;
+        return false;
+    }
+    return true;
   }
 
   inline void CreateCache(const std::string& id, Chunk&& chunk) {

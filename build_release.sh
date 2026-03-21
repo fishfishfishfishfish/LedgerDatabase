@@ -26,4 +26,5 @@ mkdir -p ./${build_dir}
 cd ./${build_dir}
 
 cmake -DLEDGERDB=${ledgerdbopt} -DAMZQLDB=${qldbopt} -DSQLLEDGER=${sqlledgeropt} ..
+# cmake -DBOOST_ROOT=/usr/local/opt/boost1.67 -DLEDGERDB=${ledgerdbopt} -DAMZQLDB=${qldbopt} -DSQLLEDGER=${sqlledgeropt} ..
 make -j6 VERBOSE=1 
