@@ -37,7 +37,7 @@ class DB {
     options_db.table_factory.reset(
         rocksdb::NewBlockBasedTableFactory(db_blk_tab_opts));
     // return rocksdb::DB::Open(options_db, db_path, &db_).ok();
-    rocksdb::Status status = rocksdb::D8  B::Open(options_db, db_path, &db_);
+    rocksdb::Status status = rocksdb::DB::Open(options_db, db_path, &db_);
     if (!status.ok()) {
         std::cerr << "RocksDB Open failed: " << status.ToString() << std::endl;
         return false;
