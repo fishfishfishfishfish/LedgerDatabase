@@ -170,6 +170,7 @@ bool VersionedKVStore::BatchGet(const std::vector<std::string>& keys,
   for (auto& key : keys) {
     auto result = sqlledger_->GetCommitted(key);
     if (result.size() == 0) {
+      std::cout << key << " is empty" << std::endl;
       continue;
     }
     auto docs = ledgebase::Utils::splitBy(result, '|');
