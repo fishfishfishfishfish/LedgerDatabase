@@ -192,7 +192,7 @@ int main(int argc, char* argv[]) {
   // line Test scales: 1000 → 10k → 100k → 1M → 10M → 100M (1B requires
   // distributed environment)
   const std::vector<uint64_t> BASE_DATA_SIZES = {
-      1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000};
+      1000, 10000, 100000, 1000000, 10000000, 100000000, 200000000, 1000000000};
 
   // ====================== Initialization ======================
   // Create database directory (Linux-only)

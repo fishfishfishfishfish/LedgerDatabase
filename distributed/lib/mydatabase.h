@@ -151,7 +151,7 @@ class MyDatabase {
         if (!keys.empty()) {
           strongstore::proto::Reply reply;
           store.put(keys, values, Timestamp(version), &reply);
-          //   flush();
+          // flush();
           version++;
           keys.clear();
           values.clear();

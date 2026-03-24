@@ -236,7 +236,7 @@ run_benchmark() {
     echo ""
     
     if [[ $exit_code -eq 0 ]]; then
-        print_success "基准测试完成!"
+        print_success "${BENCHMARK_BIN}基准测试完成!"
         
         # 显示结果文件位置
         local result_file="${DEFAULT_RESULT_FILE}"

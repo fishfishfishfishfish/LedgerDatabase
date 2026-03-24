@@ -222,7 +222,7 @@ The following directory should be added to linker library paths:
 
 > 如果没有输出最后的sucessful built, 则说明安装失败
 > 一种情况是找不到pyconfig.h: No such file or directory，说明没有安装python3的开发库
->    solution: `sudo apt install python-dev`, 注意不是python3-dev, 可能要对应系统默认的python版本
+>    solution: `sudo apt install python-dev`, 注意不是python3-dev, 可能要对应系统默认的python版本。安装好之后记得重新`./bootstrap.sh --with-libraries=all`.
 
 ```bash
 $ sudo ./b2 install --prefix=/usr/local/opt/boost1.67
@@ -268,4 +268,138 @@ set(Boost_NO_SYSTEM_PATHS ON) # 只搜索指定路径
 $ dpkg -l | grep tbb
 ii  libtbb2                   2020.3-0ubuntu1       amd64        Intel Threading Building Blocks
 ii  libtbb-dev                2020.3-0ubuntu1       amd64        Intel Threading Building Blocks development files
+```
+
+
+# libevent (2.1.12)
+1. 下载
+```bash
+$ wget https://github.com/libevent/libevent/releases/download/release-2.1.12-stable/libevent-2.1.12-stable.tar.gz
+$ tar zxvf libevent-2.1.12-stable.tar.gz 
+```
+2. 
+```bash
+$ cd libevent-2.1.12-stable/
+$ ./configure
+```
+输出：
+```bash
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a thread-safe mkdir -p... /bin/mkdir -p
+checking for gawk... gawk
+checking whether make sets $(MAKE)... yes
+checking whether make supports nested variables... yes
+checking whether make supports nested variables... (cached) yes
+checking whether make supports the include directive... yes (GNU style)
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+...
+checking size of pthread_t... 8
+checking that generated files are newer than configure... done
+configure: creating ./config.status
+config.status: creating libevent.pc
+config.status: creating libevent_openssl.pc
+config.status: creating libevent_pthreads.pc
+config.status: creating libevent_core.pc
+config.status: creating libevent_extra.pc
+config.status: creating Makefile
+config.status: creating config.h
+config.status: creating evconfig-private.h
+config.status: executing depfiles commands
+config.status: executing libtool commands
+```
+在执行期间有些人就会出现报错了，例如：configure: error: openssl is a must but can  not be found.这是由于我们libevent在配置阶段缺失了对openssl的依赖，我们可以用下面的命令来解除这个错误。
+```bash
+$ sudo apt-get install libssl-dev
+```
+同时我们需要使用下面的命令来查看OpenSSL库的路径，因为我们后面在运行configure命令时需要添加--with-ssl选项并指定OpenSSL的安装路径
+```bash
+$ openssl version -d
+OPENSSLDIR: "/usr/lib/ssl"
+```
+接下来我们要将路径复制下来添加到下面的代码后面，重新检测当前系统的安装环境。
+```bash
+$ ./configure --with-ssl="/usr/lib/ssl"
+```
+3. 编译
+```bash
+$ make
+```
+输出：
+```bash
+  GEN      test/rpcgen-attempted
+  GEN      include/event2/event-config.h
+make  all-am
+make[1]: Entering directory '/home/xinyuchen/libevent-2.1.12-stable'
+  CC       sample/dns-example.o
+  CC       buffer.lo
+  CC       bufferevent.lo
+  CC       bufferevent_filter.lo
+  CC       bufferevent_pair.lo
+  CC       bufferevent_ratelim.lo
+....
+ CC       test/regress-regress_rpc.o
+  CC       test/regress-regress_testutils.o
+  CC       test/regress-regress_util.o
+  CC       test/regress-tinytest.o
+  CC       test/regress-regress_thread.o
+  CC       test/regress-regress_zlib.o
+  CC       test/regress-regress_ssl.o
+  CCLD     libevent_extra.la
+/usr/bin/ld: warning: /lib/x86_64-linux-gnu/libc.so.6: unsupported GNU_PROPERTY_TYPE (5) type: 0xc0008002
+  CC       evthread_pthread.lo
+  CCLD     libevent_pthreads.la
+/usr/bin/ld: warning: /lib/x86_64-linux-gnu/libc.so.6: unsupported GNU_PROPERTY_TYPE (5) type: 0xc0008002
+  CCLD     test/regress
+/usr/bin/ld: warning: /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/Scrt1.o: unsupported GNU_PROPERTY_TYPE (5) type: 0xc0008002
+/usr/bin/ld: warning: /lib/x86_64-linux-gnu/libc.so.6: unsupported GNU_PROPERTY_TYPE (5) type: 0xc0008002
+make[1]: Leaving directory '/home/xinyuchen/libevent-2.1.12-stable'
+```
+4. 安装
+```bash
+$ sudo make install
+```
+输出：
+```bash
+make  install-am
+make[1]: Entering directory '/home/xinyuchen/libevent-2.1.12-stable'
+make[2]: Entering directory '/home/xinyuchen/libevent-2.1.12-stable'
+ /bin/mkdir -p '/usr/local/bin'
+ /usr/bin/install -c event_rpcgen.py '/usr/local/bin'
+ /bin/mkdir -p '/usr/local/lib'
+ /bin/bash ./libtool   --mode=install /usr/bin/install -c   libevent.la libevent_core.la libevent_extra.la libevent_pthreads.la libevent_openssl.la '/usr/local/lib'
+...
+See any operating system documentation about shared libraries for
+more information, such as the ld(1) and ld.so(8) manual pages.
+----------------------------------------------------------------------
+ /bin/mkdir -p '/usr/local/include'
+ /usr/bin/install -c -m 644 include/evdns.h include/event.h include/evhttp.h include/evrpc.h include/evutil.h '/usr/local/include'
+ /bin/mkdir -p '/usr/local/include/event2'
+ /usr/bin/install -c -m 644 include/event2/buffer.h include/event2/buffer_compat.h include/event2/bufferevent.h include/event2/bufferevent_compat.h include/event2/bufferevent_struct.h include/event2/dns.h include/event2/dns_compat.h include/event2/dns_struct.h include/event2/event.h include/event2/event_compat.h include/event2/event_struct.h include/event2/http.h include/event2/http_compat.h include/event2/http_struct.h include/event2/keyvalq_struct.h include/event2/listener.h include/event2/rpc.h include/event2/rpc_compat.h include/event2/rpc_struct.h include/event2/tag.h include/event2/tag_compat.h include/event2/thread.h include/event2/util.h include/event2/visibility.h include/event2/bufferevent_ssl.h '/usr/local/include/event2'
+ /bin/mkdir -p '/usr/local/include/event2'
+ /usr/bin/install -c -m 644 include/event2/event-config.h '/usr/local/include/event2'
+ /bin/mkdir -p '/usr/local/lib/pkgconfig'
+ /usr/bin/install -c -m 644 libevent.pc libevent_core.pc libevent_extra.pc libevent_pthreads.pc libevent_openssl.pc '/usr/local/lib/pkgconfig'
+make[2]: Leaving directory '/home/xinyuchen/libevent-2.1.12-stable'
+make[1]: Leaving directory '/home/xinyuchen/libevent-2.1.12-stable'
+```
+5. 验证
+接下来我们就要进行验证了，进入到安装目录的sample目录中。 
+```bash
+$ cd sample/
+```
+我们用hello-world.c进行测试，libevent的动态库名是libevent.so
+```bash
+$ gcc hello-world.c -o hello -levent
+/usr/bin/ld: warning: /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/Scrt1.o: unsupported GNU_PROPERTY_TYPE (5) type: 0xc0008002
+/usr/bin/ld: warning: /lib/x86_64-linux-gnu/libc.so.6: unsupported GNU_PROPERTY_TYPE (5) type: 0xc0008002
+/usr/bin/ld: warning: //lib/x86_64-linux-gnu/libpthread.so.0: unsupported GNU_PROPERTY_TYPE (5) type: 0xc0008002
+$ ldd hello
+        linux-vdso.so.1 (0x00007ffd97df6000)
+        libevent-2.1.so.6 => /usr/lib/x86_64-linux-gnu/libevent-2.1.so.6 (0x00007fb296e00000)
+        libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007fb296bd8000)
+        libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007fb297550000)
+        /lib64/ld-linux-x86-64.so.2 (0x00007fb29756e000)
 ```
