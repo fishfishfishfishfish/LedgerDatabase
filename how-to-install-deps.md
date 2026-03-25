@@ -63,6 +63,29 @@ make clean
 make -j$(nproc)
 ```
 
+示例错误：在编译LedgerDatabase的时候出现：
+```bash
+CMake Warning at distributed/CMakeLists.txt:69 (ADD_EXECUTABLE):
+  Cannot generate a safe runtime search path for target strongstore because
+  files in some directories may conflict with libraries in implicit
+  directories:
+
+    runtime library [librocksdb.so.5.8] in /usr/lib may be hidden by files in:
+      /usr/local/lib
+
+  Some of these libraries may not be found correctly.
+```
+解决方案：卸载重复的 RocksDB。确定项目需要的版本，删掉另一个：
+- 若需要系统版（5.8）：卸载手动安装的
+  `cd`到 rocksdb 源码目录，执行 `sudo make uninstall`
+  然后删除残留：`sudo rm /usr/local/lib/librocksdb*`
+- 若需要手动编译版：卸载系统包管理器的
+    Ubuntu/Debian：`sudo apt remove librocksdb5.8 librocksdb-dev`
+    CentOS/RHEL：`sudo yum remove rocksdb rocksdb-devel`
+
+卸载完要删除之前编译LedgerDatabase的结果，重新编译
+
+
 # protobuf (≥ 2.6.1)
 检查是否已经安装
 ```bash

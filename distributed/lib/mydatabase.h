@@ -113,7 +113,7 @@ std::string format_with_commas(uint64_t number) {
 class MyDatabase {
  public:
   // Constructor: Initialize database (create test table)
-  MyDatabase(const std::string& db_path) : store(db_path, 1000), version(0) {
+  MyDatabase(const std::string& db_path) : store(db_path, 100), version(0) {
     // init database
     // timeout = 100ms, the time between update the tree
   }
@@ -163,6 +163,10 @@ class MyDatabase {
                       << std::endl;
           }
         }
+      }
+
+      if ((start_key + i) % 50000000 == 0) {
+        flush();
       }
     }
 

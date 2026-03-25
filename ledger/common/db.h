@@ -39,8 +39,8 @@ class DB {
     // return rocksdb::DB::Open(options_db, db_path, &db_).ok();
     rocksdb::Status status = rocksdb::DB::Open(options_db, db_path, &db_);
     if (!status.ok()) {
-        std::cerr << "RocksDB Open failed: " << status.ToString() << std::endl;
-        return false;
+      std::cerr << "RocksDB Open failed: " << status.ToString() << std::endl;
+      return false;
     }
     return true;
   }
@@ -74,10 +74,10 @@ class DB {
   }
 
   inline bool Scan(const std::string& start, const std::string& end,
-      std::map<std::string, std::string>& res) {
+                   std::map<std::string, std::string>& res) {
     auto iter = db_->NewIterator(rocksdb::ReadOptions());
     for (iter->Seek(start); iter->Valid() && iter->key().ToString() < end;
-        iter->Next()) {
+         iter->Next()) {
       res.emplace(iter->key().ToString(), iter->value().ToString());
     }
     return true;
@@ -85,8 +85,9 @@ class DB {
 
   inline Chunk GetChunk(const Hash& hash) const {
     rocksdb::PinnableSlice value;
-    if (db_->Get(rocksdb::ReadOptions(),
-        db_->DefaultColumnFamily(), ToRocksSlice(hash), &value).ok()) {
+    if (db_->Get(rocksdb::ReadOptions(), db_->DefaultColumnFamily(),
+                 ToRocksSlice(hash), &value)
+            .ok()) {
       auto chunk = ToChunk(value);
       return chunk;
     } else {
@@ -95,40 +96,75 @@ class DB {
   }
 
   inline bool Put(const Hash& key, const Chunk& chunk) {
-    //rocksdb::PinnableSlice pin_val;
+    // rocksdb::PinnableSlice pin_val;
     const auto key_slice = ToRocksSlice(key);
-    //if (!db_->Get(rocksdb::ReadOptions(), db_->DefaultColumnFamily(), key_slice, &pin_val).ok()) {
+    // if (!db_->Get(rocksdb::ReadOptions(), db_->DefaultColumnFamily(),
+    // key_slice, &pin_val).ok()) {
     //  total_ += (long) (Hash::kByteLength + chunk.numBytes());
     //}
-    return db_->Put(rocksdb::WriteOptions(), key_slice, ToRocksSlice(chunk)).ok();
+    // return db_->Put(rocksdb::WriteOptions(), key_slice,
+    // ToRocksSlice(chunk)).ok();
+    rocksdb::Status status =
+        db_->Put(rocksdb::WriteOptions(), key_slice, ToRocksSlice(chunk));
+    if (!status.ok()) {
+      std::cerr << "RocksDB Put1 failed: " << status.ToString() << std::endl;
+      return false;
+    }
+    return true;
   }
 
   inline bool Put(const std::string& key, const Chunk& value) {
-    //auto res = Get(key);
-    //long temp = total_;
-    //total_ = total_ + (res->empty()? (long) (key.size() + value.numBytes()):
+    // auto res = Get(key);
+    // long temp = total_;
+    // total_ = total_ + (res->empty()? (long) (key.size() + value.numBytes()):
     //    ((long) value.numBytes() - (long) res->numBytes()));
-    //if (temp > total_) {std::cout << "[Error]" << std::endl;}
-    //std::cout << total_ << std::endl;
+    // if (temp > total_) {std::cout << "[Error]" << std::endl;}
+    // std::cout << total_ << std::endl;
     m_cache_.erase(key);
-    return db_->Put(rocksdb::WriteOptions(), rocksdb::Slice(key),
-        rocksdb::Slice(reinterpret_cast<const char*>(value.head()),
-        value.numBytes())).ok();
+    // return db_->Put(rocksdb::WriteOptions(), rocksdb::Slice(key),
+    //     rocksdb::Slice(reinterpret_cast<const char*>(value.head()),
+    //     value.numBytes())).ok();
+    rocksdb::Status status =
+        db_->Put(rocksdb::WriteOptions(), rocksdb::Slice(key),
+                 rocksdb::Slice(reinterpret_cast<const char*>(value.head()),
+                                value.numBytes()));
+    if (!status.ok()) {
+      std::cerr << "RocksDB Put2 failed: " << status.ToString() << std::endl;
+      std::cerr << "key: " << key << std::endl;
+      return false;
+    }
+    return true;
   }
 
   inline bool Put(const std::string& key, const std::string& val) {
-    //std::string res;
-    //Get(key, &res);
-    //long temp = total_;
-    //total_ = total_ + (res.size() > 0? ((long) val.size() - (long) res.size())
+    // std::string res;
+    // Get(key, &res);
+    // long temp = total_;
+    // total_ = total_ + (res.size() > 0? ((long) val.size() - (long)
+    // res.size())
     //    : (long)(key.size() + val.size()));
-    //if (temp > total_) {std::cout << "[Error]" << std::endl;}
-    //std::cout << total_ << std::endl;
-    return db_->Put(rocksdb::WriteOptions(), key, val).ok();
+    // if (temp > total_) {std::cout << "[Error]" << std::endl;}
+    // std::cout << total_ << std::endl;
+
+    // return db_->Put(rocksdb::WriteOptions(), key, val).ok();
+    rocksdb::Status status = db_->Put(rocksdb::WriteOptions(), key, val);
+    if (!status.ok()) {
+      std::cerr << "RocksDB Put3 failed: " << status.ToString() << std::endl;
+      std::cerr << "key: " << key << std::endl;
+      std::cerr << "val: " << val << std::endl;
+      return false;
+    }
+    return true;
   }
 
   inline bool Put(rocksdb::WriteBatch* batch) {
-    return db_->Write(rocksdb::WriteOptions(), batch).ok();
+    // return db_->Write(rocksdb::WriteOptions(), batch).ok();
+    rocksdb::Status status = db_->Write(rocksdb::WriteOptions(), batch);
+    if (!status.ok()) {
+      std::cerr << "RocksDB Put4 failed: " << status.ToString() << std::endl;
+      return false;
+    }
+    return true;
   }
 
   inline rocksdb::Iterator* NewIterater() {

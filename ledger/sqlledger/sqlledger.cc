@@ -76,9 +76,9 @@ void SQLLedger::updateLedger(int timeout) {
     db_.Put("digest", newhash + "|" + std::to_string(new_blk_seq));
 
     gettimeofday(&t1, NULL);
-    auto lat = (t1.tv_sec - t0.tv_sec) * 1000000 + t1.tv_usec - t0.tv_usec;
+    // auto lat = (t1.tv_sec - t0.tv_sec) * 1000000 + t1.tv_usec - t0.tv_usec;
     // std::cerr << "persist " << lat << " " << nkey << " " << new_txns->size()
-    // << std::endl;
+    //           << std::endl;
   }
 }
 
@@ -99,6 +99,7 @@ uint64_t SQLLedger::Set(const std::vector<std::string>& keys,
 
     // create documents & update index
     for (size_t i = 0; i < keys.size(); ++i) {
+      // block_seq|txnid|kv_id|key|val|timestamp
       std::string document = std::to_string(next_blk_seq) + "|" + txnid + "|" +
                              std::to_string(i) + "|" + keys[i] + "|" + vals[i] +
                              "|" + std::to_string(now);
