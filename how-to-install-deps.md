@@ -45,11 +45,11 @@ install -C -m 755 librocksdb.so.5.8.0 /usr/local/lib && \
         ln -fs librocksdb.so.5.8.0 /usr/local/lib/librocksdb.so
 ```
 
-示例错误
+**示例错误：**
 ```
 open error: Invalid argument: Compression type Snappy is not linked with the binary
 ```
-解决方法
+**解决方法：**
 1. 安装 Snappy 库
 确保系统已安装 Snappy 库及其开发文件。如果使用的是 Ubuntu，可以运行以下命令：
 ```
@@ -63,7 +63,8 @@ make clean
 make -j$(nproc)
 ```
 
-示例错误：在编译LedgerDatabase的时候出现：
+**示例错误：**
+在编译LedgerDatabase的时候出现：
 ```bash
 CMake Warning at distributed/CMakeLists.txt:69 (ADD_EXECUTABLE):
   Cannot generate a safe runtime search path for target strongstore because
@@ -75,7 +76,8 @@ CMake Warning at distributed/CMakeLists.txt:69 (ADD_EXECUTABLE):
 
   Some of these libraries may not be found correctly.
 ```
-解决方案：卸载重复的 RocksDB。确定项目需要的版本，删掉另一个：
+**解决方案：**
+卸载重复的 RocksDB。确定项目需要的版本，删掉另一个：
 - 若需要系统版（5.8）：卸载手动安装的
   `cd`到 rocksdb 源码目录，执行 `sudo make uninstall`
   然后删除残留：`sudo rm /usr/local/lib/librocksdb*`
@@ -84,6 +86,44 @@ CMake Warning at distributed/CMakeLists.txt:69 (ADD_EXECUTABLE):
     CentOS/RHEL：`sudo yum remove rocksdb rocksdb-devel`
 
 卸载完要删除之前编译LedgerDatabase的结果，重新编译
+
+**示例错误：**
+运行`./scale_benchmark.sh`之后，数据量达到一定程度出现类似错误：`RocksDB ... Too many open files`
+```bash
+key: COMMITTED_0|00000000000000000000000104379106
+RocksDB Put2 failed: IO error: While open a file for appending: /pcissd/cxy_test/vidb_project/LedgerDatabase/exps/data//data/005280.sst: Too many open files
+```
+**解决方法：**
+1. 查看文件数量限制
+查看当前环境文件数量限制
+```bash
+$ ulimit -n # 注意！一定要在运行的命令行窗口查看，有可能即使同一个账户，vscode的Terminal是一个limit，在shell的是另外一个limit。
+1024 # 默认限制只能打开1024个文件，当文件数量到九百多的时候会报错
+```
+查看系统限制
+```bash
+$ cat /etc/security/limits.conf
+# /etc/security/limits.conf
+#
+#Each line describes a limit for a user in the form:
+#
+#<domain>        <type>  <item>  <value>
+...
+#*               soft    core            0
+#root            hard    core            100000
+#*               hard    rss             10000
+#@student        hard    nproc           20
+#@faculty        soft    nproc           20
+#@faculty        hard    nproc           50
+#ftp             hard    nproc           0
+#ftp             -       chroot          /ftp
+#@student        -       maxlogins       4
+```
+虽然没有限制nofile，但是有core的限制。普通用户文件数量限制不能超过core的限制（好像）
+2. 增加文件描述符限制
+```bash
+$ulimit -n 100000
+```
 
 
 # protobuf (≥ 2.6.1)
