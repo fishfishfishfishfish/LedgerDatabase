@@ -1,0 +1,95 @@
+=== ledgerdb Scale Benchmark 运行日志 ===
+开始时间: Tue Mar 17 03:23:34 PM CST 2026
+脚本目录: /pcissd/cxy_test/vidb_project/LedgerDatabase/exps
+========================================
+
+[2026-03-17 15:23:34] [INFO] 运行默认测试模式...
+[2026-03-17 15:23:34] [WARNING] 清理旧数据库数据...
+[2026-03-17 15:23:34] [INFO] 启动基准测试...
+=== 基准测试输出开始 ===
+Benchmark Configuration:
+  Write Batch Size: 10000 records
+  Read Batch Size:  10000 records
+  Key Length:       32 bytes
+  Value Length:     512 bytes
+  Database Directory: /pcissd/cxy_test/vidb_project/LedgerDatabase/exps/data/
+  Result Directory:  /pcissd/cxy_test/vidb_project/LedgerDatabase/exps/results_ledgerdb/
+  Result File:       /pcissd/cxy_test/vidb_project/LedgerDatabase/exps/results_ledgerdb/scaleBenchmark_20260317_152334.csv
+
+====================== Test Configuration =====================
+Write Batch Size: 10000 records
+Read Batch Size:  10000 records
+Key Length:       32 bytes
+Value Length:     512 bytes
+Test Scales:      1000 → 10000 → 100000 → 1000000 → 10000000 → 100000000 → 1000000000
+===============================================================
+
+========== Starting Scale Benchmark ==========
+
+========== Testing at data scale: 1000 ==========
+Writing 1000 incremental records (keys: 1-1000, total: 1000)
+tip block: 0----0
+tip block: 0----1
+Test Results: 
+  Write Throughput: 7541.07 records/sec
+  Read Throughput:  62121.34 records/sec
+  Total Disk Usage: 12.74 MB
+  Average Per Record: 13344.38 bytes
+  Current Memory:   55.46 MB
+  Peak Memory:      55.46 MB
+  Memory Per Record: 58159.10 bytes
+
+========== Testing at data scale: 10000 ==========
+Writing 9000 incremental records (keys: 1001-10000, total: 10000)
+tip block: 1----10
+tip block: 10----11
+Test Results: 
+  Write Throughput: 7104.02 records/sec
+  Read Throughput:  62003.04 records/sec
+  Total Disk Usage: 37.17 MB
+  Average Per Record: 3895.16 bytes
+  Current Memory:   95.12 MB
+  Peak Memory:      100.40 MB
+  Memory Per Record: 9974.17 bytes
+
+========== Testing at data scale: 100000 ==========
+Writing 90000 incremental records (keys: 10001-100000, total: 100000)
+tip block: 27----27
+tip block: 27----102
+Test Results: 
+  Write Throughput: 1197.00 records/sec
+  Read Throughput:  64526.00 records/sec
+  Total Disk Usage: 165.10 MB
+  Average Per Record: 1731.03 bytes
+  Current Memory:   411.12 MB
+  Peak Memory:      411.12 MB
+  Memory Per Record: 4310.96 bytes
+
+========== Testing at data scale: 1000000 ==========
+Writing 900000 incremental records (keys: 100001-1000000, total: 1000000)
+tip block: 205----568
+tip block: 568----1002
+Test Results: 
+  Write Throughput: 145.71 records/sec
+  Read Throughput:  28164.50 records/sec
+  Total Disk Usage: 1238.53 MB
+  Average Per Record: 1298.67 bytes
+  Current Memory:   2007.90 MB
+  Peak Memory:      2007.90 MB
+  Memory Per Record: 2105.44 bytes
+
+========== Testing at data scale: 10000000 ==========
+Writing 9000000 incremental records (keys: 1000001-10000000, total: 10000000)
+tip block: 1862----6002
+tip block: 6002----10003
+Test Results: 
+  Write Throughput: 17.02 records/sec
+  Read Throughput:  17554.88 records/sec
+  Total Disk Usage: 11339.73 MB
+  Average Per Record: 1189.06 bytes
+  Current Memory:   18509.26 MB
+  Peak Memory:      19186.15 MB
+  Memory Per Record: 1940.84 bytes
+
+========== Testing at data scale: 100000000 ==========
+Writing 90000000 incremental records (keys: 10000001-100000000, total: 100000000)

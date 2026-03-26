@@ -1,0 +1,106 @@
+=== sqlledger Scale Benchmark 运行日志 ===
+开始时间: Wed Mar 25 02:17:16 PM CST 2026
+脚本目录: /pcissd/cxy_test/vidb_project/LedgerDatabase/exps
+========================================
+
+[2026-03-25 14:17:16] [INFO] 运行默认测试模式...
+[2026-03-25 14:17:16] [WARNING] 清理旧数据库数据...
+[2026-03-25 14:17:46] [INFO] 启动基准测试...
+=== 基准测试输出开始 ===
+Benchmark Configuration:
+  Write Batch Size: 10000 records
+  Read Batch Size:  10000 records
+  Key Length:       32 bytes
+  Value Length:     512 bytes
+  Database Directory: /pcissd/cxy_test/vidb_project/LedgerDatabase/exps/data/
+  Result Directory:  /pcissd/cxy_test/vidb_project/LedgerDatabase/exps/results_sqlledger/
+  Result File:       /pcissd/cxy_test/vidb_project/LedgerDatabase/exps/results_sqlledger/scaleBenchmark_20260325_141716.csv
+
+initialize database .../pcissd/cxy_test/vidb_project/LedgerDatabase/exps/data/
+initialized database
+====================== Test Configuration =====================
+Write Batch Size: 10000 records
+Read Batch Size:  10000 records
+Key Length:       32 bytes
+Value Length:     512 bytes
+Test Scales:      1000 → 10000 → 100000 → 1000000 → 10000000 → 100000000 → 200000000 → 1000000000
+===============================================================
+
+========== Starting Scale Benchmark ==========
+
+========== Testing at data scale: 1,000 ==========
+Writing 1000 incremental records (keys: 1-1000, total: 1000)
+tip block: 0----0
+Test Results: 
+  Total Disk Usage: 1.85 MB
+  Average Per Record: 1923.45 bytes
+[test batch write] generate key value
+[test batch write] write data
+[test batch write] flush
+tip block: 1----1
+  Write Throughput: 40825.79 records/sec
+  Read Throughput:  144616.33 records/sec
+  Current Memory:   51.50 MB
+  Peak Memory:      56.66 MB
+  Memory Per Record: 54005.76 bytes
+
+========== Testing at data scale: 10,000 ==========
+Writing 9000 incremental records (keys: 1001-10000, total: 10000)
+tip block: 3----3
+Test Results: 
+  Total Disk Usage: 31.22 MB
+  Average Per Record: 3271.91 bytes
+[test batch write] generate key value
+[test batch write] write data
+[test batch write] flush
+tip block: 5----5
+  Write Throughput: 26481.36 records/sec
+  Read Throughput:  116318.38 records/sec
+  Current Memory:   78.07 MB
+  Peak Memory:      88.55 MB
+  Memory Per Record: 8185.86 bytes
+
+========== Testing at data scale: 100,000 ==========
+Writing 90000 incremental records (keys: 10001-100000, total: 100000)
+write base data version: 100, memory: 205078528 bytes (195.58 MB)
+tip block: 26----28
+Test Results: 
+  Total Disk Usage: 217.59 MB
+  Average Per Record: 2281.45 bytes
+[test batch write] generate key value
+[test batch write] write data
+[test batch write] flush
+tip block: 29----29
+  Write Throughput: 22298.57 records/sec
+  Read Throughput:  90499.64 records/sec
+  Current Memory:   248.02 MB
+  Peak Memory:      283.23 MB
+  Memory Per Record: 2600.71 bytes
+
+========== Testing at data scale: 1,000,000 ==========
+Writing 900000 incremental records (keys: 100001-1000000, total: 1000000)
+write base data version: 200, memory: 397418496 bytes (379.01 MB)
+write base data version: 300, memory: 538619904 bytes (513.67 MB)
+write base data version: 400, memory: 170852352 bytes (162.94 MB)
+write base data version: 500, memory: 312397824 bytes (297.93 MB)
+write base data version: 600, memory: 454086656 bytes (433.05 MB)
+write base data version: 700, memory: 595980288 bytes (568.37 MB)
+write base data version: 800, memory: 236474368 bytes (225.52 MB)
+write base data version: 900, memory: 367448064 bytes (350.43 MB)
+write base data version: 1000, memory: 509513728 bytes (485.91 MB)
+tip block: 258----260
+Test Results: 
+  Total Disk Usage: 1837.94 MB
+  Average Per Record: 1927.20 bytes
+[test batch write] generate key value
+[test batch write] write data
+[test batch write] flush
+tip block: 261----261
+  Write Throughput: 18005.86 records/sec
+  Read Throughput:  63030.00 records/sec
+  Current Memory:   662.30 MB
+  Peak Memory:      662.30 MB
+  Memory Per Record: 694.47 bytes
+
+========== Testing at data scale: 10,000,000 ==========
+Writing 9000000 incremental records (keys: 1000001-10000000, total: 10000000)

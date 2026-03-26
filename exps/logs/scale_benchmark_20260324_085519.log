@@ -1,0 +1,12 @@
+=== sqlledger_10 Scale Benchmark 运行日志 ===
+开始时间: Tue Mar 24 08:55:19 AM CST 2026
+脚本目录: /pcissd/cxy_test/vidb_project/LedgerDatabase/exps
+========================================
+
+[2026-03-24 08:55:19] [INFO] 运行默认测试模式...
+[2026-03-24 08:55:19] [WARNING] 清理旧数据库数据...
+[2026-03-24 08:55:29] [INFO] 启动基准测试...
+=== 基准测试输出开始 ===
+/pcissd/cxy_test/vidb_project/LedgerDatabase/exps/../build_release_sqlledger_10/bin/scaleBenchmark: error while loading shared libraries: libevent_core-2.1.so.7: cannot open shared object file: No such file or directory
+=== 基准测试输出结束 ===
+[2026-03-24 08:55:29] [INFO] /pcissd/cxy_test/vidb_project/LedgerDatabase/exps/../build_release_sqlledger_10/bin/scaleBenchmark基准测试完成!

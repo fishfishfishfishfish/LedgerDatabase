@@ -1,0 +1,438 @@
+=== sqlledger Scale Benchmark 运行日志 ===
+开始时间: Mon Mar 23 12:28:00 PM CST 2026
+脚本目录: /pcissd/cxy_test/vidb_project/LedgerDatabase/exps
+========================================
+
+[2026-03-23 12:28:00] [INFO] 运行默认测试模式...
+[2026-03-23 12:28:00] [INFO] 创建数据库目录: /pcissd/cxy_test/vidb_project/LedgerDatabase/exps/data/
+[2026-03-23 12:28:00] [WARNING] 清理旧数据库数据...
+[2026-03-23 12:28:00] [INFO] 启动基准测试...
+=== 基准测试输出开始 ===
+Benchmark Configuration:
+  Write Batch Size: 10000 records
+  Read Batch Size:  10000 records
+  Key Length:       32 bytes
+  Value Length:     512 bytes
+  Database Directory: /pcissd/cxy_test/vidb_project/LedgerDatabase/exps/data/
+  Result Directory:  /pcissd/cxy_test/vidb_project/LedgerDatabase/exps/results_sqlledger/
+  Result File:       /pcissd/cxy_test/vidb_project/LedgerDatabase/exps/results_sqlledger/scaleBenchmark_20260323_122800.csv
+
+initialize database .../pcissd/cxy_test/vidb_project/LedgerDatabase/exps/data/
+initialized database
+====================== Test Configuration =====================
+Write Batch Size: 10000 records
+Read Batch Size:  10000 records
+Key Length:       32 bytes
+Value Length:     512 bytes
+Test Scales:      1000 → 10000 → 100000 → 1000000 → 10000000 → 100000000 → 1000000000
+===============================================================
+
+========== Starting Scale Benchmark ==========
+
+========== Testing at data scale: 1,000 ==========
+Writing 1000 incremental records (keys: 1-1000, total: 1000)
+tip block: 0----0
+Test Results: 
+  Total Disk Usage: 1.85 MB
+  Average Per Record: 1923.45 bytes
+[test batch write] generate key value
+[test batch write] write data
+[test batch write] flush
+tip block: 0----1
+  Write Throughput: 8318.66 records/sec
+  Read Throughput:  156714.98 records/sec
+  Current Memory:   49.71 MB
+  Peak Memory:      52.57 MB
+  Memory Per Record: 52125.70 bytes
+
+========== Testing at data scale: 10,000 ==========
+Writing 9000 incremental records (keys: 1001-10000, total: 10000)
+tip block: 1----2
+Test Results: 
+  Total Disk Usage: 31.66 MB
+  Average Per Record: 3317.68 bytes
+[test batch write] generate key value
+[test batch write] write data
+[test batch write] flush
+tip block: 2----3
+  Write Throughput: 7940.02 records/sec
+  Read Throughput:  122316.41 records/sec
+  Current Memory:   86.05 MB
+  Peak Memory:      86.05 MB
+  Memory Per Record: 9023.49 bytes
+
+========== Testing at data scale: 100,000 ==========
+Writing 90000 incremental records (keys: 10001-100000, total: 100000)
+write base data version: 100, memory: 218951680 bytes (208.81 MB)
+tip block: 6----6
+Test Results: 
+  Total Disk Usage: 216.17 MB
+  Average Per Record: 2266.55 bytes
+[test batch write] generate key value
+[test batch write] write data
+[test batch write] flush
+tip block: 7----8
+  Write Throughput: 7224.50 records/sec
+  Read Throughput:  92345.37 records/sec
+  Current Memory:   286.12 MB
+  Peak Memory:      286.12 MB
+  Memory Per Record: 3000.24 bytes
+
+========== Testing at data scale: 1,000,000 ==========
+Writing 900000 incremental records (keys: 100001-1000000, total: 1000000)
+write base data version: 200, memory: 433979392 bytes (413.88 MB)
+write base data version: 300, memory: 574623744 bytes (548.00 MB)
+write base data version: 400, memory: 208347136 bytes (198.70 MB)
+write base data version: 500, memory: 346800128 bytes (330.73 MB)
+write base data version: 600, memory: 489648128 bytes (466.96 MB)
+write base data version: 700, memory: 632930304 bytes (603.61 MB)
+write base data version: 800, memory: 269848576 bytes (257.35 MB)
+write base data version: 900, memory: 402735104 bytes (384.08 MB)
+write base data version: 1000, memory: 545181696 bytes (519.93 MB)
+tip block: 32----33
+Test Results: 
+  Total Disk Usage: 1836.15 MB
+  Average Per Record: 1925.33 bytes
+[test batch write] generate key value
+[test batch write] write data
+[test batch write] flush
+tip block: 33----33
+  Write Throughput: 17220.74 records/sec
+  Read Throughput:  59749.98 records/sec
+  Current Memory:   659.71 MB
+  Peak Memory:      678.62 MB
+  Memory Per Record: 691.76 bytes
+
+========== Testing at data scale: 10,000,000 ==========
+Writing 9000000 incremental records (keys: 1000001-10000000, total: 10000000)
+write base data version: 1100, memory: 313856000 bytes (299.32 MB)
+write base data version: 1200, memory: 455512064 bytes (434.41 MB)
+write base data version: 1300, memory: 596508672 bytes (568.88 MB)
+write base data version: 1400, memory: 737603584 bytes (703.43 MB)
+write base data version: 1500, memory: 379539456 bytes (361.96 MB)
+write base data version: 1600, memory: 530104320 bytes (505.55 MB)
+write base data version: 1700, memory: 658522112 bytes (628.02 MB)
+write base data version: 1800, memory: 815161344 bytes (777.40 MB)
+write base data version: 1900, memory: 435003392 bytes (414.85 MB)
+write base data version: 2000, memory: 577073152 bytes (550.34 MB)
+write base data version: 2100, memory: 719028224 bytes (685.72 MB)
+write base data version: 2200, memory: 354275328 bytes (337.86 MB)
+write base data version: 2300, memory: 508198912 bytes (484.66 MB)
+write base data version: 2400, memory: 651431936 bytes (621.25 MB)
+write base data version: 2500, memory: 794976256 bytes (758.15 MB)
+write base data version: 2600, memory: 427876352 bytes (408.05 MB)
+write base data version: 2700, memory: 568115200 bytes (541.80 MB)
+write base data version: 2800, memory: 709255168 bytes (676.40 MB)
+write base data version: 2900, memory: 859906048 bytes (820.07 MB)
+write base data version: 3000, memory: 495669248 bytes (472.71 MB)
+write base data version: 3100, memory: 651128832 bytes (620.96 MB)
+write base data version: 3200, memory: 801013760 bytes (763.91 MB)
+write base data version: 3300, memory: 436498432 bytes (416.28 MB)
+write base data version: 3400, memory: 577429504 bytes (550.68 MB)
+write base data version: 3500, memory: 719257600 bytes (685.94 MB)
+write base data version: 3600, memory: 860569600 bytes (820.70 MB)
+write base data version: 3700, memory: 494022656 bytes (471.14 MB)
+write base data version: 3800, memory: 647897088 bytes (617.88 MB)
+write base data version: 3900, memory: 799129600 bytes (762.11 MB)
+write base data version: 4000, memory: 950202368 bytes (906.18 MB)
+write base data version: 4100, memory: 577277952 bytes (550.54 MB)
+write base data version: 4200, memory: 720068608 bytes (686.71 MB)
+write base data version: 4300, memory: 862257152 bytes (822.31 MB)
+write base data version: 4400, memory: 491937792 bytes (469.15 MB)
+write base data version: 4500, memory: 645058560 bytes (615.18 MB)
+write base data version: 4600, memory: 799432704 bytes (762.40 MB)
+write base data version: 4700, memory: 956739584 bytes (912.42 MB)
+write base data version: 4800, memory: 585175040 bytes (558.07 MB)
+write base data version: 4900, memory: 726441984 bytes (692.79 MB)
+write base data version: 5000, memory: 867741696 bytes (827.54 MB)
+write base data version: 5100, memory: 1011212288 bytes (964.37 MB)
+write base data version: 5200, memory: 651542528 bytes (621.36 MB)
+write base data version: 5300, memory: 789065728 bytes (752.51 MB)
+write base data version: 5400, memory: 947150848 bytes (903.27 MB)
+write base data version: 5500, memory: 581931008 bytes (554.97 MB)
+write base data version: 5600, memory: 729182208 bytes (695.40 MB)
+write base data version: 5700, memory: 870973440 bytes (830.62 MB)
+write base data version: 5800, memory: 1012494336 bytes (965.59 MB)
+write base data version: 5900, memory: 650821632 bytes (620.67 MB)
+write base data version: 6000, memory: 801443840 bytes (764.32 MB)
+write base data version: 6100, memory: 956260352 bytes (911.96 MB)
+write base data version: 6200, memory: 1108361216 bytes (1057.02 MB)
+write base data version: 6300, memory: 739737600 bytes (705.47 MB)
+write base data version: 6400, memory: 883064832 bytes (842.16 MB)
+write base data version: 6500, memory: 1024741376 bytes (977.27 MB)
+write base data version: 6600, memory: 652468224 bytes (622.24 MB)
+write base data version: 6700, memory: 805826560 bytes (768.50 MB)
+write base data version: 6800, memory: 960610304 bytes (916.11 MB)
+write base data version: 6900, memory: 1116340224 bytes (1064.62 MB)
+write base data version: 7000, memory: 749088768 bytes (714.39 MB)
+write base data version: 7100, memory: 895111168 bytes (853.64 MB)
+write base data version: 7200, memory: 1036685312 bytes (988.66 MB)
+write base data version: 7300, memory: 1179557888 bytes (1124.91 MB)
+write base data version: 7400, memory: 819953664 bytes (781.97 MB)
+write base data version: 7500, memory: 961622016 bytes (917.07 MB)
+write base data version: 7600, memory: 1109778432 bytes (1058.37 MB)
+write base data version: 7700, memory: 742879232 bytes (708.46 MB)
+write base data version: 7800, memory: 883396608 bytes (842.47 MB)
+write base data version: 7900, memory: 1024471040 bytes (977.01 MB)
+write base data version: 8000, memory: 1166077952 bytes (1112.06 MB)
+write base data version: 8100, memory: 806645760 bytes (769.28 MB)
+write base data version: 8200, memory: 961179648 bytes (916.65 MB)
+write base data version: 8300, memory: 1104183296 bytes (1053.03 MB)
+write base data version: 8400, memory: 1254391808 bytes (1196.28 MB)
+write base data version: 8500, memory: 879841280 bytes (839.08 MB)
+write base data version: 8600, memory: 1029693440 bytes (981.99 MB)
+write base data version: 8700, memory: 1178669056 bytes (1124.07 MB)
+write base data version: 8800, memory: 814604288 bytes (776.87 MB)
+write base data version: 8900, memory: 967335936 bytes (922.52 MB)
+write base data version: 9000, memory: 1108811776 bytes (1057.45 MB)
+write base data version: 9100, memory: 1251729408 bytes (1193.74 MB)
+write base data version: 9200, memory: 880095232 bytes (839.32 MB)
+write base data version: 9300, memory: 1021165568 bytes (973.86 MB)
+write base data version: 9400, memory: 1162010624 bytes (1108.18 MB)
+write base data version: 9500, memory: 1301069824 bytes (1240.80 MB)
+write base data version: 9600, memory: 945340416 bytes (901.55 MB)
+write base data version: 9700, memory: 1097547776 bytes (1046.70 MB)
+write base data version: 9800, memory: 1250361344 bytes (1192.44 MB)
+write base data version: 9900, memory: 885075968 bytes (844.07 MB)
+write base data version: 10000, memory: 1035632640 bytes (987.66 MB)
+tip block: 312----313
+Test Results: 
+  Total Disk Usage: 18390.90 MB
+  Average Per Record: 1928.42 bytes
+[test batch write] generate key value
+[test batch write] write data
+[test batch write] flush
+tip block: 314----314
+  Write Throughput: 12372.22 records/sec
+  Read Throughput:  36270.75 records/sec
+  Current Memory:   1149.71 MB
+  Peak Memory:      1300.28 MB
+  Memory Per Record: 120.56 bytes
+
+========== Testing at data scale: 100,000,000 ==========
+Writing 90000000 incremental records (keys: 10000001-100000000, total: 100000000)
+write base data version: 10100, memory: 1351159808 bytes (1288.57 MB)
+write base data version: 10200, memory: 990056448 bytes (944.19 MB)
+write base data version: 10300, memory: 1144762368 bytes (1091.73 MB)
+write base data version: 10400, memory: 1285685248 bytes (1226.12 MB)
+write base data version: 10500, memory: 1442996224 bytes (1376.15 MB)
+write base data version: 10600, memory: 1090686976 bytes (1040.16 MB)
+write base data version: 10700, memory: 1190043648 bytes (1134.91 MB)
+write base data version: 10800, memory: 1331142656 bytes (1269.48 MB)
+write base data version: 10900, memory: 1476435968 bytes (1408.04 MB)
+write base data version: 11000, memory: 1113366528 bytes (1061.79 MB)
+write base data version: 11100, memory: 1268531200 bytes (1209.77 MB)
+write base data version: 11200, memory: 1421545472 bytes (1355.69 MB)
+write base data version: 11300, memory: 1047318528 bytes (998.80 MB)
+write base data version: 11400, memory: 1194725376 bytes (1139.38 MB)
+write base data version: 11500, memory: 1335951360 bytes (1274.06 MB)
+write base data version: 11600, memory: 1479364608 bytes (1410.83 MB)
+write base data version: 11700, memory: 1115160576 bytes (1063.50 MB)
+write base data version: 11800, memory: 1265963008 bytes (1207.32 MB)
+write base data version: 11900, memory: 1424179200 bytes (1358.20 MB)
+write base data version: 12000, memory: 1571217408 bytes (1498.43 MB)
+write base data version: 12100, memory: 1199501312 bytes (1143.93 MB)
+write base data version: 12200, memory: 1346015232 bytes (1283.66 MB)
+write base data version: 12300, memory: 1497853952 bytes (1428.46 MB)
+write base data version: 12400, memory: 1134772224 bytes (1082.20 MB)
+write base data version: 12500, memory: 1282977792 bytes (1223.54 MB)
+write base data version: 12600, memory: 1430392832 bytes (1364.13 MB)
+write base data version: 12700, memory: 1558904832 bytes (1486.69 MB)
+write base data version: 12800, memory: 1189244928 bytes (1134.15 MB)
+write base data version: 12900, memory: 1332289536 bytes (1270.57 MB)
+write base data version: 13000, memory: 1482670080 bytes (1413.98 MB)
+write base data version: 13100, memory: 1627328512 bytes (1551.94 MB)
+write base data version: 13200, memory: 1264844800 bytes (1206.25 MB)
+write base data version: 13300, memory: 1424396288 bytes (1358.41 MB)
+write base data version: 13400, memory: 1551466496 bytes (1479.59 MB)
+write base data version: 13500, memory: 1185341440 bytes (1130.43 MB)
+write base data version: 13600, memory: 1336422400 bytes (1274.51 MB)
+write base data version: 13700, memory: 1482600448 bytes (1413.92 MB)
+write base data version: 13800, memory: 1623289856 bytes (1548.09 MB)
+write base data version: 13900, memory: 1259720704 bytes (1201.36 MB)
+write base data version: 14000, memory: 1412214784 bytes (1346.79 MB)
+write base data version: 14100, memory: 1568129024 bytes (1495.48 MB)
+write base data version: 14200, memory: 1711554560 bytes (1632.27 MB)
+write base data version: 14300, memory: 1340964864 bytes (1278.84 MB)
+write base data version: 14400, memory: 1499353088 bytes (1429.89 MB)
+write base data version: 14500, memory: 1641611264 bytes (1565.56 MB)
+write base data version: 14600, memory: 1270894592 bytes (1212.02 MB)
+write base data version: 14700, memory: 1424650240 bytes (1358.65 MB)
+write base data version: 14800, memory: 1580900352 bytes (1507.66 MB)
+write base data version: 14900, memory: 1730822144 bytes (1650.64 MB)
+write base data version: 15000, memory: 1353342976 bytes (1290.65 MB)
+write base data version: 15100, memory: 1507237888 bytes (1437.41 MB)
+write base data version: 15200, memory: 1649078272 bytes (1572.68 MB)
+write base data version: 15300, memory: 1794744320 bytes (1711.60 MB)
+write base data version: 15400, memory: 1429807104 bytes (1363.57 MB)
+write base data version: 15500, memory: 1582600192 bytes (1509.29 MB)
+write base data version: 15600, memory: 1735905280 bytes (1655.49 MB)
+write base data version: 15700, memory: 1362661376 bytes (1299.54 MB)
+write base data version: 15800, memory: 1514176512 bytes (1444.03 MB)
+write base data version: 15900, memory: 1664352256 bytes (1587.25 MB)
+write base data version: 16000, memory: 1819848704 bytes (1735.54 MB)
+write base data version: 16100, memory: 1421410304 bytes (1355.56 MB)
+write base data version: 16200, memory: 1564778496 bytes (1492.29 MB)
+write base data version: 16300, memory: 1705508864 bytes (1626.50 MB)
+write base data version: 16400, memory: 1848541184 bytes (1762.91 MB)
+write base data version: 16500, memory: 1468903424 bytes (1400.86 MB)
+write base data version: 16600, memory: 1613107200 bytes (1538.38 MB)
+write base data version: 16700, memory: 1753309184 bytes (1672.09 MB)
+write base data version: 16800, memory: 1382768640 bytes (1318.71 MB)
+write base data version: 16900, memory: 1536663552 bytes (1465.48 MB)
+write base data version: 17000, memory: 1693876224 bytes (1615.41 MB)
+write base data version: 17100, memory: 1844817920 bytes (1759.36 MB)
+write base data version: 17200, memory: 1469759488 bytes (1401.67 MB)
+write base data version: 17300, memory: 1611210752 bytes (1536.57 MB)
+write base data version: 17400, memory: 1751683072 bytes (1670.54 MB)
+write base data version: 17500, memory: 1899241472 bytes (1811.26 MB)
+write base data version: 17600, memory: 1531715584 bytes (1460.76 MB)
+write base data version: 17700, memory: 1693069312 bytes (1614.64 MB)
+write base data version: 17800, memory: 1843138560 bytes (1757.75 MB)
+write base data version: 17900, memory: 1472557056 bytes (1404.34 MB)
+write base data version: 18000, memory: 1619234816 bytes (1544.22 MB)
+write base data version: 18100, memory: 1769295872 bytes (1687.33 MB)
+write base data version: 18200, memory: 1911992320 bytes (1823.42 MB)
+write base data version: 18300, memory: 1541881856 bytes (1470.45 MB)
+write base data version: 18400, memory: 1699545088 bytes (1620.81 MB)
+write base data version: 18500, memory: 1837035520 bytes (1751.93 MB)
+write base data version: 18600, memory: 1986859008 bytes (1894.82 MB)
+write base data version: 18700, memory: 1609187328 bytes (1534.64 MB)
+write base data version: 18800, memory: 1748893696 bytes (1667.88 MB)
+write base data version: 18900, memory: 1892872192 bytes (1805.18 MB)
+write base data version: 19000, memory: 1516118016 bytes (1445.88 MB)
+write base data version: 19100, memory: 1659383808 bytes (1582.51 MB)
+write base data version: 19200, memory: 1776177152 bytes (1693.89 MB)
+write base data version: 19300, memory: 1920737280 bytes (1831.76 MB)
+write base data version: 19400, memory: 1563930624 bytes (1491.48 MB)
+write base data version: 19500, memory: 1713311744 bytes (1633.94 MB)
+write base data version: 19600, memory: 1867300864 bytes (1780.80 MB)
+write base data version: 19700, memory: 2020499456 bytes (1926.90 MB)
+write base data version: 19800, memory: 1647947776 bytes (1571.61 MB)
+write base data version: 19900, memory: 1792069632 bytes (1709.05 MB)
+write base data version: 20000, memory: 1937956864 bytes (1848.18 MB)
+write base data version: 20100, memory: 1561604096 bytes (1489.26 MB)
+write base data version: 20200, memory: 1705660416 bytes (1626.64 MB)
+write base data version: 20300, memory: 1846292480 bytes (1760.76 MB)
+write base data version: 20400, memory: 1986641920 bytes (1894.61 MB)
+write base data version: 20500, memory: 1631715328 bytes (1556.12 MB)
+write base data version: 20600, memory: 1781342208 bytes (1698.82 MB)
+write base data version: 20700, memory: 1918803968 bytes (1829.91 MB)
+write base data version: 20800, memory: 2077376512 bytes (1981.14 MB)
+write base data version: 20900, memory: 1700519936 bytes (1621.74 MB)
+write base data version: 21000, memory: 1833807872 bytes (1748.86 MB)
+write base data version: 21100, memory: 1988956160 bytes (1896.82 MB)
+write base data version: 21200, memory: 1626869760 bytes (1551.50 MB)
+write base data version: 21300, memory: 1783963648 bytes (1701.32 MB)
+write base data version: 21400, memory: 1928163328 bytes (1838.84 MB)
+write base data version: 21500, memory: 2071986176 bytes (1976.00 MB)
+write base data version: 21600, memory: 1700790272 bytes (1622.00 MB)
+write base data version: 21700, memory: 1842163712 bytes (1756.82 MB)
+write base data version: 21800, memory: 1982738432 bytes (1890.89 MB)
+write base data version: 21900, memory: 2130960384 bytes (2032.24 MB)
+write base data version: 22000, memory: 1771122688 bytes (1689.07 MB)
+write base data version: 22100, memory: 1913647104 bytes (1825.00 MB)
+write base data version: 22200, memory: 2061012992 bytes (1965.54 MB)
+write base data version: 22300, memory: 1694638080 bytes (1616.13 MB)
+write base data version: 22400, memory: 1848111104 bytes (1762.50 MB)
+write base data version: 22500, memory: 1998659584 bytes (1906.07 MB)
+write base data version: 22600, memory: 2159001600 bytes (2058.98 MB)
+write base data version: 22700, memory: 1792823296 bytes (1709.77 MB)
+write base data version: 22800, memory: 1944514560 bytes (1854.43 MB)
+write base data version: 22900, memory: 2086088704 bytes (1989.45 MB)
+write base data version: 23000, memory: 2232229888 bytes (2128.82 MB)
+write base data version: 23100, memory: 1859452928 bytes (1773.31 MB)
+write base data version: 23200, memory: 2005491712 bytes (1912.59 MB)
+write base data version: 23300, memory: 2155692032 bytes (2055.83 MB)
+write base data version: 23400, memory: 1793445888 bytes (1710.36 MB)
+write base data version: 23500, memory: 1936891904 bytes (1847.16 MB)
+write base data version: 23600, memory: 2063609856 bytes (1968.01 MB)
+write base data version: 23700, memory: 2208604160 bytes (2106.29 MB)
+write base data version: 23800, memory: 1842012160 bytes (1756.68 MB)
+write base data version: 23900, memory: 1994797056 bytes (1902.39 MB)
+write base data version: 24000, memory: 2141609984 bytes (2042.40 MB)
+write base data version: 24100, memory: 2300157952 bytes (2193.60 MB)
+write base data version: 24200, memory: 1933144064 bytes (1843.59 MB)
+write base data version: 24300, memory: 2079920128 bytes (1983.57 MB)
+write base data version: 24400, memory: 2237755392 bytes (2134.09 MB)
+write base data version: 24500, memory: 1866194944 bytes (1779.74 MB)
+write base data version: 24600, memory: 2009411584 bytes (1916.32 MB)
+write base data version: 24700, memory: 2149928960 bytes (2050.33 MB)
+write base data version: 24800, memory: 2292981760 bytes (2186.76 MB)
+write base data version: 24900, memory: 1914232832 bytes (1825.55 MB)
+write base data version: 25000, memory: 2057859072 bytes (1962.53 MB)
+write base data version: 25100, memory: 2171850752 bytes (2071.24 MB)
+write base data version: 25200, memory: 2327449600 bytes (2219.63 MB)
+write base data version: 25300, memory: 1948524544 bytes (1858.26 MB)
+write base data version: 25400, memory: 2095681536 bytes (1998.60 MB)
+write base data version: 25500, memory: 2247872512 bytes (2143.74 MB)
+write base data version: 25600, memory: 1879506944 bytes (1792.44 MB)
+write base data version: 25700, memory: 2033041408 bytes (1938.86 MB)
+write base data version: 25800, memory: 2177691648 bytes (2076.81 MB)
+write base data version: 25900, memory: 2329210880 bytes (2221.31 MB)
+write base data version: 26000, memory: 1953648640 bytes (1863.14 MB)
+write base data version: 26100, memory: 2096148480 bytes (1999.04 MB)
+write base data version: 26200, memory: 2244239360 bytes (2140.27 MB)
+write base data version: 26300, memory: 2407440384 bytes (2295.91 MB)
+write base data version: 26400, memory: 2037977088 bytes (1943.57 MB)
+write base data version: 26500, memory: 2184671232 bytes (2083.46 MB)
+write base data version: 26600, memory: 2325925888 bytes (2218.18 MB)
+write base data version: 26700, memory: 1954586624 bytes (1864.04 MB)
+write base data version: 26800, memory: 2111680512 bytes (2013.86 MB)
+write base data version: 26900, memory: 2232692736 bytes (2129.26 MB)
+write base data version: 27000, memory: 2386210816 bytes (2275.67 MB)
+write base data version: 27100, memory: 2020306944 bytes (1926.71 MB)
+write base data version: 27200, memory: 2174496768 bytes (2073.76 MB)
+write base data version: 27300, memory: 2330677248 bytes (2222.71 MB)
+write base data version: 27400, memory: 2480349184 bytes (2365.45 MB)
+write base data version: 27500, memory: 2114834432 bytes (2016.86 MB)
+write base data version: 27600, memory: 2268807168 bytes (2163.70 MB)
+write base data version: 27700, memory: 2417528832 bytes (2305.54 MB)
+write base data version: 27800, memory: 2053660672 bytes (1958.52 MB)
+write base data version: 27900, memory: 2207879168 bytes (2105.60 MB)
+write base data version: 28000, memory: 2354237440 bytes (2245.18 MB)
+write base data version: 28100, memory: 2504519680 bytes (2388.50 MB)
+write base data version: 28200, memory: 2136989696 bytes (2037.99 MB)
+write base data version: 28300, memory: 2282733568 bytes (2176.98 MB)
+write base data version: 28400, memory: 2437074944 bytes (2324.18 MB)
+write base data version: 28500, memory: 2578313216 bytes (2458.87 MB)
+write base data version: 28600, memory: 2200489984 bytes (2098.55 MB)
+write base data version: 28700, memory: 2352721920 bytes (2243.73 MB)
+write base data version: 28800, memory: 2464272384 bytes (2350.11 MB)
+write base data version: 28900, memory: 2107375616 bytes (2009.75 MB)
+write base data version: 29000, memory: 2247335936 bytes (2143.23 MB)
+write base data version: 29100, memory: 2400428032 bytes (2289.23 MB)
+write base data version: 29200, memory: 2545623040 bytes (2427.70 MB)
+write base data version: 29300, memory: 2192404480 bytes (2090.84 MB)
+write base data version: 29400, memory: 2337783808 bytes (2229.48 MB)
+write base data version: 29500, memory: 2485706752 bytes (2370.55 MB)
+write base data version: 29600, memory: 2647736320 bytes (2525.08 MB)
+write base data version: 29700, memory: 2275041280 bytes (2169.65 MB)
+write base data version: 29800, memory: 2424963072 bytes (2312.62 MB)
+write base data version: 29900, memory: 2564993024 bytes (2446.17 MB)
+write base data version: 30000, memory: 2199429120 bytes (2097.54 MB)
+write base data version: 30100, memory: 2340429824 bytes (2232.01 MB)
+write base data version: 30200, memory: 2484891648 bytes (2369.78 MB)
+write base data version: 30300, memory: 2626666496 bytes (2504.98 MB)
+write base data version: 30400, memory: 2262032384 bytes (2157.24 MB)
+write base data version: 30500, memory: 2423316480 bytes (2311.05 MB)
+write base data version: 30600, memory: 2539716608 bytes (2422.06 MB)
+write base data version: 30700, memory: 2704056320 bytes (2578.79 MB)
+write base data version: 30800, memory: 2323992576 bytes (2216.33 MB)
+write base data version: 30900, memory: 2481381376 bytes (2366.43 MB)
+write base data version: 31000, memory: 2636853248 bytes (2514.70 MB)
+write base data version: 31100, memory: 2774028288 bytes (2645.52 MB)
+write base data version: 31200, memory: 2415431680 bytes (2303.54 MB)
+write base data version: 31300, memory: 2572095488 bytes (2452.94 MB)
+write base data version: 31400, memory: 2724425728 bytes (2598.21 MB)
+write base data version: 31500, memory: 2363383808 bytes (2253.90 MB)
+write base data version: 31600, memory: 2518454272 bytes (2401.79 MB)
+write base data version: 31700, memory: 2649722880 bytes (2526.97 MB)
+write base data version: 31800, memory: 2278449152 bytes (2172.90 MB)
+write base data version: 31900, memory: 2425470976 bytes (2313.11 MB)
+write base data version: 32000, memory: 2568806400 bytes (2449.80 MB)
+write base data version: 32100, memory: 2710941696 bytes (2585.36 MB)
+write base data version: 32200, memory: 2339659776 bytes (2231.27 MB)
+write base data version: 32300, memory: 2490368000 bytes (2375.00 MB)
+write base data version: 32400, memory: 2648842240 bytes (2526.13 MB)
+write base data version: 32500, memory: 2794270720 bytes (2664.82 MB)

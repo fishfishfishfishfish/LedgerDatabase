@@ -9,7 +9,9 @@ bin/
 data/
 
 result*/
-*.log
+# *.log
+exps/logs/scale_benchmark_20260325_225847.log
+exps/logs/scale_benchmark_20260320_094112.log
 !exps/exp_arxiv/
 
 nohup.out

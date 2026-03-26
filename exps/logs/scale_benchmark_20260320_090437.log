@@ -1,0 +1,7 @@
+=== ledgerDB Scale Benchmark 运行日志 ===
+开始时间: Fri Mar 20 09:04:37 AM CST 2026
+脚本目录: /pcissd/cxy_test/vidb_project/LedgerDatabase/exps
+========================================
+
+[2026-03-20 09:04:37] [ERROR] 可执行文件不存在: /pcissd/cxy_test/vidb_project/LedgerDatabase/exps/../build_release_ledgerDB/bin/scaleBenchmark
+[2026-03-20 09:04:37] [INFO] 请先构建项目: cd /pcissd/cxy_test/vidb_project/LedgerDatabase/exps/../build_release_ledgerDB && make scaleBenchmark

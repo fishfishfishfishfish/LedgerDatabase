@@ -1,0 +1,84 @@
+=== sqlledger Scale Benchmark 运行日志 ===
+开始时间: Wed Mar 25 09:03:54 PM CST 2026
+脚本目录: /pcissd/cxy_test/vidb_project/LedgerDatabase/exps
+========================================
+
+[2026-03-25 21:03:54] [INFO] 运行默认测试模式...
+[2026-03-25 21:03:54] [WARNING] 清理旧数据库数据...
+[2026-03-25 21:03:58] [INFO] 启动基准测试...
+=== 基准测试输出开始 ===
+Benchmark Configuration:
+  Write Batch Size: 10000 records
+  Read Batch Size:  10000 records
+  Key Length:       32 bytes
+  Value Length:     512 bytes
+  Database Directory: /pcissd/cxy_test/vidb_project/LedgerDatabase/exps/data/
+  Result Directory:  /pcissd/cxy_test/vidb_project/LedgerDatabase/exps/results_sqlledger/
+  Result File:       /pcissd/cxy_test/vidb_project/LedgerDatabase/exps/results_sqlledger/scaleBenchmark_20260325_210354.csv
+
+initialize database .../pcissd/cxy_test/vidb_project/LedgerDatabase/exps/data/
+initialized database
+====================== Test Configuration =====================
+Write Batch Size: 10000 records
+Read Batch Size:  10000 records
+Key Length:       32 bytes
+Value Length:     512 bytes
+Test Scales:      1000 → 10000 → 100000 → 1000000 → 10000000 → 100000000 → 200000000 → 1000000000
+===============================================================
+
+========== Starting Scale Benchmark ==========
+
+========== Testing at data scale: 1,000 ==========
+Writing 1000 incremental records (keys: 1-1000, total: 1000)
+tip block: 0----0
+Test Results: 
+  Total Disk Usage: 1.85 MB
+  Average Per Record: 1923.45 bytes
+[test batch write] generate key value
+[test batch write] write data
+[test batch write] flush
+tip block: 0----0
+  Write Throughput: 50074.71 records/sec
+  Read Throughput:  149330.48 records/sec
+  Current Memory:   52.98 MB
+  Peak Memory:      57.68 MB
+  Memory Per Record: 55549.95 bytes
+
+========== Testing at data scale: 10,000 ==========
+Writing 9000 incremental records (keys: 1001-10000, total: 10000)
+tip block: 3----4
+Test Results: 
+  Total Disk Usage: 31.65 MB
+  Average Per Record: 3317.14 bytes
+[test batch write] generate key value
+[test batch write] write data
+[test batch write] flush
+tip block: 5----5
+  Write Throughput: 36348.97 records/sec
+  Read Throughput:  120756.01 records/sec
+  Current Memory:   78.91 MB
+  Peak Memory:      89.58 MB
+  Memory Per Record: 8273.92 bytes
+
+========== Testing at data scale: 100,000 ==========
+Writing 90000 incremental records (keys: 10001-100000, total: 100000)
+write base data version: 100, memory: 206004224 bytes (196.46 MB)
+tip block: 23----25
+Test Results: 
+  Total Disk Usage: 217.55 MB
+  Average Per Record: 2280.95 bytes
+[test batch write] generate key value
+[test batch write] write data
+[test batch write] flush
+tip block: 26----26
+  Write Throughput: 21029.43 records/sec
+  Read Throughput:  87773.09 records/sec
+  Current Memory:   248.07 MB
+  Peak Memory:      283.27 MB
+  Memory Per Record: 2601.25 bytes
+
+========== Testing at data scale: 1,000,000 ==========
+Writing 900000 incremental records (keys: 100001-1000000, total: 1000000)
+write base data version: 200, memory: 397324288 bytes (378.92 MB)
+write base data version: 300, memory: 538673152 bytes (513.72 MB)
+write base data version: 400, memory: 171008000 bytes (163.09 MB)
